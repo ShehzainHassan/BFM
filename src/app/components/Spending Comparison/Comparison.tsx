@@ -1,14 +1,9 @@
 import styled from "styled-components";
 import Card from "../Card/Card";
 import { BFMPalette } from "@/Theme";
+import { H6 } from "@/Typography";
 
 export default function Comparison() {
-  const Heading2 = styled("h2")`
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 18px;
-    margin: 0;
-  `;
   const BarsContainer = styled("div")`
     display: flex;
     flex-direction: column;
@@ -50,14 +45,14 @@ export default function Comparison() {
       title="Your advertising / marketing spend is less than last month">
       <BarsContainer>
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-          <Heading2>MAR 2024</Heading2>
+          <H6>MAR 2024</H6>
           <BarUI>
             <Filled $filledColor={BFMPalette.purple600} $filledValue={80} />
             <Badge>HKD 20,000</Badge>
           </BarUI>
         </div>
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
-          <Heading2>MAR 2024</Heading2>
+          <H6>MAR 2024</H6>
           <BarUI>
             <Filled $filledColor={BFMPalette.purple300} $filledValue={90} />
             <Badge>HKD 20,000</Badge>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
+import { BodyText, Title, Value } from "@/Typography";
 const Container = styled("div")`
   display: flex;
   justify-content: space-between;
@@ -18,15 +19,6 @@ const TextContainer = styled("div")`
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
-`;
-const Title = styled("p")`
-  color: ${BFMPalette.gray700};
-  font-size: 16px;
-  font-weight: 500;
-`;
-const Value = styled("p")`
-  font-size: 16px;
-  font-weight: 700;
 `;
 
 const Percentage = styled("div")`
@@ -64,7 +56,7 @@ export default function TextComponent({
           <Percentage>
             <Border>{percentage}%</Border>
           </Percentage>
-          <Title>{timePeriod}</Title>
+          <BodyText>{timePeriod}</BodyText>
         </TextContainer>
       </SubContainer>
     </Container>

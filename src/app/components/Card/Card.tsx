@@ -1,4 +1,5 @@
 import { BFMPalette } from "@/Theme";
+import { Description, H3Primary } from "@/Typography";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
@@ -34,20 +35,6 @@ const SubContainer2 = styled("div")`
   flex-direction: column;
 `;
 
-const Heading = styled("h1")`
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 18px;
-  margin: 0;
-`;
-
-const Description = styled("p")`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 18px;
-  color: ${BFMPalette.black100};
-  margin: 0;
-`;
 const ButtonContainer = styled("div")`
   display: flex;
   justify-content: flex-end;
@@ -76,7 +63,7 @@ export default function Card({
       <SubContainer1>
         <Image src={image} alt={title} width={45} height={45} />
         <SubContainer2>
-          <Heading>{title}</Heading>
+          <H3Primary>{title}</H3Primary>
           <Description>{description}</Description>
         </SubContainer2>
       </SubContainer1>

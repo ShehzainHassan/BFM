@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { BFMPalette } from "@/Theme";
 import styled from "styled-components";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { H1 } from "@/Typography";
 
 const Container = styled("div")`
   display: flex;
@@ -20,12 +23,6 @@ const SubContainer = styled("div")`
   background-color: ${BFMPalette.purple950};
 `;
 
-const Heading = styled("h3")`
-  font-size: 20px;
-  line-height: 30px;
-  font-weight: 700;
-  color: ${BFMPalette.white};
-`;
 const NavContent = styled("p")<{ $isSelected: boolean }>`
   font-weight: 600;
   line-height: 20px;
@@ -39,23 +36,19 @@ const NavContent = styled("p")<{ $isSelected: boolean }>`
 `;
 
 interface NavbarProps {
-  navItems: string[];
+  navItems: { label: string; path: string }[];
 }
-
 export default function Navbar({ navItems }: NavbarProps) {
-  const [selected, setSelected] = useState(navItems[0]);
+  const pathname = usePathname();
 
   return (
     <Container>
-      <Heading>Welcome Back, Mark</Heading>
+      <H1>Welcome Back, Mark</H1>
       <SubContainer>
-        {navItems.map((item) => (
-          <NavContent
-            key={item}
-            $isSelected={selected === item}
-            onClick={() => setSelected(item)}>
-            {item}
-          </NavContent>
+        {navItems.map(({ label, path }) => (
+          <Link key={path} href={path} passHref>
+            <NavContent $isSelected={pathname === path}>{label}</NavContent>
+          </Link>
         ))}
       </SubContainer>
     </Container>

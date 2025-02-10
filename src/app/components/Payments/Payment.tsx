@@ -9,6 +9,7 @@ import {
 } from "recharts";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import styled from "styled-components";
+import { BFMPalette } from "@/Theme";
 
 const Container = styled("div")`
   display: flex;
@@ -21,7 +22,7 @@ const SubContainer = styled("div")`
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  border-bottom: 1px solid #e9eaeb;
+  border-bottom: 1px solid ${BFMPalette.gray100};
 `;
 const GraphContainer = styled("div")`
   width: 100%;
@@ -85,8 +86,8 @@ export default function Payment() {
             <Area
               type="monotone"
               dataKey="HKD"
-              stroke="#8884d8"
-              fill="#8884d8"
+              stroke={BFMPalette.purple350}
+              fill={BFMPalette.purple350}
             />
           </AreaChart>
         </ResponsiveContainer>

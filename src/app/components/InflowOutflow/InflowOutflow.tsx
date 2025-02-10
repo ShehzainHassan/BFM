@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { Cell, Pie, PieChart } from "recharts";
 import { BFMPalette } from "@/Theme";
 import { Label as RechartsLabel } from "recharts";
+import { H2, Label } from "@/Typography";
 const data = [
   { name: "Group A", value: 600 },
   { name: "Group B", value: 200 },
@@ -53,18 +54,7 @@ const LabelContainer = styled("div")`
   flex-direction: column;
   gap: 4px;
 `;
-const Label = styled("p")`
-  gap: 4px;
-  color: ${BFMPalette.black400};
-  font-weight: 500;
-  font-size: 14px;
-`;
-const Value = styled("p")`
-  color: ${BFMPalette.black800};
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 600;
-`;
+
 const Circle = styled("p")`
   width: 10px;
   height: 10px;
@@ -119,19 +109,19 @@ export default function InflowOutflow() {
           <LabelContainer>
             <Circle />
             <Label>Other Outflow</Label>
-            <Value>HKD 10,000.00</Value>
+            <H2>HKD 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
             <Label>Utilities</Label>
-            <Value>HKD 10,000.00</Value>
+            <H2>HKD 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
             <Label>Advertising</Label>
-            <Value>HKD 10,000.00</Value>
+            <H2>HKD 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
             <Label>Cheque Outflow</Label>
-            <Value>HKD 10,000.00</Value>
+            <H2>HKD 10,000.00</H2>
           </LabelContainer>
         </Labels>
       </ChartContainer>
