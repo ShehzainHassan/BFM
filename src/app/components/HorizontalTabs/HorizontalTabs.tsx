@@ -8,7 +8,7 @@ const TabContainer = styled("div")`
   gap: 8px;
   padding: 4px;
   background-color: white;
-  border: 1px solid #e9eaeb;
+  border: 1px solid ${BFMPalette.gray100};
   border-radius: 1000px;
 `;
 const TabContent = styled("p")<{ $isSelected: boolean }>`

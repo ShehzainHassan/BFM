@@ -1,10 +1,14 @@
 "use client";
+import Card from "./components/Card/Card";
 import HorizontalTabs from "./components/HorizontalTabs/HorizontalTabs";
 import InflowOutflow from "./components/InflowOutflow/InflowOutflow";
 import Navbar from "./components/Navbar/Navbar";
+import Notifications from "./components/Notifications/Notifications";
 import Payment from "./components/Payments/Payment";
+import Comparison from "./components/Spending Comparison/Comparison";
 import TextComponent from "./components/TextComponent/TextComponent";
 import styled from "styled-components";
+import TextContainer from "./components/TextComponent/TextContainer/TextContainer";
 
 const MainContainer = styled("div")`
   display: flex;
@@ -12,14 +16,10 @@ const MainContainer = styled("div")`
   gap: 16px;
   padding: 32px;
 `;
-const TextContainer = styled("div")`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+
 const SubContainer = styled("div")`
   display: flex;
-  gap: 40px;
+  justify-content: space-between;
 `;
 export default function Home() {
   return (
@@ -29,27 +29,9 @@ export default function Home() {
       />
       <MainContainer>
         <SubContainer>
-          <TextContainer>
-            <TextComponent
-              title="Current Balance"
-              timePeriod="since last month"
-              percentage={8}
-              value="HKD 1,300,000.00"
-            />
-            <TextComponent
-              title="Total income"
-              timePeriod="since last month"
-              percentage={2}
-              value="HKD 240,000.00"
-            />
-            <TextComponent
-              title="Total Expenses"
-              timePeriod="since last month"
-              percentage={8}
-              value="HKD 90,000.00"
-            />
-          </TextContainer>
+          <TextContainer />
           <InflowOutflow />
+          <Notifications />
         </SubContainer>
 
         <Payment />

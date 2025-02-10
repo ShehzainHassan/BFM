@@ -5,7 +5,7 @@ import { Select } from "antd";
 import styled from "styled-components";
 import { Cell, Pie, PieChart } from "recharts";
 import { BFMPalette } from "@/Theme";
-
+import { Label as RechartsLabel } from "recharts";
 const data = [
   { name: "Group A", value: 600 },
   { name: "Group B", value: 200 },
@@ -33,7 +33,7 @@ const SubContainer = styled("div")`
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  border-bottom: 1px solid #e9eaeb;
+  border-bottom: 1px solid ${BFMPalette.gray100};
 `;
 
 const ChartContainer = styled("div")`
@@ -55,12 +55,12 @@ const LabelContainer = styled("div")`
 `;
 const Label = styled("p")`
   gap: 4px;
-  color: #414651;
+  color: ${BFMPalette.black400};
   font-weight: 500;
   font-size: 14px;
 `;
 const Value = styled("p")`
-  color: #181d27;
+  color: ${BFMPalette.black800};
   font-size: 16px;
   line-height: 24px;
   font-weight: 600;
@@ -68,7 +68,7 @@ const Value = styled("p")`
 const Circle = styled("p")`
   width: 10px;
   height: 10px;
-  color: #42307d;
+  color: ${BFMPalette.purple900};
   border-radius: 50%;
 `;
 export default function InflowOutflow() {
@@ -98,7 +98,7 @@ export default function InflowOutflow() {
             cy="50%"
             innerRadius={60}
             outerRadius={80}
-            fill="#8884d8"
+            fill={BFMPalette.purple350}
             dataKey="value">
             {data.map((entry, index) => (
               <Cell
@@ -106,6 +106,13 @@ export default function InflowOutflow() {
                 fill={COLORS[index % COLORS.length]}
               />
             ))}
+            <RechartsLabel
+              value="HKD 10,000.00"
+              position="center"
+              fill={BFMPalette.black800}
+              fontSize={16}
+              fontWeight={600}
+            />
           </Pie>
         </PieChart>
         <Labels>

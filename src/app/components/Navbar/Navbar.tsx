@@ -24,13 +24,13 @@ const Heading = styled("h3")`
   font-size: 20px;
   line-height: 30px;
   font-weight: 700;
-  color: #ffffff;
+  color: ${BFMPalette.white};
 `;
 const NavContent = styled("p")<{ $isSelected: boolean }>`
   font-weight: 600;
   line-height: 20px;
   font-size: 14px;
-  color: #ffffff;
+  color: ${BFMPalette.white};
   border-radius: 6px;
   padding: 8px 12px;
   background-color: ${({ $isSelected }) =>
