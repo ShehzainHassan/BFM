@@ -1,3 +1,4 @@
+import { BFMPalette } from "@/Theme";
 import React, { PureComponent } from "react";
 import {
   BarChart,
@@ -18,14 +19,22 @@ type DataItem = {
 interface ChartProps {
   data: DataItem[];
   color: string;
+  barSize?: number;
+  selectedBarColor?: string;
 }
 
-export default function BarGraph({ data, color }: ChartProps) {
+export default function BarGraph({
+  data,
+  color,
+  barSize,
+  selectedBarColor,
+}: ChartProps) {
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height={350}>
       <BarChart
         width={200}
         height={200}
+        barSize={barSize ?? 48}
         data={data}
         margin={{
           top: 5,
@@ -41,7 +50,9 @@ export default function BarGraph({ data, color }: ChartProps) {
         <Bar
           dataKey="value"
           fill={color}
-          activeBar={<Rectangle fill="pink" stroke="blue" />}
+          activeBar={
+            <Rectangle fill={selectedBarColor ?? BFMPalette.purple1000} />
+          }
         />
       </BarChart>
     </ResponsiveContainer>

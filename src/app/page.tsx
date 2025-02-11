@@ -1,6 +1,5 @@
 "use client";
 import InflowOutflow from "./components/InflowOutflow/InflowOutflow";
-import Navbar from "./components/Navbar/Navbar";
 import Notifications from "./components/Notifications/Notifications";
 import Payment from "./components/Payments/Payment";
 import styled from "styled-components";
