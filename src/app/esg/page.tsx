@@ -8,6 +8,7 @@ import SelectDropDown from "../components/SelectDropDown/SelectDropDown";
 import Example from "../components/Charts/BarChart/BarChart";
 import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
 import BarGraph from "../components/Charts/BarChart/BarChart";
+import { H5 } from "@/Typography";
 
 const months = [
   { name: "Jan 2024", value: 2250 },
@@ -29,19 +30,20 @@ const data = [
   { name: "Group B", value: 200 },
   { name: "Group C", value: 200 },
   { name: "Group D", value: 400 },
+  { name: "Group E", value: 400 },
 ];
 
 const COLORS = [
-  BFMPalette.purple900,
-  BFMPalette.purple100,
-  BFMPalette.purple200,
+  BFMPalette.red600,
+  BFMPalette.green500,
+  BFMPalette.blue500,
   BFMPalette.purple400,
+  BFMPalette.yellow500,
 ];
 
 const Container = styled("div")`
   display: flex;
   justify-content: space-between;
-  border-radius: 12px;
   gap: 20px;
 `;
 
@@ -54,15 +56,22 @@ const GraphsContainer = styled("div")`
 
 const ChartContainer = styled("div")`
   display: flex;
-  justify-content: space-between;
+  gap: 24px;
   align-items: center;
   padding: 24px;
-  background-color: ${BFMPalette.white};
+`;
+
+const SubContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
 `;
 
 const Labels = styled("div")`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  flex: 1;
   gap: 14px;
   & > div:nth-last-child(odd):last-child {
     grid-column: span 2;
@@ -73,7 +82,6 @@ const HeadingContainer = styled("div")`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${BFMPalette.white};
   border: 1px solid ${BFMPalette.gray100};
   padding: 12px 16px;
 `;
@@ -84,12 +92,28 @@ const Heading = styled("h1")`
   line-height: 24px;
   color: ${BFMPalette.black800};
 `;
-
+const BarLabel = styled("div")`
+  border-radius: 16px;
+  border: 1px solid ${BFMPalette.blue200};
+  padding: 2px 8px;
+  background-color: ${BFMPalette.blue300};
+  max-width: 200px;
+`;
+const BarChartContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  background-color: ${BFMPalette.white};
+`;
+const PieChartContainer = styled("div")`
+  border-radius: 12px;
+  background-color: ${BFMPalette.white};
+`;
 export default function ESG() {
   return (
     <Container>
       <GraphsContainer>
-        <div>
+        <PieChartContainer>
           <HeadingContainer>
             <Heading>CO2 Emission by Category</Heading>
             <SelectDropDown />
@@ -129,17 +153,21 @@ export default function ESG() {
               />
             </Labels>
           </ChartContainer>
-        </div>
+        </PieChartContainer>
 
-        <div>
+        <BarChartContainer>
           <HeadingContainer>
             <Heading>Carbon Footprint Trendy</Heading>
             <HorizontalTabs tabs={["2023", "2024", "2025"]} />
           </HeadingContainer>
-          <ChartContainer>
+
+          <SubContainer>
+            <BarLabel>
+              <H5>All data are in units of kg CO2e</H5>
+            </BarLabel>
             <BarGraph data={months} color={BFMPalette.purple800} />
-          </ChartContainer>
-        </div>
+          </SubContainer>
+        </BarChartContainer>
       </GraphsContainer>
 
       <Actions />
