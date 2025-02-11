@@ -7,6 +7,7 @@ import { Cell, Pie, PieChart } from "recharts";
 import { BFMPalette } from "@/Theme";
 import { Label as RechartsLabel } from "recharts";
 import { H2, Label } from "@/Typography";
+import PieGraph from "../Charts/PieChart/PieChart";
 const data = [
   { name: "Group A", value: 600 },
   { name: "Group B", value: 200 },
@@ -81,30 +82,7 @@ export default function InflowOutflow() {
       </SubContainer>
 
       <ChartContainer>
-        <PieChart width={300} height={300}>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={80}
-            fill={BFMPalette.purple350}
-            dataKey="value">
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-            <RechartsLabel
-              value="HKD 10,000.00"
-              position="center"
-              fill={BFMPalette.black800}
-              fontSize={16}
-              fontWeight={600}
-            />
-          </Pie>
-        </PieChart>
+        <PieGraph data={data} COLORS={COLORS} />
         <Labels>
           <LabelContainer>
             <Circle />

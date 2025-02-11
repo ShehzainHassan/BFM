@@ -4,8 +4,9 @@ import Card from "../Card/Card";
 import Image from "next/image";
 import { BFMPalette } from "@/Theme";
 import { H2 } from "@/Typography";
+import InputLabel from "../InputLabel/Input";
 
-export default function Notifications() {
+export default function Actions() {
   const Container = styled("div")`
     display: flex;
     flex-direction: column;
@@ -33,14 +34,14 @@ export default function Notifications() {
     align-items: center;
     gap: 8px;
     padding: 16px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    border-bottom: 1px solid ${BFMPalette.purple200};
     background: linear-gradient(
       to right,
       ${BFMPalette.purple175},
       ${BFMPalette.white}
     );
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom: 1px solid ${BFMPalette.purple200};
   `;
   return (
     <Container>
@@ -49,17 +50,14 @@ export default function Notifications() {
         <H2>For You</H2>
       </TitleContainer>
       <CardContainer>
-        <Comparison />
         <Card
-          image="/images/Frame 3.png"
-          title="Apply for a Business Loan"
-          description="Apply for a business loan and enjoy up to HKD 3,000 rewards!"
-        />
-        <Card
-          image="/images/Frame 3.png"
-          title="Fee Detected"
-          description="You just got charged a fee from ABC bank."
-        />
+          image="/images/sun.png"
+          title="Improve the energy efficiency of your premises">
+          <InputLabel />
+        </Card>
+        <Card image="/images/car.png" title="Reduce use of fossil fuel">
+          <InputLabel />
+        </Card>
       </CardContainer>
     </Container>
   );

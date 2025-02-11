@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { BFMPalette } from "@/Theme";
 import styled from "styled-components";
 import Link from "next/link";
@@ -10,6 +9,7 @@ const Container = styled("div")`
   display: flex;
   flex-direction: column;
   background-color: ${BFMPalette.purple1000};
+  width: 100%;
   height: 150px;
   gap: 16px;
   padding: 32px;
@@ -41,9 +41,18 @@ interface NavbarProps {
 export default function Navbar({ navItems }: NavbarProps) {
   const pathname = usePathname();
 
+  const titleMapping: Record<string, string> = {
+    "/": "Welcome Back, Mark",
+    "/analytics": "Welcome Back, Mark",
+    "/invoices": "Invoices",
+    "/calender": "Business Calender",
+    "/esg": "ESG",
+  };
+
+  const pageTitle = titleMapping[pathname] || "Welcome Back, Mark";
   return (
     <Container>
-      <H1>Welcome Back, Mark</H1>
+      <H1>{pageTitle}</H1>
       <SubContainer>
         {navItems.map(({ label, path }) => (
           <Link key={path} href={path} passHref>

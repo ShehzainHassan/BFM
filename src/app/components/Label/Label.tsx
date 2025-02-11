@@ -2,7 +2,18 @@ import { BFMPalette } from "@/Theme";
 import { H3Secondary, H3SecondaryDark, H4, H5 } from "@/Typography";
 import styled from "styled-components";
 
-export default function ESGCard() {
+interface ESGCardProps {
+  title: string;
+  value: string;
+  kg: number;
+  circleColor?: string;
+}
+export default function ESGCard({
+  title,
+  value,
+  kg,
+  circleColor,
+}: ESGCardProps) {
   const Container = styled("div")`
     display: flex;
     align-items: center;
@@ -17,10 +28,10 @@ export default function ESGCard() {
     align-items: center;
     gap: 10px;
   `;
-  const Circle = styled("p")`
+  const Circle = styled("p")<{ color: string }>`
     width: 10px;
     height: 10px;
-    background-color: ${BFMPalette.purple900};
+    background-color: ${(props) => props.color};
     border-radius: 50%;
   `;
   const CategoryContainer = styled("div")`
@@ -37,13 +48,13 @@ export default function ESGCard() {
     <Container>
       <CategoryContainer>
         <CircleContainer>
-          <Circle />
-          <H3Secondary>Electricity</H3Secondary>
+          <Circle color={circleColor ?? BFMPalette.purple600} />
+          <H3Secondary>{title}</H3Secondary>
         </CircleContainer>
-        <H5>HKD 100,000.00</H5>
+        <H5>{value}</H5>
       </CategoryContainer>
       <ValueContainer>
-        <H3SecondaryDark>586.75</H3SecondaryDark>
+        <H3SecondaryDark>{kg}</H3SecondaryDark>
         <H4>kg CO2</H4>
       </ValueContainer>
     </Container>

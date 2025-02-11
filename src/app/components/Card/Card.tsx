@@ -32,6 +32,8 @@ const SubContainer1 = styled("div")`
 
 const SubContainer2 = styled("div")`
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 `;
 

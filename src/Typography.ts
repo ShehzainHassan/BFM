@@ -73,6 +73,13 @@ export const Label = styled.p`
   color: ${BFMPalette.black400};
 `;
 
+export const LabelMedium = styled.p`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${BFMPalette.black400};
+`;
+
 export const Description = styled.p`
   font-weight: 500;
   font-size: 14px;

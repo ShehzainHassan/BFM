@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import TextComponent from "../TextComponent";
+import TextComponent from "../TextComponent/TextComponent";
 
 export default function TextContainer() {
   const Container = styled("div")`
