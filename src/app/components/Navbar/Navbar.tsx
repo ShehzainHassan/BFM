@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { H1 } from "@/Typography";
+import NavButton from "../Button/Primary/NavButton";
 
 const Container = styled("div")`
   display: flex;
@@ -41,6 +42,14 @@ interface NavbarProps {
 export default function Navbar({ navItems }: NavbarProps) {
   const pathname = usePathname();
 
+  const Header = styled("div")`
+    display: flex;
+    justify-content: space-between;
+  `;
+  const ButtonsContainer = styled("div")`
+    display: flex;
+    gap: 16px;
+  `;
   const titleMapping: Record<string, string> = {
     "/": "Welcome Back, Mark",
     "/analytics": "Welcome Back, Mark",
@@ -49,10 +58,48 @@ export default function Navbar({ navItems }: NavbarProps) {
     "/esg": "ESG",
   };
 
+  const navButtons =
+    pathname === "/calender" || pathname === "/esg"
+      ? ["schedule", "create"]
+      : pathname === "/invoices"
+      ? ["invoice"]
+      : [];
   const pageTitle = titleMapping[pathname] || "Welcome Back, Mark";
   return (
     <Container>
-      <H1 color={BFMPalette.white}>{pageTitle}</H1>
+      <Header>
+        <H1 color={BFMPalette.white}>{pageTitle}</H1>
+        <ButtonsContainer>
+          {navButtons.includes("schedule") && (
+            <NavButton
+              textColor={BFMPalette.purple600}
+              bgColor={BFMPalette.white}
+              imagePosition="right"
+              imageSrc="/images/clock.png">
+              Schedule Event
+            </NavButton>
+          )}
+          {navButtons.includes("create") && (
+            <NavButton
+              textColor={BFMPalette.white}
+              borderColor={BFMPalette.purple500}
+              bgColor={BFMPalette.purple500}
+              imageSrc="/images/plus.png">
+              Create New Event
+            </NavButton>
+          )}
+          {navButtons.includes("invoice") && (
+            <NavButton
+              textColor={BFMPalette.white}
+              borderColor={BFMPalette.purple500}
+              bgColor={BFMPalette.purple500}
+              imageSrc="/images/plus.png">
+              Create New Invoice
+            </NavButton>
+          )}{" "}
+        </ButtonsContainer>
+      </Header>
+
       <SubContainer>
         {navItems.map(({ label, path }) => (
           <Link key={path} href={path} passHref>

@@ -15,7 +15,12 @@ export const H2 = styled.h2<{ color?: string }>`
   line-height: 24px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
-
+export const H3 = styled.h2<{ color?: string }>`
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
 export const H3Primary = styled.h3<{ color?: string }>`
   font-weight: 600;
   font-size: 14px;
@@ -48,6 +53,13 @@ export const H5 = styled.h5<{ color?: string }>`
 export const BodyText = styled.p<{ color?: string }>`
   font-weight: 400;
   font-size: 14px;
+  line-height: 20px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
+export const MediumText = styled.p<{ color?: string }>`
+  font-weight: 400;
+  font-size: 16px;
   line-height: 20px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;

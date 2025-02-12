@@ -22,6 +22,8 @@ export const BFMPalette = {
   purple250: "#f9f5ff",
   purple300: "#d6bbfb",
   purple350: "#8884d8",
+  purple375: "#4e5ba6",
+
   purple400: "#9e77ed",
   purple500: "#7f56d9",
   purple600: "#6941c6",
@@ -42,6 +44,7 @@ export const BFMPalette = {
 
   blue100: "#c7d7fe",
   blue200: "#B2DDFF",
+
   blue300: "#eff8ff",
   blue500: "#1570EF",
   blue550: "#175CD3",
