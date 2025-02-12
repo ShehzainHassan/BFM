@@ -52,7 +52,7 @@ export default function Navbar({ navItems }: NavbarProps) {
   const pageTitle = titleMapping[pathname] || "Welcome Back, Mark";
   return (
     <Container>
-      <H1>{pageTitle}</H1>
+      <H1 color={BFMPalette.white}>{pageTitle}</H1>
       <SubContainer>
         {navItems.map(({ label, path }) => (
           <Link key={path} href={path} passHref>

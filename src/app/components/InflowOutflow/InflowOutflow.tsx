@@ -3,10 +3,8 @@ import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { generateMonths } from "@/utils";
 import { Select } from "antd";
 import styled from "styled-components";
-import { Cell, Pie, PieChart } from "recharts";
 import { BFMPalette } from "@/Theme";
-import { Label as RechartsLabel } from "recharts";
-import { H2, Label } from "@/Typography";
+import { H2, H4 } from "@/Typography";
 import PieGraph from "../Charts/PieChart/PieChart";
 const data = [
   { name: "Group A", value: 600 },
@@ -42,8 +40,7 @@ const ChartContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px;
-  height: 300px;
+  padding: 16px 24px;
 `;
 const Labels = styled("div")`
   display: flex;
@@ -86,20 +83,20 @@ export default function InflowOutflow() {
         <Labels>
           <LabelContainer>
             <Circle />
-            <Label>Other Outflow</Label>
-            <H2>HKD 10,000.00</H2>
+            <H4 color={BFMPalette.black400}>Other Outflow</H4>
+            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
-            <Label>Utilities</Label>
-            <H2>HKD 10,000.00</H2>
+            <H4 color={BFMPalette.black400}>Utilities</H4>
+            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
-            <Label>Advertising</Label>
-            <H2>HKD 10,000.00</H2>
+            <H4 color={BFMPalette.black400}>Advertising</H4>
+            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
-            <Label>Cheque Outflow</Label>
-            <H2>HKD 10,000.00</H2>
+            <H4 color={BFMPalette.black400}>Cheque Outflow</H4>
+            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
           </LabelContainer>
         </Labels>
       </ChartContainer>

@@ -1,4 +1,5 @@
 import { BFMPalette } from "@/Theme";
+import { H5 } from "@/Typography";
 import React, { PureComponent } from "react";
 import {
   BarChart,
@@ -10,7 +11,9 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
+import styled from "styled-components";
 
 type DataItem = {
   name: string;
@@ -22,6 +25,53 @@ interface ChartProps {
   barSize?: number;
   selectedBarColor?: string;
 }
+
+const LabelContainer = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  border: 1px solid ${BFMPalette.purple200};
+  padding: 2px 8px;
+  background-color: ${BFMPalette.purple250};
+`;
+const LabelText = styled("p")`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${BFMPalette.purple600};
+`;
+
+const CustomTick = (props: {
+  x: number;
+  y: number;
+  payload: { value: string };
+}) => {
+  const { x, y, payload } = props;
+  return (
+    <text
+      x={x}
+      y={y + 15}
+      textAnchor="middle"
+      fontSize={12}
+      fontWeight={500}
+      fill={BFMPalette.black100}>
+      {payload.value}
+    </text>
+  );
+};
+
+const CustomLabel = (props: any) => {
+  const { x, y, value } = props;
+
+  return (
+    <foreignObject x={x} y={y - 30} width={50} height={30}>
+      <LabelContainer>
+        <LabelText>{value}</LabelText>
+      </LabelContainer>
+    </foreignObject>
+  );
+};
 
 export default function BarGraph({
   data,
@@ -42,18 +92,50 @@ export default function BarGraph({
           left: 20,
           bottom: 5,
         }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
+        <CartesianGrid
+          stroke={BFMPalette.gray100}
+          strokeWidth={1.5}
+          strokeDasharray="0"
+          vertical={false}
+        />
+        <XAxis
+          dataKey="name"
+          axisLine={false}
+          tickLine={false}
+          interval={0}
+          tick={
+            <CustomTick
+              x={0}
+              y={0}
+              payload={{
+                value: "",
+              }}
+            />
+          }
+        />
+        <YAxis
+          axisLine={false}
+          tickLine={false}
+          interval={0}
+          tick={
+            <CustomTick
+              x={0}
+              y={0}
+              payload={{
+                value: "",
+              }}
+            />
+          }
+        />
         <Tooltip />
-        <Legend />
         <Bar
           dataKey="value"
           fill={color}
           activeBar={
             <Rectangle fill={selectedBarColor ?? BFMPalette.purple1000} />
-          }
-        />
+          }>
+          <LabelList dataKey="value" position="top" content={CustomLabel} />
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   );

@@ -5,7 +5,6 @@ import ESGCard from "../components/Label/Label";
 import Actions from "../components/Actions/actions";
 import PieGraph from "../components/Charts/PieChart/PieChart";
 import SelectDropDown from "../components/SelectDropDown/SelectDropDown";
-import Example from "../components/Charts/BarChart/BarChart";
 import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
 import BarGraph from "../components/Charts/BarChart/BarChart";
 import { H5 } from "@/Typography";
@@ -42,8 +41,8 @@ const COLORS = [
 ];
 
 const Container = styled("div")`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 8.55fr 3.45fr;
   gap: 20px;
 `;
 
@@ -163,7 +162,9 @@ export default function ESG() {
 
           <SubContainer>
             <BarLabel>
-              <H5>All data are in units of kg CO2e</H5>
+              <H5 color={BFMPalette.blue550}>
+                All data are in units of kg CO2e
+              </H5>
             </BarLabel>
             <BarGraph data={months} color={BFMPalette.purple800} />
           </SubContainer>

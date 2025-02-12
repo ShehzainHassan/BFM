@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
-import { BodyText, Title, Value } from "@/Typography";
+import { BodyText, Title, H1 } from "@/Typography";
 const Container = styled("div")`
   display: flex;
   justify-content: space-between;
-  max-width: 460px;
   background-color: ${BFMPalette.white25};
   border-radius: 12px;
-  padding: 14px 18px;
+  padding: 22px 18px;
 `;
 
 const SubContainer = styled("div")`
   display: flex;
-  gap: 40px;
+  justify-content: space-between;
+  flex: 1;
 `;
 const TextContainer = styled("div")`
   display: flex;
@@ -49,14 +49,14 @@ export default function TextComponent({
     <Container>
       <SubContainer>
         <TextContainer>
-          <Title>{title}</Title>
-          <Value>{value}</Value>
+          <Title color={BFMPalette.gray700}>{title}</Title>
+          <H1 color={BFMPalette.black800}>{value}</H1>
         </TextContainer>
         <TextContainer>
           <Percentage>
             <Border>{percentage}%</Border>
           </Percentage>
-          <BodyText>{timePeriod}</BodyText>
+          <BodyText color={BFMPalette.gray700}>{timePeriod}</BodyText>
         </TextContainer>
       </SubContainer>
     </Container>

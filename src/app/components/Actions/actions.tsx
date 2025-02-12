@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Comparison from "../Spending Comparison/Comparison";
 import Card from "../Card/Card";
 import Image from "next/image";
 import { BFMPalette } from "@/Theme";
 import { H2 } from "@/Typography";
-import InputLabel from "../InputLabel/Input";
+import InputLabel from "../CarbonContainer/CarbonContainer";
+import CarbonContainer from "../CarbonContainer/CarbonContainer";
 
 export default function Actions() {
   const Container = styled("div")`
@@ -47,16 +47,16 @@ export default function Actions() {
     <Container>
       <TitleContainer>
         <Image src="/images/icon.png" alt="icon" width={40} height={40} />
-        <H2>For You</H2>
+        <H2 color={BFMPalette.black800}>Actions For You</H2>
       </TitleContainer>
       <CardContainer>
         <Card
           image="/images/sun.png"
           title="Improve the energy efficiency of your premises">
-          <InputLabel />
+          <CarbonContainer />
         </Card>
         <Card image="/images/car.png" title="Reduce use of fossil fuel">
-          <InputLabel />
+          <CarbonContainer carbonVal="3 t Carbon" />
         </Card>
       </CardContainer>
     </Container>

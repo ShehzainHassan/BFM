@@ -1,5 +1,5 @@
 import { BFMPalette } from "@/Theme";
-import { H3Secondary, H3SecondaryDark, H4, H5 } from "@/Typography";
+import { H3Secondary, H4, H5 } from "@/Typography";
 import styled from "styled-components";
 
 interface ESGCardProps {
@@ -49,13 +49,13 @@ export default function ESGCard({
       <CategoryContainer>
         <CircleContainer>
           <Circle color={circleColor ?? BFMPalette.purple600} />
-          <H3Secondary>{title}</H3Secondary>
+          <H3Secondary color={BFMPalette.black400}>{title}</H3Secondary>
         </CircleContainer>
-        <H5>{value}</H5>
+        <H5 color={BFMPalette.gray700}>{value}</H5>
       </CategoryContainer>
       <ValueContainer>
-        <H3SecondaryDark>{kg}</H3SecondaryDark>
-        <H4>kg CO2</H4>
+        <H3Secondary color={BFMPalette.black800}>{kg}</H3Secondary>
+        <H4 color={BFMPalette.gray700}>kg CO2</H4>
       </ValueContainer>
     </Container>
   );

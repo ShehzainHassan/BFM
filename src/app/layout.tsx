@@ -17,6 +17,9 @@ const ContentWrapper = styled("div")`
   margin-left: 76px;
 `;
 const MainContent = styled("main")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 32px;
   overflow: auto;
 `;
