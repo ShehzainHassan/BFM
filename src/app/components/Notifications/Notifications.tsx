@@ -58,20 +58,20 @@ export default function Notifications() {
         <Card
           image="/images/Frame 3.png"
           title="Apply for a Business Loan"
-          description="Apply for a business loan and enjoy up to HKD 3,000 rewards!"
-        />
-        <ButtonContainer>
-          <ButtonSecondary />
-        </ButtonContainer>
+          description="Apply for a business loan and enjoy up to HKD 3,000 rewards!">
+          <ButtonContainer>
+            <ButtonSecondary />
+          </ButtonContainer>
+        </Card>
 
         <Card
           image="/images/Frame 3.png"
           title="Fee Detected"
-          description="You just got charged a fee from ABC bank."
-        />
-        <ButtonContainer>
-          <ButtonSecondary />
-        </ButtonContainer>
+          description="You just got charged a fee from ABC bank.">
+          <ButtonContainer>
+            <ButtonSecondary />
+          </ButtonContainer>
+        </Card>
       </CardContainer>
     </Container>
   );

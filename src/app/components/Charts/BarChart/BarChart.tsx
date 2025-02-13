@@ -76,18 +76,16 @@ const CustomLabel = (props: any) => {
 export default function BarGraph({
   data,
   color,
-  barSize,
+  barSize = 48,
   selectedBarColor,
 }: ChartProps) {
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <ResponsiveContainer width="100%" height={400}>
       <BarChart
-        width={200}
-        height={200}
-        barSize={barSize ?? 48}
+        barSize={barSize}
         data={data}
         margin={{
-          top: 5,
+          top: 25,
           right: 30,
           left: 20,
           bottom: 5,

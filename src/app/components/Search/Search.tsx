@@ -18,7 +18,7 @@ export default function Search({ placeholder }: SearchProps) {
   `;
   return (
     <SearchContainer>
-      <MediumText color={BFMPalette.gray700}>
+      <MediumText color={BFMPalette.gray700} width="300px">
         {placeholder ?? "Search"}
       </MediumText>
       <Image src="/images/Search.png" alt="search" width={20} height={20} />

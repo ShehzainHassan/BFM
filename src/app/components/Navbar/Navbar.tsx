@@ -72,8 +72,8 @@ export default function Navbar({ navItems }: NavbarProps) {
         <ButtonsContainer>
           {navButtons.includes("schedule") && (
             <NavButton
-              textColor={BFMPalette.purple600}
-              bgColor={BFMPalette.white}
+              $textColor={BFMPalette.purple600}
+              $bgColor={BFMPalette.white}
               imagePosition="right"
               imageSrc="/images/clock.png">
               Schedule Event
@@ -81,18 +81,18 @@ export default function Navbar({ navItems }: NavbarProps) {
           )}
           {navButtons.includes("create") && (
             <NavButton
-              textColor={BFMPalette.white}
-              borderColor={BFMPalette.purple500}
-              bgColor={BFMPalette.purple500}
+              $textColor={BFMPalette.white}
+              $borderColor={BFMPalette.purple500}
+              $bgColor={BFMPalette.purple500}
               imageSrc="/images/plus.png">
               Create New Event
             </NavButton>
           )}
           {navButtons.includes("invoice") && (
             <NavButton
-              textColor={BFMPalette.white}
-              borderColor={BFMPalette.purple500}
-              bgColor={BFMPalette.purple500}
+              $textColor={BFMPalette.white}
+              $borderColor={BFMPalette.purple500}
+              $bgColor={BFMPalette.purple500}
               imageSrc="/images/plus.png">
               Create New Invoice
             </NavButton>
