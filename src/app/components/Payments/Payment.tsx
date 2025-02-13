@@ -10,6 +10,7 @@ import {
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
+import { useState } from "react";
 
 const Container = styled("div")`
   display: flex;
@@ -64,10 +65,15 @@ const data = [
   },
 ];
 export default function Payment() {
+  const [selectedTab, setSelectedTab] = useState("Balance Over Time");
   return (
     <Container>
       <SubContainer>
-        <HorizontalTabs tabs={["Balance Over Time", "Cashflow"]} />.
+        <HorizontalTabs
+          tabs={["Balance Over Time", "Cashflow"]}
+          onTabChange={setSelectedTab}
+        />
+        .
       </SubContainer>
       <GraphContainer>
         <ResponsiveContainer width="100%" height="100%">

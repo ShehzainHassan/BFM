@@ -1,4 +1,5 @@
-import React, { useMemo } from "react";
+"use client";
+import React, { useMemo, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -6,16 +7,17 @@ import {
   ColumnDef,
 } from "@tanstack/react-table";
 import styled from "styled-components";
-import { Transaction } from "@/interfaces";
+import DetailsModal from "../Modal/Modal";
+import TransactionDetails from "../TransactionDetails/TransactionDetails";
 
 const TableContainer = styled.div`
   padding: 12px 16px 16px 16px;
   background-color: #f9f9f9;
 `;
 
-const DataRow = styled.div`
+const DataRow = styled.div<{ $columns: number }>`
   display: grid;
-  grid-template-columns: 1fr 2fr 1.5fr 1.5fr 2fr 1fr;
+  grid-template-columns: ${({ $columns }) => `repeat(${$columns}, 1fr)`};
   border-bottom: 1px solid #ddd;
   align-items: center;
 `;
@@ -24,23 +26,27 @@ export const DataCell = styled.div`
   padding: 16px 20px;
 `;
 
-interface TransactionTableProps {
-  data: Transaction[];
-  columns: ColumnDef<Transaction>[];
+interface TableProps<T> {
+  data: T[];
+  columns: ColumnDef<T>[];
 }
-export default function TransactionTable({
-  data,
-  columns,
-}: TransactionTableProps) {
+export default function DataTable<T>({ data, columns }: TableProps<T>) {
   const table = useReactTable({
     data: useMemo(() => data, []),
     columns: useMemo(() => columns, []),
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState<T>();
+
+  const handleRowClick = (rowData: T) => {
+    setSelectedRow(rowData);
+    setModalIsOpen(true);
+  };
   return (
     <TableContainer>
-      <DataRow>
+      <DataRow $columns={columns.length}>
         {table
           .getHeaderGroups()
           .map((headerGroup) =>
@@ -56,14 +62,32 @@ export default function TransactionTable({
       </DataRow>
 
       {table.getRowModel().rows.map((row) => (
-        <DataRow key={row.id}>
-          {row.getVisibleCells().map((cell) => (
-            <DataCell key={cell.id}>
-              {flexRender(cell.column.columnDef.cell, cell.getContext())}
-            </DataCell>
-          ))}
+        <DataRow key={row.id} $columns={columns.length}>
+          {row.getVisibleCells().map((cell) => {
+            const isActionColumn = cell.column.id === "action";
+
+            return (
+              <DataCell
+                key={cell.id}
+                onClick={() => {
+                  if (isActionColumn) {
+                    handleRowClick(row.original);
+                    setModalIsOpen(true);
+                  }
+                }}
+                style={{ cursor: isActionColumn ? "pointer" : "default" }}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </DataCell>
+            );
+          })}
         </DataRow>
       ))}
+      <DetailsModal
+        headerText="Transaction Details"
+        modalIsOpen={modalIsOpen}
+        closeModal={() => setModalIsOpen(false)}>
+        <TransactionDetails selectedRow={selectedRow} />
+      </DetailsModal>
     </TableContainer>
   );
 }

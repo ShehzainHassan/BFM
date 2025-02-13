@@ -8,6 +8,7 @@ import SelectDropDown from "../components/SelectDropDown/SelectDropDown";
 import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
 import BarGraph from "../components/Charts/BarChart/BarChart";
 import { H5 } from "@/Typography";
+import { useState } from "react";
 
 const months = [
   { name: "Jan 2024", value: 2250 },
@@ -109,6 +110,7 @@ const PieChartContainer = styled("div")`
   background-color: ${BFMPalette.white};
 `;
 export default function ESG() {
+  const [selectedTab, setSelectedTab] = useState("2024");
   return (
     <Container>
       <GraphsContainer>
@@ -157,7 +159,10 @@ export default function ESG() {
         <BarChartContainer>
           <HeadingContainer>
             <Heading>Carbon Footprint Trendy</Heading>
-            <HorizontalTabs tabs={["2023", "2024", "2025"]} />
+            <HorizontalTabs
+              tabs={["2023", "2024", "2025"]}
+              onTabChange={setSelectedTab}
+            />
           </HeadingContainer>
 
           <SubContainer>

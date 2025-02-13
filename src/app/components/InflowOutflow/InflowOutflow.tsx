@@ -61,11 +61,14 @@ const Circle = styled("p")`
 `;
 export default function InflowOutflow() {
   const [selectedMonth, setSelectedMonth] = useState<string>("Oct 2024");
-
+  const [selectedTab, setSelectedTab] = useState("Deposit");
   return (
     <Container>
       <SubContainer>
-        <HorizontalTabs tabs={["Deposit", "Withdrawal"]} />
+        <HorizontalTabs
+          tabs={["Deposit", "Withdrawal"]}
+          onTabChange={setSelectedTab}
+        />
         <Select
           style={{ height: "45px" }}
           onChange={(value) => setSelectedMonth(value)}

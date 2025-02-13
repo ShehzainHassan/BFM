@@ -23,6 +23,7 @@ const StyledButton = styled.button<ButtonProps>`
   font-size: 14px;
   font-weight: 600;
   line-height: 20px;
+  height: 36px;
   cursor: pointer;
   background-color: ${({ $bgColor }) => $bgColor || BFMPalette.purple500};
   color: ${({ $textColor }) => $textColor || BFMPalette.black100};

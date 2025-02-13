@@ -9,6 +9,13 @@ export const H1 = styled.h1<{ color?: string }>`
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 
+export const Header = styled.h1<{ color?: string }>`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
 export const H2 = styled.h2<{ color?: string }>`
   font-weight: 600;
   font-size: 16px;
@@ -69,6 +76,13 @@ export const Description = styled.p<{ color?: string }>`
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
+export const SubTitle = styled.p<{ color?: string }>`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 

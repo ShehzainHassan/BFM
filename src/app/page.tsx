@@ -4,197 +4,78 @@ import Notifications from "./components/Notifications/Notifications";
 import Payment from "./components/Payments/Payment";
 import styled from "styled-components";
 import TextContainer from "./components/TextContainer/TextContainer";
-import TransactionTable, { DataCell } from "./components/Table/Table";
+import { DataCell } from "./components/Table/Table";
 import HorizontalTabs from "./components/HorizontalTabs/HorizontalTabs";
 import Search from "./components/Search/Search";
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
-import { Transaction } from "@/interfaces";
 import { ColumnDef } from "@tanstack/react-table";
 import { BodyText, H3, H3Secondary, H4 } from "@/Typography";
+import DataTable from "./components/Table/Table";
+import { useState } from "react";
+import { Transaction, transactionData } from "@/transactions";
+import { AccountData, accountsData } from "@/accounts";
+import DetailsModal from "./components/Modal/Modal";
+import TransactionDetails from "./components/TransactionDetails/TransactionDetails";
 
-const data: Transaction[] = [
+const accountsColumns: ColumnDef<AccountData>[] = [
   {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/receipt-check.png",
-      title: "HKCSL Telecom Ltd",
-      subtitle: "Bills",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD",
-      value: "10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-];
-
-const transactionColumns: ColumnDef<Transaction>[] = [
-  {
-    accessorKey: "date",
+    accessorKey: "bank",
     header: () => (
       <HeaderCell>
-        <H3 color={BFMPalette.gray700}>DATE</H3>
+        <H3 color={BFMPalette.gray700}>BANK</H3>
       </HeaderCell>
     ),
     cell: ({ row }) => (
-      <DataCell>
-        <BodyText color={BFMPalette.black800}>{row.original.date}</BodyText>
-      </DataCell>
+      <BankText>
+        <BodyText color={BFMPalette.black800}>{row.original.bank}</BodyText>
+      </BankText>
     ),
   },
   {
-    accessorKey: "description",
+    accessorKey: "account",
     header: () => (
       <HeaderCell>
-        <H3 color={BFMPalette.gray700}>DESCRIPTIONS</H3>
+        <H3 color={BFMPalette.gray700}>ACCOUNT NAME</H3>
       </HeaderCell>
     ),
     cell: ({ row }) => {
-      const { imgSrc, title, subtitle } = row.original.description;
+      const { name, number } = row.original.account;
       return (
-        <DescriptionWrapper>
-          <ImageContainer>
-            <Image src={imgSrc} alt="icon" width={20} height={20} />
-          </ImageContainer>
-          <DescriptionText>
-            <H4 color={BFMPalette.black800}>{title}</H4>
-            <BodyText>{subtitle}</BodyText>
-          </DescriptionText>
-        </DescriptionWrapper>
+        <AccountText>
+          <H4 color={BFMPalette.black800}>{name}</H4>
+          <BodyText>{number}</BodyText>
+        </AccountText>
       );
     },
+  },
+  {
+    accessorKey: "type",
+    header: () => (
+      <HeaderCell>
+        <H3 color={BFMPalette.gray700}>ACCOUNT TYPE</H3>
+      </HeaderCell>
+    ),
+    cell: ({ row }) => (
+      <BankText>
+        <BodyText color={BFMPalette.black800}>
+          {row.original.accountType}
+        </BodyText>
+      </BankText>
+    ),
+  },
+  {
+    accessorKey: "balance",
+    header: () => (
+      <HeaderCell>
+        <H3 color={BFMPalette.gray700}>BALANCE</H3>
+      </HeaderCell>
+    ),
+    cell: ({ row }) => (
+      <BankText>
+        <BodyText color={BFMPalette.black800}>{row.original.balance}</BodyText>
+      </BankText>
+    ),
   },
   {
     accessorKey: "amount",
@@ -215,54 +96,7 @@ const transactionColumns: ColumnDef<Transaction>[] = [
       );
     },
   },
-  {
-    accessorKey: "bank",
-    header: () => (
-      <HeaderCell>
-        <H3 color={BFMPalette.gray700}>BANK</H3>
-      </HeaderCell>
-    ),
-    cell: ({ row }) => (
-      <BankText>
-        <BodyText color={BFMPalette.black800}>{row.original.bank}</BodyText>
-      </BankText>
-    ),
-  },
-  {
-    accessorKey: "account",
-    header: () => (
-      <HeaderCell>
-        <H3 color={BFMPalette.gray700}>ACCOUNT</H3>
-      </HeaderCell>
-    ),
-    cell: ({ row }) => {
-      const { type, number } = row.original.account;
-      return (
-        <AccountText>
-          <H4 color={BFMPalette.black800}>{type}</H4>
-          <BodyText>{number}</BodyText>
-        </AccountText>
-      );
-    },
-  },
-  {
-    accessorKey: "action",
-    header: () => (
-      <HeaderCell>
-        <H3 color={BFMPalette.gray700}></H3>
-      </HeaderCell>
-    ),
-    cell: () => (
-      <Image
-        src="/images/Button utility.png"
-        alt="icon"
-        width={32}
-        height={32}
-      />
-    ),
-  },
 ];
-
 const MainContainer = styled("div")`
   display: grid;
   grid-template-columns: 8.55fr 3.45fr;
@@ -303,7 +137,7 @@ const Filter = styled("div")`
   border-radius: 12px;
   border: 1px solid ${BFMPalette.purple400};
 `;
-const HeaderCell = styled.div`
+export const HeaderCell = styled.div`
   padding: 12px 20px;
   height: 100%;
   text-align: left;
@@ -347,6 +181,114 @@ const AccountText = styled.div`
   gap: 4px;
 `;
 export default function Home() {
+  const [selectedTab, setSelectedTab] = useState("Transactions");
+  // const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const transactionColumns: ColumnDef<Transaction>[] = [
+    {
+      accessorKey: "date",
+      header: () => (
+        <HeaderCell>
+          <H3 color={BFMPalette.gray700}>DATE</H3>
+        </HeaderCell>
+      ),
+      cell: ({ row }) => (
+        <DataCell>
+          <BodyText color={BFMPalette.black800}>{row.original.date}</BodyText>
+        </DataCell>
+      ),
+    },
+    {
+      accessorKey: "description",
+      header: () => (
+        <HeaderCell>
+          <H3 color={BFMPalette.gray700}>DESCRIPTIONS</H3>
+        </HeaderCell>
+      ),
+      cell: ({ row }) => {
+        const { imgSrc, title, subtitle } = row.original.description;
+        return (
+          <DescriptionWrapper>
+            <ImageContainer>
+              <Image src={imgSrc} alt="icon" width={20} height={20} />
+            </ImageContainer>
+            <DescriptionText>
+              <H4 color={BFMPalette.black800}>{title}</H4>
+              <BodyText>{subtitle}</BodyText>
+            </DescriptionText>
+          </DescriptionWrapper>
+        );
+      },
+    },
+    {
+      accessorKey: "amount",
+      header: () => (
+        <HeaderCell>
+          <H3 color={BFMPalette.gray700}>AMOUNT / HKD EQV</H3>
+        </HeaderCell>
+      ),
+      cell: ({ row }) => {
+        const { currency, value, equivalent } = row.original.amount;
+        return (
+          <AmountText>
+            <H3Secondary color={BFMPalette.purple375}>
+              {currency} {value}
+            </H3Secondary>
+            <H3Secondary color={BFMPalette.purple375}>{equivalent}</H3Secondary>
+          </AmountText>
+        );
+      },
+    },
+    {
+      accessorKey: "bank",
+      header: () => (
+        <HeaderCell>
+          <H3 color={BFMPalette.gray700}>BANK</H3>
+        </HeaderCell>
+      ),
+      cell: ({ row }) => (
+        <BankText>
+          <BodyText color={BFMPalette.black800}>{row.original.bank}</BodyText>
+        </BankText>
+      ),
+    },
+    {
+      accessorKey: "account",
+      header: () => (
+        <HeaderCell>
+          <H3 color={BFMPalette.gray700}>ACCOUNT</H3>
+        </HeaderCell>
+      ),
+      cell: ({ row }) => {
+        const { type, number } = row.original.account;
+        return (
+          <AccountText>
+            <H4 color={BFMPalette.black800}>{type}</H4>
+            <BodyText>{number}</BodyText>
+          </AccountText>
+        );
+      },
+    },
+    {
+      accessorKey: "action",
+      header: () => (
+        <HeaderCell>
+          <H3 color={BFMPalette.gray700}></H3>
+        </HeaderCell>
+      ),
+      cell: () => (
+        <Image
+          src="/images/Button utility.png"
+          alt="icon"
+          width={32}
+          height={32}
+          style={{ cursor: "pointer" }}
+          // onClick={() => setModalIsOpen(true)}
+        />
+      ),
+    },
+  ];
+
   return (
     <Container>
       <MainContainer>
@@ -361,9 +303,16 @@ export default function Home() {
       </MainContainer>
       <PaymentsContainer>
         <Header>
-          <HorizontalTabs tabs={["Transactions", "Accounts"]} />
+          <HorizontalTabs
+            tabs={["Transactions", "Accounts"]}
+            onTabChange={setSelectedTab}
+          />
           <SearchAndFilter>
-            <Search placeholder="Search Transactions..." />
+            {selectedTab === "Transactions" ? (
+              <Search placeholder="Search Transactions..." />
+            ) : (
+              <Search placeholder="Search by bank/account" />
+            )}
             <Filter>
               <Image
                 src="/images/filter.png"
@@ -374,7 +323,25 @@ export default function Home() {
             </Filter>
           </SearchAndFilter>
         </Header>
-        <TransactionTable data={data} columns={transactionColumns} />
+        {selectedTab === "Transactions" ? (
+          <DataTable
+            key="transactions"
+            data={transactionData}
+            columns={transactionColumns}
+          />
+        ) : (
+          <DataTable
+            key="accounts"
+            data={accountsData}
+            columns={accountsColumns}
+          />
+        )}
+        {/* <DetailsModal
+          headerText="Transaction Details"
+          modalIsOpen={modalIsOpen}
+          closeModal={() => setModalIsOpen(false)}>
+          <TransactionDetails />
+        </DetailsModal> */}
       </PaymentsContainer>
     </Container>
   );
