@@ -29,7 +29,7 @@ export const accountsData: AccountData[] = [
     },
   },
   {
-    bank: "Sample Bank",
+    bank: "abc Bank",
     account: {
       name: "Sample HKD Savings",
       number: "(666111***888)",

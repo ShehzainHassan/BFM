@@ -29,11 +29,31 @@ export const DataCell = styled.div`
 interface TableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
+  searchQuery?: string;
+  searchColumns?: (keyof T)[];
 }
-export default function DataTable<T>({ data, columns }: TableProps<T>) {
+
+export default function DataTable<T>({
+  data,
+  columns,
+  searchQuery,
+  searchColumns = [],
+}: TableProps<T>) {
+  const filteredData = useMemo(() => {
+    if (!searchQuery) return data;
+    return data.filter((row) =>
+      searchColumns.some((column) => {
+        const cellValue = row[column];
+        return cellValue
+          ? String(cellValue).toLowerCase().includes(searchQuery.toLowerCase())
+          : false;
+      })
+    );
+  }, [data, searchQuery, searchColumns]);
+
   const table = useReactTable({
-    data: useMemo(() => data, []),
-    columns: useMemo(() => columns, []),
+    data: filteredData, // Use filteredData here
+    columns: useMemo(() => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -44,6 +64,7 @@ export default function DataTable<T>({ data, columns }: TableProps<T>) {
     setSelectedRow(rowData);
     setModalIsOpen(true);
   };
+
   return (
     <TableContainer>
       <DataRow $columns={columns.length}>

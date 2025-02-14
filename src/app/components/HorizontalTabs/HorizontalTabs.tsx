@@ -29,31 +29,37 @@ const TabContent = styled("p")<{
         border-radius: 1000px;
         background-color: ${$isSelected ? BFMPalette.purple800 : "transparent"};
         color: ${$isSelected ? BFMPalette.white : BFMPalette.black100};
+         &:hover {
+          background-color: ${!$isSelected ? BFMPalette.purple200 : ""};
+        }
       `
       : `
         background-color: ${$isSelected ? BFMPalette.white25 : "transparent"};
         color: ${$isSelected ? BFMPalette.purple500 : BFMPalette.gray700};
   border-bottom: ${$isSelected ? `1px solid ${BFMPalette.purple500}` : ""};
+         &:hover {
+          background-color: ${!$isSelected ? BFMPalette.purple200 : ""};
+        }
 
 `}
 `;
 
 interface HorizontalTabsProps {
   tabs: string[];
-  onTabChange?: (tab: string) => void;
+  onTabSelect: (tab: string) => void;
   tabType?: "button" | "tab";
 }
 
 export default function HorizontalTabs({
   tabs,
-  onTabChange,
+  onTabSelect,
   tabType = "button",
 }: HorizontalTabsProps) {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
 
   const handleTabSelection = (tab: string) => {
     setSelectedTab(tab);
-    onTabChange?.(tab);
+    onTabSelect(tab);
   };
 
   return (

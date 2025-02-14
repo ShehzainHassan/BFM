@@ -368,7 +368,7 @@ export default function TransactionDetails({
       <HorizontalTabs
         tabs={["Details", "Attachments"]}
         tabType="tab"
-        onTabChange={(tab) => setSelectedTab(tab)}
+        onTabSelect={setSelectedTab}
       />
       {selectedTab === "Details" ? (
         <DetailsContainer>

@@ -30,6 +30,39 @@ const GraphContainer = styled("div")`
   padding: 14px 16px;
   height: 300px;
 `;
+const CustomTooltipContainer = styled("div")`
+  background-color: ${BFMPalette.purple925};
+  padding: 8px 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const CustomTooltipLabel = styled("p")`
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${BFMPalette.gray200};
+`;
+
+const CustomTooltipValue = styled("p")`
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${BFMPalette.white};
+`;
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <CustomTooltipContainer>
+        <CustomTooltipLabel>{label}</CustomTooltipLabel>
+        <CustomTooltipValue>{payload[0].value}</CustomTooltipValue>
+      </CustomTooltipContainer>
+    );
+  }
+
+  return null;
+};
 const data = [
   {
     name: "31 Dec 2023",
@@ -71,7 +104,7 @@ export default function Payment() {
       <SubContainer>
         <HorizontalTabs
           tabs={["Balance Over Time", "Cashflow"]}
-          onTabChange={setSelectedTab}
+          onTabSelect={setSelectedTab}
         />
         .
       </SubContainer>
@@ -88,7 +121,7 @@ export default function Payment() {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip />
+            <Tooltip content={<CustomTooltip />} />
             <Area
               type="monotone"
               dataKey="HKD"

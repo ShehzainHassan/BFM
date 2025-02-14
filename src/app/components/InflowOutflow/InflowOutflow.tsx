@@ -67,7 +67,7 @@ export default function InflowOutflow() {
       <SubContainer>
         <HorizontalTabs
           tabs={["Deposit", "Withdrawal"]}
-          onTabChange={setSelectedTab}
+          onTabSelect={setSelectedTab}
         />
         <Select
           style={{ height: "45px" }}

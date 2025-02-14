@@ -1,12 +1,14 @@
 import { BFMPalette } from "@/Theme";
-import { MediumText } from "@/Typography";
 import Image from "next/image";
 import styled from "styled-components";
 
 interface SearchProps {
   placeholder?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
-export default function Search({ placeholder }: SearchProps) {
+
+export default function Search({ placeholder, value, onChange }: SearchProps) {
   const SearchContainer = styled("div")`
     display: flex;
     gap: 8px;
@@ -15,12 +17,30 @@ export default function Search({ placeholder }: SearchProps) {
     padding: 8px 12px;
     border: 1px solid ${BFMPalette.gray200};
     background-color: ${BFMPalette.white};
+    width: 300px;
   `;
+
+  const SearchInput = styled("input")`
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    color: ${BFMPalette.gray700};
+    background-color: transparent;
+
+    &::placeholder {
+      color: ${BFMPalette.gray700};
+    }
+  `;
+
   return (
     <SearchContainer>
-      <MediumText color={BFMPalette.gray700} width="300px">
-        {placeholder ?? "Search"}
-      </MediumText>
+      <SearchInput
+        type="text"
+        placeholder={placeholder ?? "Search"}
+        value={value}
+        onChange={onChange}
+      />
       <Image src="/images/Search.png" alt="search" width={20} height={20} />
     </SearchContainer>
   );

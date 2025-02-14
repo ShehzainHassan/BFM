@@ -182,6 +182,7 @@ const AccountText = styled.div`
 `;
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState("Transactions");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const transactionColumns: ColumnDef<Transaction>[] = [
     {
@@ -303,13 +304,21 @@ export default function Home() {
         <Header>
           <HorizontalTabs
             tabs={["Transactions", "Accounts"]}
-            onTabChange={setSelectedTab}
+            onTabSelect={setSelectedTab}
           />
           <SearchAndFilter>
             {selectedTab === "Transactions" ? (
-              <Search placeholder="Search Transactions..." />
+              <Search
+                placeholder="Search Transactions..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             ) : (
-              <Search placeholder="Search by bank/account" />
+              <Search
+                placeholder="Search by bank/account"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             )}
             <Filter>
               <Image
@@ -332,6 +341,8 @@ export default function Home() {
             key="accounts"
             data={accountsData}
             columns={accountsColumns}
+            searchQuery={searchQuery}
+            searchColumns={["bank", "account"]}
           />
         )}
       </PaymentsContainer>

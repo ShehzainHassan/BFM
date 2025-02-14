@@ -33,6 +33,10 @@ const NavContent = styled("p")<{ $isSelected: boolean }>`
   padding: 8px 12px;
   background-color: ${({ $isSelected }) =>
     $isSelected ? BFMPalette.purple500 : "transparent"};
+  &:hover {
+    background-color: ${({ $isSelected }) =>
+      !$isSelected ? BFMPalette.purple1000 : ""};
+  }
   cursor: pointer;
 `;
 
