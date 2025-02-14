@@ -55,6 +55,7 @@ export default function HorizontalTabs({
     setSelectedTab(tab);
     onTabChange?.(tab);
   };
+
   return (
     <TabContainer $tabType={tabType}>
       {tabs.map((tab) => {

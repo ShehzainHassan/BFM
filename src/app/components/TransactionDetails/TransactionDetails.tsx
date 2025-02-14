@@ -150,7 +150,7 @@ export default function TransactionDetails({
   const Button = styled("div")`
     cursor: pointer;
   `;
-  const ButtonContainer = styled("button")`
+  const ButtonContainer = styled("div")`
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -283,7 +283,7 @@ export default function TransactionDetails({
         </>
       </StatsContainer>
       {!isEditingNotes ? (
-        <>
+        <StatsContainer>
           <Descriptions>
             <InfoContainer>
               <BodyText>{noteTitle}</BodyText>
@@ -302,7 +302,7 @@ export default function TransactionDetails({
               Edit
             </NavButton>
           </>
-        </>
+        </StatsContainer>
       ) : (
         <FileUploadContainer>
           {!isAddingNotes ? (
@@ -368,7 +368,7 @@ export default function TransactionDetails({
       <HorizontalTabs
         tabs={["Details", "Attachments"]}
         tabType="tab"
-        onTabChange={setSelectedTab}
+        onTabChange={(tab) => setSelectedTab(tab)}
       />
       {selectedTab === "Details" ? (
         <DetailsContainer>
