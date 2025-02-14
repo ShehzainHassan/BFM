@@ -64,6 +64,13 @@ export const BodyText = styled.p<{ color?: string }>`
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 
+export const SmallText = styled.p<{ color?: string }>`
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
 export const MediumText = styled.p<{ color?: string; width?: string }>`
   font-weight: 400;
   font-size: 16px;
@@ -90,5 +97,12 @@ export const Title = styled.p<{ color?: string }>`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
+export const SmallHeading = styled.h6<{ color?: string }>`
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 12px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;

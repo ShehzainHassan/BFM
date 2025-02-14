@@ -1,13 +1,13 @@
 "use client";
 import { BFMPalette } from "@/Theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const TabContainer = styled("div")<{ $tabType: "button" | "tab" }>`
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 4px;
+  padding: ${({ $tabType }) => ($tabType === "button" ? "4px" : "0px")};
   background-color: ${BFMPalette.white25};
   border-radius: ${({ $tabType }) => ($tabType === "button" ? "1000px" : "0")};
   border: ${({ $tabType }) =>
@@ -33,40 +33,41 @@ const TabContent = styled("p")<{
       : `
         background-color: ${$isSelected ? BFMPalette.white25 : "transparent"};
         color: ${$isSelected ? BFMPalette.purple500 : BFMPalette.gray700};
-      `}
+  border-bottom: ${$isSelected ? `1px solid ${BFMPalette.purple500}` : ""};
+
+`}
 `;
 
 interface HorizontalTabsProps {
   tabs: string[];
-  defaultValue?: string;
   onTabChange?: (tab: string) => void;
   tabType?: "button" | "tab";
 }
 
 export default function HorizontalTabs({
   tabs,
-  defaultValue,
   onTabChange,
   tabType = "button",
 }: HorizontalTabsProps) {
-  const [selectedTab, setSelectedTab] = useState(defaultValue ?? tabs[0]);
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
 
   const handleTabSelection = (tab: string) => {
     setSelectedTab(tab);
     onTabChange?.(tab);
   };
-
   return (
     <TabContainer $tabType={tabType}>
-      {tabs.map((tab, index) => (
-        <TabContent
-          key={index}
-          $isSelected={selectedTab === tab}
-          $tabType={tabType}
-          onClick={() => handleTabSelection(tab)}>
-          {tab}
-        </TabContent>
-      ))}
+      {tabs.map((tab) => {
+        return (
+          <TabContent
+            key={tab}
+            $isSelected={selectedTab === tab}
+            $tabType={tabType}
+            onClick={() => handleTabSelection(tab)}>
+            {tab}
+          </TabContent>
+        );
+      })}
     </TabContainer>
   );
 }

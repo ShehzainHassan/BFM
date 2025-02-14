@@ -8,6 +8,7 @@ interface ButtonProps {
   $textColor?: string;
   imageSrc?: string;
   imagePosition?: "left" | "right";
+  onClick?: () => void;
   children: React.ReactNode;
 }
 
@@ -49,12 +50,14 @@ export default function NavButton({
   imageSrc,
   imagePosition = "left",
   children,
+  onClick,
 }: ButtonProps) {
   return (
     <StyledButton
       $borderColor={$borderColor}
       $bgColor={$bgColor}
-      $textColor={$textColor}>
+      $textColor={$textColor}
+      onClick={onClick}>
       <ButtonContent $imagePosition={imagePosition}>
         {imageSrc && <Image src={imageSrc} alt="icon" width={20} height={20} />}
         <span>{children}</span>

@@ -124,7 +124,7 @@ const PaymentsContainer = styled("div")`
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  background-color: cadetblue;
+  max-width: 1300px;
 `;
 const SearchAndFilter = styled("div")`
   display: flex;
@@ -182,7 +182,6 @@ const AccountText = styled.div`
 `;
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState("Transactions");
-  // const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const transactionColumns: ColumnDef<Transaction>[] = [
     {
@@ -283,7 +282,6 @@ export default function Home() {
           width={32}
           height={32}
           style={{ cursor: "pointer" }}
-          // onClick={() => setModalIsOpen(true)}
         />
       ),
     },
@@ -336,12 +334,6 @@ export default function Home() {
             columns={accountsColumns}
           />
         )}
-        {/* <DetailsModal
-          headerText="Transaction Details"
-          modalIsOpen={modalIsOpen}
-          closeModal={() => setModalIsOpen(false)}>
-          <TransactionDetails />
-        </DetailsModal> */}
       </PaymentsContainer>
     </Container>
   );
