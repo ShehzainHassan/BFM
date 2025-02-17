@@ -12,6 +12,7 @@ export const BFMPalette = {
   red100: "#FC9E9E",
   red500: "#F04438",
   red600: "#D92D20",
+  red700: "#B42318",
 
   yellow500: "#F7C900",
 
@@ -49,4 +50,6 @@ export const BFMPalette = {
   blue500: "#1570EF",
   blue550: "#175CD3",
   blue600: "#3538cd",
+
+  skin300: "#FECDCA",
 };

@@ -55,6 +55,27 @@ export const H5 = styled.h5<{ color?: string }>`
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 
+export const SmallHeading = styled.h6<{ color?: string }>`
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 12px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
+export const MediumBoldHeading = styled.h6<{ color?: string }>`
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
+export const TableTitle = styled.h1<{ color?: string }>`
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
 /*          PARAGRAPHS           */
 
 export const BodyText = styled.p<{ color?: string }>`
@@ -97,12 +118,5 @@ export const Title = styled.p<{ color?: string }>`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
-  color: ${({ color }) => (color ? color : BFMPalette.black100)};
-`;
-
-export const SmallHeading = styled.h6<{ color?: string }>`
-  font-weight: 700;
-  font-size: 10px;
-  line-height: 12px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;

@@ -9,10 +9,12 @@ import {
 import styled from "styled-components";
 import DetailsModal from "../Modal/Modal";
 import TransactionDetails from "../TransactionDetails/TransactionDetails";
+import { H3, TableTitle } from "@/Typography";
+import { BFMPalette } from "@/Theme";
 
 const TableContainer = styled.div`
   padding: 12px 16px 16px 16px;
-  background-color: #f9f9f9;
+  background-color: ${BFMPalette.white25};
 `;
 
 const DataRow = styled.div<{ $columns: number }>`
@@ -20,10 +22,25 @@ const DataRow = styled.div<{ $columns: number }>`
   grid-template-columns: ${({ $columns }) => `repeat(${$columns}, 1fr)`};
   border-bottom: 1px solid #ddd;
   align-items: center;
+  background-color: ${BFMPalette.white25};
 `;
 
 export const DataCell = styled.div`
   padding: 16px 20px;
+`;
+
+export const HeaderCell = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  height: 100%;
+  background-color: ${BFMPalette.white};
+`;
+
+const TitleContainer = styled("div")`
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
 `;
 
 interface TableProps<T> {
@@ -31,6 +48,7 @@ interface TableProps<T> {
   columns: ColumnDef<T>[];
   searchQuery?: string;
   searchColumns?: (keyof T)[];
+  title?: string;
 }
 
 export default function DataTable<T>({
@@ -38,6 +56,7 @@ export default function DataTable<T>({
   columns,
   searchQuery,
   searchColumns = [],
+  title,
 }: TableProps<T>) {
   const filteredData = useMemo(() => {
     if (!searchQuery) return data;
@@ -52,7 +71,7 @@ export default function DataTable<T>({
   }, [data, searchQuery, searchColumns]);
 
   const table = useReactTable({
-    data: filteredData, // Use filteredData here
+    data: filteredData,
     columns: useMemo(() => columns, [columns]),
     getCoreRowModel: getCoreRowModel(),
   });
@@ -67,19 +86,24 @@ export default function DataTable<T>({
 
   return (
     <TableContainer>
+      {title && (
+        <TitleContainer>
+          <TableTitle color={BFMPalette.black800}>{title}</TableTitle>
+        </TitleContainer>
+      )}
       <DataRow $columns={columns.length}>
-        {table
-          .getHeaderGroups()
-          .map((headerGroup) =>
-            headerGroup.headers.map((header) => (
-              <React.Fragment key={header.id}>
+        {table.getHeaderGroups().map((headerGroup) =>
+          headerGroup.headers.map((header) => (
+            <HeaderCell key={header.id}>
+              <H3 color={BFMPalette.gray700}>
                 {flexRender(
                   header.column.columnDef.header,
                   header.getContext()
                 )}
-              </React.Fragment>
-            ))
-          )}
+              </H3>
+            </HeaderCell>
+          ))
+        )}
       </DataRow>
 
       {table.getRowModel().rows.map((row) => (

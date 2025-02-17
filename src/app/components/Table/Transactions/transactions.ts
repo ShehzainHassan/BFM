@@ -7,7 +7,6 @@ export interface Transaction {
   };
   amount: {
     currency: string;
-    value: string;
     equivalent: string;
   };
   bank: string;
@@ -26,8 +25,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Bills",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
@@ -44,8 +42,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
@@ -62,8 +59,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
@@ -80,8 +76,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
@@ -98,8 +93,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
@@ -116,8 +110,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
@@ -134,8 +127,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
@@ -152,8 +144,7 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD",
-      value: "10,000.00",
+      currency: "USD 10,000.00",
       equivalent: "HKD 10,000.00",
     },
     bank: "Sample Bank",
