@@ -104,7 +104,8 @@ export default function Payment() {
       <SubContainer>
         <HorizontalTabs
           tabs={["Balance Over Time", "Cashflow"]}
-          onTabSelect={setSelectedTab}
+          selectedTab={selectedTab}
+          onTabChange={setSelectedTab}
         />
         .
       </SubContainer>

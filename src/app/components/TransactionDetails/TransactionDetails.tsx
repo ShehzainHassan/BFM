@@ -11,8 +11,8 @@ import {
 import Image from "next/image";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
-import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { useRef, useState } from "react";
+import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 interface TransactionDetailsProps<T = {}> {
   selectedRow: T;
   primaryDetail?: string;
@@ -367,8 +367,9 @@ export default function TransactionDetails({
       )}
       <HorizontalTabs
         tabs={["Details", "Attachments"]}
+        selectedTab={selectedTab}
         tabType="tab"
-        onTabSelect={setSelectedTab}
+        onTabChange={setSelectedTab}
       />
       {selectedTab === "Details" ? (
         <DetailsContainer>

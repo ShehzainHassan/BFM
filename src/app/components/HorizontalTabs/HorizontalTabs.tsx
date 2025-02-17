@@ -1,9 +1,14 @@
-"use client";
 import { BFMPalette } from "@/Theme";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-const TabContainer = styled("div")<{ $tabType: "button" | "tab" }>`
+interface HorizontalTabProps {
+  tabs: string[];
+  selectedTab: string;
+  tabType?: "button" | "tab";
+  onTabChange: (tab: string) => void;
+}
+
+const TabContainer = styled.div<{ $tabType: "button" | "tab" }>`
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -11,70 +16,66 @@ const TabContainer = styled("div")<{ $tabType: "button" | "tab" }>`
   background-color: ${BFMPalette.white25};
   border-radius: ${({ $tabType }) => ($tabType === "button" ? "1000px" : "0")};
   border: ${({ $tabType }) =>
-    $tabType === "button" ? `1px solid ${BFMPalette.gray100}` : `none`};
+    $tabType === "button" ? `1px solid ${BFMPalette.gray100}` : "none"};
   border-bottom: ${({ $tabType }) =>
     $tabType === "tab" ? `1px solid ${BFMPalette.gray100}` : ""};
+  width: fit-content;
 `;
 
-const TabContent = styled("p")<{
-  $isSelected: boolean;
-  $tabType: "button" | "tab";
-}>`
+const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
   padding: 8px 12px;
   cursor: pointer;
   font-weight: 600;
-  ${({ $tabType, $isSelected }) =>
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease-in-out, border-bottom 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+  border-radius: ${({ $tabType }) => ($tabType === "button" ? "1000px" : "0")};
+
+  ${({ $isActive, $tabType }) =>
     $tabType === "button"
       ? `
-        border-radius: 1000px;
-        background-color: ${$isSelected ? BFMPalette.purple800 : "transparent"};
-        color: ${$isSelected ? BFMPalette.white : BFMPalette.black100};
-         &:hover {
-          background-color: ${!$isSelected ? BFMPalette.purple200 : ""};
+        background-color: ${$isActive ? BFMPalette.purple800 : "transparent"};
+        color: ${$isActive ? BFMPalette.white : BFMPalette.black100};
+
+        &:hover {
+          background-color: ${
+            $isActive ? BFMPalette.purple800 : BFMPalette.purple200
+          };
         }
       `
       : `
-        background-color: ${$isSelected ? BFMPalette.white25 : "transparent"};
-        color: ${$isSelected ? BFMPalette.purple500 : BFMPalette.gray700};
-  border-bottom: ${$isSelected ? `1px solid ${BFMPalette.purple500}` : ""};
-         &:hover {
-          background-color: ${!$isSelected ? BFMPalette.purple200 : ""};
+        background-color: ${$isActive ? BFMPalette.white25 : "transparent"};
+        color: ${$isActive ? BFMPalette.purple500 : BFMPalette.gray700};
+        border-bottom: ${
+          $isActive ? `2px solid ${BFMPalette.purple500}` : "none"
+        };
+
+        &:hover {
+          background-color: ${
+            $isActive ? BFMPalette.white25 : BFMPalette.purple200
+          };
         }
-
-`}
+      `}
 `;
-
-interface HorizontalTabsProps {
-  tabs: string[];
-  onTabSelect: (tab: string) => void;
-  tabType?: "button" | "tab";
-}
 
 export default function HorizontalTabs({
   tabs,
-  onTabSelect,
+  selectedTab,
   tabType = "button",
-}: HorizontalTabsProps) {
-  const [selectedTab, setSelectedTab] = useState(tabs[0]);
-
-  const handleTabSelection = (tab: string) => {
-    setSelectedTab(tab);
-    onTabSelect(tab);
-  };
-
+  onTabChange,
+}: HorizontalTabProps) {
   return (
     <TabContainer $tabType={tabType}>
-      {tabs.map((tab) => {
-        return (
-          <TabContent
-            key={tab}
-            $isSelected={selectedTab === tab}
-            $tabType={tabType}
-            onClick={() => handleTabSelection(tab)}>
-            {tab}
-          </TabContent>
-        );
-      })}
+      {tabs.map((tab) => (
+        <Tab
+          key={tab}
+          $isActive={selectedTab === tab}
+          $tabType={tabType}
+          onClick={() => onTabChange(tab)}>
+          {tab}
+        </Tab>
+      ))}
     </TabContainer>
   );
 }

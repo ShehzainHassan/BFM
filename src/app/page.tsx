@@ -304,7 +304,8 @@ export default function Home() {
         <Header>
           <HorizontalTabs
             tabs={["Transactions", "Accounts"]}
-            onTabSelect={setSelectedTab}
+            selectedTab={selectedTab}
+            onTabChange={setSelectedTab}
           />
           <SearchAndFilter>
             {selectedTab === "Transactions" ? (

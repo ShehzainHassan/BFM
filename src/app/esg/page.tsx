@@ -161,7 +161,8 @@ export default function ESG() {
             <Heading>Carbon Footprint Trendy</Heading>
             <HorizontalTabs
               tabs={["2023", "2024", "2025"]}
-              onTabSelect={setSelectedTab}
+              selectedTab={selectedTab}
+              onTabChange={setSelectedTab}
             />
           </HeadingContainer>
 
