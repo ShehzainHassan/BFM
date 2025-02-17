@@ -1,9 +1,9 @@
 "use client";
-import { Content, Inter } from "next/font/google";
-import "./globals.css";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Navbar from "./components/Navbar/Navbar";
+import { Inter } from "next/font/google";
 import styled from "styled-components";
+import Navbar from "./components/Navbar/Navbar";
+import Sidebar from "./components/Sidebar/Sidebar";
+import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",

@@ -1,36 +1,21 @@
 "use client";
-import { useState } from "react";
-import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
-import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
+import { H4, MediumBoldHeading } from "@/Typography";
 import { depositData } from "@/app/components/Table/BuyerSupplierAnalysis/BuyerSupplierAnalysis";
-import { AccountText } from "../page";
-import {
-  BodyText,
-  H3,
-  H3Secondary,
-  H4,
-  H5,
-  MediumBoldHeading,
-} from "@/Typography";
-import DataTable, { DataCell, HeaderCell } from "../components/Table/Table";
-import { ColumnDef } from "@tanstack/react-table";
-import { inflowData, Inflows } from "@/app/components/Table/Inflows/inflows";
-import {
-  outflowData,
-  Outflows,
-} from "@/app/components/Table/Outflows/outflows";
-import Image from "next/image";
-import {
-  RecurringTransaction,
-  recurringTransData,
-} from "@/app/components/Table/RecurringTransactions/recurringTransactions";
+import { inflowData } from "@/app/components/Table/Inflows/inflows";
+import { outflowData } from "@/app/components/Table/Outflows/outflows";
+import { recurringTransData } from "@/app/components/Table/RecurringTransactions/recurringTransactions";
 import { highlightData } from "@/app/components/Table/TransitionHighlight/transitionHighlight";
-import { TransitionHighlightColumns } from "../components/Table/TransitionHighlight/TransitionHighlightColumn";
-import { RecurringTransactionColumns } from "../components/Table/RecurringTransactions/RecurringTransactionColumn";
+import Image from "next/image";
+import { useState } from "react";
+import styled from "styled-components";
+import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
 import { BuyerSupplierAnalysisColumns } from "../components/Table/BuyerSupplierAnalysis/BuyerSupplierAnalysisColumns";
 import { InflowsColumns } from "../components/Table/Inflows/InflowsColumns";
 import { OutflowsColumns } from "../components/Table/Outflows/OutflowsColumns";
+import { RecurringTransactionColumns } from "../components/Table/RecurringTransactions/RecurringTransactionColumn";
+import DataTable from "../components/Table/Table";
+import { TransitionHighlightColumns } from "../components/Table/TransitionHighlight/TransitionHighlightColumn";
 
 export default function Analytics() {
   const tabs = [

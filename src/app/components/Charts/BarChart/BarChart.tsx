@@ -1,17 +1,14 @@
 import { BFMPalette } from "@/Theme";
-import { H5 } from "@/Typography";
-import React, { PureComponent } from "react";
 import {
-  BarChart,
   Bar,
+  BarChart,
+  CartesianGrid,
+  LabelList,
   Rectangle,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  LabelList,
 } from "recharts";
 import styled from "styled-components";
 

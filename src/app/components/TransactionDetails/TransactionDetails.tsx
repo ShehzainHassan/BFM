@@ -3,15 +3,14 @@ import {
   BodyText,
   H3Secondary,
   H4,
-  Header,
   SmallHeading,
   SmallText,
   SubTitle,
 } from "@/Typography";
 import Image from "next/image";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
-import { useRef, useState } from "react";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 interface TransactionDetailsProps<T = {}> {
   selectedRow: T;

@@ -3,7 +3,6 @@ import { Description, H3Primary } from "@/Typography";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import ButtonSecondary from "../Button/Secondary/ButtonSecondary";
 
 interface CardProps {
   image: string;

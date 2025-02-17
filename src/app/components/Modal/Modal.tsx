@@ -1,5 +1,4 @@
 import { BFMPalette } from "@/Theme";
-import { Transaction } from "@/app/components/Table/Transactions/transactions";
 import { Header } from "@/Typography";
 import Image from "next/image";
 import React from "react";

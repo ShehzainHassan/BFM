@@ -1,29 +1,19 @@
 "use client";
+import { accountsData } from "@/app/components/Table/Accounts/accounts";
+import { transactionData } from "@/app/components/Table/Transactions/transactions";
+import { BFMPalette } from "@/Theme";
+import Image from "next/image";
+import { useState } from "react";
+import styled from "styled-components";
+import HorizontalTabs from "./components/HorizontalTabs/HorizontalTabs";
 import InflowOutflow from "./components/InflowOutflow/InflowOutflow";
 import Notifications from "./components/Notifications/Notifications";
 import Payment from "./components/Payments/Payment";
-import styled from "styled-components";
-import TextContainer from "./components/TextContainer/TextContainer";
-import { DataCell, HeaderCell } from "./components/Table/Table";
-import HorizontalTabs from "./components/HorizontalTabs/HorizontalTabs";
 import Search from "./components/Search/Search";
-import { BFMPalette } from "@/Theme";
-import Image from "next/image";
-import { ColumnDef } from "@tanstack/react-table";
-import { BodyText, H3, H3Secondary, H4 } from "@/Typography";
-import DataTable from "./components/Table/Table";
-import { useState } from "react";
-import {
-  Transaction,
-  transactionData,
-} from "@/app/components/Table/Transactions/transactions";
-import {
-  AccountData,
-  accountsData,
-} from "@/app/components/Table/Accounts/accounts";
-import { AmountText } from "./components/Table/Accounts/AccountsStyles";
 import { AccountsColumns } from "./components/Table/Accounts/AccountsColumns";
+import DataTable from "./components/Table/Table";
 import { TransactionColumns } from "./components/Table/Transactions/TransactionsColumns";
+import TextContainer from "./components/TextContainer/TextContainer";
 
 const MainContainer = styled("div")`
   display: grid;

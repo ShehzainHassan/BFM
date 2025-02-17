@@ -1,10 +1,9 @@
-import styled from "styled-components";
-import Card from "../Card/Card";
-import Image from "next/image";
 import { BFMPalette } from "@/Theme";
 import { H2 } from "@/Typography";
-import InputLabel from "../CarbonContainer/CarbonContainer";
+import Image from "next/image";
+import styled from "styled-components";
 import CarbonContainer from "../CarbonContainer/CarbonContainer";
+import Card from "../Card/Card";
 
 export default function Actions() {
   const Container = styled("div")`
