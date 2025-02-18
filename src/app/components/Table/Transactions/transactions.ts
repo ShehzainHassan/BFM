@@ -7,7 +7,8 @@ export interface Transaction {
   };
   amount: {
     currency: string;
-    equivalent: string;
+    value: number;
+    HKDEquivalent: number;
   };
   bank: string;
   account: {
@@ -25,8 +26,9 @@ export const transactionData: Transaction[] = [
       subtitle: "Bills",
     },
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
     account: {
@@ -42,8 +44,28 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
+    },
+
+    bank: "Sample Bank",
+    account: {
+      type: "Sample HKD Savings",
+      number: "(666111***888)",
+    },
+  },
+  {
+    date: "12 Oct 2024",
+    description: {
+      imgSrc: "/images/building-06.png",
+      title: "Cyberport HC-009w8274",
+      subtitle: "Rent",
+    },
+    amount: {
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
     account: {
@@ -59,8 +81,9 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
     account: {
@@ -76,8 +99,9 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
     account: {
@@ -93,8 +117,9 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
     account: {
@@ -110,8 +135,9 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
     account: {
@@ -127,25 +153,9 @@ export const transactionData: Transaction[] = [
       subtitle: "Rent",
     },
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
-    },
-    bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
-  },
-  {
-    date: "12 Oct 2024",
-    description: {
-      imgSrc: "/images/building-06.png",
-      title: "Cyberport HC-009w8274",
-      subtitle: "Rent",
-    },
-    amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
     account: {

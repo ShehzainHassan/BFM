@@ -17,7 +17,7 @@ export const highlightData: TransitionHighlight[] = [
     category: "Transfer In",
     payeeORMerchant: "KPAY",
     amount: "HKD 10,000.00",
-    reason: "21.34 more than average",
+    reason: "21.34x more than average",
   },
   {
     date: "23 JAN 2024",
@@ -27,7 +27,7 @@ export const highlightData: TransitionHighlight[] = [
     category: "Transfer In",
     payeeORMerchant: "KPAY",
     amount: "HKD 10,000.00",
-    reason: "21.34 more than average",
+    reason: "21.34x more than average",
   },
   {
     date: "23 JAN 2024",
@@ -37,7 +37,7 @@ export const highlightData: TransitionHighlight[] = [
     category: "Transfer In",
     payeeORMerchant: "KPAY",
     amount: "HKD 10,000.00",
-    reason: "21.34 more than average",
+    reason: "21.34x more than average",
   },
   {
     date: "23 JAN 2024",
@@ -47,7 +47,7 @@ export const highlightData: TransitionHighlight[] = [
     category: "Transfer In",
     payeeORMerchant: "KPAY",
     amount: "HKD 10,000.00",
-    reason: "21.34 more than average",
+    reason: "21.34x more than average",
   },
   {
     date: "23 JAN 2024",
@@ -57,7 +57,7 @@ export const highlightData: TransitionHighlight[] = [
     category: "Transfer In",
     payeeORMerchant: "KPAY",
     amount: "HKD 10,000.00",
-    reason: "21.34 more than average",
+    reason: "21.34x more than average",
   },
   {
     date: "23 JAN 2024",
@@ -67,6 +67,6 @@ export const highlightData: TransitionHighlight[] = [
     category: "Transfer In",
     payeeORMerchant: "KPAY",
     amount: "HKD 10,000.00",
-    reason: "21.34 more than average",
+    reason: "21.34x more than average",
   },
 ];

@@ -1,23 +1,25 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import { BFMPalette } from "@/Theme";
+import { H3, TableTitle } from "@/Typography";
 import {
-  useReactTable,
-  getCoreRowModel,
-  flexRender,
   ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
 } from "@tanstack/react-table";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import DetailsModal from "../Modal/Modal";
 import TransactionDetails from "../TransactionDetails/TransactionDetails";
-import { H3, TableTitle } from "@/Typography";
-import { BFMPalette } from "@/Theme";
+import { ExpandedColumns } from "./ExpandedTable/ExpandedColumn";
+import { expandedData } from "./ExpandedTable/ExpandedTableData";
 
-const TableContainer = styled.div`
+export const TableContainer = styled.div`
   padding: 12px 16px 16px 16px;
   background-color: ${BFMPalette.white25};
 `;
 
-const DataRow = styled.div<{ $columns: number }>`
+export const DataRow = styled.div<{ $columns: number }>`
   display: grid;
   grid-template-columns: ${({ $columns }) => `repeat(${$columns}, 1fr)`};
   border-bottom: 1px solid #ddd;
@@ -26,6 +28,9 @@ const DataRow = styled.div<{ $columns: number }>`
 `;
 
 export const DataCell = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
   padding: 16px 20px;
 `;
 
@@ -50,7 +55,6 @@ interface TableProps<T> {
   searchColumns?: (keyof T)[];
   title?: string;
 }
-
 export default function DataTable<T>({
   data,
   columns,
@@ -78,7 +82,19 @@ export default function DataTable<T>({
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<T>();
+  const [expandedRowIds, setExpandedRowIds] = useState<Set<string>>(new Set());
 
+  const handleExpandRow = (rowId: string) => {
+    setExpandedRowIds((prev) => {
+      const newExpandedRowIds = new Set(prev);
+      if (newExpandedRowIds.has(rowId)) {
+        newExpandedRowIds.delete(rowId);
+      } else {
+        newExpandedRowIds.add(rowId);
+      }
+      return newExpandedRowIds;
+    });
+  };
   const handleRowClick = (rowData: T) => {
     setSelectedRow(rowData);
     setModalIsOpen(true);
@@ -107,26 +123,38 @@ export default function DataTable<T>({
       </DataRow>
 
       {table.getRowModel().rows.map((row) => (
-        <DataRow key={row.id} $columns={columns.length}>
-          {row.getVisibleCells().map((cell) => {
-            const isActionColumn = cell.column.id === "action";
+        <React.Fragment key={row.id}>
+          <DataRow $columns={columns.length}>
+            {row.getVisibleCells().map((cell) => {
+              const isActionColumn = cell.column.id === "ACTION";
+              const isExpandableRow =
+                cell.column.id === "TRANSACTION_DESCRIPTION";
 
-            return (
-              <DataCell
-                key={cell.id}
-                onClick={() => {
-                  if (isActionColumn) {
-                    handleRowClick(row.original);
-                    setModalIsOpen(true);
-                  }
-                }}
-                style={{ cursor: isActionColumn ? "pointer" : "default" }}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </DataCell>
-            );
-          })}
-        </DataRow>
+              return (
+                <DataCell
+                  key={cell.id}
+                  onClick={() => {
+                    if (isActionColumn) {
+                      handleRowClick(row.original);
+                      setModalIsOpen(true);
+                    }
+                    if (isExpandableRow) {
+                      handleExpandRow(row.id);
+                    }
+                  }}
+                  style={{ cursor: isActionColumn ? "pointer" : "default" }}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </DataCell>
+              );
+            })}
+          </DataRow>
+
+          {expandedRowIds.has(row.id) && (
+            <DataTable data={expandedData} columns={ExpandedColumns} />
+          )}
+        </React.Fragment>
       ))}
+
       <DetailsModal
         headerText="Transaction Details"
         modalIsOpen={modalIsOpen}

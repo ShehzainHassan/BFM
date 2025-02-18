@@ -4,11 +4,12 @@ export interface AccountData {
     type: string;
     number: string;
   };
-  accountType:string;
+  accountType: string;
   balance: string;
   amount: {
     currency: string;
-    equivalent: string;
+    value: number;
+    HKDEquivalent: number;
   };
 }
 
@@ -22,8 +23,9 @@ export const accountsData: AccountData[] = [
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
   },
   {
@@ -31,11 +33,13 @@ export const accountsData: AccountData[] = [
     account: {
       type: "Sample HKD Savings",
       number: "(666111***888)",
-    },    accountType: "Current/Savings",
+    },
+    accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
   },
   {
@@ -43,11 +47,13 @@ export const accountsData: AccountData[] = [
     account: {
       type: "Sample HKD Savings",
       number: "(666111***888)",
-    },    accountType: "Current/Savings",
+    },
+    accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
   },
   {
@@ -55,11 +61,13 @@ export const accountsData: AccountData[] = [
     account: {
       type: "Sample HKD Savings",
       number: "(666111***888)",
-    },    accountType: "Current/Savings",
+    },
+    accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
   },
   {
@@ -67,11 +75,13 @@ export const accountsData: AccountData[] = [
     account: {
       type: "Sample HKD Savings",
       number: "(666111***888)",
-    },    accountType: "Current/Savings",
+    },
+    accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
   },
   {
@@ -79,11 +89,13 @@ export const accountsData: AccountData[] = [
     account: {
       type: "Sample HKD Savings",
       number: "(666111***888)",
-    },    accountType: "Current/Savings",
+    },
+    accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
   },
   {
@@ -91,11 +103,13 @@ export const accountsData: AccountData[] = [
     account: {
       type: "Sample HKD Savings",
       number: "(666111***888)",
-    },    accountType: "Current/Savings",
+    },
+    accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
-      currency: "USD 10,000.00",
-      equivalent: "HKD 10,000.00",
+      currency: "USD",
+      value: 10000.0,
+      HKDEquivalent: 10000.0,
     },
   },
 ];

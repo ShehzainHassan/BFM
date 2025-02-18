@@ -29,10 +29,10 @@ export const AccountsStyles = {
   AMOUNT: (row: AccountData) => (
     <AmountText>
       <H3Secondary color={BFMPalette.purple375}>
-        {row.amount.currency}
+        {row.amount.currency} {row.amount.value}
       </H3Secondary>
       <H3Secondary color={BFMPalette.purple375}>
-        {row.amount.equivalent}
+        HKD {row.amount.HKDEquivalent}
       </H3Secondary>
     </AmountText>
   ),

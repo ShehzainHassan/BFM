@@ -4,18 +4,18 @@ import { RecurringTransactionStyles } from "./RecurringTransactionsStyles";
 
 export const RecurringTransactionColumns: ColumnDef<RecurringTransaction>[] = [
   {
-    accessorKey: "DESCRIPTION",
-    header: "DESCRIPTION",
+    accessorKey: "TRANSACTION_DESCRIPTION",
+    header: "TRANSACTION DESCRIPTION",
     cell: ({ row }) => RecurringTransactionStyles.DESCRIPTION(row.original),
   },
   {
     accessorKey: "DATE",
-    header: "DATE",
+    header: "TRANSACTION DATE",
     cell: ({ row }) => RecurringTransactionStyles.DATE(row.original),
   },
   {
     accessorKey: "TRANSACTION_AMOUNT",
-    header: "TRANSACTION_AMOUNT",
+    header: "TRANSACTION AMOUNT",
     cell: ({ row }) =>
       RecurringTransactionStyles.TRANSACTION_AMOUNT(row.original),
   },
@@ -26,12 +26,12 @@ export const RecurringTransactionColumns: ColumnDef<RecurringTransaction>[] = [
   },
   {
     accessorKey: "TOTAL_AMOUNT",
-    header: "TOTAL_AMOUNT",
+    header: "TOTAL AMOUNT",
     cell: ({ row }) => RecurringTransactionStyles.TOTAL_AMOUNT(row.original),
   },
   {
     accessorKey: "OCCURENCES",
-    header: "OCCURENCES",
+    header: "# OF OCCURENCES",
     cell: ({ row }) => RecurringTransactionStyles.OCCURRENCES(row.original),
   },
 ];
