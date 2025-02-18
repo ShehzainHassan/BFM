@@ -9,37 +9,11 @@ import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
 import BarGraph from "../components/Charts/BarChart/BarChart";
 import { H5 } from "@/Typography";
 import { useState } from "react";
-
-const months = [
-  { name: "Jan 2024", value: 2250 },
-  { name: "Feb 2024", value: 1100 },
-  { name: "Mar 2024", value: 2800 },
-  { name: "Apr 2024", value: 800 },
-  { name: "May 2024", value: 1250 },
-  { name: "Jun 2024", value: 2250 },
-  { name: "Jul 2024", value: 2950 },
-  { name: "Aug 2024", value: 1200 },
-  { name: "Sep 2024", value: 1350 },
-  { name: "Oct 2024", value: 1600 },
-  { name: "Nov 2024", value: 2750 },
-  { name: "Dec 2024", value: 750 },
-];
-
-const data = [
-  { name: "Group A", value: 600 },
-  { name: "Group B", value: 200 },
-  { name: "Group C", value: 200 },
-  { name: "Group D", value: 400 },
-  { name: "Group E", value: 400 },
-];
-
-const COLORS = [
-  BFMPalette.red600,
-  BFMPalette.green500,
-  BFMPalette.blue500,
-  BFMPalette.purple400,
-  BFMPalette.yellow500,
-];
+import { barData } from "../components/Charts/BarChart/BarChartData";
+import {
+  PIE_COLORS,
+  pieData,
+} from "../components/Charts/PieChart/PieChartData";
 
 const Container = styled("div")`
   display: grid;
@@ -120,7 +94,7 @@ export default function ESG() {
             <SelectDropDown />
           </HeadingContainer>
           <ChartContainer>
-            <PieGraph data={data} COLORS={COLORS} />
+            <PieGraph data={pieData} COLORS={PIE_COLORS} />
             <Labels>
               <ESGCard
                 title="Electricity"
@@ -172,7 +146,7 @@ export default function ESG() {
                 All data are in units of kg CO2e
               </H5>
             </BarLabel>
-            <BarGraph data={months} color={BFMPalette.purple800} />
+            <BarGraph data={barData} color={BFMPalette.purple800} />
           </SubContainer>
         </BarChartContainer>
       </GraphsContainer>

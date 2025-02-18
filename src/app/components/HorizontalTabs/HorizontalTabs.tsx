@@ -55,7 +55,8 @@ const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
           background-color: ${
             $isActive ? BFMPalette.white25 : BFMPalette.purple200
           };
-        }
+          border-radius: ${!$isActive ? "12px" : ""}
+          }
       `}
 `;
 
