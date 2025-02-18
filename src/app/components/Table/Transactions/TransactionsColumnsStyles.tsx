@@ -27,6 +27,10 @@ const DescriptionText = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const ActionContainer = styled.div`
+  display: flex;
+  gap: 8px;
+`;
 export const TransactionStyles = {
   DATE: (row: Transaction) => (
     <BodyText color={BFMPalette.black800}>{row.date}</BodyText>
@@ -62,12 +66,21 @@ export const TransactionStyles = {
     </AccountText>
   ),
   ACTION: (row: Transaction) => (
-    <Image
-      src="/images/Button utility.png"
-      alt="icon"
-      width={32}
-      height={32}
-      style={{ cursor: "pointer" }}
-    />
+    <ActionContainer>
+      <Image
+        src="/images/Button utility.png"
+        alt="icon"
+        width={32}
+        height={32}
+        style={{ cursor: "pointer" }}
+      />
+      <Image
+        src="/images/Button.png"
+        alt="icon"
+        width={32}
+        height={32}
+        style={{ cursor: "pointer" }}
+      />
+    </ActionContainer>
   ),
 };

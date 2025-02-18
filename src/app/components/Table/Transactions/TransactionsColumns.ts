@@ -30,7 +30,7 @@ export const TransactionColumns: ColumnDef<Transaction>[] = [
   },
   {
     accessorKey: "ACTION",
-    header: "ACTION",
+    header: "",
     cell: ({ row }) => TransactionStyles.ACTION(row.original),
   },
 ];

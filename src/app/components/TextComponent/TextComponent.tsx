@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
-import { BodyText, Title, H1 } from "@/Typography";
+import { BodyText, Title, H1, H3 } from "@/Typography";
+import Image from "next/image";
 const Container = styled("div")`
   display: flex;
   justify-content: space-between;
@@ -26,11 +27,18 @@ const Percentage = styled("div")`
   justify-content: right;
 `;
 
-const Border = styled("p")`
-  border: 1px solid;
+const Border = styled("div")<{ $isIncreased: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: 1px solid
+    ${({ $isIncreased }) =>
+      $isIncreased ? BFMPalette.green600 : BFMPalette.skin300};
   border-radius: 16px;
   padding: 2px 6px 2px 8px;
-  background-color: ${BFMPalette.green100};
+  background-color: ${({ $isIncreased }) =>
+    $isIncreased ? BFMPalette.green0 : BFMPalette.skin200};
 `;
 
 interface TextComponentProps {
@@ -38,12 +46,14 @@ interface TextComponentProps {
   value: string;
   percentage: number;
   timePeriod: string;
+  isIncreased?: boolean;
 }
 export default function TextComponent({
   title,
   value,
   percentage,
   timePeriod,
+  isIncreased = true,
 }: TextComponentProps) {
   return (
     <Container>
@@ -54,7 +64,30 @@ export default function TextComponent({
         </TextContainer>
         <TextContainer>
           <Percentage>
-            <Border>{percentage}%</Border>
+            <Border $isIncreased={isIncreased}>
+              {isIncreased ? (
+                <H3 color={BFMPalette.green800}>{percentage}%</H3>
+              ) : (
+                <H3 color={BFMPalette.red700}>{percentage}%</H3>
+              )}
+              {isIncreased ? (
+                <Image
+                  src="/images/success.png"
+                  alt="arrow-up"
+                  width={12}
+                  height={12}
+                  style={{ transform: "rotate(180deg)" }}
+                />
+              ) : (
+                <Image
+                  src="/images/loss.png"
+                  alt="arrow-down"
+                  width={12}
+                  height={12}
+                  style={{ transform: "rotate(180deg)" }}
+                />
+              )}
+            </Border>
           </Percentage>
           <BodyText color={BFMPalette.gray700}>{timePeriod}</BodyText>
         </TextContainer>

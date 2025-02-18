@@ -26,6 +26,7 @@ export default function TextContainer() {
         timePeriod="since last month"
         percentage={8}
         value="HKD 90,000.00"
+        isIncreased={false}
       />
     </Container>
   );

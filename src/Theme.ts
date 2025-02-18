@@ -35,11 +35,13 @@ export const BFMPalette = {
   purple950: "#fafafa0e",
   purple1000: "#1d123f",
 
+  green0: "#ecfdf3",
   green100: "#ABEFC6",
   green400: "#75E0A7",
   green500: "#1ac192",
   green600: "#17b26a",
   green700: "#099250",
+  green800: "#067647",
 
   black100: "#535862",
   black400: " #414651",
@@ -52,5 +54,6 @@ export const BFMPalette = {
   blue550: "#175CD3",
   blue600: "#3538cd",
 
+  skin200: "#FEF3F2",
   skin300: "#FECDCA",
 };
