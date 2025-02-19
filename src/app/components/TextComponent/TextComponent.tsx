@@ -4,7 +4,6 @@ import { BodyText, Title, H1, H3 } from "@/Typography";
 import Image from "next/image";
 const Container = styled("div")`
   display: flex;
-  justify-content: space-between;
   background-color: ${BFMPalette.white25};
   border-radius: 12px;
   padding: 22px 18px;
@@ -12,6 +11,7 @@ const Container = styled("div")`
 
 const SubContainer = styled("div")`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   flex: 1;
 `;
@@ -47,6 +47,7 @@ interface TextComponentProps {
   percentage: number;
   timePeriod: string;
   isIncreased?: boolean;
+  valueColor?: string;
 }
 export default function TextComponent({
   title,
@@ -54,13 +55,14 @@ export default function TextComponent({
   percentage,
   timePeriod,
   isIncreased = true,
+  valueColor = BFMPalette.black800,
 }: TextComponentProps) {
   return (
     <Container>
       <SubContainer>
         <TextContainer>
           <Title color={BFMPalette.gray700}>{title}</Title>
-          <H1 color={BFMPalette.black800}>{value}</H1>
+          <H1 color={valueColor}>{value}</H1>
         </TextContainer>
         <TextContainer>
           <Percentage>

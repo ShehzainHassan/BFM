@@ -19,9 +19,15 @@ export const TableContainer = styled.div`
   background-color: ${BFMPalette.white25};
 `;
 
-export const DataRow = styled.div<{ $columns: number }>`
+export const DataRow = styled.div<{
+  $columns: number;
+  $columnWidths?: string[];
+}>`
   display: grid;
-  grid-template-columns: ${({ $columns }) => `repeat(${$columns}, 1fr)`};
+  grid-template-columns: ${({ $columns, $columnWidths }) =>
+    $columnWidths && $columnWidths.length === $columns
+      ? $columnWidths.join(" ")
+      : `repeat(${$columns}, 1fr)`};
   border-bottom: 1px solid #ddd;
   align-items: center;
   background-color: ${BFMPalette.white25};
@@ -54,6 +60,7 @@ interface TableProps<T> {
   searchQuery?: string;
   searchColumns?: (keyof T)[];
   title?: string;
+  columnWidths?: string[];
 }
 export default function DataTable<T>({
   data,
@@ -61,6 +68,7 @@ export default function DataTable<T>({
   searchQuery,
   searchColumns = [],
   title,
+  columnWidths,
 }: TableProps<T>) {
   const filteredData = useMemo(() => {
     if (!searchQuery) return data;
@@ -80,8 +88,6 @@ export default function DataTable<T>({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedRow, setSelectedRow] = useState<T>();
   const [expandedRowIds, setExpandedRowIds] = useState<Set<string>>(new Set());
 
   const handleExpandRow = (rowId: string) => {
@@ -95,10 +101,6 @@ export default function DataTable<T>({
       return newExpandedRowIds;
     });
   };
-  const handleRowClick = (rowData: T) => {
-    setSelectedRow(rowData);
-    setModalIsOpen(true);
-  };
 
   return (
     <TableContainer>
@@ -107,7 +109,7 @@ export default function DataTable<T>({
           <TableTitle color={BFMPalette.black800}>{title}</TableTitle>
         </TitleContainer>
       )}
-      <DataRow $columns={columns.length}>
+      <DataRow $columns={columns.length} $columnWidths={columnWidths}>
         {table.getHeaderGroups().map((headerGroup) =>
           headerGroup.headers.map((header) => (
             <HeaderCell key={header.id}>
@@ -124,9 +126,8 @@ export default function DataTable<T>({
 
       {table.getRowModel().rows.map((row) => (
         <React.Fragment key={row.id}>
-          <DataRow $columns={columns.length}>
+          <DataRow $columns={columns.length} $columnWidths={columnWidths}>
             {row.getVisibleCells().map((cell) => {
-              const isActionColumn = cell.column.id === "ACTION";
               const isExpandableRow =
                 cell.column.id === "TRANSACTION_DESCRIPTION";
 
@@ -134,15 +135,10 @@ export default function DataTable<T>({
                 <DataCell
                   key={cell.id}
                   onClick={() => {
-                    if (isActionColumn) {
-                      handleRowClick(row.original);
-                      setModalIsOpen(true);
-                    }
                     if (isExpandableRow) {
                       handleExpandRow(row.id);
                     }
-                  }}
-                  style={{ cursor: isActionColumn ? "pointer" : "default" }}>
+                  }}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </DataCell>
               );
@@ -154,13 +150,6 @@ export default function DataTable<T>({
           )}
         </React.Fragment>
       ))}
-
-      <DetailsModal
-        headerText="Transaction Details"
-        modalIsOpen={modalIsOpen}
-        closeModal={() => setModalIsOpen(false)}>
-        <TransactionDetails selectedRow={selectedRow} />
-      </DetailsModal>
     </TableContainer>
   );
 }

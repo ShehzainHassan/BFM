@@ -14,6 +14,7 @@ import { AccountsColumns } from "./components/Table/Accounts/AccountsColumns";
 import DataTable from "./components/Table/Table";
 import { TransactionColumns } from "./components/Table/Transactions/TransactionsColumns";
 import TextContainer from "./components/TextContainer/TextContainer";
+import { useData } from "@/DataContext";
 
 const MainContainer = styled("div")`
   display: grid;
@@ -64,7 +65,8 @@ export const AccountText = styled.div`
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState("Transactions");
   const [searchQuery, setSearchQuery] = useState("");
-
+  const { rawData, notifications, transformAccounts } = useData();
+  const transformedAccounts = transformAccounts(rawData.parsedAccounts);
   return (
     <Container>
       <MainContainer>
@@ -75,7 +77,7 @@ export default function Home() {
           </SubContainer>
           <Payment />
         </Container>
-        <Notifications />
+        <Notifications notifications={notifications.notifications} />
       </MainContainer>
       <PaymentsContainer>
         <Header>
@@ -113,14 +115,16 @@ export default function Home() {
             key="transactions"
             data={transactionData}
             columns={TransactionColumns}
+            columnWidths={["1.2fr", "4fr", "2fr", "1.5fr", "2fr", "1.3fr"]}
           />
         ) : (
           <DataTable
             key="accounts"
-            data={accountsData}
+            data={transformedAccounts}
             columns={AccountsColumns}
             searchQuery={searchQuery}
             searchColumns={["bank", "account"]}
+            columnWidths={["2.5fr", "2.5fr", "2.5fr", "2.5fr", "2fr"]}
           />
         )}
       </PaymentsContainer>

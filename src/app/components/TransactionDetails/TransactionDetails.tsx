@@ -19,6 +19,7 @@ interface TransactionDetailsProps<T = {}> {
   noteTitle?: string;
   noteContent?: string;
   lastUpdated?: string;
+  selected?: string;
 }
 
 export default function TransactionDetails({
@@ -28,6 +29,7 @@ export default function TransactionDetails({
   noteTitle = "Notes",
   noteContent = "Transaction Notes goes here",
   lastUpdated = "Last updated: 11 Nov 2024",
+  selected = "Details",
 }: TransactionDetailsProps<any>) {
   const StatsContainer = styled("div")`
     border-radius: 12px;
@@ -190,7 +192,6 @@ export default function TransactionDetails({
     },
     { label: "Amount (HKD EQV)", value: [selectedRow.amount.equivalent] },
   ];
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const formatFileSize = (size: number) => {
     if (size >= 1024 * 1024) {
       return (size / (1024 * 1024)).toFixed(2) + " MB";
@@ -238,7 +239,7 @@ export default function TransactionDetails({
     setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const [selectedTab, setSelectedTab] = useState("Details");
+  const [selectedTab, setSelectedTab] = useState(selected);
   const [selectedFiles, setSelectedFiles] = useState<
     {
       name: string;
@@ -248,6 +249,7 @@ export default function TransactionDetails({
   >([]);
   const [isEditingNotes, setIsEditingNotes] = useState(false);
   const [isAddingNotes, setIsAddingNotes] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSaveNote = () => {
     setIsEditingNotes(false);
@@ -270,7 +272,7 @@ export default function TransactionDetails({
             <BodyText>{primaryType}</BodyText>
           </InfoContainer>
         </Descriptions>
-        <>
+        {/* <>
           <NavButton
             $bgColor={BFMPalette.white}
             $textColor={BFMPalette.purple600}
@@ -279,7 +281,7 @@ export default function TransactionDetails({
             imageSrc="/images/edit.png">
             Edit
           </NavButton>
-        </>
+        </> */}
       </StatsContainer>
       {!isEditingNotes ? (
         <StatsContainer>

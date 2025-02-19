@@ -40,20 +40,20 @@ const NavContent = styled("p")<{ $isSelected: boolean }>`
   cursor: pointer;
 `;
 
+const Header = styled("div")`
+  display: flex;
+  justify-content: space-between;
+`;
+const ButtonsContainer = styled("div")`
+  display: flex;
+  gap: 16px;
+`;
 interface NavbarProps {
   navItems: { label: string; path: string }[];
 }
 export default function Navbar({ navItems }: NavbarProps) {
   const pathname = usePathname();
 
-  const Header = styled("div")`
-    display: flex;
-    justify-content: space-between;
-  `;
-  const ButtonsContainer = styled("div")`
-    display: flex;
-    gap: 16px;
-  `;
   const titleMapping: Record<string, string> = {
     "/": "Welcome Back, Mark",
     "/analytics": "Welcome Back, Mark",

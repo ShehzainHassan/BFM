@@ -1,9 +1,6 @@
 export interface AccountData {
   bank: string;
-  account: {
-    type: string;
-    number: string;
-  };
+  account: string;
   accountType: string;
   balance: string;
   amount: {
@@ -16,10 +13,7 @@ export interface AccountData {
 export const accountsData: AccountData[] = [
   {
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
@@ -30,10 +24,7 @@ export const accountsData: AccountData[] = [
   },
   {
     bank: "abc Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
@@ -44,10 +35,7 @@ export const accountsData: AccountData[] = [
   },
   {
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
@@ -58,10 +46,7 @@ export const accountsData: AccountData[] = [
   },
   {
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
@@ -72,10 +57,7 @@ export const accountsData: AccountData[] = [
   },
   {
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
@@ -86,10 +68,7 @@ export const accountsData: AccountData[] = [
   },
   {
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {
@@ -100,10 +79,7 @@ export const accountsData: AccountData[] = [
   },
   {
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
     balance: "HKD 449,117.24",
     amount: {

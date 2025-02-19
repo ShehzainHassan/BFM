@@ -11,13 +11,13 @@ interface ChartProps {
   data: DataItem[];
   COLORS: string[];
 }
+const PieContainer = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function PieGraph({ data, COLORS }: ChartProps) {
-  const PieContainer = styled("div")`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `;
   return (
     <PieContainer>
       <PieChart width={200} height={200}>

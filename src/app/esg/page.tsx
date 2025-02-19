@@ -2,23 +2,27 @@
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import ESGCard from "../components/Label/Label";
-import Actions from "../components/Actions/actions";
 import PieGraph from "../components/Charts/PieChart/PieChart";
 import SelectDropDown from "../components/SelectDropDown/SelectDropDown";
 import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
 import BarGraph from "../components/Charts/BarChart/BarChart";
-import { H5 } from "@/Typography";
+import { H2, H5 } from "@/Typography";
 import { useState } from "react";
 import { barData } from "../components/Charts/BarChart/BarChartData";
 import {
   PIE_COLORS,
   pieData,
 } from "../components/Charts/PieChart/PieChartData";
+import { useData } from "@/DataContext";
+import ESGNotifications from "../components/ESGNotifications/ESGNotifications";
+import Image from "next/image";
 
 const Container = styled("div")`
   display: grid;
   grid-template-columns: 8.55fr 3.45fr;
   gap: 20px;
+  max-width: 1300px;
+  width: 100%;
 `;
 
 const GraphsContainer = styled("div")`
@@ -83,8 +87,44 @@ const PieChartContainer = styled("div")`
   border-radius: 12px;
   background-color: ${BFMPalette.white};
 `;
+const ESGNotificationsContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    to bottom,
+    ${BFMPalette.white},
+    ${BFMPalette.white100}
+  );
+  border-radius: 12px;
+  height: auto;
+  max-height: fit-content;
+`;
+const CardsContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 16px;
+`;
+
+const TitleContainer = styled("div")`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: linear-gradient(
+    to right,
+    ${BFMPalette.purple175},
+    ${BFMPalette.white}
+  );
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom: 1px solid ${BFMPalette.purple200};
+`;
 export default function ESG() {
   const [selectedTab, setSelectedTab] = useState("2024");
+  const { notifications } = useData();
+  console.log(notifications.esgNotifications);
+
   return (
     <Container>
       <GraphsContainer>
@@ -150,8 +190,23 @@ export default function ESG() {
           </SubContainer>
         </BarChartContainer>
       </GraphsContainer>
+      <ESGNotificationsContainer>
+        <TitleContainer>
+          <Image src="/images/icon.png" alt="icon" width={40} height={40} />
+          <H2 color={BFMPalette.black800}>Actions For You</H2>
+        </TitleContainer>
 
-      <Actions />
+        <CardsContainer>
+          {notifications.esgNotifications.map((item) => (
+            <ESGNotifications
+              key={item.id}
+              imgSrc={item.category}
+              title={item.title}
+              data={item.payload}
+            />
+          ))}
+        </CardsContainer>
+      </ESGNotificationsContainer>
     </Container>
   );
 }

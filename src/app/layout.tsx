@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./globals.css";
+import { DataProvider } from "@/DataContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,18 +34,21 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body>
         <Sidebar />
-        <ContentWrapper>
-          <Navbar
-            navItems={[
-              { label: "Dashboard", path: "/" },
-              { label: "Analytics", path: "/analytics" },
-              { label: "Invoices", path: "/invoices" },
-              { label: "Calender", path: "/calender" },
-              { label: "ESG", path: "/esg" },
-            ]}
-          />
-          <MainContent>{children}</MainContent>
-        </ContentWrapper>
+        <DataProvider>
+          <ContentWrapper>
+            <Navbar
+              navItems={[
+                { label: "Dashboard", path: "/" },
+                { label: "Analytics", path: "/analytics" },
+                { label: "Invoices", path: "/invoices" },
+                { label: "Calender", path: "/calender" },
+                { label: "ESG", path: "/esg" },
+              ]}
+            />
+
+            <MainContent>{children}</MainContent>
+          </ContentWrapper>
+        </DataProvider>
       </body>
     </html>
   );

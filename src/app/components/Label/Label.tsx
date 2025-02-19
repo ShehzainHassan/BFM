@@ -8,42 +8,42 @@ interface ESGCardProps {
   kg: number;
   circleColor?: string;
 }
+const Container = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid ${BFMPalette.gray200};
+`;
+
+const CircleContainer = styled("div")`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+const Circle = styled("p")<{ color: string }>`
+  width: 10px;
+  height: 10px;
+  background-color: ${(props) => props.color};
+  border-radius: 50%;
+`;
+const CategoryContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+`;
+const ValueContainer = styled("div")`
+  display: flex;
+  gap: 4px;
+`;
+
 export default function ESGCard({
   title,
   value,
   kg,
   circleColor,
 }: ESGCardProps) {
-  const Container = styled("div")`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid ${BFMPalette.gray200};
-  `;
-
-  const CircleContainer = styled("div")`
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  `;
-  const Circle = styled("p")<{ color: string }>`
-    width: 10px;
-    height: 10px;
-    background-color: ${(props) => props.color};
-    border-radius: 50%;
-  `;
-  const CategoryContainer = styled("div")`
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  `;
-  const ValueContainer = styled("div")`
-    display: flex;
-    gap: 4px;
-  `;
-
   return (
     <Container>
       <CategoryContainer>
