@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { H2, H4 } from "@/Typography";
 import PieGraph from "../Charts/PieChart/PieChart";
+import { CURRENCY } from "@/constants";
 const data = [
   { name: "Group A", value: 600 },
   { name: "Group B", value: 200 },
@@ -88,19 +89,19 @@ export default function InflowOutflow() {
           <LabelContainer>
             <Circle />
             <H4 color={BFMPalette.black400}>Other Outflow</H4>
-            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
+            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
             <H4 color={BFMPalette.black400}>Utilities</H4>
-            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
+            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
             <H4 color={BFMPalette.black400}>Advertising</H4>
-            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
+            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
           </LabelContainer>
           <LabelContainer>
             <H4 color={BFMPalette.black400}>Cheque Outflow</H4>
-            <H2 color={BFMPalette.black800}>HKD 10,000.00</H2>
+            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
           </LabelContainer>
         </Labels>
       </ChartContainer>

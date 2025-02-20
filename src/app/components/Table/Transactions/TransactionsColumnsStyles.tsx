@@ -8,7 +8,8 @@ import { AmountText } from "../Accounts/AccountsStyles";
 import { AccountText } from "@/app/page";
 import DetailsModal from "../../Modal/Modal";
 import TransactionDetails from "../../TransactionDetails/TransactionDetails";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { CURRENCY, LOCAL_STORAGE_KEY } from "@/constants";
 
 const ImageContainer = styled("div")`
   display: flex;
@@ -34,29 +35,47 @@ const ActionContainer = styled.div`
   display: flex;
   gap: 8px;
 `;
-const handleAttachmentClick = (row: Transaction) => {
-  console.log("Attachment Clicked!");
-};
-const handleModalClick = (row: Transaction) => {
-  console.log("Modal Clicked!");
-};
 const TransactionActions = ({ row }: { row: Transaction }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState("Details");
+  const [hasAttachments, setHasAttachments] = useState(false);
+
+  const checkAttachments = () => {
+    const storedFiles = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+    );
+    setHasAttachments(!!storedFiles[row.id]?.files?.length);
+  };
+
+  useEffect(() => {
+    checkAttachments();
+    const handleStorageChange = () => {
+      checkAttachments();
+    };
+
+    document.addEventListener("localStorageUpdate", handleStorageChange);
+
+    return () => {
+      document.removeEventListener("localStorageUpdate", handleStorageChange);
+    };
+  }, [row.id]);
+
   const handleOpenModal = (type: string) => {
     setSelected(type);
     setOpenModal(true);
   };
   return (
     <ActionContainer>
-      <Image
-        src="/images/Button utility.png"
-        alt="icon"
-        width={32}
-        height={32}
-        style={{ cursor: "pointer" }}
-        onClick={() => handleOpenModal("Attachments")}
-      />
+      {hasAttachments && (
+        <Image
+          src="/images/Button utility.png"
+          alt="icon"
+          width={32}
+          height={32}
+          style={{ cursor: "pointer" }}
+          onClick={() => handleOpenModal("Attachments")}
+        />
+      )}
       <Image
         src="/images/Button.png"
         alt="icon"
@@ -95,7 +114,7 @@ export const TransactionStyles = {
         {row.amount.currency} {row.amount.value}
       </H3Secondary>
       <H3Secondary color={BFMPalette.purple375}>
-        HKD {row.amount.HKDEquivalent}
+        {CURRENCY} {row.amount.HKDEquivalent}
       </H3Secondary>
     </AmountText>
   ),

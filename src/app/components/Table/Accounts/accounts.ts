@@ -2,7 +2,7 @@ export interface AccountData {
   bank: string;
   account: string;
   accountType: string;
-  balance: string;
+  balance: number;
   amount: {
     currency: string;
     value: number;
@@ -15,7 +15,7 @@ export const accountsData: AccountData[] = [
     bank: "Sample Bank",
     account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
-    balance: "HKD 449,117.24",
+    balance: 449117.24,
     amount: {
       currency: "USD",
       value: 10000.0,
@@ -26,7 +26,7 @@ export const accountsData: AccountData[] = [
     bank: "abc Bank",
     account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
-    balance: "HKD 449,117.24",
+    balance: 449117.24,
     amount: {
       currency: "USD",
       value: 10000.0,
@@ -37,7 +37,7 @@ export const accountsData: AccountData[] = [
     bank: "Sample Bank",
     account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
-    balance: "HKD 449,117.24",
+    balance: 449117.24,
     amount: {
       currency: "USD",
       value: 10000.0,
@@ -48,7 +48,7 @@ export const accountsData: AccountData[] = [
     bank: "Sample Bank",
     account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
-    balance: "HKD 449,117.24",
+    balance: 449117.24,
     amount: {
       currency: "USD",
       value: 10000.0,
@@ -59,7 +59,7 @@ export const accountsData: AccountData[] = [
     bank: "Sample Bank",
     account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
-    balance: "HKD 449,117.24",
+    balance: 449117.24,
     amount: {
       currency: "USD",
       value: 10000.0,
@@ -70,7 +70,7 @@ export const accountsData: AccountData[] = [
     bank: "Sample Bank",
     account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
-    balance: "HKD 449,117.24",
+    balance: 449117.24,
     amount: {
       currency: "USD",
       value: 10000.0,
@@ -81,7 +81,7 @@ export const accountsData: AccountData[] = [
     bank: "Sample Bank",
     account: "Sample HKD Savings (666111***888)",
     accountType: "Current/Savings",
-    balance: "HKD 449,117.24",
+    balance: 449117.24,
     amount: {
       currency: "USD",
       value: 10000.0,

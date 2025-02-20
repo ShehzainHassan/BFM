@@ -16,3 +16,14 @@ export const generateMonths = () => {
 
   return months;
 };
+
+export const formatCurrency = (value: string | number): string => {
+  if (value === undefined || value === null || isNaN(Number(value)))
+    return "0.00";
+
+  const num = Number(value);
+  return num.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};

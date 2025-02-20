@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { BodyText, Title, H1, H3 } from "@/Typography";
 import Image from "next/image";
+import { formatCurrency } from "@/utils";
+import { CURRENCY } from "@/constants";
 const Container = styled("div")`
   display: flex;
   background-color: ${BFMPalette.white25};
@@ -43,7 +45,7 @@ const Border = styled("div")<{ $isIncreased: boolean }>`
 
 interface TextComponentProps {
   title: string;
-  value: string;
+  value: number;
   percentage: number;
   timePeriod: string;
   isIncreased?: boolean;
@@ -62,7 +64,9 @@ export default function TextComponent({
       <SubContainer>
         <TextContainer>
           <Title color={BFMPalette.gray700}>{title}</Title>
-          <H1 color={valueColor}>{value}</H1>
+          <H1 color={valueColor}>
+            {CURRENCY}: {formatCurrency(value)}
+          </H1>
         </TextContainer>
         <TextContainer>
           <Percentage>
@@ -70,7 +74,7 @@ export default function TextComponent({
               {isIncreased ? (
                 <H3 color={BFMPalette.green800}>{percentage}%</H3>
               ) : (
-                <H3 color={BFMPalette.red700}>{percentage}%</H3>
+                <H3 color={BFMPalette.red700}>{percentage * -1}%</H3>
               )}
               {isIncreased ? (
                 <Image

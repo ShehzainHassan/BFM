@@ -16,6 +16,7 @@ import { OutflowsColumns } from "../components/Table/Outflows/OutflowsColumns";
 import { RecurringTransactionColumns } from "../components/Table/RecurringTransactions/RecurringTransactionColumn";
 import DataTable from "../components/Table/Table";
 import { TransitionHighlightColumns } from "../components/Table/TransitionHighlight/TransitionHighlightColumn";
+import { CURRENCY } from "@/constants";
 
 export default function Analytics() {
   const tabs = [
@@ -115,7 +116,7 @@ export default function Analytics() {
               </Badge>
               <Content>
                 <MediumBoldHeading color={BFMPalette.purple600}>
-                  HKD 27,776.90
+                  {CURRENCY} 27,776.90
                 </MediumBoldHeading>
                 <Image
                   src="/images/info.png"

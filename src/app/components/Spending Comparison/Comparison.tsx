@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Card from "../Card/Card";
 import { BFMPalette } from "@/Theme";
 import { H5 } from "@/Typography";
+import { CURRENCY } from "@/constants";
+import { formatCurrency } from "@/utils";
 const BarsContainer = styled("div")`
   display: flex;
   flex-direction: column;
@@ -67,14 +69,18 @@ export default function Comparison({ spendingData }: ComparisonProps) {
           <H5 color={BFMPalette.black800}>{spendingData.current.month}</H5>
           <BarUI>
             <Filled $filledColor={BFMPalette.purple600} $filledValue={80} />
-            <Badge>HKD {spendingData.current.value}</Badge>
+            <Badge>
+              {CURRENCY} {formatCurrency(spendingData.current.value)}
+            </Badge>
           </BarUI>
         </div>
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
           <H5 color={BFMPalette.black800}>{spendingData.previous.month}</H5>
           <BarUI>
             <Filled $filledColor={BFMPalette.purple300} $filledValue={90} />
-            <Badge>HKD {spendingData.previous.value}</Badge>
+            <Badge>
+              {CURRENCY} {formatCurrency(spendingData.previous.value)}
+            </Badge>
           </BarUI>
         </div>
       </BarsContainer>

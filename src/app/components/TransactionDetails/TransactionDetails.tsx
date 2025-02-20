@@ -8,10 +8,11 @@ import {
   SubTitle,
 } from "@/Typography";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import { LOCAL_STORAGE_KEY } from "@/constants";
 interface TransactionDetailsProps<T = {}> {
   selectedRow: T;
   primaryDetail?: string;
@@ -22,6 +23,147 @@ interface TransactionDetailsProps<T = {}> {
   selected?: string;
 }
 
+interface FileData {
+  name: string;
+  size: string;
+  extension: string;
+  url: string;
+}
+
+interface StoredData {
+  rowId: string;
+  files: FileData[];
+}
+
+const StatsContainer = styled("div")`
+  border-radius: 12px;
+  border: 1px solid ${BFMPalette.gray100};
+  background-color: ${BFMPalette.white};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px;
+`;
+const ImageContainer = styled("div")`
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 200px;
+  padding: 10px;
+  background-color: ${BFMPalette.purple100};
+`;
+const InfoContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+`;
+const Descriptions = styled("div")`
+  display: flex;
+  gap: 14px;
+`;
+const SelectedFilesContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+const Container = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+`;
+const DetailsContainer = styled("div")`
+  border-radius: 12px;
+  border: 1px solid ${BFMPalette.gray200};
+  background-color: ${BFMPalette.white25};
+  padding: 0px 12px;
+`;
+const RowDetails = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid ${BFMPalette.gray100};
+  padding: 16px 20px 16px 16px;
+`;
+const ValueContainer = styled("div")`
+  display: flex;
+  gap: 6px;
+  align-items: center;
+`;
+
+const StyledValue = styled.span<{ color?: string; fontWeight?: string }>`
+  color: ${({ color }) => color || BFMPalette.black800};
+  font-weight: ${({ fontWeight }) => fontWeight || "500"};
+`;
+const FileUploadContainer = styled("div")`
+  border-radius: 12px;
+  border: 1px solid ${BFMPalette.gray200};
+  padding: 16px 24px;
+  background-color: ${BFMPalette.white};
+  width: 100%;
+`;
+const FileContent = styled("div")`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+`;
+const IconContainer = styled("div")`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid ${BFMPalette.gray100};
+`;
+const FileTextContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+`;
+const FileTypeWrap = styled.div<{ $fileExtension?: string }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  padding: 2px 3px;
+  border-radius: 2px;
+  position: absolute;
+  left: 30px;
+  transform: translateY(18px);
+  background-color: ${({ $fileExtension }) => {
+    switch ($fileExtension) {
+      case "DOC":
+      case "DOCX":
+        return BFMPalette.blue500;
+      case "XLSX":
+        return BFMPalette.green700;
+      case "PDF":
+      default:
+        return BFMPalette.red600;
+    }
+  }};
+`;
+
+const NotesContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`;
+const Button = styled("div")`
+  cursor: pointer;
+`;
+const ButtonContainer = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  background: none;
+  outline: none;
+  border: none;
+`;
 export default function TransactionDetails({
   selectedRow,
   primaryDetail = "CR TO 022-170458-*** N32823454***(28MAR24)",
@@ -31,135 +173,27 @@ export default function TransactionDetails({
   lastUpdated = "Last updated: 11 Nov 2024",
   selected = "Details",
 }: TransactionDetailsProps<any>) {
-  const StatsContainer = styled("div")`
-    border-radius: 12px;
-    border: 1px solid ${BFMPalette.gray100};
-    background-color: ${BFMPalette.white};
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px;
-  `;
-  const ImageContainer = styled("div")`
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 200px;
-    padding: 10px;
-    background-color: ${BFMPalette.purple100};
-  `;
-  const InfoContainer = styled("div")`
-    display: flex;
-    flex-direction: column;
-  `;
-  const Descriptions = styled("div")`
-    display: flex;
-    gap: 14px;
-  `;
-  const SelectedFilesContainer = styled("div")`
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  `;
-  const Container = styled("div")`
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 20px;
-  `;
-  const DetailsContainer = styled("div")`
-    border-radius: 12px;
-    border: 1px solid ${BFMPalette.gray200};
-    background-color: ${BFMPalette.white25};
-    padding: 0px 12px;
-  `;
-  const RowDetails = styled("div")`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid ${BFMPalette.gray100};
-    padding: 16px 20px 16px 16px;
-  `;
-  const ValueContainer = styled("div")`
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  `;
+  const [selectedTab, setSelectedTab] = useState(selected);
+  const [selectedFiles, setSelectedFiles] = useState<StoredData>({
+    rowId: selectedRow.id || "",
+    files: [],
+  });
+  const [isEditingNotes, setIsEditingNotes] = useState(false);
+  const [isAddingNotes, setIsAddingNotes] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const StyledValue = styled.span<{ color?: string; fontWeight?: string }>`
-    color: ${({ color }) => color || BFMPalette.black800};
-    font-weight: ${({ fontWeight }) => fontWeight || "500"};
-  `;
-  const FileUploadContainer = styled("div")`
-    border-radius: 12px;
-    border: 1px solid ${BFMPalette.gray200};
-    padding: 16px 24px;
-    background-color: ${BFMPalette.white};
-    width: 100%;
-  `;
-  const FileContent = styled("div")`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 8px;
-  `;
-  const IconContainer = styled("div")`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    border: 1px solid ${BFMPalette.gray100};
-  `;
-  const FileTextContainer = styled("div")`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-  `;
-  const FileTypeWrap = styled.div<{ $fileExtension?: string }>`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 16px;
-    padding: 2px 3px;
-    border-radius: 2px;
-    position: absolute;
-    left: 30px;
-    transform: translateY(18px);
-    background-color: ${({ $fileExtension }) => {
-      switch ($fileExtension) {
-        case "DOC":
-        case "DOCX":
-          return BFMPalette.blue500;
-        case "XLSX":
-          return BFMPalette.green700;
-        case "PDF":
-        default:
-          return BFMPalette.red600;
-      }
-    }};
-  `;
+  useEffect(() => {
+    const storedFiles = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+    );
 
-  const NotesContainer = styled("div")`
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  `;
-  const Button = styled("div")`
-    cursor: pointer;
-  `;
-  const ButtonContainer = styled("div")`
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 6px;
-    background: none;
-    outline: none;
-    border: none;
-  `;
+    if (storedFiles[selectedRow?.id]) {
+      setSelectedFiles(storedFiles[selectedRow.id]);
+    } else {
+      setSelectedFiles({ rowId: selectedRow?.id || "", files: [] });
+    }
+  }, [selectedRow]);
+
   const getStyledValues = (label: string, values: string[]) => {
     return values.filter(Boolean).map((val, idx) => {
       let styleProps = {};
@@ -202,20 +236,39 @@ export default function TransactionDetails({
     }
   };
 
-  const handleFiles = (files: FileList) => {
-    const newFiles = Array.from(files).map((file) => {
-      const fileNameParts = file.name.split(".");
-      const extension =
-        fileNameParts.length > 1 ? fileNameParts.pop()!.toUpperCase() : "";
-      const name = fileNameParts.join(".");
-      return {
-        name,
-        extension,
-        size: formatFileSize(file.size),
-      };
-    });
+  const triggerStorageUpdate = () => {
+    const event = new Event("localStorageUpdate");
+    document.dispatchEvent(event);
+  };
 
-    setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+  const handleFiles = (files: FileList) => {
+    if (!selectedRow?.id) return;
+
+    const newFiles = Array.from(files).map((file) => ({
+      name: file.name,
+      extension: file.name.split(".").pop()?.toUpperCase() || "",
+      size: formatFileSize(file.size),
+      url: URL.createObjectURL(file),
+    }));
+
+    const storedFiles = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+    );
+
+    const updatedData = {
+      ...storedFiles,
+      [selectedRow.id]: {
+        rowId: selectedRow.id,
+        files: [...(storedFiles[selectedRow.id]?.files || []), ...newFiles],
+      },
+    };
+
+    setSelectedFiles(updatedData[selectedRow.id]);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedData));
+    triggerStorageUpdate();
+  };
+  const openFile = (fileUrl: string) => {
+    window.open(fileUrl, "_blank");
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -236,20 +289,30 @@ export default function TransactionDetails({
     event.preventDefault();
   };
   const removeFile = (index: number) => {
-    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-  };
+    if (!selectedRow?.id) return;
 
-  const [selectedTab, setSelectedTab] = useState(selected);
-  const [selectedFiles, setSelectedFiles] = useState<
-    {
-      name: string;
-      size: string;
-      extension: string;
-    }[]
-  >([]);
-  const [isEditingNotes, setIsEditingNotes] = useState(false);
-  const [isAddingNotes, setIsAddingNotes] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+    const storedFiles = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+    );
+
+    if (!storedFiles[selectedRow.id]) return;
+
+    const updatedFiles: FileData[] = storedFiles[selectedRow.id].files.filter(
+      (_: FileData, i: number) => i !== index
+    );
+
+    if (updatedFiles.length === 0) {
+      delete storedFiles[selectedRow.id];
+    } else {
+      storedFiles[selectedRow.id].files = updatedFiles;
+    }
+
+    setSelectedFiles(
+      storedFiles[selectedRow.id] || { rowId: selectedRow?.id, files: [] }
+    );
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(storedFiles));
+    triggerStorageUpdate();
+  };
 
   const handleSaveNote = () => {
     setIsEditingNotes(false);
@@ -416,9 +479,9 @@ export default function TransactionDetails({
               onChange={handleFileUpload}
             />
           </FileUploadContainer>
-          {selectedFiles.length > 0 && (
+          {selectedFiles.files.length > 0 && (
             <SelectedFilesContainer>
-              {selectedFiles.map((file, index) => (
+              {selectedFiles.files.map((file, index) => (
                 <StatsContainer key={index}>
                   <Descriptions>
                     <Image
@@ -433,7 +496,15 @@ export default function TransactionDetails({
                       </SmallHeading>
                     </FileTypeWrap>
                     <InfoContainer>
-                      <H4 color={BFMPalette.black400}>{file.name}</H4>
+                      <H4
+                        $cursor="pointer"
+                        $hoverColor={BFMPalette.purple375}
+                        $hoverUnderline={true}
+                        $transitionEffect="color 0.3s ease-in out"
+                        color={BFMPalette.black400}
+                        onClick={() => openFile(file.url)}>
+                        {file.name}
+                      </H4>
                       <BodyText>{file.size}</BodyText>
                     </InfoContainer>
                   </Descriptions>

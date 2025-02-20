@@ -1,14 +1,14 @@
 "use client";
-import { createContext, useContext, ReactNode } from "react";
-import { MOCK_DATA } from "./mockdata";
+import { createContext, ReactNode, useContext } from "react";
 import { AccountData } from "./app/components/Table/Accounts/accounts";
+import { MOCK_DATA } from "./mockdata";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
   reports: typeof MOCK_DATA.data.reports;
   metrics: typeof MOCK_DATA.data.metrics;
   notifications: typeof MOCK_DATA.data.notifications;
-  transformAccounts: (parsedAccounts: ParsedAccount[]) => AccountData[];
+  accounts: AccountData[];
 }
 interface ParsedAccount {
   consentId: string;
@@ -33,7 +33,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       bank: account.bank,
       account: account.accountName,
       accountType: account.accountType,
-      balance: `${account.currency} ${account.balance.toFixed(2)}`,
+      balance: account.balance,
       amount: {
         currency: account.currency,
         value: account.balance,
@@ -41,6 +41,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       },
     }));
   };
+  const accounts = transformAccounts(rawData.parsedAccounts);
+
   return (
     <DataContext.Provider
       value={{
@@ -48,7 +50,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         reports,
         metrics,
         notifications,
-        transformAccounts,
+        accounts,
       }}>
       {children}
     </DataContext.Provider>

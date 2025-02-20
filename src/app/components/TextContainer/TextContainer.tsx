@@ -1,5 +1,7 @@
+"use client";
 import styled from "styled-components";
 import TextComponent from "../TextComponent/TextComponent";
+import { useData } from "@/DataContext";
 
 export default function TextContainer() {
   const Container = styled("div")`
@@ -7,26 +9,30 @@ export default function TextContainer() {
     flex-direction: column;
     gap: 16px;
   `;
+  const { reports } = useData();
+  const overviewReport = reports.overviewReport;
   return (
     <Container>
       <TextComponent
         title="Current Balance"
         timePeriod="since last month"
-        percentage={8}
-        value="HKD 1,300,000.00"
+        percentage={overviewReport.netFlowPercentageMoM}
+        value={overviewReport.currentBalance}
+        isIncreased={overviewReport.netFlowPercentageMoM >= 0 ? true : false}
       />
       <TextComponent
         title="Total income"
         timePeriod="since last month"
-        percentage={2}
-        value="HKD 240,000.00"
+        percentage={overviewReport.inflowPercentageMoM}
+        value={overviewReport.totalInflow}
+        isIncreased={overviewReport.inflowPercentageMoM >= 0 ? true : false}
       />
       <TextComponent
         title="Total Expenses"
         timePeriod="since last month"
-        percentage={8}
-        value="HKD 90,000.00"
-        isIncreased={false}
+        percentage={overviewReport.outflowPercentageMoM}
+        value={overviewReport.totalOutflow}
+        isIncreased={overviewReport.outflowPercentageMoM >= 0 ? true : false}
       />
     </Container>
   );

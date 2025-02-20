@@ -123,7 +123,6 @@ const TitleContainer = styled("div")`
 export default function ESG() {
   const [selectedTab, setSelectedTab] = useState("2024");
   const { notifications } = useData();
-  console.log(notifications.esgNotifications);
 
   return (
     <Container>

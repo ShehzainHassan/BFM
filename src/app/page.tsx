@@ -65,8 +65,7 @@ export const AccountText = styled.div`
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState("Transactions");
   const [searchQuery, setSearchQuery] = useState("");
-  const { rawData, notifications, transformAccounts } = useData();
-  const transformedAccounts = transformAccounts(rawData.parsedAccounts);
+  const { notifications, accounts } = useData();
   return (
     <Container>
       <MainContainer>
@@ -120,7 +119,7 @@ export default function Home() {
         ) : (
           <DataTable
             key="accounts"
-            data={transformedAccounts}
+            data={accounts}
             columns={AccountsColumns}
             searchQuery={searchQuery}
             searchColumns={["bank", "account"]}

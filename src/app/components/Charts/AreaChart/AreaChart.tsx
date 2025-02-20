@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import styled from "styled-components";
 import { AreaChartData } from "./AreaChartData";
+import { CURRENCY } from "@/constants";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -43,7 +44,9 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return (
       <CustomTooltipContainer>
         <CustomTooltipLabel>{label}</CustomTooltipLabel>
-        <CustomTooltipValue>HKD {payload[0].value}</CustomTooltipValue>
+        <CustomTooltipValue>
+          {CURRENCY} {payload[0].value}
+        </CustomTooltipValue>
       </CustomTooltipContainer>
     );
   }

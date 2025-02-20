@@ -41,11 +41,27 @@ export const H3Secondary = styled.h3<{ color?: string }>`
   line-height: 20px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
-export const H4 = styled.h4<{ color?: string }>`
+export const H4 = styled.h4<{
+  color?: string;
+  $cursor?: string;
+  $hoverColor?: string;
+  $hoverUnderline?: boolean;
+  $transitionEffect?: string;
+}>`
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
-  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+  color: ${({ color }) => color || BFMPalette.black100};
+  cursor: ${({ $cursor }) => $cursor || "default"};
+  transition: ${({ $transitionEffect }) =>
+    $transitionEffect ||
+    "color 0.2s ease-in-out, text-decoration 0.2s ease-in-out"};
+
+  &:hover {
+    color: ${({ $hoverColor }) => $hoverColor || ""};
+    text-decoration: ${({ $hoverUnderline }) =>
+      $hoverUnderline ? "underline" : "none"};
+  }
 `;
 
 export const H5 = styled.h5<{ color?: string }>`

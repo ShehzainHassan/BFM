@@ -13,20 +13,20 @@ export default function InvoiceContainer() {
         title="Invoice Pending"
         timePeriod="since last month"
         percentage={8}
-        value="HKD 1,300,000.00"
+        value={1300000.0}
       />
       <TextComponent
         title="Invoice Overdue"
         timePeriod="since last month"
         percentage={2}
-        value="HKD 240,000.00"
+        value={240000.0}
         valueColor={BFMPalette.red500}
       />
       <TextComponent
         title="Invoice Paid"
         timePeriod="since last month"
         percentage={8}
-        value="HKD 00,000.00"
+        value={0}
       />
     </Container>
   );

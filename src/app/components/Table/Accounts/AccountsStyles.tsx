@@ -3,6 +3,8 @@ import { BFMPalette } from "@/Theme";
 import { BodyText, H3, H3Secondary, H4 } from "@/Typography";
 import { AccountData } from "./accounts";
 import styled from "styled-components";
+import { CURRENCY } from "@/constants";
+import { formatCurrency } from "@/utils";
 
 export const AmountText = styled.div`
   display: flex;
@@ -20,15 +22,17 @@ export const AccountsStyles = {
     <BodyText color={BFMPalette.black800}>{row.accountType}</BodyText>
   ),
   BALANCE: (row: AccountData) => (
-    <BodyText color={BFMPalette.black800}>{row.balance}</BodyText>
+    <BodyText color={BFMPalette.black800}>
+      {CURRENCY} {formatCurrency(row.balance)}
+    </BodyText>
   ),
   AMOUNT: (row: AccountData) => (
     <AmountText>
       <H3Secondary color={BFMPalette.purple375}>
-        {row.amount.currency} {row.amount.value}
+        {row.amount.currency} {formatCurrency(row.amount.value)}
       </H3Secondary>
       <H3Secondary color={BFMPalette.purple375}>
-        HKD {row.amount.HKDEquivalent}
+        {CURRENCY} {formatCurrency(row.amount.HKDEquivalent)}
       </H3Secondary>
     </AmountText>
   ),
