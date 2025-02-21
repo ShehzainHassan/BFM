@@ -64,9 +64,7 @@ export default function TextComponent({
       <SubContainer>
         <TextContainer>
           <Title color={BFMPalette.gray700}>{title}</Title>
-          <H1 color={valueColor}>
-            {CURRENCY}: {formatCurrency(value)}
-          </H1>
+          <H1 color={valueColor}>{formatCurrency(`${CURRENCY}${value}`)}</H1>
         </TextContainer>
         <TextContainer>
           <Percentage>

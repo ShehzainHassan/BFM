@@ -1,10 +1,11 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H3 } from "@/Typography";
 import { Inflows } from "./inflows";
+import { formatKeys } from "@/utils";
 
 export const InflowsStyles = {
   INFLOWS: (row: Inflows) => (
-    <BodyText color={BFMPalette.black800}>{row.inflows}</BodyText>
+    <BodyText color={BFMPalette.black800}>{formatKeys(row.inflows)}</BodyText>
   ),
   MONTH_1: (row: Inflows) => (
     <BodyText color={BFMPalette.purple375}>{row.month1}</BodyText>

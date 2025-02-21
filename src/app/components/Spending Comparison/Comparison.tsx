@@ -70,7 +70,7 @@ export default function Comparison({ spendingData }: ComparisonProps) {
           <BarUI>
             <Filled $filledColor={BFMPalette.purple600} $filledValue={80} />
             <Badge>
-              {CURRENCY} {formatCurrency(spendingData.current.value)}
+              {formatCurrency(`${CURRENCY}${spendingData.current.value}`)}
             </Badge>
           </BarUI>
         </div>
@@ -79,7 +79,7 @@ export default function Comparison({ spendingData }: ComparisonProps) {
           <BarUI>
             <Filled $filledColor={BFMPalette.purple300} $filledValue={90} />
             <Badge>
-              {CURRENCY} {formatCurrency(spendingData.previous.value)}
+              {formatCurrency(`${CURRENCY}${spendingData.previous.value}`)}
             </Badge>
           </BarUI>
         </div>

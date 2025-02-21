@@ -1,6 +1,8 @@
 "use client";
-import { accountsData } from "@/app/components/Table/Accounts/accounts";
-import { transactionData } from "@/app/components/Table/Transactions/transactions";
+import {
+  Transaction,
+  transactionData,
+} from "@/app/components/Table/Transactions/transactions";
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import { useState } from "react";
@@ -15,6 +17,8 @@ import DataTable from "./components/Table/Table";
 import { TransactionColumns } from "./components/Table/Transactions/TransactionsColumns";
 import TextContainer from "./components/TextContainer/TextContainer";
 import { useData } from "@/DataContext";
+import { AccountData } from "./components/Table/Accounts/accounts";
+import Pagination from "./components/Pagination/Pagination";
 
 const MainContainer = styled("div")`
   display: grid;
@@ -63,9 +67,23 @@ export const AccountText = styled.div`
   gap: 4px;
 `;
 export default function Home() {
-  const [selectedTab, setSelectedTab] = useState("Transactions");
+  const tabs = ["Transactions", "Accounts"];
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [searchQuery, setSearchQuery] = useState("");
-  const { notifications, accounts } = useData();
+  const { notifications, transactions, accounts } = useData();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const data: Transaction[] | AccountData[] =
+    selectedTab === tabs[0] ? transactions : accounts;
+
+  const offset = currentPage * itemsPerPage;
+  const paginatedData = data.slice(offset, offset + itemsPerPage);
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
   return (
     <Container>
       <MainContainer>
@@ -81,12 +99,15 @@ export default function Home() {
       <PaymentsContainer>
         <Header>
           <HorizontalTabs
-            tabs={["Transactions", "Accounts"]}
+            tabs={tabs}
             selectedTab={selectedTab}
-            onTabChange={setSelectedTab}
+            onTabChange={(tab) => {
+              setSelectedTab(tab);
+              setCurrentPage(0);
+            }}
           />
           <SearchAndFilter>
-            {selectedTab === "Transactions" ? (
+            {selectedTab === tabs[0] ? (
               <Search
                 placeholder="Search Transactions..."
                 value={searchQuery}
@@ -109,17 +130,17 @@ export default function Home() {
             </Filter>
           </SearchAndFilter>
         </Header>
-        {selectedTab === "Transactions" ? (
+        {selectedTab === tabs[0] ? (
           <DataTable
             key="transactions"
-            data={transactionData}
+            data={paginatedData as Transaction[]}
             columns={TransactionColumns}
             columnWidths={["1.2fr", "4fr", "2fr", "1.5fr", "2fr", "1.3fr"]}
           />
         ) : (
           <DataTable
             key="accounts"
-            data={accounts}
+            data={paginatedData as AccountData[]}
             columns={AccountsColumns}
             searchQuery={searchQuery}
             searchColumns={["bank", "account"]}
@@ -127,6 +148,11 @@ export default function Home() {
           />
         )}
       </PaymentsContainer>
+      <Pagination
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+        totalPages={totalPages}
+      />
     </Container>
   );
 }

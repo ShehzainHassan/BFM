@@ -23,16 +23,16 @@ export const AccountsStyles = {
   ),
   BALANCE: (row: AccountData) => (
     <BodyText color={BFMPalette.black800}>
-      {CURRENCY} {formatCurrency(row.balance)}
+      {formatCurrency(`${CURRENCY}${row.balance}`)}
     </BodyText>
   ),
   AMOUNT: (row: AccountData) => (
     <AmountText>
       <H3Secondary color={BFMPalette.purple375}>
-        {row.amount.currency} {formatCurrency(row.amount.value)}
+        {formatCurrency(`${row.amount.currency}${row.amount.value}`)}
       </H3Secondary>
       <H3Secondary color={BFMPalette.purple375}>
-        {CURRENCY} {formatCurrency(row.amount.HKDEquivalent)}
+        {formatCurrency(`${CURRENCY}${row.amount.HKDEquivalent}`)}
       </H3Secondary>
     </AmountText>
   ),

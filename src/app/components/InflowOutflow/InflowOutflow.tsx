@@ -7,6 +7,7 @@ import { BFMPalette } from "@/Theme";
 import { H2, H4 } from "@/Typography";
 import PieGraph from "../Charts/PieChart/PieChart";
 import { CURRENCY } from "@/constants";
+import { useData } from "@/DataContext";
 const data = [
   { name: "Group A", value: 600 },
   { name: "Group B", value: 200 },
@@ -63,6 +64,7 @@ const Circle = styled("p")`
 export default function InflowOutflow() {
   const [selectedMonth, setSelectedMonth] = useState<string>("Oct 2024");
   const [selectedTab, setSelectedTab] = useState("Deposit");
+  const { reports } = useData();
   return (
     <Container>
       <SubContainer>
@@ -75,7 +77,7 @@ export default function InflowOutflow() {
           style={{ height: "45px" }}
           onChange={(value) => setSelectedMonth(value)}
           value={selectedMonth}>
-          {generateMonths().map((month) => (
+          {generateMonths(reports.esgSummary).map((month) => (
             <Select.Option key={month} value={month}>
               {month}
             </Select.Option>

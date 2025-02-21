@@ -3,6 +3,7 @@ import { BFMPalette } from "@/Theme";
 import { TransitionHighlight } from "@/app/components/Table/TransitionHighlight/transitionHighlight";
 import { BodyText, H3Secondary, H5 } from "@/Typography";
 import styled from "styled-components";
+import { formatCurrency, formatDate } from "@/utils";
 
 const ReasonContainer = styled("div")`
   display: flex;
@@ -14,7 +15,7 @@ const ReasonContainer = styled("div")`
 `;
 export const TransitionCellStyles = {
   DATE: (row: TransitionHighlight) => (
-    <BodyText color={BFMPalette.black800}>{row.date}</BodyText>
+    <BodyText color={BFMPalette.black800}>{formatDate(row.date)}</BodyText>
   ),
   BANK: (row: TransitionHighlight) => (
     <BodyText color={BFMPalette.black800}>{row.bank}</BodyText>
@@ -32,7 +33,9 @@ export const TransitionCellStyles = {
     <BodyText color={BFMPalette.black800}>{row.payeeORMerchant}</BodyText>
   ),
   AMOUNT: (row: TransitionHighlight) => (
-    <H3Secondary color={BFMPalette.purple375}>{row.amount}</H3Secondary>
+    <H3Secondary color={BFMPalette.purple375}>
+      {formatCurrency(row.amount, 2)}
+    </H3Secondary>
   ),
   REASON: (row: TransitionHighlight) => (
     <ReasonContainer>

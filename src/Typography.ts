@@ -16,6 +16,13 @@ export const Header = styled.h1<{ color?: string }>`
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 
+export const TextTitle = styled.h2<{ color?: string }>`
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
 export const H2 = styled.h2<{ color?: string }>`
   font-weight: 600;
   font-size: 16px;

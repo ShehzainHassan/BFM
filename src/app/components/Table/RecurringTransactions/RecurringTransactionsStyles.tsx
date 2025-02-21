@@ -4,7 +4,7 @@ import { BodyText, H3, H4 } from "@/Typography";
 import { RecurringTransaction } from "./recurringTransactions";
 import styled from "styled-components";
 import Image from "next/image";
-import { AccountText } from "@/app/page";
+import { formatCurrency, formatDate } from "@/utils";
 
 const DescriptionContainer = styled("div")`
   display: flex;
@@ -12,6 +12,7 @@ const DescriptionContainer = styled("div")`
   justify-content: center;
   gap: 8px;
 `;
+
 export const RecurringTransactionStyles = {
   DESCRIPTION: (row: RecurringTransaction) => (
     <DescriptionContainer>
@@ -25,19 +26,20 @@ export const RecurringTransactionStyles = {
     </DescriptionContainer>
   ),
   DATE: (row: RecurringTransaction) => (
-    <H4 color={BFMPalette.black800}>{row.date}</H4>
+    <H4 color={BFMPalette.black800}>{formatDate(row.date)}</H4>
   ),
   TRANSACTION_AMOUNT: (row: RecurringTransaction) => (
-    <BodyText color={BFMPalette.black800}>{row.transactionAmount}</BodyText>
+    <BodyText color={BFMPalette.black800}>
+      {formatCurrency(row.transactionAmount, 2)}
+    </BodyText>
   ),
   ACCOUNT: (row: RecurringTransaction) => (
-    <AccountText>
-      <H4 color={BFMPalette.black800}>{row.account.type}</H4>
-      <BodyText>{row.account.number}</BodyText>
-    </AccountText>
+    <H4 color={BFMPalette.black800}>{row.account}</H4>
   ),
   TOTAL_AMOUNT: (row: RecurringTransaction) => (
-    <BodyText color={BFMPalette.purple375}>{row.totalAmount}</BodyText>
+    <BodyText color={BFMPalette.purple375}>
+      {formatCurrency(row.totalAmount, 2)}
+    </BodyText>
   ),
   OCCURRENCES: (row: RecurringTransaction) => (
     <H4 color={BFMPalette.black800}>{row.noOfOccurences}</H4>

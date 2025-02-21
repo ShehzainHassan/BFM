@@ -26108,8 +26108,7 @@ export const MOCK_DATA = {
             id: "814",
             transactionDate: "2024-01-23",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "Y*** LIMITED             HC12412399562***   23JAN                                                                                                                                                                                                              ",
+            description: "Y*** LIMITED HC12412399562***23JAN",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 592800,
@@ -26124,8 +26123,7 @@ export const MOCK_DATA = {
             id: "577",
             transactionDate: "2024-01-30",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12413015723***   30JAN                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12413015723***30JAN",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 531949.48,
@@ -26140,8 +26138,7 @@ export const MOCK_DATA = {
             id: "559",
             transactionDate: "2024-01-05",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC1241056046***8   05JAN                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC1241056046***805JAN",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 393151.32,
@@ -26156,8 +26153,7 @@ export const MOCK_DATA = {
             id: "601",
             transactionDate: "2024-03-06",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12430698471***   06MAR                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12430698471***06MAR",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 285375.99,
@@ -26172,8 +26168,7 @@ export const MOCK_DATA = {
             id: "584",
             transactionDate: "2024-02-09",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12420942258***   09FEB                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12420942258***09FEB",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 265409.1,
@@ -26188,8 +26183,7 @@ export const MOCK_DATA = {
             id: "643",
             transactionDate: "2024-03-12",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "GAIN*** LIMITED          STAFF CLAIM                                                                                                                                                                                                                           ",
+            description: "GAIN*** LIMITED STAFF CLAIM",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 188448.5,
@@ -26204,8 +26198,7 @@ export const MOCK_DATA = {
             id: "578",
             transactionDate: "2024-01-31",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12413117401***   31JAN                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12413117401***31JAN",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 183006.94,
@@ -26220,8 +26213,7 @@ export const MOCK_DATA = {
             id: "555",
             transactionDate: "2024-01-02",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12410252***355   02JAN                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12410252***35502JAN",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 179991.8,
@@ -26236,8 +26228,7 @@ export const MOCK_DATA = {
             id: "603",
             transactionDate: "2024-03-07",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12430701111***   07MAR                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12430701111***07MAR",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 156924.45,
@@ -26252,8 +26243,7 @@ export const MOCK_DATA = {
             id: "585",
             transactionDate: "2024-02-09",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12420942260***   09FEB                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12420942260***09FEB",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 151906.06,
@@ -26268,8 +26258,7 @@ export const MOCK_DATA = {
             id: "610",
             transactionDate: "2024-03-15",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12431519188***  15MAR                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12431519188***15MAR",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 150719.38,
@@ -26284,8 +26273,7 @@ export const MOCK_DATA = {
             id: "582",
             transactionDate: "2024-02-06",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "K*** MERC* SE***     HC12420634072***   06FEB                                                                                                                                                                                                              ",
+            description: "K*** MERC* SE***HC12420634072***06FEB",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 148707,
@@ -26305,8 +26293,7 @@ export const MOCK_DATA = {
             id: "364",
             transactionDate: "2024-01-23",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "CR TO 711-***345-101     N12342434***(23JAN24)                                                                                                                                                                                                                 ",
+            description: "CR TO 711-***345-101N12342434***(23JAN24)",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -590000,
@@ -26321,8 +26308,7 @@ export const MOCK_DATA = {
             id: "523",
             transactionDate: "2024-01-31",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "B***T C***IT FI****E     HC12413116837***   31JAN                                                                                                                                                                                                              ",
+            description: "B***T C***IT FI****EHC12413116837***31JAN",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -294068,
@@ -26337,8 +26323,7 @@ export const MOCK_DATA = {
             id: "434",
             transactionDate: "2024-01-23",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "D**R C*E G***IT CO L     HC124123991***23   23JAN                                                                                                                                                                                                              ",
+            description: "D**R C*E G***ITCOLHC124123991***2323JAN",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -235058,
@@ -26353,8 +26338,7 @@ export const MOCK_DATA = {
             id: "255",
             transactionDate: "2024-01-29",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "CR TO 030-1***56-998     N12752983***(27JAN24)                                                                                                                                                                                                                 ",
+            description: "CR TO 030-1***56-998 N12752983***(27JAN24)",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -150000,
@@ -26369,8 +26353,7 @@ export const MOCK_DATA = {
             id: "239",
             transactionDate: "2024-02-28",
             accountName: "Sample HKD Savings (666111***888)",
-            description:
-              "CR TO 040-5-201***    N22840395***(28FEB24)                                                                                                                                                                                                                 ",
+            description: "CR TO 040-5-201*** N22840395***(28FEB24)",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -150000,
@@ -26387,8 +26370,7 @@ export const MOCK_DATA = {
       incomeRecurringTransactions: [],
       expenseRecurringTransactions: [
         {
-          latestDescription:
-            "CHARGES                  HC1243274434***   27MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC1243274434***27MAR",
           latestTransactionDate: "2024-03-27",
           currency: "HKD",
           latestAmount: -5,
@@ -26403,8 +26385,7 @@ export const MOCK_DATA = {
               transactionId: "124",
               transactionDate: [2024, 3, 27],
               accountName: "Sample HKD Savings (666111***888)",
-              description:
-                "CHARGES                  HC1243274434***   27MAR                                                                                                                                                                                                              ",
+              description: "CHARGES HC1243274434*** 27MAR",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26423,8 +26404,7 @@ export const MOCK_DATA = {
               transactionId: "103",
               transactionDate: [2024, 2, 29],
               accountName: "Sample HKD Savings (666111***888)",
-              description:
-                "CHARGES                  HC12422983262***   29FEB                                                                                                                                                                                                              ",
+              description: "CHARGES HC12422983262*** 29FEB",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26443,8 +26423,7 @@ export const MOCK_DATA = {
               transactionId: "93",
               transactionDate: [2024, 1, 31],
               accountName: "Sample HKD Savings (666111***888)",
-              description:
-                "CHARGES                  HC12413116837***   31JAN                                                                                                                                                                                                              ",
+              description: "CHARGES HC12413116837*** 31JAN",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26463,8 +26442,7 @@ export const MOCK_DATA = {
               transactionId: "73",
               transactionDate: [2023, 12, 29],
               accountName: "Sample HKD Savings (666111***888)",
-              description:
-                "CHARGES                  HC123C2943***86   29DEC                                                                                                                                                                                                              ",
+              description: "CHARGES HC123C2943***86 29DEC",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26482,8 +26460,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12432744324***   27MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12432744324***27MAR",
           latestTransactionDate: "2024-03-27",
           currency: "HKD",
           latestAmount: -5,
@@ -26557,8 +26534,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12432029557***   20MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12432029557***20MAR",
           latestTransactionDate: "2024-03-20",
           currency: "HKD",
           latestAmount: -5,
@@ -26632,8 +26608,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12431621698***   16MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12431621698***16MAR",
           latestTransactionDate: "2024-03-16",
           currency: "HKD",
           latestAmount: -5,
@@ -26707,8 +26682,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12431417451***   14MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12431417451***14MAR",
           latestTransactionDate: "2024-03-14",
           currency: "HKD",
           latestAmount: -5,
@@ -26782,8 +26756,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CR TO 343-***405-***     N31485657***(14MAR24)                                                                                                                                                                                                                 ",
+          latestDescription: "CR TO 343-***405-***N31485657***(14MAR24)",
           latestTransactionDate: "2024-03-14",
           currency: "HKD",
           latestAmount: -100000,
@@ -26857,8 +26830,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12431314964***   13MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12431314964***13MAR",
           latestTransactionDate: "2024-03-13",
           currency: "HKD",
           latestAmount: -5,
@@ -26932,8 +26904,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12431111240***   11MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12431111240***11MAR",
           latestTransactionDate: "2024-03-12",
           currency: "HKD",
           latestAmount: -5,
@@ -27007,8 +26978,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CR TO 67***96     N31177954***(11MAR24)                                                                                                                                                                                                                 ",
+          latestDescription: "CR TO 67***96 N31177954***(11MAR24)",
           latestTransactionDate: "2024-03-11",
           currency: "HKD",
           latestAmount: -8000,
@@ -27082,8 +27052,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12430906353***   09MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12430906353***09MAR",
           latestTransactionDate: "2024-03-09",
           currency: "HKD",
           latestAmount: -5,
@@ -27157,8 +27126,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "CHARGES                  HC12430701240***   07MAR                                                                                                                                                                                                              ",
+          latestDescription: "CHARGES HC12430701240***07MAR",
           latestTransactionDate: "2024-03-07",
           currency: "HKD",
           latestAmount: -5,
@@ -27232,8 +27200,7 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription:
-            "C** K* D**G              HC12430187138***   01MAR                                                                                                                                                                                                              ",
+          latestDescription: "C** K* D**G HC12430187138***01MAR",
           latestTransactionDate: "2024-03-01",
           currency: "HKD",
           latestAmount: -33500,

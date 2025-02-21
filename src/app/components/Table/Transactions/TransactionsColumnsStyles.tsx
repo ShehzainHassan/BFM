@@ -10,6 +10,7 @@ import DetailsModal from "../../Modal/Modal";
 import TransactionDetails from "../../TransactionDetails/TransactionDetails";
 import { useEffect, useState } from "react";
 import { CURRENCY, LOCAL_STORAGE_KEY } from "@/constants";
+import { formatCurrency, formatDate } from "@/utils";
 
 const ImageContainer = styled("div")`
   display: flex;
@@ -95,7 +96,7 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
 };
 export const TransactionStyles = {
   DATE: (row: Transaction) => (
-    <BodyText color={BFMPalette.black800}>{row.date}</BodyText>
+    <BodyText color={BFMPalette.black800}>{formatDate(row.date)}</BodyText>
   ),
   DESCRIPTION: (row: Transaction) => (
     <DescriptionWrapper>
@@ -111,10 +112,10 @@ export const TransactionStyles = {
   AMOUNT: (row: Transaction) => (
     <AmountText>
       <H3Secondary color={BFMPalette.purple375}>
-        {row.amount.currency} {row.amount.value}
+        {formatCurrency(`${row.amount.currency}${row.amount.value}`)}
       </H3Secondary>
       <H3Secondary color={BFMPalette.purple375}>
-        {CURRENCY} {row.amount.HKDEquivalent}
+        {formatCurrency(`${row.amount.currency}${row.amount.HKDEquivalent}`, 2)}
       </H3Secondary>
     </AmountText>
   ),
@@ -122,10 +123,7 @@ export const TransactionStyles = {
     <BodyText color={BFMPalette.black800}>{row.bank}</BodyText>
   ),
   ACCOUNT: (row: Transaction) => (
-    <AccountText>
-      <H4 color={BFMPalette.black800}>{row.account.type}</H4>
-      <BodyText>{row.account.number}</BodyText>
-    </AccountText>
+    <H4 color={BFMPalette.black800}>{row.account}</H4>
   ),
   ACTION: (row: Transaction) => <TransactionActions row={row} />,
 };

@@ -12,10 +12,7 @@ export interface Transaction {
     HKDEquivalent: number;
   };
   bank: string;
-  account: {
-    type: string;
-    number: string;
-  };
+  account: string;
 }
 
 export const transactionData: Transaction[] = [
@@ -33,10 +30,7 @@ export const transactionData: Transaction[] = [
       HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
   {
     id: "2",
@@ -53,10 +47,7 @@ export const transactionData: Transaction[] = [
     },
 
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
   {
     id: "3",
@@ -72,10 +63,7 @@ export const transactionData: Transaction[] = [
       HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
   {
     id: "4",
@@ -91,10 +79,7 @@ export const transactionData: Transaction[] = [
       HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
   {
     id: "5",
@@ -110,10 +95,7 @@ export const transactionData: Transaction[] = [
       HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
   {
     id: "6",
@@ -129,10 +111,7 @@ export const transactionData: Transaction[] = [
       HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
   {
     id: "7",
@@ -148,10 +127,7 @@ export const transactionData: Transaction[] = [
       HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
   {
     id: "8",
@@ -167,9 +143,6 @@ export const transactionData: Transaction[] = [
       HKDEquivalent: 10000.0,
     },
     bank: "Sample Bank",
-    account: {
-      type: "Sample HKD Savings",
-      number: "(666111***888)",
-    },
+    account: "Sample HKD Savings (666111***888)",
   },
 ];

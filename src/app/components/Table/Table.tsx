@@ -9,10 +9,8 @@ import {
 } from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import DetailsModal from "../Modal/Modal";
-import TransactionDetails from "../TransactionDetails/TransactionDetails";
 import { ExpandedColumns } from "./ExpandedTable/ExpandedColumn";
-import { expandedData } from "./ExpandedTable/ExpandedTableData";
+import { useData } from "@/DataContext";
 
 export const TableContainer = styled.div`
   padding: 12px 16px 16px 16px;
@@ -28,7 +26,7 @@ export const DataRow = styled.div<{
     $columnWidths && $columnWidths.length === $columns
       ? $columnWidths.join(" ")
       : `repeat(${$columns}, 1fr)`};
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid ${BFMPalette.gray100};
   align-items: center;
   background-color: ${BFMPalette.white25};
 `;
@@ -89,7 +87,7 @@ export default function DataTable<T>({
   });
 
   const [expandedRowIds, setExpandedRowIds] = useState<Set<string>>(new Set());
-
+  const { withdrawalRecurring } = useData();
   const handleExpandRow = (rowId: string) => {
     setExpandedRowIds((prev) => {
       const newExpandedRowIds = new Set(prev);
@@ -146,7 +144,12 @@ export default function DataTable<T>({
           </DataRow>
 
           {expandedRowIds.has(row.id) && (
-            <DataTable data={expandedData} columns={ExpandedColumns} />
+            <>
+              <DataTable
+                data={withdrawalRecurring[Number(row.id)].subItems}
+                columns={ExpandedColumns}
+              />
+            </>
           )}
         </React.Fragment>
       ))}
