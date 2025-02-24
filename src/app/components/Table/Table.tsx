@@ -37,7 +37,13 @@ export const DataCell = styled.div`
   height: 100%;
   padding: 16px 20px;
 `;
-
+const Revenue = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 16px 20px;
+  background-color: ${BFMPalette.purple250};
+`;
 export const HeaderCell = styled.div`
   display: flex;
   align-items: center;
@@ -128,8 +134,16 @@ export default function DataTable<T>({
             {row.getVisibleCells().map((cell) => {
               const isExpandableRow =
                 cell.column.id === "TRANSACTION_DESCRIPTION";
-
-              return (
+              const isRevenueRow =
+                (row.original as any).inflows === "totalRevenue" ||
+                (row.original as any).inflows === "revenueGrowth" ||
+                (row.original as any).outflows === "totalExpense" ||
+                (row.original as any).outflows === "profitOrLoss";
+              return isRevenueRow ? (
+                <Revenue key={cell.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </Revenue>
+              ) : (
                 <DataCell
                   key={cell.id}
                   onClick={() => {

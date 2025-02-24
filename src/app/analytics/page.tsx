@@ -103,7 +103,6 @@ export default function Analytics() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  console.log(data);
   return (
     <Container>
       <TabContainer1>
