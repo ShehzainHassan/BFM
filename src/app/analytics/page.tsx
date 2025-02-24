@@ -12,6 +12,11 @@ import { OutflowsColumns } from "../components/Table/Outflows/OutflowsColumns";
 import { RecurringTransactionColumns } from "../components/Table/RecurringTransactions/RecurringTransactionColumn";
 import DataTable from "../components/Table/Table";
 import { TransitionHighlightColumns } from "../components/Table/TransitionHighlight/TransitionHighlightColumn";
+import { BuyerSupplierAnalysis } from "../components/Table/BuyerSupplierAnalysis/BuyerSupplierAnalysis";
+import { ITEMS_PER_PAGE } from "@/constants";
+import Pagination from "../components/Pagination/Pagination";
+import { RecurringTransaction } from "../components/Table/RecurringTransactions/recurringTransactions";
+import { TransitionHighlight } from "../components/Table/TransitionHighlight/transitionHighlight";
 
 const TabContainer1 = styled("div")`
   padding: 20px 16px 0px 16px;
@@ -71,6 +76,34 @@ export default function Analytics() {
     selectedTab === tabs[2] ||
     selectedTab === tabs[3];
 
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const data: (
+    | BuyerSupplierAnalysis
+    | TransitionHighlight
+    | RecurringTransaction
+  )[] =
+    selectedTab === tabs[0]
+      ? selectedButton === tabButtons[0]
+        ? deposits
+        : withdrawals
+      : selectedTab === tabs[2]
+      ? selectedButton === tabButtons[0]
+        ? depositRecurring
+        : withdrawalRecurring
+      : selectedTab === tabs[3]
+      ? selectedButton === tabButtons[0]
+        ? depositHighlights
+        : withdrawalHighlights
+      : [];
+
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const paginatedData = data.slice(offset, offset + ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+  console.log(data);
   return (
     <Container>
       <TabContainer1>
@@ -78,7 +111,10 @@ export default function Analytics() {
           tabs={tabs}
           tabType="tab"
           selectedTab={selectedTab}
-          onTabChange={setSelectedTab}
+          onTabChange={(tab) => {
+            setSelectedTab(tab);
+            setCurrentPage(0);
+          }}
         />
       </TabContainer1>
       {showTabContainer2 && (
@@ -86,7 +122,10 @@ export default function Analytics() {
           <HorizontalTabs
             tabs={tabButtons}
             selectedTab={selectedButton}
-            onTabChange={setSelectedButton}
+            onTabChange={(btn) => {
+              setSelectedButton(btn);
+              setCurrentPage(0);
+            }}
           />
           {selectedTab === tabs[2] && selectedButton === tabButtons[0] && (
             <RenderBadgeGroup
@@ -116,9 +155,15 @@ export default function Analytics() {
       )}
 
       {selectedTab === tabs[0] && selectedButton === tabButtons[0] ? (
-        <DataTable data={deposits} columns={BuyerSupplierAnalysisColumns} />
+        <DataTable
+          data={paginatedData as BuyerSupplierAnalysis[]}
+          columns={BuyerSupplierAnalysisColumns}
+        />
       ) : selectedTab === tabs[0] && selectedButton === tabButtons[1] ? (
-        <DataTable data={withdrawals} columns={BuyerSupplierAnalysisColumns} />
+        <DataTable
+          data={paginatedData as BuyerSupplierAnalysis[]}
+          columns={BuyerSupplierAnalysisColumns}
+        />
       ) : null}
 
       {selectedTab === tabs[1] && (
@@ -141,7 +186,7 @@ export default function Analytics() {
         selectedTab === tabs[2] &&
         selectedButton === tabButtons[0] && (
           <DataTable
-            data={depositRecurring}
+            data={paginatedData as RecurringTransaction[]}
             columns={RecurringTransactionColumns}></DataTable>
         )
       )}
@@ -153,7 +198,7 @@ export default function Analytics() {
         selectedTab === tabs[2] &&
         selectedButton === tabButtons[1] && (
           <DataTable
-            data={withdrawalRecurring}
+            data={paginatedData as RecurringTransaction[]}
             columns={RecurringTransactionColumns}
             columnWidths={[
               "2.25fr",
@@ -174,7 +219,7 @@ export default function Analytics() {
         selectedTab === tabs[3] &&
         selectedButton === tabButtons[0] && (
           <DataTable
-            data={depositHighlights}
+            data={paginatedData as TransitionHighlight[]}
             columns={TransitionHighlightColumns}
             columnWidths={[
               "1.21fr",
@@ -197,7 +242,7 @@ export default function Analytics() {
         selectedTab === tabs[3] &&
         selectedButton === tabButtons[1] && (
           <DataTable
-            data={withdrawalHighlights}
+            data={paginatedData as TransitionHighlight[]}
             columns={TransitionHighlightColumns}
             columnWidths={[
               "1.21fr",
@@ -210,6 +255,15 @@ export default function Analytics() {
               "1.88fr",
             ]}></DataTable>
         )
+      )}
+      {(selectedTab === tabs[0] ||
+        selectedTab === tabs[2] ||
+        selectedTab === tabs[3]) && (
+        <Pagination
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          totalPages={totalPages}
+        />
       )}
     </Container>
   );

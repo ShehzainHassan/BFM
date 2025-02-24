@@ -1,8 +1,7 @@
 "use client";
-import {
-  Transaction,
-  transactionData,
-} from "@/app/components/Table/Transactions/transactions";
+import { Transaction } from "@/app/components/Table/Transactions/transactions";
+import { ITEMS_PER_PAGE } from "@/constants";
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import { useState } from "react";
@@ -10,16 +9,14 @@ import styled from "styled-components";
 import HorizontalTabs from "./components/HorizontalTabs/HorizontalTabs";
 import InflowOutflow from "./components/InflowOutflow/InflowOutflow";
 import Notifications from "./components/Notifications/Notifications";
+import Pagination from "./components/Pagination/Pagination";
 import Payment from "./components/Payments/Payment";
 import Search from "./components/Search/Search";
+import { AccountData } from "./components/Table/Accounts/accounts";
 import { AccountsColumns } from "./components/Table/Accounts/AccountsColumns";
 import DataTable from "./components/Table/Table";
 import { TransactionColumns } from "./components/Table/Transactions/TransactionsColumns";
 import TextContainer from "./components/TextContainer/TextContainer";
-import { useData } from "@/DataContext";
-import { AccountData } from "./components/Table/Accounts/accounts";
-import Pagination from "./components/Pagination/Pagination";
-import { ITEMS_PER_PAGE } from "@/constants";
 
 const MainContainer = styled("div")`
   display: grid;
@@ -73,7 +70,7 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const { notifications, transactions, accounts } = useData();
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const data: Transaction[] | AccountData[] =
     selectedTab === tabs[0] ? transactions : accounts;
