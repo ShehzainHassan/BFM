@@ -11,13 +11,15 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
+import { BarData } from "./BarChartData";
+import {
+  CustomTooltipContainer,
+  CustomTooltipLabel,
+  CustomTooltipValue,
+} from "../AreaChart/AreaChart";
 
-type DataItem = {
-  name: string;
-  value: number;
-};
 interface ChartProps {
-  data: DataItem[];
+  data: BarData[];
   color: string;
   barSize?: number;
   selectedBarColor?: string;
@@ -58,6 +60,19 @@ const CustomTick = (props: {
   );
 };
 
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <CustomTooltipContainer>
+        <CustomTooltipLabel>{label}</CustomTooltipLabel>
+        <CustomTooltipValue>Amount: {payload[0].value}</CustomTooltipValue>
+      </CustomTooltipContainer>
+    );
+  }
+
+  return null;
+};
+
 const CustomLabel = (props: any) => {
   const { x, y, value } = props;
 
@@ -94,7 +109,7 @@ export default function BarGraph({
           vertical={false}
         />
         <XAxis
-          dataKey="name"
+          dataKey="monthYear"
           axisLine={false}
           tickLine={false}
           interval={0}
@@ -122,7 +137,7 @@ export default function BarGraph({
             />
           }
         />
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
         <Bar
           dataKey="value"
           fill={color}

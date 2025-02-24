@@ -142,3 +142,16 @@ export const convertToYYYYMM = (dateStr: string): string => {
   const [month, year] = dateStr.split(" ");
   return `${year}-${monthMap[month]}`;
 };
+
+export const getUniqueYears = (
+  esgTransactions: { month: string }[]
+): number[] => {
+  const years = new Set<number>();
+
+  esgTransactions.forEach(({ month }) => {
+    const year = parseInt(month.split("-")[0], 10);
+    years.add(year);
+  });
+
+  return Array.from(years).sort((a, b) => a - b);
+};

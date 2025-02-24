@@ -11,6 +11,7 @@ import { Transaction } from "./app/components/Table/Transactions/transactions";
 import { Inflows } from "./app/components/Table/Inflows/inflows";
 import { Outflows } from "./app/components/Table/Outflows/outflows";
 import { PieData } from "./app/components/Charts/PieChart/PieChartData";
+import { BarData } from "./app/components/Charts/BarChart/BarChartData";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
@@ -28,6 +29,7 @@ interface DataContextType {
   inflows: Inflows[];
   outflows: Outflows[];
   pieData: PieData[];
+  barData: BarData[];
 }
 interface ParsedTransaction {
   transactionId: string;
@@ -249,6 +251,31 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     return transformedData;
   };
 
+  const transformBarData = (esgSummary: any): BarData[] => {
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    return Object.keys(esgSummary).map((monthKey) => {
+      const [year, month] = monthKey.split("-").map(Number);
+      return {
+        monthYear: `${monthNames[month - 1]} ${year % 100}`,
+        value: esgSummary[monthKey].totalAmount,
+      };
+    });
+  };
+
   const transactions = transformTransactions(rawData.taggedTransactions);
   const accounts = transformAccounts(rawData.parsedAccounts);
   const deposits = transformDeposits(reports.incomeRelationshipBreakdown);
@@ -298,6 +325,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     }))
   );
   const pieData = transformESGData(reports.esgSummary);
+  const barData = transformBarData(reports.esgSummary);
   return (
     <DataContext.Provider
       value={{
@@ -316,6 +344,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         inflows,
         outflows,
         pieData,
+        barData,
       }}>
       {children}
     </DataContext.Provider>

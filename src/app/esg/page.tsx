@@ -13,7 +13,7 @@ import { PIE_COLORS } from "../components/Charts/PieChart/PieChartData";
 import { useData } from "@/DataContext";
 import ESGNotifications from "../components/ESGNotifications/ESGNotifications";
 import Image from "next/image";
-import { convertToYYYYMM, generateMonths } from "@/utils";
+import { convertToYYYYMM, generateMonths, getUniqueYears } from "@/utils";
 
 const Container = styled("div")`
   display: grid;
@@ -119,7 +119,7 @@ const TitleContainer = styled("div")`
   border-bottom: 1px solid ${BFMPalette.purple200};
 `;
 export default function ESG() {
-  const { notifications, reports, pieData } = useData();
+  const { notifications, reports, pieData, barData } = useData();
   const [selectedTab, setSelectedTab] = useState("2024");
   const [selectedMonth, setSelectedMonth] = useState<string>(
     generateMonths(reports.esgSummary)[0]
@@ -132,6 +132,10 @@ export default function ESG() {
   const totalAmount = selectedMonthData.reduce(
     (sum, item) => sum + item.value,
     0
+  );
+  const years = getUniqueYears(pieCarbonData);
+  const filteredBarData = barData.filter((data) =>
+    data.monthYear.endsWith(selectedTab.slice(-2))
   );
   return (
     <Container>
@@ -160,38 +164,6 @@ export default function ESG() {
                 />
               ))}
             </Labels>
-            {/* <Labels>
-              <ESGCard
-                title="Electricity"
-                value="HKD 100,000.00"
-                kg={586.75}
-                circleColor={BFMPalette.yellow500}
-              />
-              <ESGCard
-                title="Transport"
-                value="HKD 100,000.00"
-                kg={586.75}
-                circleColor={BFMPalette.red100}
-              />
-              <ESGCard
-                title="Gas"
-                value="HKD 100,000.00"
-                kg={586.75}
-                circleColor={BFMPalette.red600}
-              />
-              <ESGCard
-                title="Logistics"
-                value="HKD 100,000.00"
-                kg={586.75}
-                circleColor={BFMPalette.red100}
-              />
-              <ESGCard
-                title="Water"
-                value="HKD 100,000.00"
-                kg={586.75}
-                circleColor={BFMPalette.blue500}
-              />
-            </Labels> */}
           </ChartContainer>
         </PieChartContainer>
 
@@ -199,7 +171,7 @@ export default function ESG() {
           <HeadingContainer>
             <Heading>Carbon Footprint Trendy</Heading>
             <HorizontalTabs
-              tabs={["2023", "2024", "2025"]}
+              tabs={years.map(String)}
               selectedTab={selectedTab}
               onTabChange={setSelectedTab}
             />
@@ -211,7 +183,7 @@ export default function ESG() {
                 All data are in units of kg CO2e
               </H5>
             </BarLabel>
-            <BarGraph data={barData} color={BFMPalette.purple800} />
+            <BarGraph data={filteredBarData} color={BFMPalette.purple800} />
           </SubContainer>
         </BarChartContainer>
       </GraphsContainer>
