@@ -10,6 +10,7 @@ import { formatDate, formatString, getImagePath } from "./utils";
 import { Transaction } from "./app/components/Table/Transactions/transactions";
 import { Inflows } from "./app/components/Table/Inflows/inflows";
 import { Outflows } from "./app/components/Table/Outflows/outflows";
+import { PieData } from "./app/components/Charts/PieChart/PieChartData";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
@@ -26,6 +27,7 @@ interface DataContextType {
   withdrawalRecurring: RecurringTransaction[];
   inflows: Inflows[];
   outflows: Outflows[];
+  pieData: PieData[];
 }
 interface ParsedTransaction {
   transactionId: string;
@@ -229,6 +231,24 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     return Object.values(outflowsMap);
   };
 
+  const transformESGData = (esgSummary: any): PieData[] => {
+    const transformedData: PieData[] = [];
+
+    Object.keys(esgSummary).forEach((month) => {
+      esgSummary[month].esgTransactions.forEach(
+        (transaction: { category: string; co2Amount: number }) => {
+          transformedData.push({
+            name: transaction.category,
+            value: transaction.co2Amount,
+            month: month,
+          });
+        }
+      );
+    });
+
+    return transformedData;
+  };
+
   const transactions = transformTransactions(rawData.taggedTransactions);
   const accounts = transformAccounts(rawData.parsedAccounts);
   const deposits = transformDeposits(reports.incomeRelationshipBreakdown);
@@ -277,6 +297,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       },
     }))
   );
+  const pieData = transformESGData(reports.esgSummary);
   return (
     <DataContext.Provider
       value={{
@@ -294,6 +315,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         withdrawalRecurring,
         inflows,
         outflows,
+        pieData,
       }}>
       {children}
     </DataContext.Provider>

@@ -10,6 +10,7 @@ type DataItem = {
 interface ChartProps {
   data: DataItem[];
   COLORS: string[];
+  total?: number;
 }
 const PieContainer = styled("div")`
   display: flex;
@@ -17,7 +18,7 @@ const PieContainer = styled("div")`
   align-items: center;
 `;
 
-export default function PieGraph({ data, COLORS }: ChartProps) {
+export default function PieGraph({ data, COLORS, total }: ChartProps) {
   return (
     <PieContainer>
       <PieChart width={200} height={200}>
@@ -33,17 +34,21 @@ export default function PieGraph({ data, COLORS }: ChartProps) {
           ))}
           <RechartsLabel
             content={() => (
-              <foreignObject x="25%" y="35%" width="100" height="100">
-                <div
-                  style={{
-                    textAlign: "center",
-                    fontSize: "16px",
-                    fontWeight: 600,
-                    color: BFMPalette.black800,
-                  }}>
-                  586.75 kg CO2 <br />
-                  Total
-                </div>
+              <foreignObject x="30%" y="40%" width="100" height="100">
+                {total && (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignContent: "center",
+                      fontSize: "16px",
+                      fontWeight: 600,
+                      color: BFMPalette.black800,
+                    }}>
+                    {total} kg CO2 <br />
+                    Total
+                  </div>
+                )}
               </foreignObject>
             )}
             position="center"

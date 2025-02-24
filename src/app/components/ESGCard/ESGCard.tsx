@@ -3,9 +3,9 @@ import { H3Secondary, H4, H5 } from "@/Typography";
 import styled from "styled-components";
 
 interface ESGCardProps {
-  title: string;
-  value: string;
-  kg: number;
+  title?: string;
+  value?: number;
+  kg?: number;
   circleColor?: string;
 }
 const Container = styled("div")`
@@ -39,9 +39,9 @@ const ValueContainer = styled("div")`
 `;
 
 export default function ESGCard({
-  title,
+  title = "Title",
   value,
-  kg,
+  kg = 2,
   circleColor,
 }: ESGCardProps) {
   return (

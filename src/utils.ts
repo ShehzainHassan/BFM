@@ -110,6 +110,35 @@ export const getImagePath = (transactionType: string): string => {
   }
 };
 
-export const formatString = (input: string): string => {
-  return input.replace(/_/g, " ").toLowerCase();
+export const formatString = (
+  input: string,
+  upperCamelCase: boolean = false
+): string => {
+  const formatted = input.replace(/_/g, " ").toLowerCase();
+
+  if (upperCamelCase) {
+    return formatted.replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
+  return formatted;
+};
+
+export const convertToYYYYMM = (dateStr: string): string => {
+  const monthMap: { [key: string]: string } = {
+    Jan: "01",
+    Feb: "02",
+    Mar: "03",
+    Apr: "04",
+    May: "05",
+    Jun: "06",
+    Jul: "07",
+    Aug: "08",
+    Sep: "09",
+    Oct: "10",
+    Nov: "11",
+    Dec: "12",
+  };
+
+  const [month, year] = dateStr.split(" ");
+  return `${year}-${monthMap[month]}`;
 };

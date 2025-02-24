@@ -2,7 +2,7 @@
 import { HKD_EQUIVALANT, LOCAL_STORAGE_KEY } from "@/constants";
 import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, H4 } from "@/Typography";
-import { formatCurrency, formatDate } from "@/utils";
+import { formatCurrency, formatDate, formatString } from "@/utils";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -92,7 +92,7 @@ export const TransactionStyles = {
       <Image src={row.description.imgSrc} alt="icon" width={40} height={40} />
       <DescriptionText>
         <H4 color={BFMPalette.black800}>{row.description.title}</H4>
-        <BodyText>{row.description.subtitle}</BodyText>
+        <BodyText>{formatString(row.description.subtitle, true)}</BodyText>
       </DescriptionText>
     </DescriptionWrapper>
   ),

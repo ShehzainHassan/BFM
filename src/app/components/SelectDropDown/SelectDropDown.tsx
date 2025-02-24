@@ -1,14 +1,24 @@
 "use client";
-import { useData } from "@/DataContext";
-import { generateMonths } from "@/utils";
 import { Select } from "antd";
-import { useState } from "react";
+import { generateMonths } from "@/utils";
+import { useData } from "@/DataContext";
 
-export default function SelectDropDown() {
-  const [selectedMonth, setSelectedMonth] = useState<string>("Oct 2024");
+interface SelectDropDownProps {
+  selectedMonth: string;
+  setSelectedMonth: (month: string) => void;
+}
+
+export default function SelectDropDown({
+  selectedMonth,
+  setSelectedMonth,
+}: SelectDropDownProps) {
   const { reports } = useData();
+
   return (
-    <Select onChange={(value) => setSelectedMonth(value)} value={selectedMonth}>
+    <Select
+      onChange={(value) => setSelectedMonth(value)}
+      value={selectedMonth}
+      style={{ width: 150 }}>
       {generateMonths(reports.esgSummary).map((month) => (
         <Select.Option key={month} value={month}>
           {month}

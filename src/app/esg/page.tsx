@@ -1,7 +1,7 @@
 "use client";
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
-import ESGCard from "../components/Label/Label";
+import ESGCard from "../components/ESGCard/ESGCard";
 import PieGraph from "../components/Charts/PieChart/PieChart";
 import SelectDropDown from "../components/SelectDropDown/SelectDropDown";
 import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
@@ -9,13 +9,11 @@ import BarGraph from "../components/Charts/BarChart/BarChart";
 import { H2, H5 } from "@/Typography";
 import { useState } from "react";
 import { barData } from "../components/Charts/BarChart/BarChartData";
-import {
-  PIE_COLORS,
-  pieData,
-} from "../components/Charts/PieChart/PieChartData";
+import { PIE_COLORS } from "../components/Charts/PieChart/PieChartData";
 import { useData } from "@/DataContext";
 import ESGNotifications from "../components/ESGNotifications/ESGNotifications";
 import Image from "next/image";
+import { convertToYYYYMM, generateMonths } from "@/utils";
 
 const Container = styled("div")`
   display: grid;
@@ -121,20 +119,48 @@ const TitleContainer = styled("div")`
   border-bottom: 1px solid ${BFMPalette.purple200};
 `;
 export default function ESG() {
+  const { notifications, reports, pieData } = useData();
   const [selectedTab, setSelectedTab] = useState("2024");
-  const { notifications } = useData();
+  const [selectedMonth, setSelectedMonth] = useState<string>(
+    generateMonths(reports.esgSummary)[0]
+  );
 
+  const pieCarbonData = pieData;
+  const selectedMonthData = pieCarbonData.filter(
+    (data) => data.month === convertToYYYYMM(selectedMonth)
+  );
+  const totalAmount = selectedMonthData.reduce(
+    (sum, item) => sum + item.value,
+    0
+  );
   return (
     <Container>
       <GraphsContainer>
         <PieChartContainer>
           <HeadingContainer>
             <Heading>CO2 Emission by Category</Heading>
-            <SelectDropDown />
+            <SelectDropDown
+              selectedMonth={selectedMonth}
+              setSelectedMonth={setSelectedMonth}
+            />
           </HeadingContainer>
           <ChartContainer>
-            <PieGraph data={pieData} COLORS={PIE_COLORS} />
+            <PieGraph
+              data={selectedMonthData}
+              total={totalAmount}
+              COLORS={PIE_COLORS}
+            />
             <Labels>
+              {selectedMonthData.map((label, index) => (
+                <ESGCard
+                  key={label.name}
+                  title={label.name}
+                  kg={label.value}
+                  circleColor={PIE_COLORS[index]}
+                />
+              ))}
+            </Labels>
+            {/* <Labels>
               <ESGCard
                 title="Electricity"
                 value="HKD 100,000.00"
@@ -165,7 +191,7 @@ export default function ESG() {
                 kg={586.75}
                 circleColor={BFMPalette.blue500}
               />
-            </Labels>
+            </Labels> */}
           </ChartContainer>
         </PieChartContainer>
 
