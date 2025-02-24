@@ -1,26 +1,15 @@
 "use client";
+import { LOCAL_STORAGE_KEY } from "@/constants";
 import { BFMPalette } from "@/Theme";
-import { BodyText, H3, H3Secondary, H4 } from "@/Typography";
-import { Transaction } from "./transactions";
-import styled from "styled-components";
+import { BodyText, H3Secondary, H4 } from "@/Typography";
+import { formatCurrency, formatDate } from "@/utils";
 import Image from "next/image";
-import { AmountText } from "../Accounts/AccountsStyles";
-import { AccountText } from "@/app/page";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 import DetailsModal from "../../Modal/Modal";
 import TransactionDetails from "../../TransactionDetails/TransactionDetails";
-import { useEffect, useState } from "react";
-import { CURRENCY, LOCAL_STORAGE_KEY } from "@/constants";
-import { formatCurrency, formatDate } from "@/utils";
-
-const ImageContainer = styled("div")`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 200px;
-  background-color: ${BFMPalette.purple100};
-`;
+import { AmountText } from "../Accounts/AccountsStyles";
+import { Transaction } from "./transactions";
 
 const DescriptionWrapper = styled.div`
   display: flex;
@@ -100,9 +89,7 @@ export const TransactionStyles = {
   ),
   DESCRIPTION: (row: Transaction) => (
     <DescriptionWrapper>
-      <ImageContainer>
-        <Image src={row.description.imgSrc} alt="icon" width={20} height={20} />
-      </ImageContainer>
+      <Image src={row.description.imgSrc} alt="icon" width={40} height={40} />
       <DescriptionText>
         <H4 color={BFMPalette.black800}>{row.description.title}</H4>
         <BodyText>{row.description.subtitle}</BodyText>

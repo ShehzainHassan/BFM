@@ -81,3 +81,31 @@ export const formatKeys = (key: string): string => {
     .replace(/([a-z])([A-Z])/g, "$1 $2")
     .replace(/\b[a-z]/g, (char) => char.toUpperCase());
 };
+
+export const getImagePath = (transactionType: string): string => {
+  switch (transactionType) {
+    case "OTHER_REVENUE":
+      return "/images/OTHER_REVENUE.png";
+    case "ATM_CASH_DEPOSIT":
+      return "/images/ATM_CASH_DEPOSIT.png";
+    case "CHARGE_OR_FEE":
+      return "/images/CHARGE_OR_FEE.png";
+    case "DEBIT_INTEREST_OUT":
+      return "/images/DEBIT_INTEREST_OUT.png";
+    case "GENERAL_PAYMENT_IN":
+      return "/images/GENERAL_PAYMENT_IN.png";
+    case "GENERAL_PAYMENT_OUT":
+      return "/images/GENERAL_PAYMENT_OUT.png";
+    case "CREDIT_INTEREST":
+      return "/images/CREDIT_INTEREST.png";
+    case "INTRA_COMPANY_TRANSFER_OUT":
+      return "/images/INTRA_COMPANY_TRANSFER_OUT.png";
+    case "INTRA_COMPANY_TRANSFER_IN":
+      return "/images/INTRA_COMPANY_TRANSFER_IN.png";
+    case "CHEQUE_WITHDRAWAL":
+      return "/images/CHEQUE_WITHDRAWAL.png";
+
+    default:
+      return "/images/no-record.png";
+  }
+};

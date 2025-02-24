@@ -154,10 +154,17 @@ export default function Analytics() {
         selectedButton === tabButtons[1] && (
           <DataTable
             data={withdrawalRecurring}
-            columns={RecurringTransactionColumns}></DataTable>
+            columns={RecurringTransactionColumns}
+            columnWidths={[
+              "2.25fr",
+              "1.95fr",
+              "1.95fr",
+              "1.95fr",
+              "1.95fr",
+              "1.95fr",
+            ]}></DataTable>
         )
       )}
-      {/*RECURRING TRANSACTIONS */}
 
       {selectedTab === tabs[3] &&
       selectedButton === tabButtons[0] &&

@@ -6,7 +6,7 @@ import { BuyerSupplierAnalysis } from "./app/components/Table/BuyerSupplierAnaly
 import { TransitionHighlight } from "./app/components/Table/TransitionHighlight/transitionHighlight";
 import { RecurringTransaction } from "./app/components/Table/RecurringTransactions/recurringTransactions";
 import { CURRENCY } from "./constants";
-import { formatDate } from "./utils";
+import { formatDate, getImagePath } from "./utils";
 import { Transaction } from "./app/components/Table/Transactions/transactions";
 import { Inflows } from "./app/components/Table/Inflows/inflows";
 import { Outflows } from "./app/components/Table/Outflows/outflows";
@@ -102,7 +102,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       id: transaction.transactionId,
       date: transaction.transactionDate,
       description: {
-        imgSrc: "/images/building-06.png",
+        imgSrc: getImagePath(transaction.category),
         title: transaction.description,
         subtitle: transaction.category,
       },

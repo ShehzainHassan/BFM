@@ -19,6 +19,7 @@ import TextContainer from "./components/TextContainer/TextContainer";
 import { useData } from "@/DataContext";
 import { AccountData } from "./components/Table/Accounts/accounts";
 import Pagination from "./components/Pagination/Pagination";
+import { ITEMS_PER_PAGE } from "@/constants";
 
 const MainContainer = styled("div")`
   display: grid;
@@ -73,14 +74,13 @@ export default function Home() {
   const { notifications, transactions, accounts } = useData();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
 
   const data: Transaction[] | AccountData[] =
     selectedTab === tabs[0] ? transactions : accounts;
 
-  const offset = currentPage * itemsPerPage;
-  const paginatedData = data.slice(offset, offset + itemsPerPage);
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const paginatedData = data.slice(offset, offset + ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(data.length / ITEMS_PER_PAGE);
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
