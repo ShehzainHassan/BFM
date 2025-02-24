@@ -109,3 +109,7 @@ export const getImagePath = (transactionType: string): string => {
       return "/images/no-record.png";
   }
 };
+
+export const formatString = (input: string): string => {
+  return input.replace(/_/g, " ").toLowerCase();
+};

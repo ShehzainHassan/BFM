@@ -6,7 +6,7 @@ import { BuyerSupplierAnalysis } from "./app/components/Table/BuyerSupplierAnaly
 import { TransitionHighlight } from "./app/components/Table/TransitionHighlight/transitionHighlight";
 import { RecurringTransaction } from "./app/components/Table/RecurringTransactions/recurringTransactions";
 import { CURRENCY } from "./constants";
-import { formatDate, getImagePath } from "./utils";
+import { formatDate, formatString, getImagePath } from "./utils";
 import { Transaction } from "./app/components/Table/Transactions/transactions";
 import { Inflows } from "./app/components/Table/Inflows/inflows";
 import { Outflows } from "./app/components/Table/Outflows/outflows";
@@ -108,7 +108,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       },
       amount: {
         currency: transaction.currency,
-        value: transaction.localCurrencyAmount,
+        value: transaction.localCurrencyBalance,
         HKDEquivalent: transaction.balance,
       },
       bank: transaction.bank,
@@ -153,7 +153,9 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       category: highlight.category,
       payeeORMerchant: highlight.merchant,
       amount: `${highlight.currency} ${highlight.amount}`,
-      reason: `${highlight.reason.value} ${highlight.reason.type} `,
+      reason: `${highlight.reason.value}x ${formatString(
+        highlight.reason.type
+      )}`,
     }));
   };
   const transformRecurringTransactions = (

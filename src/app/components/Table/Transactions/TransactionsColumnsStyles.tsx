@@ -1,5 +1,5 @@
 "use client";
-import { LOCAL_STORAGE_KEY } from "@/constants";
+import { HKD_EQUIVALANT, LOCAL_STORAGE_KEY } from "@/constants";
 import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, H4 } from "@/Typography";
 import { formatCurrency, formatDate } from "@/utils";
@@ -97,14 +97,22 @@ export const TransactionStyles = {
     </DescriptionWrapper>
   ),
   AMOUNT: (row: Transaction) => (
-    <AmountText>
-      <H3Secondary color={BFMPalette.purple375}>
-        {formatCurrency(`${row.amount.currency}${row.amount.value}`)}
-      </H3Secondary>
-      <H3Secondary color={BFMPalette.purple375}>
-        {formatCurrency(`${row.amount.currency}${row.amount.HKDEquivalent}`, 2)}
-      </H3Secondary>
-    </AmountText>
+    <>
+      {row.amount.currency === HKD_EQUIVALANT ? (
+        <H3Secondary color={BFMPalette.purple375}>
+          {formatCurrency(`${HKD_EQUIVALANT}${row.amount.HKDEquivalent}`, 2)}
+        </H3Secondary>
+      ) : (
+        <AmountText>
+          <H3Secondary color={BFMPalette.purple375}>
+            {formatCurrency(`${row.amount.currency}${row.amount.value}`)}
+          </H3Secondary>
+          <H3Secondary color={BFMPalette.purple375}>
+            {formatCurrency(`${HKD_EQUIVALANT}${row.amount.HKDEquivalent}`, 2)}
+          </H3Secondary>
+        </AmountText>
+      )}
+    </>
   ),
   BANK: (row: Transaction) => (
     <BodyText color={BFMPalette.black800}>{row.bank}</BodyText>

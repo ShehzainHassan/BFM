@@ -3,7 +3,7 @@ import { BFMPalette } from "@/Theme";
 import { BodyText, H3, H3Secondary, H4 } from "@/Typography";
 import { AccountData } from "./accounts";
 import styled from "styled-components";
-import { CURRENCY } from "@/constants";
+import { CURRENCY, HKD_EQUIVALANT } from "@/constants";
 import { formatCurrency } from "@/utils";
 
 export const AmountText = styled.div`
@@ -27,13 +27,21 @@ export const AccountsStyles = {
     </BodyText>
   ),
   AMOUNT: (row: AccountData) => (
-    <AmountText>
-      <H3Secondary color={BFMPalette.purple375}>
-        {formatCurrency(`${row.amount.currency}${row.amount.value}`)}
-      </H3Secondary>
-      <H3Secondary color={BFMPalette.purple375}>
-        {formatCurrency(`${CURRENCY}${row.amount.HKDEquivalent}`)}
-      </H3Secondary>
-    </AmountText>
+    <>
+      {row.amount.currency === HKD_EQUIVALANT ? (
+        <H3Secondary color={BFMPalette.purple375}>
+          {formatCurrency(`${CURRENCY}${row.amount.HKDEquivalent}`)}
+        </H3Secondary>
+      ) : (
+        <AmountText>
+          <H3Secondary color={BFMPalette.purple375}>
+            {formatCurrency(`${row.amount.currency}${row.amount.value}`, 2)}
+          </H3Secondary>
+          <H3Secondary color={BFMPalette.purple375}>
+            {formatCurrency(`${CURRENCY}${row.amount.HKDEquivalent}`, 2)}
+          </H3Secondary>
+        </AmountText>
+      )}
+    </>
   ),
 };
