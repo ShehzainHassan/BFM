@@ -12,6 +12,7 @@ import { Inflows } from "./app/components/Table/Inflows/inflows";
 import { Outflows } from "./app/components/Table/Outflows/outflows";
 import { PieData } from "./app/components/Charts/PieChart/PieChartData";
 import { BarData } from "./app/components/Charts/BarChart/BarChartData";
+import { AreaChartData } from "./app/components/Charts/AreaChart/AreaChartData";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
@@ -31,7 +32,7 @@ interface DataContextType {
   pieData: PieData[];
   depositsDashboard: PieData[];
   withDrawalsDashboard: PieData[];
-
+  areaData: AreaChartData[];
   barData: BarData[];
 }
 interface ParsedTransaction {
@@ -303,6 +304,20 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       };
     });
   };
+  const transformAreaData = (reports: any): AreaChartData[] => {
+    if (!reports) {
+      return [];
+    }
+
+    return reports.map((report: any) => ({
+      name: new Date(report.date).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+      HKDValue: report.balance,
+    }));
+  };
 
   const transactions = transformTransactions(rawData.taggedTransactions);
   const accounts = transformAccounts(rawData.parsedAccounts);
@@ -356,6 +371,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const barData = transformBarData(reports.esgSummary);
   const depositsDashboard = transformReportsData(reports.incomeByCategory);
   const withDrawalsDashboard = transformReportsData(reports.expenseByCategory);
+  const areaData = transformAreaData(reports.dailyBankBalanceDtos);
   return (
     <DataContext.Provider
       value={{
@@ -377,6 +393,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         barData,
         depositsDashboard,
         withDrawalsDashboard,
+        areaData,
       }}>
       {children}
     </DataContext.Provider>

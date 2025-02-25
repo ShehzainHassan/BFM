@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import AreaChartGraph from "../Charts/AreaChart/AreaChart";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
-import { areaData } from "../Charts/AreaChart/AreaChartData";
+import { useData } from "@/DataContext";
 
 const Container = styled("div")`
   display: flex;
@@ -20,7 +20,9 @@ const SubContainer = styled("div")`
 `;
 
 export default function Payment() {
+  const { areaData } = useData();
   const [selectedTab, setSelectedTab] = useState("Balance Over Time");
+  console.log("Area Data = ", areaData);
   return (
     <Container>
       <SubContainer>

@@ -24,7 +24,6 @@ export default function PieGraph({ data, COLORS, total }: ChartProps) {
     ...entry,
     value: Math.abs(entry.value),
   }));
-  console.log(processedData);
   return (
     <PieContainer>
       <PieChart width={200} height={200}>

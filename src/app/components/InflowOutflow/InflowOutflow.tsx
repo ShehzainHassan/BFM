@@ -68,6 +68,7 @@ export default function InflowOutflow() {
           (withdrawal) => withdrawal.month === selectedMonth
         );
 
+  const totalValue = filteredData.reduce((sum, item) => sum + item.value, 0);
   return (
     <Container>
       <SubContainer>
@@ -89,7 +90,7 @@ export default function InflowOutflow() {
       </SubContainer>
 
       <ChartContainer>
-        <PieGraph data={filteredData} COLORS={COLORS} />
+        <PieGraph data={filteredData} COLORS={COLORS} total={totalValue} />
         <Labels>
           {filteredData.map((data, index) => (
             <Category

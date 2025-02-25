@@ -11,7 +11,8 @@ import {
 } from "recharts";
 import styled from "styled-components";
 import { AreaChartData } from "./AreaChartData";
-import { CURRENCY } from "@/constants";
+import { CURRENCY, HKD_EQUIVALANT } from "@/constants";
+import { formatCurrency } from "@/utils";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -45,7 +46,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       <CustomTooltipContainer>
         <CustomTooltipLabel>{label}</CustomTooltipLabel>
         <CustomTooltipValue>
-          {CURRENCY} {payload[0].value}
+          {formatCurrency(`${HKD_EQUIVALANT}${payload[0].value}`)}
         </CustomTooltipValue>
       </CustomTooltipContainer>
     );
@@ -139,16 +140,10 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
             axisLine={false}
             tickLine={false}
             interval={0}
-            tick={
-              <CustomTick
-                x={0}
-                y={0}
-                payload={{
-                  value: "",
-                }}
-              />
-            }
+            tickFormatter={(value, index) => (index % 15 === 0 ? value : "")}
+            tickMargin={10}
           />
+
           <YAxis
             axisLine={false}
             tickLine={false}
