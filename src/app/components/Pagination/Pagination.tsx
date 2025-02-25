@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Select } from "antd";
 import { BFMPalette } from "@/Theme";
+import Image from "next/image";
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -10,7 +11,8 @@ const PaginationContainer = styled.div`
   margin-top: 20px;
   gap: 8px;
   font-size: 16px;
-  font-weight: bold;
+  color: ${BFMPalette.gray700};
+  font-weight: 600;
 `;
 
 const StyledSelect = styled(Select)`
@@ -18,17 +20,22 @@ const StyledSelect = styled(Select)`
   text-align: center;
 
   .ant-select-selector {
-    background-color: ${BFMPalette.purple600} !important;
-    color: ${BFMPalette.white25} !important;
+    background-color: ${BFMPalette.white25} !important;
     font-weight: bold;
-    border-radius: 4px !important;
     text-align: center;
-    border: none !important;
+    border: 1px solid ${BFMPalette.gray200} !important;
   }
 
   .ant-select-arrow {
     color: ${BFMPalette.white25} !important;
   }
+`;
+
+const PageButton = styled(Image)`
+  cursor: pointer;
+  opacity: ${(props) => (props.hidden ? 0 : 1)};
+  pointer-events: ${(props) => (props.hidden ? "none" : "auto")};
+  transition: opacity 0.2s ease-in-out;
 `;
 
 interface PaginationProps {
@@ -44,6 +51,16 @@ export default function Pagination({
 }: PaginationProps) {
   return (
     <PaginationContainer>
+      {currentPage > 0 && (
+        <PageButton
+          src="/images/chevron-right.png"
+          alt="<"
+          width={20}
+          height={20}
+          style={{ transform: "rotate(180deg)" }}
+          onClick={() => onPageChange(currentPage - 1)}
+        />
+      )}
       Page
       <StyledSelect
         value={currentPage}
@@ -56,6 +73,15 @@ export default function Pagination({
         ))}
       </StyledSelect>
       of {totalPages}
+      {currentPage < totalPages - 1 && (
+        <PageButton
+          src="/images/chevron-right.png"
+          alt=">"
+          width={20}
+          height={20}
+          onClick={() => onPageChange(currentPage + 1)}
+        />
+      )}
     </PaginationContainer>
   );
 }
