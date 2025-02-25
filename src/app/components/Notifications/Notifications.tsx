@@ -75,6 +75,7 @@ export default function Notifications({ notifications }: NotificationsProps) {
             case "InvoiceDueSoon":
               return (
                 <Card
+                  key={notification.id}
                   image="/images/Frame 3.png"
                   title={notification.title}
                   description={notification.description}>

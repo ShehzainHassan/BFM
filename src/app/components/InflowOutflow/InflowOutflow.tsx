@@ -1,25 +1,19 @@
-import { useState } from "react";
-import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import { useData } from "@/DataContext";
+import { BFMPalette } from "@/Theme";
 import { generateMonths } from "@/utils";
 import { Select } from "antd";
+import { useState } from "react";
 import styled from "styled-components";
-import { BFMPalette } from "@/Theme";
-import { H2, H4 } from "@/Typography";
+import Category from "../Category/Category";
 import PieGraph from "../Charts/PieChart/PieChart";
-import { CURRENCY } from "@/constants";
-import { useData } from "@/DataContext";
-const data = [
-  { name: "Group A", value: 600 },
-  { name: "Group B", value: 200 },
-  { name: "Group C", value: 200 },
-  { name: "Group D", value: 400 },
-];
+import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 
 const COLORS = [
-  BFMPalette.purple900,
-  BFMPalette.purple100,
-  BFMPalette.purple200,
+  BFMPalette.purple1000,
+  BFMPalette.purple800,
+  BFMPalette.purple600,
   BFMPalette.purple400,
+  BFMPalette.purple200,
 ];
 
 const Container = styled("div")`
@@ -55,21 +49,30 @@ const LabelContainer = styled("div")`
   gap: 4px;
 `;
 
-const Circle = styled("p")`
-  width: 10px;
-  height: 10px;
-  color: ${BFMPalette.purple900};
-  border-radius: 50%;
-`;
 export default function InflowOutflow() {
-  const [selectedMonth, setSelectedMonth] = useState<string>("Oct 2024");
-  const [selectedTab, setSelectedTab] = useState("Deposit");
-  const { reports } = useData();
+  const { reports, depositsDashboard, withDrawalsDashboard } = useData();
+  const tabs = ["Deposit", "Withdrawal"];
+  const [selectedMonth, setSelectedMonth] = useState<string>(
+    generateMonths(reports.incomeByCategory)[0]
+  );
+  const [selectedTab, setSelectedTab] = useState(tabs[0]);
+  const months =
+    selectedTab === tabs[0]
+      ? reports.incomeByCategory
+      : reports.expenseByCategory;
+
+  const filteredData =
+    selectedTab === tabs[0]
+      ? depositsDashboard.filter((deposit) => deposit.month === selectedMonth)
+      : withDrawalsDashboard.filter(
+          (withdrawal) => withdrawal.month === selectedMonth
+        );
+
   return (
     <Container>
       <SubContainer>
         <HorizontalTabs
-          tabs={["Deposit", "Withdrawal"]}
+          tabs={tabs}
           selectedTab={selectedTab}
           onTabChange={setSelectedTab}
         />
@@ -77,7 +80,7 @@ export default function InflowOutflow() {
           style={{ height: "45px" }}
           onChange={(value) => setSelectedMonth(value)}
           value={selectedMonth}>
-          {generateMonths(reports.esgSummary).map((month) => (
+          {generateMonths(months).map((month) => (
             <Select.Option key={month} value={month}>
               {month}
             </Select.Option>
@@ -86,25 +89,15 @@ export default function InflowOutflow() {
       </SubContainer>
 
       <ChartContainer>
-        <PieGraph data={data} COLORS={COLORS} />
+        <PieGraph data={filteredData} COLORS={COLORS} />
         <Labels>
-          <LabelContainer>
-            <Circle />
-            <H4 color={BFMPalette.black400}>Other Outflow</H4>
-            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
-          </LabelContainer>
-          <LabelContainer>
-            <H4 color={BFMPalette.black400}>Utilities</H4>
-            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
-          </LabelContainer>
-          <LabelContainer>
-            <H4 color={BFMPalette.black400}>Advertising</H4>
-            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
-          </LabelContainer>
-          <LabelContainer>
-            <H4 color={BFMPalette.black400}>Cheque Outflow</H4>
-            <H2 color={BFMPalette.black800}>{CURRENCY} 10,000.00</H2>
-          </LabelContainer>
+          {filteredData.map((data, index) => (
+            <Category
+              circleColor={COLORS[index % COLORS.length]}
+              category={data.name}
+              amount={data.value}
+            />
+          ))}
         </Labels>
       </ChartContainer>
     </Container>

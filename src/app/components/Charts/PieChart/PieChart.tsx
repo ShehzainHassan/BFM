@@ -6,6 +6,7 @@ import { BFMPalette } from "@/Theme";
 type DataItem = {
   name: string;
   value: number;
+  month: string;
 };
 interface ChartProps {
   data: DataItem[];
@@ -19,17 +20,22 @@ const PieContainer = styled("div")`
 `;
 
 export default function PieGraph({ data, COLORS, total }: ChartProps) {
+  const processedData = data.map((entry) => ({
+    ...entry,
+    value: Math.abs(entry.value),
+  }));
+  console.log(processedData);
   return (
     <PieContainer>
       <PieChart width={200} height={200}>
         <Pie
-          data={data}
+          data={processedData}
           cx="50%"
           cy="50%"
           innerRadius={60}
           outerRadius={80}
           dataKey="value">
-          {data.map((entry, index) => (
+          {processedData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
           <RechartsLabel

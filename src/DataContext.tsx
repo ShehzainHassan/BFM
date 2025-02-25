@@ -29,6 +29,9 @@ interface DataContextType {
   inflows: Inflows[];
   outflows: Outflows[];
   pieData: PieData[];
+  depositsDashboard: PieData[];
+  withDrawalsDashboard: PieData[];
+
   barData: BarData[];
 }
 interface ParsedTransaction {
@@ -251,6 +254,31 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     return transformedData;
   };
 
+  const transformReportsData = (
+    incomeByCategory: Record<string, { id: string; amount: number }[]>
+  ): PieData[] => {
+    const transformedData: PieData[] = [];
+
+    Object.keys(incomeByCategory).forEach((monthKey) => {
+      const [year, month] = monthKey.split("-");
+      const date = new Date(Number(year), Number(month) - 1);
+      const formattedMonth = date.toLocaleString("en-US", {
+        month: "short",
+        year: "numeric",
+      });
+
+      incomeByCategory[monthKey].forEach(({ id, amount }) => {
+        transformedData.push({
+          month: formattedMonth,
+          name: id,
+          value: amount,
+        });
+      });
+    });
+
+    return transformedData;
+  };
+
   const transformBarData = (esgSummary: any): BarData[] => {
     const monthNames = [
       "Jan",
@@ -326,6 +354,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   );
   const pieData = transformESGData(reports.esgSummary);
   const barData = transformBarData(reports.esgSummary);
+  const depositsDashboard = transformReportsData(reports.incomeByCategory);
+  const withDrawalsDashboard = transformReportsData(reports.expenseByCategory);
   return (
     <DataContext.Provider
       value={{
@@ -345,6 +375,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         outflows,
         pieData,
         barData,
+        depositsDashboard,
+        withDrawalsDashboard,
       }}>
       {children}
     </DataContext.Provider>

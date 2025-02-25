@@ -12,11 +12,17 @@ export interface ESGSummary {
     }[];
   };
 }
+export interface Reports {
+  [key: string]: {
+    id: string;
+    amount: number;
+  }[];
+}
 
-export const generateMonths = (esgSummary?: ESGSummary) => {
-  if (!esgSummary || typeof esgSummary !== "object") return [];
+export const generateMonths = (reports?: ESGSummary | Reports) => {
+  if (!reports || typeof reports !== "object") return [];
 
-  return Object.keys(esgSummary)
+  return Object.keys(reports)
     .map((key) => {
       const [year, month] = key.split("-").map(Number);
       return dayjs(`${year}-${month}`, "YYYY-M").format("MMM YYYY");
