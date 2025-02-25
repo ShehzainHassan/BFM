@@ -5,6 +5,7 @@ import Image from "next/image";
 import { BFMPalette } from "@/Theme";
 import { H2 } from "@/Typography";
 import ButtonSecondary from "../Button/Secondary/ButtonSecondary";
+import DueDate, { DueDatePayload } from "../DueDate/DueDate";
 
 interface Notification {
   id: number;
@@ -70,6 +71,18 @@ export default function Notifications({ notifications }: NotificationsProps) {
               const spendingData = notification.payload as Payload;
               return (
                 <Comparison key={notification.id} spendingData={spendingData} />
+              );
+            case "InvoiceDueSoon":
+              return (
+                <Card
+                  image="/images/Frame 3.png"
+                  title={notification.title}
+                  description={notification.description}>
+                  <DueDate payload={notification.payload as DueDatePayload} />
+                  <ButtonContainer>
+                    <ButtonSecondary />
+                  </ButtonContainer>
+                </Card>
               );
 
             default:

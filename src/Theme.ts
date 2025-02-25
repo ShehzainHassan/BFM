@@ -3,12 +3,13 @@ export const BFMPalette = {
   white25: "#FDFDFD",
   white40: "#eef4ff",
   white50: "#EFEFFB",
+  white60: "#EDEDED",
   white100: "#fffafe",
-
   gray100: "#e9eaeb",
   gray200: "#D5D7DA",
   gray700: "#717680",
 
+  red50: "#fee4e2",
   red100: "#FC9E9E",
   red500: "#F04438",
   red600: "#D92D20",
