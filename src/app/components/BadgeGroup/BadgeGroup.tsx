@@ -41,7 +41,7 @@ export default function RenderBadgeGroup({
       </Badge>
       <Content>
         <MediumBoldHeading color={BFMPalette.purple600}>
-          {formatCurrency(`${CURRENCY}${value}`)}
+          {formatCurrency(`${CURRENCY}${value}`, 2)}
         </MediumBoldHeading>
       </Content>
     </BadgeGroup>

@@ -17,6 +17,7 @@ import { ITEMS_PER_PAGE } from "@/constants";
 import Pagination from "../components/Pagination/Pagination";
 import { RecurringTransaction } from "../components/Table/RecurringTransactions/recurringTransactions";
 import { TransitionHighlight } from "../components/Table/TransitionHighlight/transitionHighlight";
+import { calculateAverageHKD } from "@/utils";
 
 const TabContainer1 = styled("div")`
   padding: 20px 16px 0px 16px;
@@ -103,6 +104,8 @@ export default function Analytics() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+  const depositRecurringAVG = calculateAverageHKD(depositRecurring);
+  const withdrawalRecurringAVG = calculateAverageHKD(withdrawalRecurring);
   return (
     <Container>
       <TabContainer1>
@@ -129,13 +132,13 @@ export default function Analytics() {
           {selectedTab === tabs[2] && selectedButton === tabButtons[0] && (
             <RenderBadgeGroup
               title="Total Monthly Recurring Inflow"
-              value={27776.9}
+              value={depositRecurringAVG}
             />
           )}
           {selectedTab === tabs[2] && selectedButton === tabButtons[1] && (
             <RenderBadgeGroup
               title="Total Monthly Recurring Outflow"
-              value={27776.9}
+              value={withdrawalRecurringAVG}
             />
           )}
           {selectedTab === tabs[3] && selectedButton === tabButtons[0] && (
@@ -153,30 +156,53 @@ export default function Analytics() {
         </TabContainer2>
       )}
 
-      {selectedTab === tabs[0] && selectedButton === tabButtons[0] ? (
-        <DataTable
-          data={paginatedData as BuyerSupplierAnalysis[]}
-          columns={BuyerSupplierAnalysisColumns}
-        />
-      ) : selectedTab === tabs[0] && selectedButton === tabButtons[1] ? (
-        <DataTable
-          data={paginatedData as BuyerSupplierAnalysis[]}
-          columns={BuyerSupplierAnalysisColumns}
-        />
-      ) : null}
-
-      {selectedTab === tabs[1] && (
-        <InflowOutflowContainer>
+      {selectedTab === tabs[0] &&
+      selectedButton === tabButtons[0] &&
+      deposits.length === 0 ? (
+        <NoResults />
+      ) : (
+        selectedTab === tabs[0] &&
+        selectedButton === tabButtons[0] && (
           <DataTable
-            title="Inflows"
-            data={inflows}
-            columns={InflowsColumns}></DataTable>
-          <DataTable
-            title="Outflows"
-            data={outflows}
-            columns={OutflowsColumns}></DataTable>
-        </InflowOutflowContainer>
+            data={paginatedData as BuyerSupplierAnalysis[]}
+            columns={BuyerSupplierAnalysisColumns}
+          />
+        )
       )}
+
+      {selectedTab === tabs[0] &&
+      selectedButton === tabButtons[1] &&
+      deposits.length === 0 ? (
+        <NoResults />
+      ) : (
+        selectedTab === tabs[0] &&
+        selectedButton === tabButtons[1] && (
+          <DataTable
+            data={paginatedData as BuyerSupplierAnalysis[]}
+            columns={BuyerSupplierAnalysisColumns}
+          />
+        )
+      )}
+
+      {selectedTab === tabs[1] &&
+      inflows.length === 0 &&
+      outflows.length === 0 ? (
+        <NoResults />
+      ) : (
+        selectedTab === tabs[1] && (
+          <InflowOutflowContainer>
+            <DataTable
+              title="Inflows"
+              data={inflows}
+              columns={InflowsColumns}></DataTable>
+            <DataTable
+              title="Outflows"
+              data={outflows}
+              columns={OutflowsColumns}></DataTable>
+          </InflowOutflowContainer>
+        )
+      )}
+
       {selectedTab === tabs[2] &&
       selectedButton === tabButtons[0] &&
       depositRecurring.length === 0 ? (
@@ -257,13 +283,14 @@ export default function Analytics() {
       )}
       {(selectedTab === tabs[0] ||
         selectedTab === tabs[2] ||
-        selectedTab === tabs[3]) && (
-        <Pagination
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-          totalPages={totalPages}
-        />
-      )}
+        selectedTab === tabs[3]) &&
+        paginatedData.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            totalPages={totalPages}
+          />
+        )}
     </Container>
   );
 }

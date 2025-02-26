@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import { HKD_EQUIVALANT } from "./constants";
+import { RecurringTransaction } from "./app/components/Table/RecurringTransactions/recurringTransactions";
 
 export interface ESGSummary {
   [key: string]: {
@@ -160,4 +162,20 @@ export const getUniqueYears = (
   });
 
   return Array.from(years).sort((a, b) => a - b);
+};
+
+export const calculateAverageHKD = (
+  recurring: RecurringTransaction[]
+): number => {
+  if (recurring.length === 0) return 0.0;
+
+  const prices = recurring.map((transaction) =>
+    parseFloat(transaction.totalAmount.replace(`${HKD_EQUIVALANT} `, ""))
+  );
+
+  const sum = prices.reduce((acc, price) => acc + price, 0);
+
+  const avg = sum / prices.length;
+
+  return avg;
 };

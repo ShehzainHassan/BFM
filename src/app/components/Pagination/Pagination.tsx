@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const PaginationContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   margin-top: 20px;
   gap: 8px;

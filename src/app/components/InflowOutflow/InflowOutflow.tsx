@@ -94,6 +94,7 @@ export default function InflowOutflow() {
         <Labels>
           {filteredData.map((data, index) => (
             <Category
+              key={index}
               circleColor={COLORS[index % COLORS.length]}
               category={data.name}
               amount={data.value}
