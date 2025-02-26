@@ -6,13 +6,19 @@ import { BuyerSupplierAnalysis } from "./app/components/Table/BuyerSupplierAnaly
 import { TransitionHighlight } from "./app/components/Table/TransitionHighlight/transitionHighlight";
 import { RecurringTransaction } from "./app/components/Table/RecurringTransactions/recurringTransactions";
 import { CURRENCY } from "./constants";
-import { formatDate, formatString, getImagePath } from "./utils";
+import {
+  formatDate,
+  formatString,
+  formatYearMonth,
+  getImagePath,
+} from "./utils";
 import { Transaction } from "./app/components/Table/Transactions/transactions";
 import { Inflows } from "./app/components/Table/Inflows/inflows";
 import { Outflows } from "./app/components/Table/Outflows/outflows";
 import { PieData } from "./app/components/Charts/PieChart/PieChartData";
 import { BarData } from "./app/components/Charts/BarChart/BarChartData";
 import { AreaChartData } from "./app/components/Charts/AreaChart/AreaChartData";
+import { CashFlowData } from "./app/components/Charts/CashflowChart/CashflowData";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
@@ -34,6 +40,7 @@ interface DataContextType {
   withDrawalsDashboard: PieData[];
   areaData: AreaChartData[];
   barData: BarData[];
+  cashflowData: CashFlowData[];
 }
 interface ParsedTransaction {
   transactionId: string;
@@ -279,6 +286,14 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
 
     return transformedData;
   };
+  const transformCashflowData = (history: any[]): CashFlowData[] => {
+    if (!Array.isArray(history)) return [];
+    return history.map((data) => ({
+      category: formatYearMonth(data.yearMonth),
+      positive: data.totalDeposit?.amount || 0,
+      negative: data.totalWithdrawal?.amount || 0,
+    }));
+  };
 
   const transformBarData = (esgSummary: any): BarData[] => {
     const monthNames = [
@@ -372,6 +387,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const depositsDashboard = transformReportsData(reports.incomeByCategory);
   const withDrawalsDashboard = transformReportsData(reports.expenseByCategory);
   const areaData = transformAreaData(reports.dailyBankBalanceDtos);
+  const cashflowData = transformCashflowData(reports.cashFlow.history);
   return (
     <DataContext.Provider
       value={{
@@ -394,6 +410,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         depositsDashboard,
         withDrawalsDashboard,
         areaData,
+        cashflowData,
       }}>
       {children}
     </DataContext.Provider>

@@ -37,11 +37,13 @@ const ChartContainer = styled("div")`
   justify-content: space-between;
   align-items: center;
   padding: 16px 24px;
+  max-height: 250px;
 `;
 const Labels = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  overflow: auto;
 `;
 const LabelContainer = styled("div")`
   display: flex;

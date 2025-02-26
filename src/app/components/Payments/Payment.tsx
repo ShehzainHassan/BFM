@@ -4,11 +4,12 @@ import styled from "styled-components";
 import AreaChartGraph from "../Charts/AreaChart/AreaChart";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { useData } from "@/DataContext";
+import CashflowChart from "../Charts/CashflowChart/CashflowChart";
 
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${BFMPalette.white};
   border-radius: 12px;
 `;
 const SubContainer = styled("div")`
@@ -21,19 +22,19 @@ const SubContainer = styled("div")`
 
 export default function Payment() {
   const { areaData } = useData();
+  const tabs = ["Balance Over Time", "Cashflow"];
   const [selectedTab, setSelectedTab] = useState("Balance Over Time");
-  console.log("Area Data = ", areaData);
   return (
     <Container>
       <SubContainer>
         <HorizontalTabs
-          tabs={["Balance Over Time", "Cashflow"]}
+          tabs={tabs}
           selectedTab={selectedTab}
           onTabChange={setSelectedTab}
         />
-        .
       </SubContainer>
-      <AreaChartGraph data={areaData} />
+      {selectedTab === tabs[0] && <AreaChartGraph data={areaData} />}
+      {selectedTab === tabs[1] && <CashflowChart />}
     </Container>
   );
 }

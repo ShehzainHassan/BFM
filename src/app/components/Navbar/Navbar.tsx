@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { H1 } from "@/Typography";
 import NavButton from "../Button/Primary/NavButton";
-
+import i18n from "@/translations";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
@@ -54,21 +54,17 @@ interface NavbarProps {
 export default function Navbar({ navItems }: NavbarProps) {
   const pathname = usePathname();
 
-  const titleMapping: Record<string, string> = {
-    "/": "Welcome Back, Mark",
-    "/analytics": "Welcome Back, Mark",
-    "/invoices": "Invoices",
-    "/calender": "Business Calender",
-    "/esg": "ESG",
-  };
-
   const navButtons =
     pathname === "/calender" || pathname === "/esg"
       ? ["schedule", "create"]
       : pathname === "/invoices"
       ? ["invoice"]
       : [];
-  const pageTitle = titleMapping[pathname] || "Welcome Back, Mark";
+  const formattedPath =
+    pathname === "/" ? "dashboard" : pathname.replace("/", "");
+  const pageTitle = i18n.t(`navbar.${formattedPath}`, {
+    defaultValue: "Welcome Back, Mark",
+  });
   return (
     <Container>
       <Header>
@@ -80,7 +76,7 @@ export default function Navbar({ navItems }: NavbarProps) {
               $bgColor={BFMPalette.white}
               imagePosition="right"
               imageSrc="/images/clock.png">
-              Schedule Event
+              {i18n.t("nav_buttons.schedule")}
             </NavButton>
           )}
           {navButtons.includes("create") && (
@@ -89,7 +85,7 @@ export default function Navbar({ navItems }: NavbarProps) {
               $borderColor={BFMPalette.purple500}
               $bgColor={BFMPalette.purple500}
               imageSrc="/images/plus.png">
-              Create New Event
+              {i18n.t("nav_buttons.createEvent")}
             </NavButton>
           )}
           {navButtons.includes("invoice") && (
@@ -98,9 +94,9 @@ export default function Navbar({ navItems }: NavbarProps) {
               $borderColor={BFMPalette.purple500}
               $bgColor={BFMPalette.purple500}
               imageSrc="/images/plus.png">
-              Create New Invoice
+              {i18n.t("nav_buttons.createInvoice")}
             </NavButton>
-          )}{" "}
+          )}
         </ButtonsContainer>
       </Header>
 

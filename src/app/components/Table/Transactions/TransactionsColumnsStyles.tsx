@@ -23,7 +23,21 @@ const DescriptionText = styled.div`
 `;
 const ActionContainer = styled.div`
   display: flex;
-  gap: 8px;
+  align-items: center;
+  position: relative;
+  width: 72px;
+`;
+
+const AttachmentIcon = styled(Image)`
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+`;
+
+const DetailsIcon = styled(Image)`
+  position: absolute;
+  right: 0;
+  cursor: pointer;
 `;
 const TransactionActions = ({ row }: { row: Transaction }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -57,23 +71,23 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
   return (
     <ActionContainer>
       {hasAttachments && (
-        <Image
+        <AttachmentIcon
           src="/images/Button utility.png"
           alt="icon"
           width={32}
           height={32}
-          style={{ cursor: "pointer" }}
           onClick={() => handleOpenModal("Attachments")}
         />
       )}
-      <Image
+
+      <DetailsIcon
         src="/images/Button.png"
         alt="icon"
         width={32}
         height={32}
-        style={{ cursor: "pointer" }}
         onClick={() => handleOpenModal("Details")}
       />
+
       <DetailsModal
         headerText="Transaction Details"
         modalIsOpen={openModal}

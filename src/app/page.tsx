@@ -123,6 +123,8 @@ export default function Home() {
                 alt="filter"
                 width={20}
                 height={20}
+                style={{ cursor: "pointer" }}
+                onClick={() => setSearchQuery("")}
               />
             </Filter>
           </SearchAndFilter>

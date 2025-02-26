@@ -194,11 +194,15 @@ export default function Analytics() {
             <DataTable
               title="Inflows"
               data={inflows}
-              columns={InflowsColumns}></DataTable>
+              columns={InflowsColumns}
+              columnWidths={["2.4fr", "2.4fr", "2.4fr", "2.4fr", "2.4fr"]}
+            />
             <DataTable
               title="Outflows"
               data={outflows}
-              columns={OutflowsColumns}></DataTable>
+              columns={OutflowsColumns}
+              columnWidths={["2.4fr", "2.4fr", "2.4fr", "2.4fr", "2.4fr"]}
+            />
           </InflowOutflowContainer>
         )
       )}
@@ -212,7 +216,16 @@ export default function Analytics() {
         selectedButton === tabButtons[0] && (
           <DataTable
             data={paginatedData as RecurringTransaction[]}
-            columns={RecurringTransactionColumns}></DataTable>
+            columns={RecurringTransactionColumns}
+            columnWidths={[
+              "2.23fr",
+              "1.95fr",
+              "1.95fr",
+              "1.95fr",
+              "1.95fr",
+              "1.95fr",
+            ]}
+          />
         )
       )}
       {selectedTab === tabs[2] &&
@@ -232,7 +245,8 @@ export default function Analytics() {
               "1.95fr",
               "1.95fr",
               "1.95fr",
-            ]}></DataTable>
+            ]}
+          />
         )
       )}
 

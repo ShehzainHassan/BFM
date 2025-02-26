@@ -9,11 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nivo/bar": "^0.88.0",
     "@tanstack/react-table": "^8.21.2",
     "antd": "^5.23.4",
+    "i18n-js": "^4.5.1",
     "next": "15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
     "react-modal": "^3.16.3",
     "recharts": "^2.15.1",
     "styled-components": "^6.1.15"
