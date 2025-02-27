@@ -151,8 +151,10 @@ export default function ESG() {
           <ChartContainer>
             <PieGraph
               data={selectedMonthData}
-              total={totalAmount}
               COLORS={PIE_COLORS}
+              amount={totalAmount}
+              unit="kg CO2"
+              text="Total"
             />
             <Labels>
               {selectedMonthData.map((label, index) => (

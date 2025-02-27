@@ -2,7 +2,7 @@ import { Cell, Pie, PieChart, Text } from "recharts";
 import styled from "styled-components";
 import { Label as RechartsLabel } from "recharts";
 import { BFMPalette } from "@/Theme";
-import { MediumBoldHeading } from "@/Typography";
+import { H3Secondary, H4, MediumBoldHeading } from "@/Typography";
 
 type DataItem = {
   name: string;
@@ -13,6 +13,9 @@ interface ChartProps {
   data: DataItem[];
   COLORS: string[];
   total?: string;
+  amount?: number;
+  unit?: string;
+  text?: string;
 }
 const PieContainer = styled("div")`
   display: flex;
@@ -20,12 +23,18 @@ const PieContainer = styled("div")`
   align-items: center;
 `;
 
-export default function PieGraph({ data, COLORS, total }: ChartProps) {
+export default function PieGraph({
+  data,
+  COLORS,
+  total,
+  amount,
+  unit,
+  text,
+}: ChartProps) {
   const processedData = data.map((entry) => ({
     ...entry,
     value: Math.abs(entry.value),
   }));
-  console.log(total?.length);
   return (
     <PieContainer>
       <PieChart width={200} height={200}>
@@ -58,6 +67,23 @@ export default function PieGraph({ data, COLORS, total }: ChartProps) {
                     </MediumBoldHeading>
                   </div>
                 )}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}>
+                  <div style={{ display: "flex", gap: "4px" }}>
+                    {amount && (
+                      <H3Secondary color={BFMPalette.black800}>
+                        {amount}
+                      </H3Secondary>
+                    )}
+                    {unit && <H4 color={BFMPalette.gray700}>{unit}</H4>}
+                  </div>
+
+                  {text && <H4>{text}</H4>}
+                </div>
               </foreignObject>
             )}
           />

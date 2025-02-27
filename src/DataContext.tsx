@@ -19,6 +19,7 @@ import { PieData } from "./app/components/Charts/PieChart/PieChartData";
 import { BarData } from "./app/components/Charts/BarChart/BarChartData";
 import { AreaChartData } from "./app/components/Charts/AreaChart/AreaChartData";
 import { CashFlowData } from "./app/components/Charts/CashflowChart/CashflowData";
+import { LineChartData } from "./app/components/Charts/CashflowChart/LineChartData";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
@@ -41,6 +42,7 @@ interface DataContextType {
   areaData: AreaChartData[];
   barData: BarData[];
   cashflowData: CashFlowData[];
+  lineChartData: LineChartData[];
 }
 interface ParsedTransaction {
   transactionId: string;
@@ -295,6 +297,13 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
+  const lineData = (history: any[]): LineChartData[] => {
+    if (!Array.isArray(history)) return [];
+    return history.map((data, index) => ({
+      value: data.net?.amount || 0,
+      index: index,
+    }));
+  };
   const transformBarData = (esgSummary: any): BarData[] => {
     const monthNames = [
       "Jan",
@@ -388,6 +397,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const withDrawalsDashboard = transformReportsData(reports.expenseByCategory);
   const areaData = transformAreaData(reports.dailyBankBalanceDtos);
   const cashflowData = transformCashflowData(reports.cashFlow.history);
+  const lineChartData = lineData(reports.cashFlow.history);
   return (
     <DataContext.Provider
       value={{
@@ -411,6 +421,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         withDrawalsDashboard,
         areaData,
         cashflowData,
+        lineChartData,
       }}>
       {children}
     </DataContext.Provider>

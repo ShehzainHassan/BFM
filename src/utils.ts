@@ -84,6 +84,12 @@ export const formatYearMonth = (yearMonth: string) => {
     .toUpperCase();
 };
 
+export const getDynamicScale = (maxValue: number) => {
+  const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
+  const roundedMax = Math.ceil(maxValue / magnitude) * magnitude;
+  return roundedMax + 2 * magnitude;
+};
+
 export const formatKeys = (key: string): string => {
   return key
     .replace(/([a-z])([A-Z])/g, "$1 $2")
