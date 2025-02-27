@@ -12,7 +12,8 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
-import { LOCAL_STORAGE_KEY } from "@/constants";
+import { HKD_EQUIVALANT, LOCAL_STORAGE_KEY } from "@/constants";
+import { formatCurrency, formatDate } from "@/utils";
 interface TransactionDetailsProps<T = {}> {
   selectedRow: T;
   primaryDetail?: string;
@@ -214,17 +215,30 @@ export default function TransactionDetails({
     });
   };
   const rowDetailsData = [
-    { label: "Date", value: [selectedRow.date] },
+    { label: "Date", value: [formatDate(selectedRow.date)] },
     { label: "Bank", value: [selectedRow.bank] },
     {
       label: "Account",
-      value: [selectedRow.account.type, selectedRow.account.number],
+      value: [selectedRow.account],
     },
     {
       label: "Amount",
-      value: [selectedRow.amount.currency, selectedRow.amount.value],
+      value: [
+        formatCurrency(
+          `${selectedRow.amount.currency}${selectedRow.amount.value}`,
+          2
+        ),
+      ],
     },
-    { label: "Amount (HKD EQV)", value: [selectedRow.amount.equivalent] },
+    {
+      label: "Amount (HKD EQV)",
+      value: [
+        formatCurrency(
+          `${HKD_EQUIVALANT}${selectedRow.amount.HKDEquivalent}`,
+          2
+        ),
+      ],
+    },
   ];
   const formatFileSize = (size: number) => {
     if (size >= 1024 * 1024) {
@@ -318,6 +332,7 @@ export default function TransactionDetails({
     setIsEditingNotes(false);
     setIsAddingNotes(false);
   };
+
   return (
     <Container>
       <StatsContainer>

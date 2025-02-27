@@ -1,7 +1,8 @@
-import { Cell, Pie, PieChart } from "recharts";
+import { Cell, Pie, PieChart, Text } from "recharts";
 import styled from "styled-components";
 import { Label as RechartsLabel } from "recharts";
 import { BFMPalette } from "@/Theme";
+import { MediumBoldHeading } from "@/Typography";
 
 type DataItem = {
   name: string;
@@ -11,7 +12,7 @@ type DataItem = {
 interface ChartProps {
   data: DataItem[];
   COLORS: string[];
-  total?: number;
+  total?: string;
 }
 const PieContainer = styled("div")`
   display: flex;
@@ -24,6 +25,7 @@ export default function PieGraph({ data, COLORS, total }: ChartProps) {
     ...entry,
     value: Math.abs(entry.value),
   }));
+  console.log(total?.length);
   return (
     <PieContainer>
       <PieChart width={200} height={200}>
@@ -39,24 +41,25 @@ export default function PieGraph({ data, COLORS, total }: ChartProps) {
           ))}
           <RechartsLabel
             content={() => (
-              <foreignObject x="30%" y="40%" width="100" height="100">
+              <foreignObject x="25%" y="40%" width="100" height="100">
                 {total && (
                   <div
                     style={{
                       display: "flex",
-                      justifyContent: "center",
-                      alignContent: "center",
-                      fontSize: "16px",
-                      fontWeight: 600,
-                      color: BFMPalette.black800,
+                      flexDirection: "column",
+                      alignItems: "center",
                     }}>
-                    {total} kg CO2 <br />
-                    Total
+                    <MediumBoldHeading color={BFMPalette.black800}>
+                      {total.split(" ")[0]}
+                    </MediumBoldHeading>
+
+                    <MediumBoldHeading color={BFMPalette.black800}>
+                      {total.split(" ").slice(1).join(" ")}
+                    </MediumBoldHeading>
                   </div>
                 )}
               </foreignObject>
             )}
-            position="center"
           />
         </Pie>
       </PieChart>

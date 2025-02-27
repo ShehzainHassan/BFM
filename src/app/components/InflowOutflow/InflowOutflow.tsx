@@ -1,12 +1,13 @@
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
-import { generateMonths } from "@/utils";
+import { formatCurrency, generateMonths } from "@/utils";
 import { Select } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
 import Category from "../Category/Category";
 import PieGraph from "../Charts/PieChart/PieChart";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import { HKD_EQUIVALANT } from "@/constants";
 
 const COLORS = [
   BFMPalette.purple1000,
@@ -37,18 +38,14 @@ const ChartContainer = styled("div")`
   justify-content: space-between;
   align-items: center;
   padding: 16px 24px;
-  max-height: 250px;
+  height: 100%;
 `;
 const Labels = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 14px;
   overflow: auto;
-`;
-const LabelContainer = styled("div")`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  max-height: 250px;
 `;
 
 export default function InflowOutflow() {
@@ -92,7 +89,14 @@ export default function InflowOutflow() {
       </SubContainer>
 
       <ChartContainer>
-        <PieGraph data={filteredData} COLORS={COLORS} total={totalValue} />
+        <PieGraph
+          data={filteredData}
+          COLORS={COLORS}
+          total={`${formatCurrency(
+            `${HKD_EQUIVALANT}${Math.abs(totalValue)}`,
+            2
+          )}`}
+        />
         <Labels>
           {filteredData.map((data, index) => (
             <Category
