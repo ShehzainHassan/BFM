@@ -1,4 +1,4 @@
-import { ResponsiveBar } from "@nivo/bar";
+import { BarTooltipProps, ResponsiveBar } from "@nivo/bar";
 import { JSX } from "react";
 import { useData } from "@/DataContext";
 import styled from "styled-components";
@@ -7,7 +7,8 @@ import { BarCustomLayerProps } from "@nivo/bar";
 import { CashFlowData } from "./CashflowData";
 import { formatCurrency, getDynamicScale } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
-import { H5 } from "@/Typography";
+import { H3Primary, H5 } from "@/Typography";
+import { TooltipProps } from "recharts";
 
 const ChartContainer = styled.div`
   display: flex;
@@ -39,6 +40,36 @@ const ColorBox = styled.div<{ $bgColor: string }>`
   background-color: ${(props) => props.$bgColor};
 `;
 
+const TooltipContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: ${BFMPalette.purple925};
+  padding: 8px 10px;
+  border-radius: 12px;
+`;
+const LabelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const CustomTooltip = ({ data }: BarTooltipProps<CashFlowData>) => {
+  return (
+    <TooltipContainer>
+      <LabelContainer>
+        <H5 color={BFMPalette.gray200}>Total Deposit: </H5>
+        <H3Primary color={BFMPalette.white}>
+          {formatCurrency(`${HKD_EQUIVALANT}${data.positive}`, 2)}
+        </H3Primary>
+      </LabelContainer>
+      <LabelContainer>
+        <H5 color={BFMPalette.gray200}>Total Withdrawal: </H5>
+        <H3Primary color={BFMPalette.red500}>
+          {formatCurrency(`${HKD_EQUIVALANT}${data.negative}`, 2)}
+        </H3Primary>
+      </LabelContainer>
+    </TooltipContainer>
+  );
+};
 export default function CashflowChart(): JSX.Element {
   const { cashflowData } = useData();
   const maxValue = Math.max(
@@ -186,6 +217,7 @@ export default function CashflowChart(): JSX.Element {
         enableLabel={false}
         minValue={-scaleMax}
         maxValue={scaleMax}
+        tooltip={CustomTooltip}
         labelSkipWidth={12}
         labelSkipHeight={12}
         labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
