@@ -2,25 +2,36 @@
 import { Select } from "antd";
 import { generateMonths } from "@/utils";
 import { useData } from "@/DataContext";
+import { useEffect, useState } from "react";
 
 interface SelectDropDownProps {
-  selectedMonth: string;
-  setSelectedMonth: (month: string) => void;
+  selectedMonths: string[];
+  setSelectedMonths: (months: string[]) => void;
 }
 
 export default function SelectDropDown({
-  selectedMonth,
-  setSelectedMonth,
+  selectedMonths,
+  setSelectedMonths,
 }: SelectDropDownProps) {
   const { reports } = useData();
+  const months = generateMonths(reports.esgSummary);
 
   return (
     <Select
-      onChange={(value) => setSelectedMonth(value)}
-      value={selectedMonth}
-      style={{ width: 150 }}>
-      {generateMonths(reports.esgSummary).map((month) => (
-        <Select.Option key={month} value={month}>
+      mode="multiple"
+      onChange={(values) => setSelectedMonths(values)}
+      value={selectedMonths}
+      style={{ width: 250 }}
+      placeholder="Select at least one month"
+      optionLabelProp="label">
+      {months.map((month) => (
+        <Select.Option key={month} value={month} label={month}>
+          <input
+            type="checkbox"
+            checked={selectedMonths.includes(month)}
+            readOnly
+            style={{ marginRight: 8 }}
+          />
           {month}
         </Select.Option>
       ))}

@@ -1,3 +1,4 @@
+import { HKD_EQUIVALANT } from "@/constants";
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { formatCurrency, generateMonths } from "@/utils";
@@ -5,11 +6,10 @@ import { Select } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
 import Category from "../Category/Category";
-import PieGraph from "../Charts/PieChart/PieChart";
+import PieGraph from "../Charts/PieChart/Pie";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
-import { HKD_EQUIVALANT } from "@/constants";
 
-const COLORS = [
+export const COLORS = [
   BFMPalette.purple1000,
   BFMPalette.purple800,
   BFMPalette.purple600,
@@ -44,7 +44,6 @@ const Labels = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 14px;
-  overflow: auto;
   max-height: 250px;
 `;
 
@@ -67,7 +66,9 @@ export default function InflowOutflow() {
           (withdrawal) => withdrawal.month === selectedMonth
         );
 
-  const totalValue = filteredData.reduce((sum, item) => sum + item.value, 0);
+  const totalValue = Math.abs(
+    filteredData.reduce((sum, item) => sum + item.value, 0)
+  );
   return (
     <Container>
       <SubContainer>
@@ -91,11 +92,8 @@ export default function InflowOutflow() {
       <ChartContainer>
         <PieGraph
           data={filteredData}
-          COLORS={COLORS}
-          total={`${formatCurrency(
-            `${HKD_EQUIVALANT}${Math.abs(totalValue)}`,
-            2
-          )}`}
+          colors={COLORS}
+          total={formatCurrency(`${HKD_EQUIVALANT}${totalValue}`, 2)}
         />
         <Labels>
           {filteredData.map((data, index) => (

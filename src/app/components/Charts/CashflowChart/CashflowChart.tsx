@@ -7,7 +7,7 @@ import { BarCustomLayerProps } from "@nivo/bar";
 import { CashFlowData } from "./CashflowData";
 import { formatCurrency, getDynamicScale } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
-import { H3Primary, H5 } from "@/Typography";
+import { H3, H3Primary, H5 } from "@/Typography";
 import { TooltipProps } from "recharts";
 
 const ChartContainer = styled.div`
@@ -44,8 +44,9 @@ const TooltipContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: ${BFMPalette.purple925};
+  background: ${BFMPalette.white25};
   padding: 8px 10px;
+  border: 1px solid ${BFMPalette.gray100};
   border-radius: 12px;
 `;
 const LabelContainer = styled.div`
@@ -56,15 +57,28 @@ const CustomTooltip = ({ data }: BarTooltipProps<CashFlowData>) => {
   return (
     <TooltipContainer>
       <LabelContainer>
-        <H5 color={BFMPalette.gray200}>Total Deposit: </H5>
-        <H3Primary color={BFMPalette.white}>
+        <H3 color={BFMPalette.black800}>{data.category}</H3>
+      </LabelContainer>
+
+      <LabelContainer>
+        <H5 color={BFMPalette.gray700}>Deposits</H5>
+        <H3Primary color={BFMPalette.purple375}>
           {formatCurrency(`${HKD_EQUIVALANT}${data.positive}`, 2)}
         </H3Primary>
       </LabelContainer>
       <LabelContainer>
-        <H5 color={BFMPalette.gray200}>Total Withdrawal: </H5>
+        <H5 color={BFMPalette.gray700}>Withdrawals</H5>
         <H3Primary color={BFMPalette.red500}>
           {formatCurrency(`${HKD_EQUIVALANT}${data.negative}`, 2)}
+        </H3Primary>
+      </LabelContainer>
+      <LabelContainer>
+        <H5 color={BFMPalette.gray700}>Net</H5>
+        <H3Primary color={BFMPalette.black800}>
+          {formatCurrency(
+            `${HKD_EQUIVALANT}${data.positive + data.negative}`,
+            2
+          )}
         </H3Primary>
       </LabelContainer>
     </TooltipContainer>
@@ -170,7 +184,6 @@ export default function CashflowChart(): JSX.Element {
                 rx={10}
                 ry={10}
               />
-
               <text
                 x={5}
                 y={4}

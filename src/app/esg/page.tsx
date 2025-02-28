@@ -2,7 +2,6 @@
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import ESGCard from "../components/ESGCard/ESGCard";
-import PieGraph from "../components/Charts/PieChart/PieChart";
 import SelectDropDown from "../components/SelectDropDown/SelectDropDown";
 import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
 import BarGraph from "../components/Charts/BarChart/BarChart";
@@ -14,6 +13,8 @@ import { useData } from "@/DataContext";
 import ESGNotifications from "../components/ESGNotifications/ESGNotifications";
 import Image from "next/image";
 import { convertToYYYYMM, generateMonths, getUniqueYears } from "@/utils";
+import PieGraph from "../components/Charts/PieChart/Pie";
+import { COLORS } from "../components/InflowOutflow/InflowOutflow";
 
 const Container = styled("div")`
   display: grid;
@@ -118,24 +119,38 @@ const TitleContainer = styled("div")`
   border-top-right-radius: 12px;
   border-bottom: 1px solid ${BFMPalette.purple200};
 `;
+const NoData = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+`;
 export default function ESG() {
-  const { notifications, reports, pieData, barData } = useData();
+  const { notifications, pieData, barData } = useData();
   const [selectedTab, setSelectedTab] = useState("2024");
-  const [selectedMonth, setSelectedMonth] = useState<string>(
-    generateMonths(reports.esgSummary)[0]
-  );
+  const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
+  const selectedMonthFormatted = selectedMonths.map(convertToYYYYMM);
 
-  const pieCarbonData = pieData;
-  const selectedMonthData = pieCarbonData.filter(
-    (data) => data.month === convertToYYYYMM(selectedMonth)
-  );
-  const totalAmount = selectedMonthData.reduce(
-    (sum, item) => sum + item.value,
-    0
-  );
-  const years = getUniqueYears(pieCarbonData);
+  const years = getUniqueYears(pieData);
   const filteredBarData = barData.filter((data) =>
     data.monthYear.endsWith(selectedTab.slice(-2))
+  );
+
+  const aggregatedData = pieData
+    .filter((data) => selectedMonthFormatted.includes(data.month))
+    .reduce<{ month: string; name: string; value: number }[]>((acc, curr) => {
+      const existingEntry = acc.find((item) => item.name === curr.name);
+      if (existingEntry) {
+        existingEntry.value += curr.value;
+      } else {
+        acc.push({ name: curr.name, value: curr.value, month: "Multiple" });
+      }
+      return acc;
+    }, []);
+
+  const totalAggregatedValue = aggregatedData.reduce(
+    (sum, item) => sum + item.value,
+    0
   );
   return (
     <Container>
@@ -144,29 +159,33 @@ export default function ESG() {
           <HeadingContainer>
             <Heading>CO2 Emission by Category</Heading>
             <SelectDropDown
-              selectedMonth={selectedMonth}
-              setSelectedMonth={setSelectedMonth}
+              selectedMonths={selectedMonths}
+              setSelectedMonths={setSelectedMonths}
             />
           </HeadingContainer>
-          <ChartContainer>
-            <PieGraph
-              data={selectedMonthData}
-              COLORS={PIE_COLORS}
-              amount={totalAmount}
-              unit="kg CO2"
-              text="Total"
-            />
-            <Labels>
-              {selectedMonthData.map((label, index) => (
-                <ESGCard
-                  key={label.name}
-                  title={label.name}
-                  kg={label.value}
-                  circleColor={PIE_COLORS[index]}
-                />
-              ))}
-            </Labels>
-          </ChartContainer>
+          {aggregatedData.length === 0 ? (
+            <NoData>No Data</NoData>
+          ) : (
+            <ChartContainer>
+              <PieGraph
+                data={aggregatedData}
+                colors={PIE_COLORS}
+                totalCarbon={totalAggregatedValue}
+                unit="kg CO2"
+                supportingText="Total"
+              />
+              <Labels>
+                {aggregatedData.map((label, index) => (
+                  <ESGCard
+                    key={label.name}
+                    title={label.name}
+                    kg={label.value}
+                    circleColor={PIE_COLORS[index]}
+                  />
+                ))}
+              </Labels>
+            </ChartContainer>
+          )}
         </PieChartContainer>
 
         <BarChartContainer>
