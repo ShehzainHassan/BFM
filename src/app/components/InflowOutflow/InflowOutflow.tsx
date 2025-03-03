@@ -8,6 +8,7 @@ import styled from "styled-components";
 import Category from "../Category/Category";
 import PieGraph from "../Charts/PieChart/Pie";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import SelectDropDown from "../SelectDropDown/SelectDropDown";
 
 export const COLORS = [
   BFMPalette.purple1000,
@@ -46,28 +47,41 @@ const Labels = styled("div")`
   gap: 14px;
   max-height: 250px;
 `;
-
+const NoData = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`;
 export default function InflowOutflow() {
   const { reports, depositsDashboard, withDrawalsDashboard } = useData();
   const tabs = ["Deposit", "Withdrawal"];
-  const [selectedMonth, setSelectedMonth] = useState<string>(
-    generateMonths(reports.incomeByCategory)[0]
-  );
+  const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
+
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const months =
     selectedTab === tabs[0]
-      ? reports.incomeByCategory
-      : reports.expenseByCategory;
+      ? generateMonths(reports.incomeByCategory)
+      : generateMonths(reports.expenseByCategory);
 
-  const filteredData =
-    selectedTab === tabs[0]
-      ? depositsDashboard.filter((deposit) => deposit.month === selectedMonth)
-      : withDrawalsDashboard.filter(
-          (withdrawal) => withdrawal.month === selectedMonth
-        );
+  const selectedData =
+    selectedTab === tabs[0] ? depositsDashboard : withDrawalsDashboard;
 
-  const totalValue = Math.abs(
-    filteredData.reduce((sum, item) => sum + item.value, 0)
+  const filteredData = selectedData.filter((item) =>
+    selectedMonths.includes(item.month)
+  );
+  const aggregatedData = filteredData.reduce((acc, item) => {
+    const existingItem = acc.find((entry) => entry.name === item.name);
+    if (existingItem) {
+      existingItem.value += item.value;
+    } else {
+      acc.push({ ...item });
+    }
+    return acc;
+  }, [] as { month: string; name: string; value: number }[]);
+
+  const total = Math.abs(
+    aggregatedData.reduce((sum, item) => sum + item.value, 0)
   );
   return (
     <Container>
@@ -77,35 +91,33 @@ export default function InflowOutflow() {
           selectedTab={selectedTab}
           onTabChange={setSelectedTab}
         />
-        <Select
-          style={{ height: "45px" }}
-          onChange={(value) => setSelectedMonth(value)}
-          value={selectedMonth}>
-          {generateMonths(months).map((month) => (
-            <Select.Option key={month} value={month}>
-              {month}
-            </Select.Option>
-          ))}
-        </Select>
-      </SubContainer>
-
-      <ChartContainer>
-        <PieGraph
-          data={filteredData}
-          colors={COLORS}
-          total={formatCurrency(`${HKD_EQUIVALANT}${totalValue}`, 2)}
+        <SelectDropDown
+          selectedMonths={selectedMonths}
+          setSelectedMonths={setSelectedMonths}
+          months={months}
         />
-        <Labels>
-          {filteredData.map((data, index) => (
-            <Category
-              key={index}
-              circleColor={COLORS[index % COLORS.length]}
-              category={data.name}
-              amount={data.value}
-            />
-          ))}
-        </Labels>
-      </ChartContainer>
+      </SubContainer>
+      {aggregatedData.length > 0 ? (
+        <ChartContainer>
+          <PieGraph
+            data={aggregatedData}
+            colors={COLORS}
+            total={formatCurrency(`${HKD_EQUIVALANT}${total}`, 2)}
+          />
+          <Labels>
+            {aggregatedData.map((data, index) => (
+              <Category
+                key={index}
+                circleColor={COLORS[index % COLORS.length]}
+                category={data.name}
+                amount={data.value}
+              />
+            ))}
+          </Labels>
+        </ChartContainer>
+      ) : (
+        <NoData>No data</NoData>
+      )}
     </Container>
   );
 }

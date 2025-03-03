@@ -126,11 +126,11 @@ const NoData = styled("div")`
   padding: 10px;
 `;
 export default function ESG() {
-  const { notifications, pieData, barData } = useData();
+  const { notifications, reports, pieData, barData } = useData();
   const [selectedTab, setSelectedTab] = useState("2024");
   const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
   const selectedMonthFormatted = selectedMonths.map(convertToYYYYMM);
-
+  const months = generateMonths(reports.esgSummary);
   const years = getUniqueYears(pieData);
   const filteredBarData = barData.filter((data) =>
     data.monthYear.endsWith(selectedTab.slice(-2))
@@ -161,6 +161,7 @@ export default function ESG() {
             <SelectDropDown
               selectedMonths={selectedMonths}
               setSelectedMonths={setSelectedMonths}
+              months={months}
             />
           </HeadingContainer>
           {aggregatedData.length === 0 ? (
