@@ -2,13 +2,13 @@
 import styled from "styled-components";
 import TextComponent from "../TextComponent/TextComponent";
 import { useData } from "@/DataContext";
+const Container = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
 
 export default function TextContainer() {
-  const Container = styled("div")`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  `;
   const { reports } = useData();
   const overviewReport = reports.overviewReport;
   return (

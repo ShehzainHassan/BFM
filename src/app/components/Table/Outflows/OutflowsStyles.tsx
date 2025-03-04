@@ -1,5 +1,5 @@
 import { BFMPalette } from "@/Theme";
-import { BodyText, MediumBoldHeading } from "@/Typography";
+import { BodyText, H3Secondary, MediumBoldHeading } from "@/Typography";
 import { Outflows } from "./outflows";
 import { formatCurrency, formatKeys } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
@@ -18,7 +18,7 @@ const renderMonthCell = (value: string | number) => {
   return numericValue === 0 ? (
     <BodyText color={color}>{formattedValue}</BodyText>
   ) : (
-    <MediumBoldHeading color={color}>{formattedValue}</MediumBoldHeading>
+    <H3Secondary color={color}>{formattedValue}</H3Secondary>
   );
 };
 

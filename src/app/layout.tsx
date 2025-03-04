@@ -38,11 +38,11 @@ export default function RootLayout({
           <ContentWrapper>
             <Navbar
               navItems={[
-                { label: "Dashboard", path: "/" },
-                { label: "Analytics", path: "/analytics" },
-                { label: "Invoices", path: "/invoices" },
-                { label: "Calender", path: "/calender" },
-                { label: "ESG", path: "/esg" },
+                { label: "Dashboard" },
+                { label: "Analytics" },
+                { label: "Invoices" },
+                { label: "Calender" },
+                { label: "ESG" },
               ]}
             />
 

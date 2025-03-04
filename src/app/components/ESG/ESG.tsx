@@ -1,20 +1,18 @@
 "use client";
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
-import ESGCard from "../components/ESGCard/ESGCard";
-import SelectDropDown from "../components/SelectDropDown/SelectDropDown";
-import HorizontalTabs from "../components/HorizontalTabs/HorizontalTabs";
-import BarGraph from "../components/Charts/BarChart/BarChart";
 import { H2, H5 } from "@/Typography";
 import { useState } from "react";
-import { barData } from "../components/Charts/BarChart/BarChartData";
-import { PIE_COLORS } from "../components/Charts/PieChart/PieChartData";
 import { useData } from "@/DataContext";
-import ESGNotifications from "../components/ESGNotifications/ESGNotifications";
 import Image from "next/image";
 import { convertToYYYYMM, generateMonths, getUniqueYears } from "@/utils";
-import PieGraph from "../components/Charts/PieChart/Pie";
-import { COLORS } from "../components/InflowOutflow/InflowOutflow";
+import SelectDropDown from "../SelectDropDown/SelectDropDown";
+import PieGraph from "../Charts/PieChart/Pie";
+import { PIE_COLORS_1 } from "../Charts/PieChart/PieChartData";
+import ESGCard from "../ESGCard/ESGCard";
+import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import BarGraph from "../Charts/BarChart/BarChart";
+import ESGNotifications from "../ESGNotifications/ESGNotifications";
 
 const Container = styled("div")`
   display: grid;
@@ -170,7 +168,7 @@ export default function ESG() {
             <ChartContainer>
               <PieGraph
                 data={aggregatedData}
-                colors={PIE_COLORS}
+                colors={PIE_COLORS_1}
                 totalCarbon={totalAggregatedValue}
                 unit="kg CO2"
                 supportingText="Total"
@@ -181,7 +179,7 @@ export default function ESG() {
                     key={label.name}
                     title={label.name}
                     kg={label.value}
-                    circleColor={PIE_COLORS[index]}
+                    circleColor={PIE_COLORS_1[index]}
                   />
                 ))}
               </Labels>

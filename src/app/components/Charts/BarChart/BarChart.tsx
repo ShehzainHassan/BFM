@@ -126,7 +126,8 @@ export default function BarGraph({
         <YAxis
           axisLine={false}
           tickLine={false}
-          interval={0}
+          interval="preserveStartEnd"
+          tickCount={6}
           tick={
             <CustomTick
               x={0}

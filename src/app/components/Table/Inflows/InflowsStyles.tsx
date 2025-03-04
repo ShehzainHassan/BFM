@@ -1,5 +1,5 @@
 import { BFMPalette } from "@/Theme";
-import { BodyText, MediumBoldHeading } from "@/Typography";
+import { BodyText, H4, MediumBoldHeading } from "@/Typography";
 import { Inflows } from "./inflows";
 import { formatCurrency, formatKeys } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
@@ -38,9 +38,9 @@ const renderValue = (value: string, row: Inflows) => {
   }
 
   return (
-    <BodyText color={color}>
+    <H4 color={color}>
       {formatCurrency(`${HKD_EQUIVALANT}${formattedValue}`, 2)}
-    </BodyText>
+    </H4>
   );
 };
 

@@ -1,4 +1,7 @@
+import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
+import { H3 } from "@/Typography";
+import { formatCurrency, formatString } from "@/utils";
 import { ResponsivePie } from "@nivo/pie";
 import styled from "styled-components";
 
@@ -106,6 +109,13 @@ const PieGraph = ({
     color: colors[index % colors.length],
   }));
 
+  const ToolTip = styled("div")`
+    display: flex;
+    flex-direction: column;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background-color: ${BFMPalette.gray100};
+  `;
   return (
     <PieContainer>
       <ResponsivePie
@@ -127,6 +137,14 @@ const PieGraph = ({
         arcLabelsSkipAngle={360}
         colors={({ data }) => data.color}
         layers={["arcs", "arcLabels", "arcLinkLabels", "legends", CenteredText]}
+        tooltip={({ datum }) => (
+          <ToolTip>
+            <H3>{formatString(`${datum.id}`, true)}</H3>
+            <H3 color={BFMPalette.purple600}>
+              {formatCurrency(`${HKD_EQUIVALANT}${datum.value}`, 2)}
+            </H3>
+          </ToolTip>
+        )}
       />
     </PieContainer>
   );

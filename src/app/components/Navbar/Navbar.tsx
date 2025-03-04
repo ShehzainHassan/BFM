@@ -6,6 +6,12 @@ import { usePathname } from "next/navigation";
 import { H1 } from "@/Typography";
 import NavButton from "../Button/Primary/NavButton";
 import i18n from "@/translations";
+import { useState } from "react";
+import Dashboard from "../Dashboard/Dashboard";
+import Analytics from "../Analytics/Analytics";
+import Calender from "../Calender/Calender";
+import ESG from "../ESG/ESG";
+import Invoices from "@/app/invoices/page";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
@@ -48,11 +54,42 @@ const ButtonsContainer = styled("div")`
   display: flex;
   gap: 16px;
 `;
+const MainContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Component = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1300px;
+  height: 100%;
+`;
 interface NavbarProps {
-  navItems: { label: string; path: string }[];
+  navItems: { label: string }[];
 }
 export default function Navbar({ navItems }: NavbarProps) {
   const pathname = usePathname();
+  const [selectedTab, setSelectedTab] = useState("Dashboard");
+  const renderComponent = () => {
+    switch (selectedTab) {
+      case "Dashboard":
+        return <Dashboard />;
+      case "Analytics":
+        return <Analytics />;
+      case "Invoices":
+        return <Invoices />;
+
+      case "Calender":
+        return <Calender />;
+      case "ESG":
+        return <ESG />;
+
+      default:
+        return <Dashboard />;
+    }
+  };
 
   const navButtons =
     pathname === "/calender" || pathname === "/esg"
@@ -66,47 +103,53 @@ export default function Navbar({ navItems }: NavbarProps) {
     defaultValue: "Welcome Back, Mark",
   });
   return (
-    <Container>
-      <Header>
-        <H1 color={BFMPalette.white}>{pageTitle}</H1>
-        <ButtonsContainer>
-          {navButtons.includes("schedule") && (
-            <NavButton
-              $textColor={BFMPalette.purple600}
-              $bgColor={BFMPalette.white}
-              imagePosition="right"
-              imageSrc="/images/clock.png">
-              {i18n.t("nav_buttons.schedule")}
-            </NavButton>
-          )}
-          {navButtons.includes("create") && (
-            <NavButton
-              $textColor={BFMPalette.white}
-              $borderColor={BFMPalette.purple500}
-              $bgColor={BFMPalette.purple500}
-              imageSrc="/images/plus.png">
-              {i18n.t("nav_buttons.createEvent")}
-            </NavButton>
-          )}
-          {navButtons.includes("invoice") && (
-            <NavButton
-              $textColor={BFMPalette.white}
-              $borderColor={BFMPalette.purple500}
-              $bgColor={BFMPalette.purple500}
-              imageSrc="/images/plus.png">
-              {i18n.t("nav_buttons.createInvoice")}
-            </NavButton>
-          )}
-        </ButtonsContainer>
-      </Header>
+    <MainContainer>
+      <Container>
+        <Header>
+          <H1 color={BFMPalette.white}>{pageTitle}</H1>
+          <ButtonsContainer>
+            {navButtons.includes("schedule") && (
+              <NavButton
+                $textColor={BFMPalette.purple600}
+                $bgColor={BFMPalette.white}
+                imagePosition="right"
+                imageSrc="/images/clock.png">
+                {i18n.t("nav_buttons.schedule")}
+              </NavButton>
+            )}
+            {navButtons.includes("create") && (
+              <NavButton
+                $textColor={BFMPalette.white}
+                $borderColor={BFMPalette.purple500}
+                $bgColor={BFMPalette.purple500}
+                imageSrc="/images/plus.png">
+                {i18n.t("nav_buttons.createEvent")}
+              </NavButton>
+            )}
+            {navButtons.includes("invoice") && (
+              <NavButton
+                $textColor={BFMPalette.white}
+                $borderColor={BFMPalette.purple500}
+                $bgColor={BFMPalette.purple500}
+                imageSrc="/images/plus.png">
+                {i18n.t("nav_buttons.createInvoice")}
+              </NavButton>
+            )}
+          </ButtonsContainer>
+        </Header>
 
-      <SubContainer>
-        {navItems.map(({ label, path }) => (
-          <Link key={path} href={path} passHref>
-            <NavContent $isSelected={pathname === path}>{label}</NavContent>
-          </Link>
-        ))}
-      </SubContainer>
-    </Container>
+        <SubContainer>
+          {navItems.map(({ label }) => (
+            <NavContent
+              key={label}
+              $isSelected={selectedTab === label}
+              onClick={() => setSelectedTab(label)}>
+              {label}
+            </NavContent>
+          ))}
+        </SubContainer>
+      </Container>
+      <Component>{renderComponent()}</Component>
+    </MainContainer>
   );
 }

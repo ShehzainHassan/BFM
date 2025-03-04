@@ -9,14 +9,7 @@ import Category from "../Category/Category";
 import PieGraph from "../Charts/PieChart/Pie";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import SelectDropDown from "../SelectDropDown/SelectDropDown";
-
-export const COLORS = [
-  BFMPalette.purple1000,
-  BFMPalette.purple800,
-  BFMPalette.purple600,
-  BFMPalette.purple400,
-  BFMPalette.purple200,
-];
+import { PIE_COLORS_2 } from "../Charts/PieChart/PieChartData";
 
 const Container = styled("div")`
   display: flex;
@@ -101,14 +94,14 @@ export default function InflowOutflow() {
         <ChartContainer>
           <PieGraph
             data={aggregatedData}
-            colors={COLORS}
+            colors={PIE_COLORS_2}
             total={formatCurrency(`${HKD_EQUIVALANT}${total}`, 2)}
           />
           <Labels>
             {aggregatedData.map((data, index) => (
               <Category
                 key={index}
-                circleColor={COLORS[index % COLORS.length]}
+                circleColor={PIE_COLORS_2[index % PIE_COLORS_2.length]}
                 category={data.name}
                 amount={data.value}
               />
