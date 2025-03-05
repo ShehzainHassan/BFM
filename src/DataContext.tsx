@@ -1,5 +1,5 @@
 "use client";
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { AccountData } from "./app/components/Table/Accounts/accounts";
 import { MOCK_DATA } from "./mockdata";
 import { BuyerSupplierAnalysis } from "./app/components/Table/BuyerSupplierAnalysis/BuyerSupplierAnalysis";
@@ -20,6 +20,7 @@ import { BarData } from "./app/components/Charts/BarChart/BarChartData";
 import { AreaChartData } from "./app/components/Charts/AreaChart/AreaChartData";
 import { CashFlowData } from "./app/components/Charts/CashflowChart/CashflowData";
 import { LineChartData } from "./app/components/Charts/CashflowChart/LineChartData";
+import useTranslation from "./translations";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
@@ -43,6 +44,8 @@ interface DataContextType {
   barData: BarData[];
   cashflowData: CashFlowData[];
   lineChartData: LineChartData[];
+  selectedTab: string;
+  setSelectedTab: (tab: string) => void;
 }
 interface ParsedTransaction {
   transactionId: string;
@@ -111,7 +114,8 @@ const DataContext = createContext<DataContextType | null>(null);
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
   const { rawData, reports, metrics, notifications } = MOCK_DATA.data;
-
+  const { t } = useTranslation();
+  const [selectedTab, setSelectedTab] = useState(t("navbar.tabs.dashboard"));
   const transformTransactions = (
     parsedTransaction: ParsedTransaction[]
   ): Transaction[] => {
@@ -422,6 +426,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         areaData,
         cashflowData,
         lineChartData,
+        selectedTab,
+        setSelectedTab,
       }}>
       {children}
     </DataContext.Provider>
