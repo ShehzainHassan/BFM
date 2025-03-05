@@ -14,6 +14,7 @@ import NavButton from "../Button/Primary/NavButton";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { HKD_EQUIVALANT, LOCAL_STORAGE_KEY } from "@/constants";
 import { formatCurrency, formatDate } from "@/utils";
+import axios from "axios";
 interface TransactionDetailsProps<T = {}> {
   selectedRow: T;
   primaryDetail?: string;
@@ -34,6 +35,12 @@ interface FileData {
 interface StoredData {
   rowId: string;
   files: FileData[];
+}
+interface Note {
+  transactionId: string;
+  note: string;
+  createdDate: string;
+  lastModifiedDate: string;
 }
 
 const StatsContainer = styled("div")`
@@ -170,7 +177,6 @@ export default function TransactionDetails({
   primaryDetail = "CR TO 022-170458-*** N32823454***(28MAR24)",
   primaryType = "General Payment",
   noteTitle = "Notes",
-  noteContent = "Transaction Notes goes here",
   lastUpdated = "Last updated: 11 Nov 2024",
   selected = "Details",
 }: TransactionDetailsProps<any>) {
@@ -181,9 +187,20 @@ export default function TransactionDetails({
   });
   const [isEditingNotes, setIsEditingNotes] = useState(false);
   const [isAddingNotes, setIsAddingNotes] = useState(false);
+  const [noteDetails, setNoteDetails] = useState<Note>();
+  const [editText, setEditText] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  const getNoteDetails = async () => {
+    const response = await axios.get(
+      `https://api.dev.pca.planto.io/v1/businessFinancialManagement/note/${selectedRow.id}`
+    );
+    if (!response.data.data) {
+      setIsEditingNotes(true);
+    }
+    setNoteDetails(response.data.data);
+  };
   useEffect(() => {
+    getNoteDetails();
     const storedFiles = JSON.parse(
       localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
     );
@@ -328,7 +345,30 @@ export default function TransactionDetails({
     triggerStorageUpdate();
   };
 
+  const saveNote = async () => {
+    try {
+      const response = await axios.post(
+        "https://api.dev.pca.planto.io/v1/businessFinancialManagement/add-note",
+        {
+          transactionId: selectedRow.id,
+          note: editText,
+        }
+      );
+      setNoteDetails((prev) => {
+        if (!prev) return undefined;
+        return { ...prev, note: editText };
+      });
+    } catch (err) {
+      console.error("Error saving note");
+    }
+  };
+  const handleCancelNote = () => {
+    setIsEditingNotes(true);
+    setIsAddingNotes(false);
+    setEditText("");
+  };
   const handleSaveNote = () => {
+    saveNote();
     setIsEditingNotes(false);
     setIsAddingNotes(false);
   };
@@ -366,7 +406,7 @@ export default function TransactionDetails({
           <Descriptions>
             <InfoContainer>
               <BodyText>{noteTitle}</BodyText>
-              <H4 color={BFMPalette.black800}>{noteContent}</H4>
+              <H4 color={BFMPalette.black800}>{noteDetails?.note}</H4>
               <BodyText>{lastUpdated}</BodyText>
             </InfoContainer>
           </Descriptions>
@@ -414,6 +454,8 @@ export default function TransactionDetails({
               Add comments or notes to your transactions
               <textarea
                 rows={5}
+                value={editText}
+                onChange={(e) => setEditText(e.target.value)}
                 placeholder="Add details about this transaction..."
                 style={{
                   width: "100%",
@@ -430,7 +472,7 @@ export default function TransactionDetails({
                   $bgColor={BFMPalette.white}
                   $textColor={BFMPalette.black400}
                   $borderColor={BFMPalette.gray200}
-                  onClick={handleSaveNote}>
+                  onClick={handleCancelNote}>
                   Cancel
                 </NavButton>
                 <NavButton
