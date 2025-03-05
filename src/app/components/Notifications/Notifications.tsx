@@ -6,6 +6,7 @@ import { BFMPalette } from "@/Theme";
 import { H2 } from "@/Typography";
 import ButtonSecondary from "../Button/Secondary/ButtonSecondary";
 import DueDate, { DueDatePayload } from "../DueDate/DueDate";
+import useTranslation from "@/translations";
 
 interface Notification {
   id: number;
@@ -58,11 +59,12 @@ const ButtonContainer = styled("div")`
   justify-content: flex-end;
 `;
 export default function Notifications({ notifications }: NotificationsProps) {
+  const { t } = useTranslation();
   return (
     <Container>
       <TitleContainer>
         <Image src="/images/icon.png" alt="icon" width={40} height={40} />
-        <H2 color={BFMPalette.black800}>For You</H2>
+        <H2 color={BFMPalette.black800}>{t("notification_title.dashboard")}</H2>
       </TitleContainer>
       <CardContainer>
         {notifications.map((notification) => {

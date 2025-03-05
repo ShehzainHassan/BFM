@@ -13,6 +13,7 @@ import ESGCard from "../ESGCard/ESGCard";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import BarGraph from "../Charts/BarChart/BarChart";
 import ESGNotifications from "../ESGNotifications/ESGNotifications";
+import useTranslation from "@/translations";
 
 const Container = styled("div")`
   display: grid;
@@ -125,6 +126,7 @@ const NoData = styled("div")`
 `;
 export default function ESG() {
   const { notifications, reports, pieData, barData } = useData();
+  const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState("2024");
   const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
   const selectedMonthFormatted = selectedMonths.map(convertToYYYYMM);
@@ -155,7 +157,7 @@ export default function ESG() {
       <GraphsContainer>
         <PieChartContainer>
           <HeadingContainer>
-            <Heading>CO2 Emission by Category</Heading>
+            <Heading>{t("charts.co2_emission_text")}</Heading>
             <SelectDropDown
               selectedMonths={selectedMonths}
               setSelectedMonths={setSelectedMonths}
@@ -189,7 +191,7 @@ export default function ESG() {
 
         <BarChartContainer>
           <HeadingContainer>
-            <Heading>Carbon Footprint Trendy</Heading>
+            <Heading>{t("charts.carbon_footprint")}</Heading>
             <HorizontalTabs
               tabs={years.map(String)}
               selectedTab={selectedTab}
@@ -199,9 +201,7 @@ export default function ESG() {
 
           <SubContainer>
             <BarLabel>
-              <H5 color={BFMPalette.blue550}>
-                All data are in units of kg CO2e
-              </H5>
+              <H5 color={BFMPalette.blue550}>{t("charts.barChart.label")}</H5>
             </BarLabel>
             <BarGraph data={filteredBarData} color={BFMPalette.purple800} />
           </SubContainer>
@@ -210,7 +210,7 @@ export default function ESG() {
       <ESGNotificationsContainer>
         <TitleContainer>
           <Image src="/images/icon.png" alt="icon" width={40} height={40} />
-          <H2 color={BFMPalette.black800}>Actions For You</H2>
+          <H2 color={BFMPalette.black800}>{t("notification_title.esg")}</H2>
         </TitleContainer>
 
         <CardsContainer>

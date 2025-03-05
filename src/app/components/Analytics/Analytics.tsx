@@ -18,6 +18,7 @@ import { OutflowsColumns } from "../Table/Outflows/OutflowsColumns";
 import { RecurringTransactionColumns } from "../Table/RecurringTransactions/RecurringTransactionColumn";
 import { TransitionHighlightColumns } from "../Table/TransitionHighlight/TransitionHighlightColumn";
 import Pagination from "../Pagination/Pagination";
+import useTranslation from "@/translations";
 
 const TabContainer1 = styled("div")`
   padding: 20px 16px 0px 16px;
@@ -71,6 +72,7 @@ export default function Analytics() {
     inflows,
     outflows,
   } = useData();
+  const { t } = useTranslation();
 
   const showTabContainer2 =
     selectedTab === tabs[0] ||
@@ -131,25 +133,25 @@ export default function Analytics() {
           />
           {selectedTab === tabs[2] && selectedButton === tabButtons[0] && (
             <RenderBadgeGroup
-              title="Total Monthly Recurring Inflow"
+              title={t("tables.recurring_transactions.total_deposits_text")}
               value={depositRecurringAVG}
             />
           )}
           {selectedTab === tabs[2] && selectedButton === tabButtons[1] && (
             <RenderBadgeGroup
-              title="Total Monthly Recurring Outflow"
+              title={t("tables.recurring_transactions.total_withdrawal_text")}
               value={withdrawalRecurringAVG}
             />
           )}
           {selectedTab === tabs[3] && selectedButton === tabButtons[0] && (
             <RenderBadgeGroup
-              title="Average Inflow"
+              title={t("tables.transition_highlight.average_deposit_text")}
               value={reports.incomeIrregularReport?.averageAmount || 0}
             />
           )}
           {selectedTab === tabs[3] && selectedButton === tabButtons[1] && (
             <RenderBadgeGroup
-              title="Average Outflow"
+              title={t("tables.transition_highlight.average_withdrawal_text")}
               value={reports.expenseIrregularReport?.averageAmount || 0}
             />
           )}
