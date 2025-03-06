@@ -11,20 +11,19 @@ interface DetailsModalProps {
   closeModal: () => void;
   children: React.ReactNode;
 }
-
+const HeaderContainer = styled("div")`
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: ${BFMPalette.white25};
+  border-bottom: 1px solid ${BFMPalette.gray100};
+`;
 export default function DetailsModal<T>({
   headerText = "Modal Header",
   modalIsOpen,
   closeModal,
   children,
 }: DetailsModalProps) {
-  const HeaderContainer = styled("div")`
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    background-color: ${BFMPalette.white25};
-    border-bottom: 1px solid ${BFMPalette.gray100};
-  `;
   return (
     <Modal
       isOpen={modalIsOpen}
