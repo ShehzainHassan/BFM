@@ -41,7 +41,7 @@ export default function RootLayout({
                 { label: "Dashboard" },
                 { label: "Analytics" },
                 { label: "Invoices" },
-                { label: "Calender" },
+                { label: "Calendar" },
                 { label: "ESG" },
               ]}
             />

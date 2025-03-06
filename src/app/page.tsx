@@ -4,9 +4,9 @@ import useTranslation from "@/translations";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Analytics from "./components/Analytics/Analytics";
 import Invoices from "./invoices/page";
-import Calender from "./components/Calender/Calender";
 import ESG from "./components/ESG/ESG";
 import { JSX } from "react";
+import Calender from "./components/Calender/Calender";
 
 export default function Page() {
   const { t } = useTranslation();
