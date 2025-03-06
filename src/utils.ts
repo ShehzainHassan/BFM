@@ -31,6 +31,9 @@ export const generateMonths = (reports?: ESGSummary | Reports) => {
     })
     .sort((a, b) => dayjs(a, "MMM YYYY").unix() - dayjs(b, "MMM YYYY").unix());
 };
+export const getFileExtension = (fileName: string): string => {
+  return fileName.split(".").pop()?.toUpperCase() || "";
+};
 
 export const formatCurrency = (input: string, decimals?: number): string => {
   if (!input) return "";
@@ -88,6 +91,30 @@ export const getDynamicScale = (maxValue: number) => {
   const magnitude = Math.pow(10, Math.floor(Math.log10(maxValue)));
   const roundedMax = Math.ceil(maxValue / magnitude) * magnitude;
   return roundedMax + 2 * magnitude;
+};
+export const formatLastUpdated = (timestamp: string): string => {
+  const date = new Date(timestamp);
+
+  const monthAbbreviations = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const day = date.getDate();
+  const month = monthAbbreviations[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `last updated: ${day} ${month} ${year}`;
 };
 
 export const formatKeys = (key: string): string => {

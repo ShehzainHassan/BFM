@@ -13,7 +13,12 @@ import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { HKD_EQUIVALANT, LOCAL_STORAGE_KEY } from "@/constants";
-import { formatCurrency, formatDate } from "@/utils";
+import {
+  formatCurrency,
+  formatDate,
+  formatLastUpdated,
+  getFileExtension,
+} from "@/utils";
 import axios from "axios";
 interface TransactionDetailsProps<T = {}> {
   selectedRow: T;
@@ -41,6 +46,15 @@ interface Note {
   note: string;
   createdDate: string;
   lastModifiedDate: string;
+}
+interface Attachment {
+  id: number;
+  txnId: string;
+  fileName: string;
+  mimeType: string;
+  fileSize: number;
+  createdDate: string;
+  lastModifiedData: string;
 }
 
 const StatsContainer = styled("div")`
@@ -177,19 +191,18 @@ export default function TransactionDetails({
   primaryDetail = "CR TO 022-170458-*** N32823454***(28MAR24)",
   primaryType = "General Payment",
   noteTitle = "Notes",
-  lastUpdated = "Last updated: 11 Nov 2024",
   selected = "Details",
 }: TransactionDetailsProps<any>) {
   const [selectedTab, setSelectedTab] = useState(selected);
-  const [selectedFiles, setSelectedFiles] = useState<StoredData>({
-    rowId: selectedRow.id || "",
-    files: [],
-  });
+
   const [isEditingNotes, setIsEditingNotes] = useState(false);
   const [isAddingNotes, setIsAddingNotes] = useState(false);
   const [noteDetails, setNoteDetails] = useState<Note>();
+  const [allAttachments, setAllAttachments] = useState<Attachment[]>();
   const [editText, setEditText] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [dragging, setDragging] = useState(false);
+
   const getNoteDetails = async () => {
     const response = await axios.get(
       `https://api.dev.pca.planto.io/v1/businessFinancialManagement/note/${selectedRow.id}`
@@ -199,17 +212,20 @@ export default function TransactionDetails({
     }
     setNoteDetails(response.data.data);
   };
+  const getAttachmentsDetails = async () => {
+    try {
+      await axios
+        .get(
+          `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${selectedRow.id}`
+        )
+        .then((response) => setAllAttachments(response.data.data));
+    } catch (err) {
+      console.error("Error fetching attachment details ", err);
+    }
+  };
   useEffect(() => {
     getNoteDetails();
-    const storedFiles = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
-    );
-
-    if (storedFiles[selectedRow?.id]) {
-      setSelectedFiles(storedFiles[selectedRow.id]);
-    } else {
-      setSelectedFiles({ rowId: selectedRow?.id || "", files: [] });
-    }
+    getAttachmentsDetails();
   }, [selectedRow]);
 
   const getStyledValues = (label: string, values: string[]) => {
@@ -257,92 +273,72 @@ export default function TransactionDetails({
       ],
     },
   ];
-  const formatFileSize = (size: number) => {
-    if (size >= 1024 * 1024) {
-      return (size / (1024 * 1024)).toFixed(2) + " MB";
-    } else if (size >= 1024) {
-      return (size / 1024).toFixed(2) + " KB";
-    } else {
-      return size + " bytes";
-    }
+  const formatFileSize = (fileSize: number) => {
+    if (fileSize < 1024) return `${fileSize} B`;
+    if (fileSize < 1024 * 1024) return `${(fileSize / 1024).toFixed(2)} KB`;
+    return `${(fileSize / (1024 * 1024)).toFixed(2)} MB`;
   };
 
-  const triggerStorageUpdate = () => {
-    const event = new Event("localStorageUpdate");
-    document.dispatchEvent(event);
-  };
-
-  const handleFiles = (files: FileList) => {
-    if (!selectedRow?.id) return;
-
-    const newFiles = Array.from(files).map((file) => ({
-      name: file.name,
-      extension: file.name.split(".").pop()?.toUpperCase() || "",
-      size: formatFileSize(file.size),
-      url: URL.createObjectURL(file),
-    }));
-
-    const storedFiles = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+  const uploadFile = async (file: File) => {
+    if (!file) return;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append(
+      "data",
+      new Blob([JSON.stringify(selectedRow.id)], { type: "application/json" })
     );
 
-    const updatedData = {
-      ...storedFiles,
-      [selectedRow.id]: {
-        rowId: selectedRow.id,
-        files: [...(storedFiles[selectedRow.id]?.files || []), ...newFiles],
-      },
-    };
-
-    setSelectedFiles(updatedData[selectedRow.id]);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedData));
-    triggerStorageUpdate();
-  };
-  const openFile = (fileUrl: string) => {
-    window.open(fileUrl, "_blank");
-  };
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      handleFiles(event.target.files);
+    try {
+      await axios
+        .post(
+          "https://api.dev.pca.planto.io/v1/businessFinancialManagement/upload",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then(() => getAttachmentsDetails());
+    } catch (error) {
+      console.error("File upload failed:", error);
     }
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) uploadFile(file);
+  };
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setDragging(false);
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
-      handleFiles(event.dataTransfer.files);
-      event.dataTransfer.clearData();
-    }
+    setDragging(false);
+
+    const file = event.dataTransfer.files?.[0];
+    if (file) uploadFile(file);
   };
 
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
-  const removeFile = (index: number) => {
-    if (!selectedRow?.id) return;
-
-    const storedFiles = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+  const removeAttachment = async (index: number) => {
+    const updatedAttachments = allAttachments?.filter(
+      (attachment) => attachment.id != index
     );
-
-    if (!storedFiles[selectedRow.id]) return;
-
-    const updatedFiles: FileData[] = storedFiles[selectedRow.id].files.filter(
-      (_: FileData, i: number) => i !== index
-    );
-
-    if (updatedFiles.length === 0) {
-      delete storedFiles[selectedRow.id];
-    } else {
-      storedFiles[selectedRow.id].files = updatedFiles;
+    try {
+      await axios
+        .delete(
+          `https://api.dev.pca.planto.io/v1/businessFinancialManagement/delete-attachment/${index}`
+        )
+        .then((response) => setAllAttachments(updatedAttachments));
+    } catch (err) {
+      console.error("Error deleting attachment ", err);
     }
-
-    setSelectedFiles(
-      storedFiles[selectedRow.id] || { rowId: selectedRow?.id, files: [] }
-    );
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(storedFiles));
-    triggerStorageUpdate();
   };
 
   const saveNote = async () => {
@@ -407,7 +403,11 @@ export default function TransactionDetails({
             <InfoContainer>
               <BodyText>{noteTitle}</BodyText>
               <H4 color={BFMPalette.black800}>{noteDetails?.note}</H4>
-              <BodyText>{lastUpdated}</BodyText>
+              {noteDetails?.lastModifiedDate && (
+                <BodyText>
+                  {formatLastUpdated(noteDetails.lastModifiedDate)}
+                </BodyText>
+              )}
             </InfoContainer>
           </Descriptions>
           <>
@@ -505,7 +505,10 @@ export default function TransactionDetails({
         </DetailsContainer>
       ) : (
         <>
-          <FileUploadContainer onDragOver={handleDragOver} onDrop={handleDrop}>
+          <FileUploadContainer
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onDragLeave={handleDragLeave}>
             <FileContent>
               <IconContainer>
                 <Image
@@ -533,12 +536,12 @@ export default function TransactionDetails({
               type="file"
               ref={fileInputRef}
               style={{ display: "none" }}
-              onChange={handleFileUpload}
+              onChange={handleFileChange}
             />
           </FileUploadContainer>
-          {selectedFiles.files.length > 0 && (
+          {allAttachments && allAttachments.length > 0 && (
             <SelectedFilesContainer>
-              {selectedFiles.files.map((file, index) => (
+              {allAttachments.map((attachment, index) => (
                 <StatsContainer key={index}>
                   <Descriptions>
                     <Image
@@ -547,9 +550,10 @@ export default function TransactionDetails({
                       width={32}
                       height={40}
                     />
-                    <FileTypeWrap $fileExtension={file.extension}>
+                    <FileTypeWrap
+                      $fileExtension={getFileExtension(attachment.fileName)}>
                       <SmallHeading color={BFMPalette.white}>
-                        {file.extension}
+                        {getFileExtension(attachment.fileName)}
                       </SmallHeading>
                     </FileTypeWrap>
                     <InfoContainer>
@@ -558,11 +562,10 @@ export default function TransactionDetails({
                         $hoverColor={BFMPalette.purple375}
                         $hoverUnderline={true}
                         $transitionEffect="color 0.3s ease-in out"
-                        color={BFMPalette.black400}
-                        onClick={() => openFile(file.url)}>
-                        {file.name}
+                        color={BFMPalette.black400}>
+                        {attachment.fileName}
                       </H4>
-                      <BodyText>{file.size}</BodyText>
+                      <BodyText>{formatFileSize(attachment.fileSize)}</BodyText>
                     </InfoContainer>
                   </Descriptions>
                   <>
@@ -572,7 +575,7 @@ export default function TransactionDetails({
                       width={16}
                       height={16}
                       style={{ cursor: "pointer" }}
-                      onClick={() => removeFile(index)}
+                      onClick={() => removeAttachment(attachment.id)}
                     />
                   </>
                 </StatsContainer>

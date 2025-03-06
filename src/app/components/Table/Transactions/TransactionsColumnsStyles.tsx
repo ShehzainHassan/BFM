@@ -10,6 +10,7 @@ import DetailsModal from "../../Modal/Modal";
 import TransactionDetails from "../../TransactionDetails/TransactionDetails";
 import { AmountText } from "../Accounts/AccountsStyles";
 import { Transaction } from "./transactions";
+import axios from "axios";
 
 const DescriptionWrapper = styled.div`
   display: flex;
@@ -43,26 +44,22 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState("Details");
   const [hasAttachments, setHasAttachments] = useState(false);
-
-  const checkAttachments = () => {
-    const storedFiles = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
+  const checkAttachments = async () => {
+    const response = await axios.get(
+      `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${row.id}`
     );
-    setHasAttachments(!!storedFiles[row.id]?.files?.length);
+    if (
+      response.data.data.some(
+        (attachment: { txnId: string }) => attachment.txnId === row.id
+      )
+    ) {
+      setHasAttachments(true);
+    }
   };
 
   useEffect(() => {
     checkAttachments();
-    const handleStorageChange = () => {
-      checkAttachments();
-    };
-
-    document.addEventListener("localStorageUpdate", handleStorageChange);
-
-    return () => {
-      document.removeEventListener("localStorageUpdate", handleStorageChange);
-    };
-  }, [row.id]);
+  }, [row]);
 
   const handleOpenModal = (type: string) => {
     setSelected(type);
