@@ -46,7 +46,12 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
   const [hasAttachments, setHasAttachments] = useState(false);
   const checkAttachments = async () => {
     const response = await axios.get(
-      `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${row.id}`
+      `https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/attachments/${row.id}`,
+      {
+        headers: {
+          "ngrok-skip-browser-warning": "69420",
+        },
+      }
     );
     if (response.data.data.length > 0) {
       setHasAttachments(true);

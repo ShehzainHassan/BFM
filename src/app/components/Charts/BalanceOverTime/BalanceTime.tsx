@@ -1,5 +1,7 @@
 "use client";
+import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
+import { formatCurrency, formatNumberWithCommas } from "@/utils";
 import {
   Area,
   AreaChart,
@@ -10,9 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
-import { AreaChartData } from "./AreaChartData";
-import { CURRENCY, HKD_EQUIVALANT } from "@/constants";
-import { formatCurrency } from "@/utils";
+import { AreaChartData } from "./BalanceOverTime";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -55,7 +55,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-const CustomTick = (props: {
+const CustomYAxisTick = (props: {
   x: number;
   y: number;
   payload: { value: string };
@@ -65,13 +65,13 @@ const CustomTick = (props: {
     <text
       x={x}
       y={y}
-      dx={-10}
+      dx={-30}
       dy={4}
       textAnchor="start"
       fontSize={12}
       fontWeight={400}
       fill={BFMPalette.black100}>
-      {payload.value}
+      {formatNumberWithCommas(Number(payload.value))}
     </text>
   );
 };
@@ -149,7 +149,7 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
             tickLine={false}
             interval={0}
             tick={
-              <CustomTick
+              <CustomYAxisTick
                 x={0}
                 y={0}
                 payload={{
@@ -157,6 +157,7 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
                 }}
               />
             }
+            tickFormatter={(value) => formatNumberWithCommas(value)}
             tickMargin={20}
           />
           <Tooltip content={<CustomTooltip />} />

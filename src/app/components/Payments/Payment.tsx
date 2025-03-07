@@ -1,10 +1,10 @@
 import { BFMPalette } from "@/Theme";
 import { useState } from "react";
 import styled from "styled-components";
-import AreaChartGraph from "../Charts/AreaChart/AreaChart";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { useData } from "@/DataContext";
 import CashflowChart from "../Charts/CashflowChart/CashflowChart";
+import AreaChartGraph from "../Charts/BalanceOverTime/BalanceTime";
 
 const Container = styled("div")`
   display: flex;

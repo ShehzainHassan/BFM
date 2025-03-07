@@ -17,7 +17,7 @@ import { Inflows } from "./app/components/Table/Inflows/inflows";
 import { Outflows } from "./app/components/Table/Outflows/outflows";
 import { PieData } from "./app/components/Charts/PieChart/PieChartData";
 import { BarData } from "./app/components/Charts/BarChart/BarChartData";
-import { AreaChartData } from "./app/components/Charts/AreaChart/AreaChartData";
+import { AreaChartData } from "./app/components/Charts/BalanceOverTime/BalanceOverTime";
 import { CashFlowData } from "./app/components/Charts/CashflowChart/CashflowData";
 import { LineChartData } from "./app/components/Charts/CashflowChart/LineChartData";
 import useTranslation from "./translations";

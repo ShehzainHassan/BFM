@@ -16,7 +16,7 @@ import {
   CustomTooltipContainer,
   CustomTooltipLabel,
   CustomTooltipValue,
-} from "../AreaChart/AreaChart";
+} from "../BalanceOverTime/BalanceTime";
 
 interface ChartProps {
   data: BarData[];

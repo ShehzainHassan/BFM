@@ -215,7 +215,12 @@ export default function TransactionDetails({
     try {
       await axios
         .get(
-          `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${selectedRow.id}`
+          `https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/attachments/${selectedRow.id}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
         )
         .then((response) => setAllAttachments(response.data.data));
     } catch (err) {
@@ -290,11 +295,12 @@ export default function TransactionDetails({
     try {
       await axios
         .post(
-          "https://api.dev.pca.planto.io/v1/businessFinancialManagement/upload",
+          "https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/upload",
           formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              "ngrok-skip-browser-warning": "69420",
             },
           }
         )
@@ -332,7 +338,12 @@ export default function TransactionDetails({
     try {
       await axios
         .delete(
-          `https://api.dev.pca.planto.io/v1/businessFinancialManagement/delete-attachment/${index}`
+          `https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/delete-attachment/${index}`,
+          {
+            headers: {
+              "ngrok-skip-browser-warning": "69420",
+            },
+          }
         )
         .then((response) => setAllAttachments(updatedAttachments));
     } catch (err) {
@@ -340,6 +351,25 @@ export default function TransactionDetails({
     }
   };
 
+  const openFile = (attachment: any) => {
+    if (!attachment?.content || !attachment?.mimeType) return;
+
+    const byteCharacters = atob(attachment.content);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    const fileBlob = new Blob([byteArray], { type: attachment.mimeType });
+
+    const url = URL.createObjectURL(fileBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = attachment.fileName || "download_file";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   const saveNote = async () => {
     try {
       const response = await axios.post(
@@ -561,7 +591,8 @@ export default function TransactionDetails({
                         $hoverColor={BFMPalette.purple375}
                         $hoverUnderline={true}
                         $transitionEffect="color 0.3s ease-in out"
-                        color={BFMPalette.black400}>
+                        color={BFMPalette.black400}
+                        onClick={() => openFile(attachment)}>
                         {attachment.fileName}
                       </H4>
                       <BodyText>{formatFileSize(attachment.fileSize)}</BodyText>

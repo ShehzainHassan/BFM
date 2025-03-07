@@ -35,6 +35,9 @@ export const getFileExtension = (fileName: string): string => {
   return fileName.split(".").pop()?.toUpperCase() || "";
 };
 
+export const formatNumberWithCommas = (value: number): string => {
+  return value.toLocaleString();
+};
 export const formatCurrency = (input: string, decimals?: number): string => {
   if (!input) return "";
 
