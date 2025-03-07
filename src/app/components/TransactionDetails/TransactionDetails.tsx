@@ -202,7 +202,6 @@ export default function TransactionDetails({
   const [editText, setEditText] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = useState(false);
-
   const getNoteDetails = async () => {
     const response = await axios.get(
       `https://api.dev.pca.planto.io/v1/businessFinancialManagement/note/${selectedRow.id}`

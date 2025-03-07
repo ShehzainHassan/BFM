@@ -48,12 +48,10 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
     const response = await axios.get(
       `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${row.id}`
     );
-    if (
-      response.data.data.some(
-        (attachment: { txnId: string }) => attachment.txnId === row.id
-      )
-    ) {
+    if (response.data.data.length > 0) {
       setHasAttachments(true);
+    } else {
+      setHasAttachments(false);
     }
   };
 
