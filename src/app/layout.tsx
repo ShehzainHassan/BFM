@@ -14,14 +14,17 @@ const inter = Inter({
 const ContentWrapper = styled("div")`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  align-items: center;
+  justify-content: center;
   margin-left: 76px;
 `;
 const MainContent = styled("main")`
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 1300px;
   padding: 32px;
+  width: 100%;
   overflow: auto;
 `;
 

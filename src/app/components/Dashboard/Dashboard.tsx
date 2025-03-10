@@ -35,24 +35,25 @@ const SubContainer = styled("div")`
   grid-template-columns: 6.2fr 5.8fr;
   gap: 20px;
 `;
-const Header = styled("div")`
+export const Header = styled("div")`
   display: flex;
+  align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid ${BFMPalette.gray100};
   background-color: ${BFMPalette.white25};
   padding: 14px 16px;
 `;
-const PaymentsContainer = styled("div")`
+export const PaymentsContainer = styled("div")`
   display: flex;
   flex-direction: column;
   border-radius: 12px;
   max-width: 1300px;
 `;
-const SearchAndFilter = styled("div")`
+export const SearchAndFilter = styled("div")`
   display: flex;
   gap: 12px;
 `;
-const Filter = styled("div")`
+export const Filter = styled("div")`
   display: flex;
   align-items: center;
   padding: 10px;
