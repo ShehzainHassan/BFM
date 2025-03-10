@@ -11,6 +11,7 @@ import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import { ExpandedColumns } from "./ExpandedTable/ExpandedColumn";
 import { useData } from "@/DataContext";
+import useTranslation from "@/translations";
 
 export const TableContainer = styled.div`
   padding: 12px 16px 16px 16px;
@@ -94,6 +95,7 @@ export default function DataTable<T>({
 
   const [expandedRowIds, setExpandedRowIds] = useState<Set<string>>(new Set());
   const { withdrawalRecurring } = useData();
+  const { t } = useTranslation();
   const handleExpandRow = (rowId: string) => {
     setExpandedRowIds((prev) => {
       const newExpandedRowIds = new Set(prev);
@@ -133,7 +135,8 @@ export default function DataTable<T>({
           <DataRow $columns={columns.length} $columnWidths={columnWidths}>
             {row.getVisibleCells().map((cell) => {
               const isExpandableRow =
-                cell.column.id === "TRANSACTION_DESCRIPTION";
+                cell.column.id ===
+                t("tables.recurring_transactions.description");
               const isRevenueRow =
                 (row.original as any).inflows === "totalRevenue" ||
                 (row.original as any).inflows === "revenueGrowth" ||

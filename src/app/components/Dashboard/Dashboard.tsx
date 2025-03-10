@@ -13,10 +13,11 @@ import Notifications from "../Notifications/Notifications";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import Search from "../Search/Search";
 import DataTable from "../Table/Table";
-import { TransactionColumns } from "../Table/Transactions/TransactionsColumns";
-import { AccountsColumns } from "../Table/Accounts/AccountsColumns";
+import { useTransactionColumns } from "../Table/Transactions/TransactionsColumns";
 import Pagination from "../Pagination/Pagination";
 import { AccountData } from "../Table/Accounts/accounts";
+import { useAccountsColumns } from "../Table/Accounts/AccountsColumns";
+import { formatYearMonth } from "@/utils";
 
 const MainContainer = styled("div")`
   display: grid;
@@ -69,9 +70,9 @@ export default function Dashboard() {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const { notifications, transactions, accounts } = useData();
-
+  const accountColumns = useAccountsColumns();
+  const transactionColumns = useTransactionColumns();
   const [currentPage, setCurrentPage] = useState(0);
-
   const data: Transaction[] | AccountData[] =
     selectedTab === tabs[0] ? transactions : accounts;
 
@@ -133,14 +134,14 @@ export default function Dashboard() {
           <DataTable
             key="transactions"
             data={paginatedData as Transaction[]}
-            columns={TransactionColumns}
+            columns={transactionColumns}
             columnWidths={["1.2fr", "4fr", "2fr", "1.5fr", "2fr", "1.3fr"]}
           />
         ) : (
           <DataTable
             key="accounts"
             data={paginatedData as AccountData[]}
-            columns={AccountsColumns}
+            columns={accountColumns}
             searchQuery={searchQuery}
             searchColumns={["bank", "account"]}
             columnWidths={["2.5fr", "2.5fr", "2.5fr", "2.5fr", "2fr"]}

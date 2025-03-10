@@ -83,7 +83,7 @@ export default function Notifications({ notifications }: NotificationsProps) {
                   description={notification.description}>
                   <DueDate payload={notification.payload as DueDatePayload} />
                   <ButtonContainer>
-                    <ButtonSecondary />
+                    <ButtonSecondary btnText="Send Reminder" />
                   </ButtonContainer>
                 </Card>
               );

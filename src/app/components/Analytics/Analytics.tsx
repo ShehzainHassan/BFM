@@ -12,13 +12,13 @@ import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import RenderBadgeGroup from "../BadgeGroup/BadgeGroup";
 import NoResults from "../NoRecordFound/NoResuts";
 import DataTable from "../Table/Table";
-import { BuyerSupplierAnalysisColumns } from "../Table/BuyerSupplierAnalysis/BuyerSupplierAnalysisColumns";
-import { InflowsColumns } from "../Table/Inflows/InflowsColumns";
-import { OutflowsColumns } from "../Table/Outflows/OutflowsColumns";
-import { RecurringTransactionColumns } from "../Table/RecurringTransactions/RecurringTransactionColumn";
-import { TransitionHighlightColumns } from "../Table/TransitionHighlight/TransitionHighlightColumn";
+import { useInflowsColumns } from "../Table/Inflows/InflowsColumns";
+import { useOutflowsColumns } from "../Table/Outflows/OutflowsColumns";
+import { useRecurringTransactionColumns } from "../Table/RecurringTransactions/RecurringTransactionColumn";
+import { useTransitionHighlightColumns } from "../Table/TransitionHighlight/TransitionHighlightColumn";
 import Pagination from "../Pagination/Pagination";
 import useTranslation from "@/translations";
+import { useBuyerSupplierAnalysisColumns } from "../Table/BuyerSupplierAnalysis/BuyerSupplierAnalysisColumns";
 
 const TabContainer1 = styled("div")`
   padding: 20px 16px 0px 16px;
@@ -60,7 +60,11 @@ export default function Analytics() {
 
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const [selectedButton, setSelectedButton] = useState(tabButtons[0]);
-
+  const buyerSupplierColumns = useBuyerSupplierAnalysisColumns();
+  const recurringTransactionsColumns = useRecurringTransactionColumns();
+  const transitionHighlightColumns = useTransitionHighlightColumns();
+  const inflowsColumns = useInflowsColumns();
+  const outflowsColums = useOutflowsColumns();
   const {
     reports,
     deposits,
@@ -167,7 +171,7 @@ export default function Analytics() {
         selectedButton === tabButtons[0] && (
           <DataTable
             data={paginatedData as BuyerSupplierAnalysis[]}
-            columns={BuyerSupplierAnalysisColumns}
+            columns={buyerSupplierColumns}
           />
         )
       )}
@@ -181,7 +185,7 @@ export default function Analytics() {
         selectedButton === tabButtons[1] && (
           <DataTable
             data={paginatedData as BuyerSupplierAnalysis[]}
-            columns={BuyerSupplierAnalysisColumns}
+            columns={buyerSupplierColumns}
           />
         )
       )}
@@ -196,13 +200,13 @@ export default function Analytics() {
             <DataTable
               title="Inflows"
               data={inflows}
-              columns={InflowsColumns}
+              columns={inflowsColumns}
               columnWidths={["2.4fr", "2.4fr", "2.4fr", "2.4fr", "2.4fr"]}
             />
             <DataTable
               title="Outflows"
               data={outflows}
-              columns={OutflowsColumns}
+              columns={outflowsColums}
               columnWidths={["2.4fr", "2.4fr", "2.4fr", "2.4fr", "2.4fr"]}
             />
           </InflowOutflowContainer>
@@ -218,7 +222,7 @@ export default function Analytics() {
         selectedButton === tabButtons[0] && (
           <DataTable
             data={paginatedData as RecurringTransaction[]}
-            columns={RecurringTransactionColumns}
+            columns={recurringTransactionsColumns}
             columnWidths={[
               "2.23fr",
               "1.95fr",
@@ -239,7 +243,7 @@ export default function Analytics() {
         selectedButton === tabButtons[1] && (
           <DataTable
             data={paginatedData as RecurringTransaction[]}
-            columns={RecurringTransactionColumns}
+            columns={recurringTransactionsColumns}
             columnWidths={[
               "2.25fr",
               "1.95fr",
@@ -261,7 +265,7 @@ export default function Analytics() {
         selectedButton === tabButtons[0] && (
           <DataTable
             data={paginatedData as TransitionHighlight[]}
-            columns={TransitionHighlightColumns}
+            columns={transitionHighlightColumns}
             columnWidths={[
               "1.21fr",
               "1.19fr",
@@ -284,7 +288,7 @@ export default function Analytics() {
         selectedButton === tabButtons[1] && (
           <DataTable
             data={paginatedData as TransitionHighlight[]}
-            columns={TransitionHighlightColumns}
+            columns={transitionHighlightColumns}
             columnWidths={[
               "1.21fr",
               "1.19fr",
