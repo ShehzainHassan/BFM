@@ -7,14 +7,20 @@ import Invoices from "./invoices/page";
 import ESG from "./components/ESG/ESG";
 import { JSX } from "react";
 import Calender from "./components/Calender/Calender";
+import SelectDropDown from "./components/SelectDropDown/SelectDropDown";
+import CreateNewInvoice from "./components/CreateNewInvoice/CreateNewInvoice";
 
 export default function Page() {
   const { t } = useTranslation();
-  const { selectedTab } = useData();
+  const { selectedTab, isCreatingInvoice } = useData();
   const componentMap: Record<string, JSX.Element> = {
     [t("navbar.tabs.dashboard")]: <Dashboard />,
     [t("navbar.tabs.analytics")]: <Analytics />,
-    [t("navbar.tabs.invoices")]: <Invoices />,
+    [t("navbar.tabs.invoices")]: isCreatingInvoice ? (
+      <CreateNewInvoice />
+    ) : (
+      <Invoices />
+    ),
     [t("navbar.tabs.calendar")]: <Calender />,
     [t("navbar.tabs.esg")]: <ESG />,
   };

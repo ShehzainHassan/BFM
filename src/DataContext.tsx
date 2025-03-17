@@ -46,6 +46,8 @@ interface DataContextType {
   lineChartData: LineChartData[];
   selectedTab: string;
   setSelectedTab: (tab: string) => void;
+  isCreatingInvoice: boolean;
+  setIsCreatingInvoice: (value: boolean) => void;
 }
 interface ParsedTransaction {
   transactionId: string;
@@ -116,6 +118,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const { rawData, reports, metrics, notifications } = MOCK_DATA.data;
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(t("navbar.tabs.dashboard"));
+  const [isCreatingInvoice, setIsCreatingInvoice] = useState(false);
   const transformTransactions = (
     parsedTransaction: ParsedTransaction[]
   ): Transaction[] => {
@@ -428,6 +431,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         lineChartData,
         selectedTab,
         setSelectedTab,
+        isCreatingInvoice,
+        setIsCreatingInvoice,
       }}>
       {children}
     </DataContext.Provider>

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useData } from "@/DataContext";
 import Image from "next/image";
 import { convertToYYYYMM, generateMonths, getUniqueYears } from "@/utils";
-import SelectDropDown from "../SelectDropDown/SelectDropDown";
+import SelectDropDown from "../MonthDropDown/MonthDropDown";
 import PieGraph from "../Charts/PieChart/Pie";
 import { PIE_COLORS_1 } from "../Charts/PieChart/PieChartData";
 import ESGCard from "../ESGCard/ESGCard";
@@ -14,6 +14,7 @@ import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import BarGraph from "../Charts/BarChart/BarChart";
 import ESGNotifications from "../ESGNotifications/ESGNotifications";
 import useTranslation from "@/translations";
+import MonthDropDown from "../MonthDropDown/MonthDropDown";
 
 const Container = styled("div")`
   display: grid;
@@ -158,7 +159,7 @@ export default function ESG() {
         <PieChartContainer>
           <HeadingContainer>
             <Heading>{t("charts.co2_emission_text")}</Heading>
-            <SelectDropDown
+            <MonthDropDown
               selectedMonths={selectedMonths}
               setSelectedMonths={setSelectedMonths}
               months={months}

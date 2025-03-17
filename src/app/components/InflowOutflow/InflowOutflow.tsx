@@ -2,14 +2,13 @@ import { HKD_EQUIVALANT } from "@/constants";
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { formatCurrency, generateMonths } from "@/utils";
-import { Select } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
 import Category from "../Category/Category";
 import PieGraph from "../Charts/PieChart/Pie";
-import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
-import SelectDropDown from "../SelectDropDown/SelectDropDown";
 import { PIE_COLORS_2 } from "../Charts/PieChart/PieChartData";
+import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import MonthDropDown from "../MonthDropDown/MonthDropDown";
 
 const Container = styled("div")`
   display: flex;
@@ -84,7 +83,7 @@ export default function InflowOutflow() {
           selectedTab={selectedTab}
           onTabChange={setSelectedTab}
         />
-        <SelectDropDown
+        <MonthDropDown
           selectedMonths={selectedMonths}
           setSelectedMonths={setSelectedMonths}
           months={months}

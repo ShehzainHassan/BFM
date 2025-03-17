@@ -83,6 +83,24 @@ const i18n = new I18n({
         total_amount: "TOTAL AMOUNT",
       },
     },
+    invoice_creation: {
+      dropdown: {
+        label: "Bill to",
+        options: {
+          blue_fund: "Blue Fund Pte Ltd",
+          red_fund: "Red Fund Pte Ltd",
+          green_fund: "Green Fund Pte Ltd",
+        },
+      },
+      subject: {
+        label: "Subject",
+        placeholder: "Design service per june 2023",
+      },
+      invoice_detail: {
+        label: "Invoice Detail",
+        placeholder: "Summary (e.g project name, descriptions of invoice)",
+      },
+    },
   },
 });
 

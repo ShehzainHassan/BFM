@@ -53,7 +53,7 @@ interface NavbarProps {
 }
 export default function Navbar({ navItems }: NavbarProps) {
   const { t } = useTranslation();
-  const { selectedTab, setSelectedTab } = useData();
+  const { selectedTab, setSelectedTab, setIsCreatingInvoice } = useData();
 
   const getPageTitle = () => {
     if (
@@ -99,7 +99,8 @@ export default function Navbar({ navItems }: NavbarProps) {
               $textColor={BFMPalette.white}
               $borderColor={BFMPalette.purple500}
               $bgColor={BFMPalette.purple500}
-              imageSrc="/images/plus.png">
+              imageSrc="/images/plus.png"
+              onClick={() => setIsCreatingInvoice(true)}>
               {t("nav_buttons.createInvoice")}
             </NavButton>
           )}
