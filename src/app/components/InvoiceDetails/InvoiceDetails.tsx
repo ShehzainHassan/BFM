@@ -4,6 +4,9 @@ import styled from "styled-components";
 import InputCurrency from "../InputCurrency/InputCurrency";
 import InputDate from "../InputDate/InputDate";
 import Checkbox from "../Checkbox/Checkbox";
+import { BFMPalette } from "@/Theme";
+import Image from "next/image";
+import InvoiceItem from "../InvoiceItem/InvoiceItem";
 
 const Container = styled("div")`
   display: flex;
@@ -15,6 +18,7 @@ const CurrencyDateContainer = styled("div")`
   align-items: center;
   gap: 20px;
 `;
+
 export default function InvoiceDetails() {
   const { t } = useTranslation();
   return (
@@ -31,6 +35,7 @@ export default function InvoiceDetails() {
         <InputCurrency label="Currency" />
         <InputDate label="Invoice Due" />
       </CurrencyDateContainer>
+      <InvoiceItem />
       <Checkbox label="Add payment method" />
       <Checkbox label="Add discount" />
     </Container>

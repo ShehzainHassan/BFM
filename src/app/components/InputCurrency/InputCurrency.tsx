@@ -71,12 +71,14 @@ interface InputCurrencyProps {
   label?: string;
   placeholder?: string;
   isRequired?: boolean;
+  showLabel?: boolean;
 }
 
 export default function InputCurrency({
   label = "Amount",
   placeholder = "Enter amount",
   isRequired = true,
+  showLabel = true,
 }: InputCurrencyProps) {
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("USD");
@@ -84,7 +86,7 @@ export default function InputCurrency({
   return (
     <Container>
       <LabelWrapper>
-        <H4>{label}</H4>
+        {showLabel && <H4>{label}</H4>}
         {isRequired && <H4 color={BFMPalette.purple500}>*</H4>}
       </LabelWrapper>
       <InputWrapper>

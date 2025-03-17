@@ -34,19 +34,21 @@ interface InputWithLabelProps {
   label?: string;
   placeholder?: string;
   isRequired?: boolean;
+  showLabel?: boolean;
 }
 
 export default function InputWithLabel({
   label = "Label",
   placeholder = "Placeholder",
   isRequired = true,
+  showLabel = true,
 }: InputWithLabelProps) {
   const [text, setText] = useState("");
 
   return (
     <Container>
       <LabelWrapper>
-        <H4>{label}</H4>
+        {showLabel && <H4>{label}</H4>}
         {isRequired && <H4 color={BFMPalette.purple500}>*</H4>}
       </LabelWrapper>
       <StyledInput
