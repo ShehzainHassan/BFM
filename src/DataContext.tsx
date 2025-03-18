@@ -48,6 +48,31 @@ interface DataContextType {
   setSelectedTab: (tab: string) => void;
   isCreatingInvoice: boolean;
   setIsCreatingInvoice: (value: boolean) => void;
+  items: InvoiceItem[];
+  addItem: () => void;
+  removeItem: (id: number) => void;
+  updateItem: (id: number, field: keyof InvoiceItem, value: string) => void;
+  currency: string;
+  setCurrency: (currency: string) => void;
+  handleCurrencyChange: (newCurrency: string) => void;
+  invoiceSubject: string;
+  setInvoiceSubject: (value: string) => void;
+  invoiceDetails: string;
+  setInvoiceDetails: (value: string) => void;
+  dueDate: string;
+  setDueDate: (value: string) => void;
+  companyName: string;
+  setCompanyName: (value: string) => void;
+  companyAddress: string;
+  setCompanyAddress: (value: string) => void;
+}
+
+export interface InvoiceItem {
+  id: number;
+  description: string;
+  qty: number;
+  price: number;
+  currency: string;
 }
 interface ParsedTransaction {
   transactionId: string;
@@ -119,6 +144,21 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(t("navbar.tabs.dashboard"));
   const [isCreatingInvoice, setIsCreatingInvoice] = useState(false);
+  const [currency, setCurrency] = useState("USD");
+  const [invoiceSubject, setInvoiceSubject] = useState("");
+  const [invoiceDetails, setInvoiceDetails] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [items, setItems] = useState([
+    {
+      id: Date.now(),
+      description: "Enter item description",
+      qty: 1,
+      price: 0,
+      currency: currency,
+    },
+  ]);
   const transformTransactions = (
     parsedTransaction: ParsedTransaction[]
   ): Transaction[] => {
@@ -398,6 +438,40 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       },
     }))
   );
+  const addItem = () => {
+    setItems([
+      ...items,
+      {
+        id: Date.now(),
+        description: "Enter item description",
+        qty: 1,
+        price: 0,
+        currency,
+      },
+    ]);
+  };
+
+  const removeItem = (id: number) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
+
+  const updateItem = (id: number, key: string, value: any) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === id ? { ...item, [key]: value } : item
+      )
+    );
+  };
+  const handleCurrencyChange = (newCurrency: string) => {
+    setCurrency(newCurrency);
+
+    setItems((prevItems) =>
+      prevItems.map((item) => ({
+        ...item,
+        currency: newCurrency,
+      }))
+    );
+  };
   const pieData = transformESGData(reports.esgSummary);
   const barData = transformBarData(reports.esgSummary);
   const depositsDashboard = transformReportsData(reports.incomeByCategory);
@@ -433,6 +507,23 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setSelectedTab,
         isCreatingInvoice,
         setIsCreatingInvoice,
+        items,
+        addItem,
+        removeItem,
+        updateItem,
+        currency,
+        setCurrency,
+        handleCurrencyChange,
+        invoiceSubject,
+        setInvoiceSubject,
+        invoiceDetails,
+        setInvoiceDetails,
+        dueDate,
+        setDueDate,
+        companyName,
+        setCompanyName,
+        companyAddress,
+        setCompanyAddress,
       }}>
       {children}
     </DataContext.Provider>

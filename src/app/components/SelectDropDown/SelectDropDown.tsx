@@ -1,7 +1,8 @@
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
-import { Description, H3Primary } from "@/Typography";
-import { useState } from "react";
+import { Description } from "@/Typography";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -54,7 +55,14 @@ export default function SelectDropDown() {
   const options = Object.entries(t("invoice_creation.dropdown.options")).map(
     ([value, label]) => ({ value, label })
   );
-  const [selected, setSelected] = useState(options[0].value);
+
+  const { companyAddress, setCompanyAddress } = useData();
+
+  useEffect(() => {
+    if (!companyAddress && options.length > 0) {
+      setCompanyAddress(options[0].value);
+    }
+  }, [companyAddress, options]);
 
   return (
     <Container>
@@ -62,7 +70,9 @@ export default function SelectDropDown() {
         <Description>{t("invoice_creation.dropdown.label")}</Description>
       </Label>
       <SelectWrapper>
-        <Select value={selected} onChange={(e) => setSelected(e.target.value)}>
+        <Select
+          value={companyAddress}
+          onChange={(e) => setCompanyAddress(e.target.value)}>
           {options.map((option) => (
             <Option key={option.value} value={option.value}>
               {option.label}

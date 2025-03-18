@@ -7,6 +7,7 @@ export const BFMPalette = {
   white100: "#fffafe",
   gray100: "#e9eaeb",
   gray200: "#D5D7DA",
+  gray300: "#f5f5f5",
   gray700: "#717680",
 
   red50: "#fee4e2",

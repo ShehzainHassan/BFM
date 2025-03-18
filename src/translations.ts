@@ -10,6 +10,7 @@ const i18n = new I18n({
         invoices: "Invoices",
         calendar: "Business Calendar",
         esg: "ESG",
+        create_Invoice: "Create New Invoice",
       },
       tabs: {
         dashboard: "Dashboard",
@@ -23,6 +24,8 @@ const i18n = new I18n({
       schedule: "Schedule Event",
       createEvent: "Create New Event",
       createInvoice: "Create New Invoice",
+      cancel: "Cancel",
+      save_Invoice: "Save Invoice",
     },
     notification_title: {
       dashboard: "For You",

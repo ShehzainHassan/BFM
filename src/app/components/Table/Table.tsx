@@ -66,6 +66,7 @@ interface TableProps<T> {
   searchColumns?: (keyof T)[];
   title?: string;
   columnWidths?: string[];
+  showHeader?: boolean;
 }
 export default function DataTable<T>({
   data,
@@ -74,6 +75,7 @@ export default function DataTable<T>({
   searchColumns = [],
   title,
   columnWidths,
+  showHeader = true,
 }: TableProps<T>) {
   const filteredData = useMemo(() => {
     if (!searchQuery) return data;
@@ -115,20 +117,22 @@ export default function DataTable<T>({
           <TableTitle color={BFMPalette.black800}>{title}</TableTitle>
         </TitleContainer>
       )}
-      <DataRow $columns={columns.length} $columnWidths={columnWidths}>
-        {table.getHeaderGroups().map((headerGroup) =>
-          headerGroup.headers.map((header) => (
-            <HeaderCell key={header.id}>
-              <H3 color={BFMPalette.gray700}>
-                {flexRender(
-                  header.column.columnDef.header,
-                  header.getContext()
-                )}
-              </H3>
-            </HeaderCell>
-          ))
-        )}
-      </DataRow>
+      {showHeader && (
+        <DataRow $columns={columns.length} $columnWidths={columnWidths}>
+          {table.getHeaderGroups().map((headerGroup) =>
+            headerGroup.headers.map((header) => (
+              <HeaderCell key={header.id}>
+                <H3 color={BFMPalette.gray700}>
+                  {flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+                </H3>
+              </HeaderCell>
+            ))
+          )}
+        </DataRow>
+      )}
 
       {table.getRowModel().rows.map((row) => (
         <React.Fragment key={row.id}>

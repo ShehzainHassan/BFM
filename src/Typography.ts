@@ -35,6 +35,13 @@ export const H3 = styled.h2<{ color?: string }>`
   line-height: 18px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
+export const SmallH3 = styled.h2<{ color?: string }>`
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 16px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+`;
+
 export const H3Primary = styled.h3<{ color?: string }>`
   font-weight: 600;
   font-size: 14px;
@@ -69,6 +76,13 @@ export const H4 = styled.h4<{
     text-decoration: ${({ $hoverUnderline }) =>
       $hoverUnderline ? "underline" : "none"};
   }
+`;
+
+export const SmallH5 = styled.h5<{ color?: string }>`
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 16px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 
 export const H5 = styled.h5<{ color?: string }>`

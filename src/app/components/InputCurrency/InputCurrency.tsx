@@ -13,25 +13,23 @@ const Container = styled.div`
 `;
 
 const InputWrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   border: 1px solid ${BFMPalette.gray200};
   padding: 4px 12px;
   background-color: ${BFMPalette.white};
   border-radius: 8px;
-  position: relative;
   gap: 8px;
+  max-width: 200px;
 `;
 
 const StyledInput = styled.input`
-  flex: 1;
   border: none;
   outline: none;
   font-size: 16px;
   color: ${BFMPalette.black800};
   font-family: "Inter", Arial, Helvetica, sans-serif;
   background: transparent;
-
   &::placeholder {
     color: ${BFMPalette.gray700};
   }
@@ -72,6 +70,10 @@ interface InputCurrencyProps {
   placeholder?: string;
   isRequired?: boolean;
   showLabel?: boolean;
+  price: number;
+  onChangeAmount: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  currency: string;
+  onChangeCurrency: (value: string) => void;
 }
 
 export default function InputCurrency({
@@ -79,10 +81,11 @@ export default function InputCurrency({
   placeholder = "Enter amount",
   isRequired = true,
   showLabel = true,
+  price = 0,
+  currency = "USD",
+  onChangeAmount,
+  onChangeCurrency,
 }: InputCurrencyProps) {
-  const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState("USD");
-
   return (
     <Container>
       <LabelWrapper>
@@ -92,7 +95,7 @@ export default function InputCurrency({
       <InputWrapper>
         <StyledSelect
           value={currency}
-          onChange={(value) => setCurrency(value as string)}
+          onChange={(value) => onChangeCurrency(value as string)}
           popupMatchSelectWidth={false}>
           <Option value="USD">USD</Option>
           <Option value="HKD">HKD</Option>
@@ -101,8 +104,8 @@ export default function InputCurrency({
         <StyledInput
           type="number"
           placeholder={placeholder}
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          value={price}
+          onChange={onChangeAmount}
         />
       </InputWrapper>
     </Container>

@@ -53,19 +53,27 @@ interface NavbarProps {
 }
 export default function Navbar({ navItems }: NavbarProps) {
   const { t } = useTranslation();
-  const { selectedTab, setSelectedTab, setIsCreatingInvoice } = useData();
-
+  const {
+    selectedTab,
+    setSelectedTab,
+    isCreatingInvoice,
+    setIsCreatingInvoice,
+  } = useData();
   const getPageTitle = () => {
     if (
       selectedTab === t("navbar.tabs.dashboard") ||
       selectedTab === t("navbar.tabs.analytics")
     )
       return t("navbar.titles.dashboard");
-    if (selectedTab === t("navbar.tabs.invoices"))
+    if (selectedTab === t("navbar.tabs.invoices") && !isCreatingInvoice)
       return t("navbar.titles.invoices");
     if (selectedTab === t("navbar.tabs.calendar"))
       return t("navbar.titles.calendar");
     if (selectedTab === t("navbar.tabs.esg")) return t("navbar.titles.esg");
+    if (isCreatingInvoice) {
+      return t("navbar.titles.create_Invoice");
+    }
+
     return "Page Title";
   };
   const pageTitle = getPageTitle();
@@ -94,7 +102,7 @@ export default function Navbar({ navItems }: NavbarProps) {
               {t("nav_buttons.createEvent")}
             </NavButton>
           )}
-          {selectedTab === t("navbar.tabs.invoices") && (
+          {selectedTab === t("navbar.tabs.invoices") && !isCreatingInvoice && (
             <NavButton
               $textColor={BFMPalette.white}
               $borderColor={BFMPalette.purple500}
@@ -102,6 +110,23 @@ export default function Navbar({ navItems }: NavbarProps) {
               imageSrc="/images/plus.png"
               onClick={() => setIsCreatingInvoice(true)}>
               {t("nav_buttons.createInvoice")}
+            </NavButton>
+          )}
+          {selectedTab === t("navbar.tabs.invoices") && isCreatingInvoice && (
+            <NavButton
+              $bgColor={BFMPalette.white}
+              $textColor={BFMPalette.black400}>
+              {t("nav_buttons.cancel")}
+            </NavButton>
+          )}
+          {selectedTab === t("navbar.tabs.invoices") && isCreatingInvoice && (
+            <NavButton
+              $textColor={BFMPalette.white}
+              $borderColor={BFMPalette.purple500}
+              $bgColor={BFMPalette.purple500}
+              imagePosition="right"
+              imageSrc="/images/arrow-right.png">
+              {t("nav_buttons.save_Invoice")}
             </NavButton>
           )}
         </ButtonsContainer>

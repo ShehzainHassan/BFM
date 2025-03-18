@@ -3,6 +3,7 @@ import { H4 } from "@/Typography";
 import { useState, useRef } from "react";
 import styled from "styled-components";
 import { CalendarOutlined } from "@ant-design/icons";
+import { useData } from "@/DataContext";
 
 const Container = styled.div`
   display: flex;
@@ -61,7 +62,7 @@ export default function InputDate({
   label = "Select Date",
   isRequired = true,
 }: InputDateProps) {
-  const [date, setDate] = useState("");
+  const { dueDate, setDueDate } = useData();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleIconClick = () => {
@@ -80,8 +81,8 @@ export default function InputDate({
         <StyledInput
           ref={inputRef}
           type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
         />
         <CalendarIcon />
       </InputWrapper>
