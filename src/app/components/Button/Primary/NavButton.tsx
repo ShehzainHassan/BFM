@@ -9,7 +9,7 @@ interface ButtonProps {
   imageSrc?: string;
   imagePosition?: "left" | "right";
   onClick?: () => void;
-  isDisabled?: boolean;
+  $isDisabled?: boolean;
   children: React.ReactNode;
 }
 
@@ -26,14 +26,14 @@ const StyledButton = styled.button<ButtonProps>`
   font-weight: 600;
   line-height: 20px;
   height: 36px;
-  cursor: ${({ isDisabled }) => (isDisabled ? "not-allowed" : "pointer")};
+  cursor: ${({ $isDisabled }) => ($isDisabled ? "not-allowed" : "pointer")};
   background-color: ${({ $bgColor }) => $bgColor || BFMPalette.purple500};
   color: ${({ $textColor }) => $textColor || BFMPalette.black100};
-  opacity: ${({ isDisabled }) => (isDisabled ? "0.5" : "1")};
+  opacity: ${({ $isDisabled }) => ($isDisabled ? "0.5" : "1")};
   transition: all 0.3s ease;
 
   &:hover {
-    opacity: ${({ isDisabled }) => (isDisabled ? "0.5" : "0.85")};
+    opacity: ${({ $isDisabled }) => ($isDisabled ? "0.5" : "0.85")};
   }
 `;
 
@@ -53,16 +53,16 @@ export default function NavButton({
   imagePosition = "left",
   children,
   onClick,
-  isDisabled = false,
+  $isDisabled = false,
 }: ButtonProps) {
   return (
     <StyledButton
       $borderColor={$borderColor}
       $bgColor={$bgColor}
       $textColor={$textColor}
-      onClick={isDisabled ? undefined : onClick}
-      isDisabled={isDisabled}
-      disabled={isDisabled}>
+      onClick={$isDisabled ? undefined : onClick}
+      $isDisabled={$isDisabled}
+      disabled={$isDisabled}>
       <ButtonContent $imagePosition={imagePosition}>
         {imageSrc && <Image src={imageSrc} alt="icon" width={20} height={20} />}
         <span>{children}</span>

@@ -10,38 +10,67 @@ interface DetailsModalProps {
   modalIsOpen: boolean;
   closeModal: () => void;
   children: React.ReactNode;
+  width?: string;
+  height?: string;
+  position?: "left" | "right" | "middle";
 }
-const HeaderContainer = styled("div")`
+
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 16px;
   background-color: ${BFMPalette.white25};
   border-bottom: 1px solid ${BFMPalette.gray100};
 `;
-export default function DetailsModal<T>({
+
+export default function DetailsModal({
   headerText = "Modal Header",
   modalIsOpen,
   closeModal,
   children,
+  width = "600px",
+  height = "calc(100vh - 40px)",
+  position = "middle",
 }: DetailsModalProps) {
+  const modalPositionStyles = {
+    left: {
+      left: "20px",
+      right: "auto",
+      top: "20px",
+      bottom: "20px",
+    },
+    right: {
+      left: "auto",
+      right: "20px",
+      top: "20px",
+      bottom: "20px",
+    },
+    middle: {
+      left: "50%",
+      top: "50%",
+      transform: "translate(-50%, -50%)",
+      bottom: "auto",
+      right: "auto",
+    },
+  };
+
   return (
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       ariaHideApp={false}
       style={{
-        overlay: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+        overlay: {
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+        },
         content: {
           position: "fixed",
-          top: "20px",
-          bottom: "20px",
-          right: "20px",
-          left: "auto",
           padding: "0px",
-          width: "600px",
-          height: "calc(100vh - 40px)",
+          width,
+          height,
           backgroundColor: BFMPalette.white25,
           borderRadius: "12px",
+          ...modalPositionStyles[position],
         },
       }}>
       <HeaderContainer>

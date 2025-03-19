@@ -136,6 +136,13 @@ export const MediumText = styled.p<{ color?: string; width?: string }>`
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
   width: ${({ width }) => (width ? width : "100%")};
 `;
+export const MediumSpacedText = styled.p<{ color?: string; width?: string }>`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${({ color }) => (color ? color : BFMPalette.black100)};
+  width: ${({ width }) => (width ? width : "100%")};
+`;
 
 export const Description = styled.p<{ color?: string }>`
   font-weight: 500;

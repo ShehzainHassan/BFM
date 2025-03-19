@@ -6,6 +6,10 @@ import { H1 } from "@/Typography";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
 import { generateInvoiceNumber } from "@/utils";
+import Image from "next/image";
+import { useState } from "react";
+import DetailsModal from "../Modal/Modal";
+import SavedModalContent from "../SavedModalContent/SavedModalContent";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
@@ -23,7 +27,11 @@ const SubContainer = styled("div")`
   padding: 4px;
   background-color: ${BFMPalette.purple950};
 `;
-
+const TitleContainer = styled("div")`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
 const NavContent = styled("p")<{ $isSelected: boolean }>`
   font-weight: 600;
   line-height: 20px;
@@ -48,12 +56,22 @@ const ButtonsContainer = styled("div")`
   display: flex;
   gap: 16px;
 `;
-
+const ImageContainer = styled("div")`
+  border-radius: 12px;
+  padding: 10px;
+  background-color: ${() => `${BFMPalette.white}14`};
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
 interface NavbarProps {
   navItems: { label: string }[];
 }
 export default function Navbar({ navItems }: NavbarProps) {
   const { t } = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     selectedTab,
     setSelectedTab,
@@ -88,6 +106,12 @@ export default function Navbar({ navItems }: NavbarProps) {
     const updatedInvoices = [...storedInvoices, newInvoice];
 
     localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
+
+    setIsModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setIsCreatingInvoice(false);
   };
   const getPageTitle = () => {
     if (
@@ -138,7 +162,23 @@ export default function Navbar({ navItems }: NavbarProps) {
   return (
     <Container>
       <Header>
-        <H1 color={BFMPalette.white}>{pageTitle}</H1>
+        {pageTitle === t("navbar.titles.create_Invoice") ? (
+          <TitleContainer>
+            <ImageContainer onClick={() => setIsCreatingInvoice(false)}>
+              <Image
+                src="/images/arrow-left.png"
+                alt="back"
+                width={15}
+                height={15}
+              />
+            </ImageContainer>
+
+            <H1 color={BFMPalette.white}>{pageTitle}</H1>
+          </TitleContainer>
+        ) : (
+          <H1 color={BFMPalette.white}>{pageTitle}</H1>
+        )}
+
         <ButtonsContainer>
           {(selectedTab === t("navbar.tabs.calendar") ||
             selectedTab === t("navbar.tabs.esg")) && (
@@ -173,7 +213,8 @@ export default function Navbar({ navItems }: NavbarProps) {
           {selectedTab === t("navbar.tabs.invoices") && isCreatingInvoice && (
             <NavButton
               $bgColor={BFMPalette.white}
-              $textColor={BFMPalette.black400}>
+              $textColor={BFMPalette.black400}
+              onClick={() => setIsCreatingInvoice(false)}>
               {t("nav_buttons.cancel")}
             </NavButton>
           )}
@@ -183,7 +224,7 @@ export default function Navbar({ navItems }: NavbarProps) {
               $borderColor={BFMPalette.purple500}
               imagePosition="right"
               imageSrc="/images/arrow-right.png"
-              isDisabled={!validateInvoice()}
+              $isDisabled={!validateInvoice()}
               onClick={saveInvoice}>
               {t("nav_buttons.save_Invoice")}
             </NavButton>
@@ -201,6 +242,14 @@ export default function Navbar({ navItems }: NavbarProps) {
           </NavContent>
         ))}
       </SubContainer>
+      <DetailsModal
+        headerText=""
+        width="400px"
+        height="375px"
+        modalIsOpen={isModalOpen}
+        closeModal={handleCloseModal}>
+        <SavedModalContent />
+      </DetailsModal>
     </Container>
   );
 }

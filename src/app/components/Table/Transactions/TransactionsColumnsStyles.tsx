@@ -89,6 +89,7 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
       />
 
       <DetailsModal
+        position="right"
         headerText="Transaction Details"
         modalIsOpen={openModal}
         closeModal={() => setOpenModal(false)}>
