@@ -1,6 +1,6 @@
 import { BFMPalette } from "@/Theme";
-import { H4 } from "@/Typography";
-import { useState, useRef } from "react";
+import { H3, H4 } from "@/Typography";
+import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { CalendarOutlined } from "@ant-design/icons";
 import { useData } from "@/DataContext";
@@ -12,15 +12,17 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ $isError: boolean }>`
   display: flex;
   align-items: center;
-  border: 1px solid ${BFMPalette.gray200};
+  border: 1px solid
+    ${(props) => (props.$isError ? BFMPalette.red600 : BFMPalette.gray200)};
   padding: 8px 12px;
   background-color: ${BFMPalette.white};
   border-radius: 8px;
   position: relative;
   cursor: pointer;
+  transition: border 0.2s ease-in-out;
 `;
 
 const StyledInput = styled.input`
@@ -64,11 +66,20 @@ export default function InputDate({
 }: InputDateProps) {
   const { dueDate, setDueDate } = useData();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isTouched, setIsTouched] = useState(false);
+
+  const isError = isRequired && isTouched && !dueDate;
+
 
   const handleIconClick = () => {
     if (inputRef.current) {
       inputRef.current.showPicker();
     }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDueDate(e.target.value);
+    setIsTouched(true);
   };
 
   return (
@@ -77,12 +88,12 @@ export default function InputDate({
         <H4>{label}</H4>
         {isRequired && <H4 color={BFMPalette.purple500}>*</H4>}
       </LabelWrapper>
-      <InputWrapper onClick={handleIconClick}>
+      <InputWrapper onClick={handleIconClick} $isError={isError}>
         <StyledInput
           ref={inputRef}
           type="date"
           value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
+          onChange={handleChange}
         />
         <CalendarIcon />
       </InputWrapper>

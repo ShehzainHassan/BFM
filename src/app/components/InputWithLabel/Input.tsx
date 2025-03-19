@@ -1,3 +1,4 @@
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { H3, H4 } from "@/Typography";
 import { useState } from "react";
@@ -10,19 +11,30 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const StyledInput = styled.input<{ isError: boolean }>`
-  width: 100%;
-  min-width: 0;
+const InputWrapper = styled.div<{ $isError: boolean }>`
+  display: flex;
+  align-items: center;
   border: 1px solid
-    ${(props) => (props.isError ? BFMPalette.red500 : BFMPalette.gray200)};
-  padding: 8px 12px;
+    ${(props) => (props.$isError ? BFMPalette.red500 : BFMPalette.gray200)};
+  padding: 2px 12px;
   background-color: ${BFMPalette.white};
   border-radius: 8px;
+  transition: border 0.2s ease-in-out;
+  position: relative;
+  width: 100%;
+`;
+
+const StyledInput = styled.input<{ $showPercentage?: boolean }>`
+  width: 100%;
+  min-width: 0;
+  border: none;
   outline: none;
   font-size: 16px;
   color: ${BFMPalette.black800};
   font-family: "Inter", Arial, Helvetica, sans-serif;
-  transition: border 0.2s ease-in-out;
+  background: transparent;
+  padding: 8px 12px;
+  padding-left: ${(props) => (props.$showPercentage ? "30px" : "0")};
 
   &::placeholder {
     color: ${BFMPalette.gray700};
@@ -43,6 +55,12 @@ const StyledInput = styled.input<{ isError: boolean }>`
   }
 `;
 
+const PercentageIcon = styled.span`
+  position: absolute;
+  left: 12px;
+  color: ${BFMPalette.gray700};
+`;
+
 const LabelWrapper = styled.div`
   display: flex;
   gap: 2px;
@@ -54,8 +72,13 @@ interface InputWithLabelProps {
   placeholder?: string;
   isRequired?: boolean;
   showLabel?: boolean;
+  showAsterik?: boolean;
+  showError?: boolean;
+  showPercentage?: boolean;
   value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  minimum?: number;
+  maximum?: number;
 }
 
 export default function InputWithLabel({
@@ -64,7 +87,12 @@ export default function InputWithLabel({
   placeholder = "Placeholder",
   isRequired = true,
   showLabel = true,
+  showAsterik = true,
+  showError = true,
+  showPercentage = false,
   value,
+  minimum = 1,
+  maximum,
   onChange,
 }: InputWithLabelProps) {
   const [isTouched, setIsTouched] = useState(false);
@@ -77,17 +105,22 @@ export default function InputWithLabel({
     <Container>
       <LabelWrapper>
         {showLabel && <H4>{label}</H4>}
-        {isRequired && <H4 color={BFMPalette.purple500}>*</H4>}
+        {isRequired && showAsterik && <H4 color={BFMPalette.purple500}>*</H4>}
       </LabelWrapper>
-      <StyledInput
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onBlur={handleBlur}
-        isError={isRequired && isTouched && !value}
-      />
-      {isRequired && isTouched && !value && (
+      <InputWrapper $isError={isRequired && isTouched && !value}>
+        {showPercentage && <PercentageIcon>%</PercentageIcon>}
+        <StyledInput
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          onBlur={handleBlur}
+          min={minimum}
+          max={maximum ?? undefined}
+          $showPercentage={showPercentage}
+        />
+      </InputWrapper>
+      {isRequired && isTouched && !value && showError && (
         <H3 color={BFMPalette.red600}>{label} is required</H3>
       )}
     </Container>

@@ -4,6 +4,7 @@ import InvoiceDetails from "../InvoiceDetails/InvoiceDetails";
 import SelectDropDown from "../SelectDropDown/SelectDropDown";
 import { H2 } from "@/Typography";
 import PreviewDetails from "../PreviewDetails/PreviewDetails";
+import { useData } from "@/DataContext";
 
 const Container = styled("div")`
   display: grid;

@@ -12,15 +12,20 @@ const Container = styled.div`
   gap: 6px;
 `;
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ $isError: boolean }>`
   display: inline-flex;
   align-items: center;
-  border: 1px solid ${BFMPalette.gray200};
+  border: 1px solid
+    ${({ $isError }) => ($isError ? BFMPalette.red500 : BFMPalette.gray200)};
   padding: 4px 12px;
   background-color: ${BFMPalette.white};
   border-radius: 8px;
   gap: 8px;
   max-width: 200px;
+
+  &:focus-within {
+    border-color: ${({ $isError }) => $isError && BFMPalette.red500};
+  }
 `;
 
 const StyledInput = styled.input`
@@ -30,6 +35,7 @@ const StyledInput = styled.input`
   color: ${BFMPalette.black800};
   font-family: "Inter", Arial, Helvetica, sans-serif;
   background: transparent;
+
   &::placeholder {
     color: ${BFMPalette.gray700};
   }
@@ -70,6 +76,7 @@ interface InputCurrencyProps {
   placeholder?: string;
   isRequired?: boolean;
   showLabel?: boolean;
+  showAsterik?: boolean;
   price: number;
   onChangeAmount: (e: React.ChangeEvent<HTMLInputElement>) => void;
   currency: string;
@@ -81,18 +88,27 @@ export default function InputCurrency({
   placeholder = "Enter amount",
   isRequired = true,
   showLabel = true,
+  showAsterik = true,
   price = 0,
   currency = "USD",
   onChangeAmount,
   onChangeCurrency,
 }: InputCurrencyProps) {
+  const [touched, setTouched] = useState(false);
+
+  const handleBlur = () => {
+    setTouched(true);
+  };
+
+  const isError = isRequired && touched && Number(price) === 0;
+
   return (
     <Container>
       <LabelWrapper>
         {showLabel && <H4>{label}</H4>}
-        {isRequired && <H4 color={BFMPalette.purple500}>*</H4>}
+        {isRequired && showAsterik && <H4 color={BFMPalette.purple500}>*</H4>}
       </LabelWrapper>
-      <InputWrapper>
+      <InputWrapper $isError={isError}>
         <StyledSelect
           value={currency}
           onChange={(value) => onChangeCurrency(value as string)}
@@ -105,7 +121,9 @@ export default function InputCurrency({
           type="number"
           placeholder={placeholder}
           value={price}
+          min={0}
           onChange={onChangeAmount}
+          onBlur={handleBlur}
         />
       </InputWrapper>
     </Container>

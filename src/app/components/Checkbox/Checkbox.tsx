@@ -41,12 +41,21 @@ const StyledCheckbox = styled(Checkbox)`
 
 interface CheckboxProps {
   label?: string;
+  checked: boolean;
+  setChecked: (e: any) => void;
 }
 
-export default function CustomCheckbox({ label = "Label" }: CheckboxProps) {
+export default function CustomCheckbox({
+  label = "Label",
+  checked,
+  setChecked,
+}: CheckboxProps) {
+  const handleChange = (e: any) => {
+    setChecked(e.target.checked);
+  };
   return (
     <Container>
-      <StyledCheckbox />
+      <StyledCheckbox checked={checked} onChange={handleChange} />
       <Title>{label}</Title>
     </Container>
   );

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { SmallH3, SmallH5 } from "@/Typography";
+import { BankDetails } from "@/DataContext";
 
 const TableWrapper = styled.div`
   background-color: ${BFMPalette.white};
@@ -10,7 +11,6 @@ const TableWrapper = styled.div`
 const TableContainer = styled.div`
   border: 1px solid ${BFMPalette.gray100};
   border-radius: 8px;
-
   width: 100%;
 `;
 
@@ -35,14 +35,22 @@ const ValueCell = styled.div`
 `;
 
 interface InfoTableProps {
-  data: { label: string; value: string }[];
+  data: BankDetails;
 }
 
-export default function InfoTable({ data }: InfoTableProps) {
+export default function PaymentsTable({ data }: InfoTableProps) {
+  const formattedData = [
+    { label: "Bank Name", value: data.bankName },
+    { label: "Name", value: data.name },
+    { label: "Account Number", value: data.accountNumber },
+    { label: "SWIFT Code", value: data.SWIFTCode },
+    { label: "Bank Address", value: data.bankAddress },
+  ];
+
   return (
     <TableWrapper>
       <TableContainer>
-        {data.map((row, index) => (
+        {formattedData.map((row, index) => (
           <Row key={index}>
             <LabelCell>
               <SmallH3>{row.label}</SmallH3>

@@ -83,6 +83,19 @@ export const formatDate = (dateInput: string | number[]): string => {
   });
 };
 
+export const generateInvoiceNumber = () => {
+  const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
+
+  let nextInvoiceNumber;
+  if (storedInvoices.length === 0) {
+    return "INV000-00-0001";
+  } else {
+    const lastInvoice = storedInvoices[storedInvoices.length - 1];
+    const lastNumber = parseInt(lastInvoice.invoiceNumber.split("-").pop(), 10);
+    nextInvoiceNumber = `INV000-00-${String(lastNumber + 1).padStart(4, "0")}`;
+    return nextInvoiceNumber;
+  }
+};
 export const formatYearMonth = (yearMonth: string) => {
   const date = new Date(`${yearMonth}-01`);
   return date

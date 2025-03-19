@@ -65,8 +65,27 @@ interface DataContextType {
   setCompanyName: (value: string) => void;
   companyAddress: string;
   setCompanyAddress: (value: string) => void;
+  discount: number;
+  setDiscount: (value: number) => void;
+  hasDiscount: boolean;
+  setHasDiscount: (value: boolean) => void;
+  hasPaymentChecked: boolean;
+  setHasPaymentChecked: (value: boolean) => void;
+  bankDetails: BankDetails;
+  setBankDetails: (details: BankDetails) => void;
+  subTotal: string;
+  setSubTotal: (value: string) => void;
+  finalTotal: string;
+  setFinalTotal: (value: string) => void;
 }
 
+export interface BankDetails {
+  bankName: string;
+  name: string;
+  accountNumber: string;
+  SWIFTCode: string;
+  bankAddress: string;
+}
 export interface InvoiceItem {
   id: number;
   description: string;
@@ -150,6 +169,18 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [dueDate, setDueDate] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [companyAddress, setCompanyAddress] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [hasDiscount, setHasDiscount] = useState(false);
+  const [subTotal, setSubTotal] = useState("");
+  const [finalTotal, setFinalTotal] = useState("");
+  const [hasPaymentChecked, setHasPaymentChecked] = useState(false);
+  const [bankDetails, setBankDetails] = useState<BankDetails>({
+    bankName: "",
+    name: "",
+    accountNumber: "",
+    SWIFTCode: "",
+    bankAddress: "",
+  });
   const [items, setItems] = useState([
     {
       id: Date.now(),
@@ -524,6 +555,18 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setCompanyName,
         companyAddress,
         setCompanyAddress,
+        discount,
+        setDiscount,
+        hasDiscount,
+        setHasDiscount,
+        hasPaymentChecked,
+        setHasPaymentChecked,
+        bankDetails,
+        setBankDetails,
+        subTotal,
+        setSubTotal,
+        finalTotal,
+        setFinalTotal,
       }}>
       {children}
     </DataContext.Provider>

@@ -1,16 +1,14 @@
-import { BFMPalette } from "@/Theme";
-import styled from "styled-components";
-import Notes from "../Notes/Notes";
-import Address from "../Address/Address";
-import Image from "next/image";
-import { ColumnDef } from "@tanstack/react-table";
-import DataTable from "../Table/Table";
-import { bankDetails, fromAddress, invoiceData } from "@/constants";
-import InfoTable from "../InfoTable/InfoTable";
-import InvoiceTable from "../InvoiceTable/InvoiceTable";
+import { fromAddress } from "@/constants";
 import { useData } from "@/DataContext";
-import { formatDate } from "@/utils";
+import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
+import { formatDate, generateInvoiceNumber } from "@/utils";
+import Image from "next/image";
+import styled from "styled-components";
+import Address from "../Address/Address";
+import InvoiceTable from "../InvoiceTable/InvoiceTable";
+import Notes from "../Notes/Notes";
+import InfoTable from "../PaymentsTable/PaymentsTable";
 
 const Container = styled("div")`
   background-color: ${BFMPalette.white25};
@@ -33,11 +31,18 @@ const TableContainer = styled("div")`
 
 export default function PreviewDetails() {
   const { t } = useTranslation();
-  const { companyAddress, items, invoiceDetails, dueDate } = useData();
+  const {
+    companyAddress,
+    items,
+    invoiceDetails,
+    dueDate,
+    bankDetails,
+    hasPaymentChecked,
+  } = useData();
 
   return (
     <Container>
-      <Notes title="Invoice number" value="INV000-00-0001" />
+      <Notes title="Invoice number" value={generateInvoiceNumber()} />
       <SubContainer>
         <Address
           title="From"
@@ -60,15 +65,17 @@ export default function PreviewDetails() {
         <Notes title="Invoice detail" value={invoiceDetails} />
       )}
       <InvoiceTable rows={items} />
-      <TableContainer>
-        <Image
-          src="/images/qr-code 1.png"
-          alt="QR-Code"
-          width={56}
-          height={56}
-        />
-        <InfoTable data={bankDetails} />
-      </TableContainer>
+      {hasPaymentChecked && (
+        <TableContainer>
+          <Image
+            src="/images/qr-code 1.png"
+            alt="QR-Code"
+            width={56}
+            height={56}
+          />
+          <InfoTable data={bankDetails} />
+        </TableContainer>
+      )}
     </Container>
   );
 }

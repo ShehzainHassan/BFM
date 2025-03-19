@@ -1,8 +1,8 @@
-import { InvoiceItem } from "@/DataContext";
+import { InvoiceItem, useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { H3, SmallText } from "@/Typography";
 import { formatCurrency } from "@/utils";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const TableWrapper = styled.div`
@@ -38,11 +38,37 @@ const SummaryRow = styled(TableRow)`
 
 interface Props {
   rows: InvoiceItem[];
-  discount?: number;
 }
 
-const InvoiceTable: React.FC<Props> = ({ rows, discount = 0 }) => {
+const InvoiceTable: React.FC<Props> = ({ rows }) => {
   if (rows.length === 0) return null;
+  const {
+    hasDiscount,
+    discount,
+    setDiscount,
+    items,
+    subTotal,
+    setSubTotal,
+    finalTotal,
+    setFinalTotal,
+  } = useData();
+  const totalPrice = items.reduce(
+    (sum, item) => sum + item.qty * parseFloat(item.price.toString()),
+    0
+  );
+  const currency = items.length > 0 ? items[0].currency : "";
+  const finalPrice = (totalPrice * ((100 - discount) / 100)).toFixed(2);
+
+  useEffect(() => {
+    if (isNaN(discount) || !hasDiscount) {
+      setDiscount(0);
+    }
+  }, [hasDiscount]);
+  useEffect(() => {
+    setSubTotal(formatCurrency(`${currency} ${totalPrice}`, 2));
+    setFinalTotal(formatCurrency(`${currency} ${finalPrice}`, 2));
+  }, [items, discount]);
+
   return (
     <TableWrapper>
       {rows.length > 0 && (
@@ -81,7 +107,7 @@ const InvoiceTable: React.FC<Props> = ({ rows, discount = 0 }) => {
         </TableCell>
         <TableCell />
         <TableCell $alignRight>
-          <H3 color={BFMPalette.black800}>AED</H3>
+          <H3 color={BFMPalette.black800}>{subTotal}</H3>
         </TableCell>
       </SummaryRow>
 
@@ -91,7 +117,7 @@ const InvoiceTable: React.FC<Props> = ({ rows, discount = 0 }) => {
         </TableCell>
         <TableCell />
         <TableCell $alignRight>
-          <H3 color={BFMPalette.black800}>10%</H3>
+          <H3 color={BFMPalette.black800}>{discount}%</H3>
         </TableCell>
       </SummaryRow>
 
@@ -101,7 +127,7 @@ const InvoiceTable: React.FC<Props> = ({ rows, discount = 0 }) => {
         </TableCell>
         <TableCell />
         <TableCell $alignRight>
-          <H3 color={BFMPalette.black800}>AED</H3>
+          <H3 color={BFMPalette.black800}>{finalTotal}</H3>
         </TableCell>
       </SummaryRow>
     </TableWrapper>

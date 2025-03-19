@@ -5,6 +5,7 @@ import useTranslation from "@/translations";
 import { H1 } from "@/Typography";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
+import { generateInvoiceNumber } from "@/utils";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
@@ -58,7 +59,36 @@ export default function Navbar({ navItems }: NavbarProps) {
     setSelectedTab,
     isCreatingInvoice,
     setIsCreatingInvoice,
+    items,
+    invoiceSubject,
+    invoiceDetails,
+    dueDate,
+    hasPaymentChecked,
+    bankDetails,
+    companyName,
+    companyAddress,
+    discount,
+    subTotal,
+    finalTotal,
   } = useData();
+  const saveInvoice = () => {
+    const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
+    const newInvoice = {
+      invoiceNumber: generateInvoiceNumber(),
+      companyName: companyName,
+      address: companyAddress,
+      invoiceDate: "01 October 2024",
+      dueDate: dueDate,
+      invoiceDetail: invoiceDetails,
+      items: items || [],
+      subTotal: subTotal,
+      discount: discount,
+      amountDue: finalTotal,
+    };
+    const updatedInvoices = [...storedInvoices, newInvoice];
+
+    localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
+  };
   const getPageTitle = () => {
     if (
       selectedTab === t("navbar.tabs.dashboard") ||
@@ -76,7 +106,35 @@ export default function Navbar({ navItems }: NavbarProps) {
 
     return "Page Title";
   };
+  const validateInvoice = (): boolean => {
+    if (items.length > 0) {
+      const allItemsValid = items.every(
+        (item) =>
+          item.description && item.qty > 0 && item.price > 0 && item.currency
+      );
+      if (!allItemsValid) {
+        return false;
+      }
+    }
+    if (!invoiceSubject.trim() || !invoiceDetails.trim() || !dueDate.trim()) {
+      return false;
+    }
+    if (hasPaymentChecked) {
+      if (
+        !bankDetails.bankName.trim() ||
+        !bankDetails.name.trim() ||
+        !bankDetails.accountNumber.trim() ||
+        !bankDetails.SWIFTCode.trim() ||
+        !bankDetails.bankAddress.trim()
+      ) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const pageTitle = getPageTitle();
+
   return (
     <Container>
       <Header>
@@ -123,9 +181,10 @@ export default function Navbar({ navItems }: NavbarProps) {
             <NavButton
               $textColor={BFMPalette.white}
               $borderColor={BFMPalette.purple500}
-              $bgColor={BFMPalette.purple500}
               imagePosition="right"
-              imageSrc="/images/arrow-right.png">
+              imageSrc="/images/arrow-right.png"
+              isDisabled={!validateInvoice()}
+              onClick={saveInvoice}>
               {t("nav_buttons.save_Invoice")}
             </NavButton>
           )}

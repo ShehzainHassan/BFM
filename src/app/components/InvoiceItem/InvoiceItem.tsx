@@ -53,15 +53,17 @@ export default function InvoiceItem() {
             height={24}
           />
           <InputWithLabel
-            isRequired={false}
+            label="Description"
+            showError={false}
             showLabel={false}
+            showAsterik={false}
             placeholder="Enter item descriptions"
             value={item.description}
             onChange={(e) => updateItem(item.id, "description", e.target.value)}
           />
           <InputWithLabel
-            isRequired={false}
             showLabel={false}
+            showAsterik={false}
             placeholder="Qty"
             type="number"
             value={item.qty}
@@ -69,7 +71,7 @@ export default function InvoiceItem() {
           />
           <InputCurrency
             showLabel={false}
-            isRequired={false}
+            showAsterik={false}
             price={item.price}
             onChangeAmount={(e) => updateItem(item.id, "price", e.target.value)}
             currency={currency}
