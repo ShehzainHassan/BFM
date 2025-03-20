@@ -22,20 +22,20 @@ const DescriptionText = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const ActionContainer = styled.div`
+export const ActionContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
   width: 72px;
 `;
 
-const AttachmentIcon = styled(Image)`
+export const AttachmentIcon = styled(Image)`
   position: absolute;
   left: 0;
   cursor: pointer;
 `;
 
-const DetailsIcon = styled(Image)`
+export const DetailsIcon = styled(Image)`
   position: absolute;
   right: 0;
   cursor: pointer;

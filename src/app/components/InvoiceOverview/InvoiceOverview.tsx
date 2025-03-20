@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { TableTitle } from "@/Typography";
 import InvoiceChart from "../Charts/InvoiceOverview/InvoiceChart";
+import { invoiceData } from "../Charts/InvoiceOverview/InvoiceData";
 const MainContainer = styled("div")`
   border-radius: 12px;
   background-color: ${BFMPalette.white};
@@ -19,7 +20,17 @@ const OverviewContainer = styled("div")`
 export default function InvoiceOverview() {
   const tabs = ["3 Months", "6 Months", "1 Year"];
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
-
+  const getFilteredData = () => {
+    switch (selectedTab) {
+      case tabs[0]:
+        return invoiceData.filter((_, index) => index % 3 === 0);
+      case tabs[1]:
+        return invoiceData.filter((_, index) => index % 6 === 0);
+      case tabs[2]:
+      default:
+        return invoiceData;
+    }
+  };
   return (
     <MainContainer>
       <OverviewContainer>
@@ -30,7 +41,7 @@ export default function InvoiceOverview() {
           onTabChange={(tab) => setSelectedTab(tab)}
         />
       </OverviewContainer>
-      <InvoiceChart />
+      <InvoiceChart invoiceData={getFilteredData()} />
     </MainContainer>
   );
 }

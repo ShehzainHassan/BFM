@@ -8,20 +8,20 @@ export const fromAddress = {
   address: "22/F, 3 Lockhart Road, Wan Chai, Hong Kong",
 };
 
-export const invoiceData = [
-  {
-    description: "Enter item descriptions",
-    quantity: 1,
-    amount: "AED 10,000.00",
-  },
-  {
-    description: "Enter item descriptions",
-    quantity: 1,
-    amount: "AED 10,000.00",
-  },
-  {
-    description: "Enter item descriptions",
-    quantity: 1,
-    amount: "AED 10,000.00",
-  },
-];
+// export const invoiceData = [
+//   {
+//     description: "Enter item descriptions",
+//     quantity: 1,
+//     amount: "AED 10,000.00",
+//   },
+//   {
+//     description: "Enter item descriptions",
+//     quantity: 1,
+//     amount: "AED 10,000.00",
+//   },
+//   {
+//     description: "Enter item descriptions",
+//     quantity: 1,
+//     amount: "AED 10,000.00",
+//   },
+// ];

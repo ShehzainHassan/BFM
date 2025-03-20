@@ -9,9 +9,13 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { invoiceData } from "./InvoiceData";
+import { Invoice } from "./InvoiceData";
+import { BFMPalette } from "@/Theme";
 
-export default function InvoiceChart() {
+interface InvoiceChartProps {
+  invoiceData: Invoice[];
+}
+export default function InvoiceChart({ invoiceData }: InvoiceChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>
       <BarChart
@@ -23,17 +27,17 @@ export default function InvoiceChart() {
         <Tooltip />
         <Bar
           dataKey="value1"
-          fill="#8884d8"
+          fill={BFMPalette.purple200}
           activeBar={<Rectangle fill="pink" stroke="blue" />}
         />
         <Bar
           dataKey="value2"
-          fill="#82ca9d"
+          fill={BFMPalette.skin600}
           activeBar={<Rectangle fill="gold" stroke="purple" />}
         />
         <Bar
           dataKey="value3"
-          fill="#ff7300"
+          fill={BFMPalette.purple800}
           activeBar={<Rectangle fill="cyan" stroke="red" />}
         />
       </BarChart>

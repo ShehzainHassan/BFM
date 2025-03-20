@@ -12,9 +12,10 @@ import DataTable from "../Table/Table";
 import { AccountData } from "../Table/Accounts/accounts";
 import { useData } from "@/DataContext";
 import { useAccountsColumns } from "../Table/Accounts/AccountsColumns";
+import { useInvoiceSummaryColumns } from "../Table/InvoiceSummaryTable/InvoiceSummaryTableColumns";
 
 export default function InvoiceSummary() {
-  const { accounts } = useData();
+  const { accounts, invoicesSummary } = useData();
 
   return (
     <PaymentsContainer>
@@ -35,11 +36,18 @@ export default function InvoiceSummary() {
         </SearchAndFilter>
       </Header>
       <DataTable
-        key="accounts"
-        data={accounts}
-        columns={useAccountsColumns()}
-        searchColumns={["bank", "account"]}
-        columnWidths={["2.5fr", "2.5fr", "2.5fr", "2.5fr", "2fr"]}
+        key="invoices"
+        data={invoicesSummary}
+        columns={useInvoiceSummaryColumns()}
+        columnWidths={[
+          "2.02fr",
+          "2.02fr",
+          "2.02fr",
+          "2.02fr",
+          "2.02fr",
+          "1fr",
+          "0.9fr",
+        ]}
       />
     </PaymentsContainer>
   );

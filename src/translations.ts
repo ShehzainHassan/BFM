@@ -85,6 +85,15 @@ const i18n = new I18n({
         number_of_transactions: "NO OF TRANSACTIONS",
         total_amount: "TOTAL AMOUNT",
       },
+      invoice: {
+        invoiceNo: "INVOICE NO.",
+        clientName: "CLIENT NAME",
+        issueDate: "ISSUE DATE",
+        dueDate: "DUE DATE",
+        invoiceAmount: "INVOICE AMOUNT",
+        category: "CATEGORY",
+        action: "",
+      },
     },
     invoice_creation: {
       dropdown: {

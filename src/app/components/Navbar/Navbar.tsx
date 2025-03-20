@@ -87,8 +87,10 @@ export default function Navbar({ navItems }: NavbarProps) {
     companyAddress,
     discount,
     subTotal,
+    invoicesSummary,
     finalTotal,
   } = useData();
+  console.log(invoicesSummary);
   const saveInvoice = () => {
     const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
     const newInvoice = {
@@ -131,6 +133,8 @@ export default function Navbar({ navItems }: NavbarProps) {
     return "Page Title";
   };
   const validateInvoice = (): boolean => {
+    if (items.length === 0) return false;
+    if (!hasPaymentChecked) return false;
     if (items.length > 0) {
       const allItemsValid = items.every(
         (item) =>

@@ -21,6 +21,7 @@ import { AreaChartData } from "./app/components/Charts/BalanceOverTime/BalanceOv
 import { CashFlowData } from "./app/components/Charts/CashflowChart/CashflowData";
 import { LineChartData } from "./app/components/Charts/CashflowChart/LineChartData";
 import useTranslation from "./translations";
+import { InvoiceSummary } from "./app/components/Table/InvoiceSummaryTable/InvoiceSummary";
 
 interface DataContextType {
   rawData: typeof MOCK_DATA.data.rawData;
@@ -77,6 +78,7 @@ interface DataContextType {
   setSubTotal: (value: string) => void;
   finalTotal: string;
   setFinalTotal: (value: string) => void;
+  invoicesSummary: InvoiceSummary[];
 }
 
 export interface BankDetails {
@@ -406,6 +408,22 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       };
     });
   };
+  const parseInvoices = (invoices: any[]): InvoiceSummary[] => {
+    const today = new Date();
+    return invoices.map((invoice) => {
+      const dueDate = new Date(invoice.dueDate);
+      const category = dueDate < today ? "OVERDUE" : "PENDING";
+
+      return {
+        invoiceNo: invoice.invoiceNumber || "",
+        clientName: invoice.address || "",
+        issueDate: invoice.invoiceDate || "",
+        dueDate: invoice.dueDate || "",
+        invoiceAmount: invoice.amountDue || "",
+        category,
+      };
+    });
+  };
   const transformAreaData = (reports: any): AreaChartData[] => {
     if (!reports) {
       return [];
@@ -503,6 +521,9 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       }))
     );
   };
+  const invoicesSummary = parseInvoices(
+    JSON.parse(localStorage.getItem("invoices") || "[]")
+  );
   const pieData = transformESGData(reports.esgSummary);
   const barData = transformBarData(reports.esgSummary);
   const depositsDashboard = transformReportsData(reports.incomeByCategory);
@@ -567,6 +588,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setSubTotal,
         finalTotal,
         setFinalTotal,
+        invoicesSummary,
       }}>
       {children}
     </DataContext.Provider>
