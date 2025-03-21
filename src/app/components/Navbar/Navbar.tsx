@@ -5,7 +5,12 @@ import useTranslation from "@/translations";
 import { H1 } from "@/Typography";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
-import { formatDate, generateInvoiceNumber, getFirstDayOfMonth } from "@/utils";
+import {
+  formatDate,
+  generateInvoiceNumber,
+  getFirstDayOfMonth,
+  getLastInvoice,
+} from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import DetailsModal from "../Modal/Modal";
@@ -114,9 +119,15 @@ export default function Navbar({ navItems }: NavbarProps) {
       subTotal: subTotal,
       discount: discount,
       amountDue: finalTotal,
+      bankDetails: {
+        bankName: bankDetails.bankName,
+        name: bankDetails.name,
+        accountNumber: bankDetails.accountNumber,
+        bankAddress: bankDetails.bankAddress,
+        SWIFTCode: bankDetails.SWIFTCode,
+      },
     };
     const updatedInvoices = [...storedInvoices, newInvoice];
-
     localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
     setIsModalOpen(true);
   };

@@ -1,6 +1,14 @@
 import dayjs from "dayjs";
-import { HKD_EQUIVALANT } from "./constants";
-import { ESGSummary, RecurringTransaction, Reports } from "../Interfaces";
+import { fromAddress, HKD_EQUIVALANT, toAddress } from "./constants";
+import {
+  DetailedInvoiceSummary,
+  ESGSummary,
+  RecurringTransaction,
+  Reports,
+} from "../Interfaces";
+import jsPDF from "jspdf";
+import { BFMPalette } from "./Theme";
+import autoTable from "jspdf-autotable";
 
 export const generateMonths = (reports?: ESGSummary | Reports) => {
   if (!reports || typeof reports !== "object") return [];
@@ -62,6 +70,175 @@ export const formatDate = (dateInput: string | number[]): string => {
     month: "short",
     year: "numeric",
   });
+};
+
+export const handleDownloadPDF = (invoice: DetailedInvoiceSummary) => {
+  const doc = new jsPDF();
+  let y = 15;
+  doc.setFontSize(14);
+  doc.setTextColor(BFMPalette.black800);
+  doc.text("Invoice", 105, y, { align: "center" });
+  y += 15;
+  const labelStyle = () => {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(BFMPalette.black100);
+  };
+
+  const valueStyle = () => {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(BFMPalette.black800);
+  };
+
+  labelStyle();
+  doc.text("Invoice number:", 20, y);
+  valueStyle();
+  doc.text(invoice.invoiceNumber, 52, y);
+  y += 15;
+
+  labelStyle();
+  doc.text("From:", 20, y);
+  doc.text("To:", 130, y);
+  y += 5;
+
+  valueStyle();
+  doc.text(fromAddress.name, 20, y);
+  doc.text(fromAddress.address, 20, y + 5);
+  doc.text(invoice.address, 130, y);
+  doc.text(toAddress, 130, y + 5);
+  y += 15;
+
+  labelStyle();
+  doc.text("Invoice date:", 20, y);
+  doc.text("Invoice due date:", 130, y);
+  y += 5;
+
+  valueStyle();
+  doc.text(formatDate(getFirstDayOfMonth(invoice.dueDate)), 20, y);
+  doc.text(formatDate(invoice.dueDate), 130, y);
+  y += 15;
+
+  labelStyle();
+  doc.text("Invoice Detail", 20, y);
+  y += 5;
+  valueStyle();
+  doc.text(invoice.invoiceDetail, 20, y);
+  y += 10;
+
+  const tableData = invoice.items.map((item) => [
+    item.description,
+    item.qty,
+    formatCurrency(`${item.currency} ${item.price}`, 2),
+  ]);
+  autoTable(doc, {
+    startY: y,
+    head: [["DESCRIPTIONS", "QUANTITY", "AMOUNT"]],
+    body: tableData,
+    theme: "grid",
+    styles: { fontSize: 10, cellPadding: 3, textColor: BFMPalette.black800 },
+    headStyles: {
+      fillColor: BFMPalette.gray100,
+      textColor: BFMPalette.black800,
+      fontStyle: "bold",
+    },
+    columnStyles: { 2: { halign: "right" } },
+    margin: { left: 15, right: 15 },
+  });
+  let finalY = (doc as any).lastAutoTable.finalY;
+
+  autoTable(doc, {
+    startY: finalY,
+    body: [
+      ["Subtotal", invoice.subTotal],
+      ["Discount", invoice.discount],
+      ["Amount due", invoice.amountDue],
+    ],
+    theme: "plain",
+    styles: {
+      fontSize: 10,
+      textColor: BFMPalette.black800,
+      cellPadding: 3,
+    },
+    bodyStyles: {
+      lineWidth: 0.5,
+      lineColor: BFMPalette.gray200,
+      fillColor: BFMPalette.gray100,
+    },
+    columnStyles: {
+      0: { fontStyle: "bold", textColor: BFMPalette.black100 },
+      1: { halign: "right" },
+    },
+    margin: { left: 15, right: 15 },
+  });
+  finalY = (doc as any).lastAutoTable.finalY + 20;
+  autoTable(doc, {
+    startY: finalY,
+    body: [
+      ["Bank Name", invoice.bankDetails.bankName],
+      ["Name", invoice.bankDetails.name],
+      ["Account Number", invoice.bankDetails.accountNumber],
+      ["SWIFT Code", invoice.bankDetails.SWIFTCode],
+      ["Bank Address", invoice.bankDetails.bankAddress],
+    ],
+    theme: "plain",
+    styles: {
+      fontSize: 10,
+      textColor: BFMPalette.black800,
+      cellPadding: 3,
+    },
+    bodyStyles: {
+      lineWidth: 0.5,
+      lineColor: BFMPalette.gray200,
+    },
+    columnStyles: {
+      0: {
+        fontStyle: "bold",
+        fillColor: BFMPalette.gray100,
+        textColor: BFMPalette.black100,
+      },
+      1: { textColor: BFMPalette.black800 },
+    },
+    margin: { left: 15, right: 15 },
+  });
+
+  doc.save("invoice.pdf");
+};
+
+export const getLastInvoice = (): DetailedInvoiceSummary | null => {
+  const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
+
+  if (storedInvoices.length === 0) {
+    return null;
+  }
+  return storedInvoices[storedInvoices.length - 1];
+};
+export const getInvoiceFromLocalStorage = (invoiceNumber: string) => {
+  const invoices = localStorage.getItem("invoices");
+
+  if (!invoices) {
+    console.error("No invoices found in localStorage.");
+    return null;
+  }
+
+  try {
+    const invoiceList = JSON.parse(invoices);
+
+    const matchedInvoice = invoiceList.find(
+      (invoice: DetailedInvoiceSummary) =>
+        invoice.invoiceNumber === invoiceNumber
+    );
+
+    if (!matchedInvoice) {
+      console.error(`Invoice with number ${invoiceNumber} not found.`);
+      return null;
+    }
+
+    return matchedInvoice;
+  } catch (error) {
+    console.error("Error parsing invoices from localStorage:", error);
+    return null;
+  }
 };
 
 export const generateInvoiceNumber = () => {

@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { InvoiceSummary } from "./InvoiceSummary";
 import useTranslation from "@/translations";
 import { InvoiceSummaryStyles } from "./InvoiceSummaryStyles";
+import { InvoiceSummary } from "../../../../../Interfaces";
 
 export const useInvoiceSummaryColumns = (): ColumnDef<InvoiceSummary>[] => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ export const useInvoiceSummaryColumns = (): ColumnDef<InvoiceSummary>[] => {
     },
     {
       accessorKey: "ISSUE_DATE",
-      header: "ISSUE_DATE",
+      header: "ISSUE DATE",
       cell: ({ row }) => InvoiceSummaryStyles.ISSUE_DATE(row.original),
     },
     {

@@ -71,6 +71,7 @@ export default function InvoiceDetails() {
           value={Number(subTotal.split(" ")[1])}
           onChangeCurrency={(newCurrency) => handleCurrencyChange(newCurrency)}
           label="Currency"
+          readonly={true}
         />
         <InputDate label="Invoice Due" />
       </CurrencyDateContainer>

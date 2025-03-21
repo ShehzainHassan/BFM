@@ -103,7 +103,7 @@ export default function InputCurrency({
       <InputWrapper $isError={isError}>
         <StyledSelect
           value={currency}
-          onChange={(value) => !readonly && onChangeCurrency(value as string)}
+          onChange={(value) => onChangeCurrency(value as string)}
           popupMatchSelectWidth={false}>
           <Option value="USD">USD</Option>
           <Option value="HKD">HKD</Option>

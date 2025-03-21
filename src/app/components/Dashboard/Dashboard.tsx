@@ -1,5 +1,4 @@
 "use client";
-import { Transaction } from "@/app/components/Table/Transactions/transactions";
 import { ITEMS_PER_PAGE } from "@/constants";
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
@@ -15,9 +14,9 @@ import Search from "../Search/Search";
 import DataTable from "../Table/Table";
 import { useTransactionColumns } from "../Table/Transactions/TransactionsColumns";
 import Pagination from "../Pagination/Pagination";
-import { AccountData } from "../Table/Accounts/accounts";
 import { useAccountsColumns } from "../Table/Accounts/AccountsColumns";
 import { formatYearMonth } from "@/utils";
+import { AccountData, Transaction } from "../../../../Interfaces";
 
 const MainContainer = styled("div")`
   display: grid;

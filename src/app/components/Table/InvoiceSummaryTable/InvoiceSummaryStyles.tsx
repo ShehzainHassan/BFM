@@ -1,13 +1,20 @@
 import { BFMPalette } from "@/Theme";
-import { InvoiceSummary } from "./InvoiceSummary";
 import { BodyText, H5 } from "@/Typography";
-import { formatDate } from "@/utils";
+import {
+  formatDate,
+  getInvoiceFromLocalStorage,
+  handleDownloadPDF,
+} from "@/utils";
 import {
   ActionContainer,
   AttachmentIcon,
   DetailsIcon,
 } from "../Transactions/TransactionsColumnsStyles";
 import styled from "styled-components";
+import { InvoiceSummary } from "../../../../../Interfaces";
+import DetailsModal from "../../Modal/Modal";
+import { useState } from "react";
+import SavedModalContent from "../../SavedModalContent/SavedModalContent";
 const StatusBadge = styled.div<{ status: "PENDING" | "OVERDUE" }>`
   border-radius: 16px;
   padding: 2px 8px;
@@ -18,6 +25,7 @@ const StatusBadge = styled.div<{ status: "PENDING" | "OVERDUE" }>`
     status === "PENDING" ? BFMPalette.white90 : BFMPalette.skin200};
 `;
 const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <ActionContainer>
       <AttachmentIcon
@@ -25,9 +33,20 @@ const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
         alt="icon"
         width={32}
         height={32}
+        onClick={() => setIsModalOpen(true)}
       />
 
       <DetailsIcon src="/images/Button.png" alt="icon" width={32} height={32} />
+      {isModalOpen && (
+        <DetailsModal
+          headerText=""
+          width="400px"
+          height="375px"
+          modalIsOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}>
+          <SavedModalContent invoiceNo={row.invoiceNo} />
+        </DetailsModal>
+      )}
     </ActionContainer>
   );
 };

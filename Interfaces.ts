@@ -462,6 +462,19 @@ export interface InvoiceSummary {
   invoiceAmount: string;
   category: string;
 }
+export interface DetailedInvoiceSummary {
+  address: string;
+  amountDue: string;
+  companyName: string;
+  discount: number;
+  dueDate: string;
+  invoiceDate: string;
+  invoiceDetail: string;
+  invoiceNumber: string;
+  items: InvoiceItem[];
+  subTotal: string;
+  bankDetails: BankDetails;
+}
 export interface RecurringTransaction {
   description: {
     icon: string;
