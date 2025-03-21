@@ -143,7 +143,7 @@ export default function Navbar({ navItems }: NavbarProps) {
   };
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    resetFields();
+    // resetFields();
   };
   const getPageTitle = () => {
     if (

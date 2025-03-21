@@ -2,7 +2,7 @@ import { fromAddress, toAddress } from "@/constants";
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { MediumSpacedText, TextTitle } from "@/Typography";
-import { formatDate, getFirstDayOfMonth } from "@/utils";
+import { formatCurrency, formatDate, getFirstDayOfMonth } from "@/utils";
 import jsPDF from "jspdf";
 import { autoTable } from "jspdf-autotable";
 import Image from "next/image";
@@ -38,8 +38,17 @@ const BtnContainer = styled("div")`
   }
 `;
 export default function SavedModalContent() {
-  const { companyAddress, invoiceNumber, invoiceDetails, dueDate, items } =
-    useData();
+  const {
+    companyAddress,
+    invoiceNumber,
+    invoiceDetails,
+    dueDate,
+    items,
+    bankDetails,
+    subTotal,
+    discount,
+    finalTotal,
+  } = useData();
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
     let y = 15;
@@ -99,7 +108,11 @@ export default function SavedModalContent() {
     autoTable(doc, {
       startY: y,
       head: [["DESCRIPTIONS", "QUANTITY", "AMOUNT"]],
-      body: items.map((item) => [item.description, item.qty, item.price]),
+      body: items.map((item) => [
+        item.description,
+        item.qty,
+        formatCurrency(`${item.currency} ${item.price}`, 2),
+      ]),
       theme: "grid",
       styles: { fontSize: 10, cellPadding: 3, textColor: BFMPalette.black800 },
       headStyles: {
@@ -110,6 +123,63 @@ export default function SavedModalContent() {
       columnStyles: { 2: { halign: "right" } },
       margin: { left: 15, right: 15 },
     });
+    y += 10;
+
+    autoTable(doc, {
+      startY: y + 10,
+      body: [
+        ["Subtotal", subTotal],
+        ["Discount", discount],
+        ["Amount due", finalTotal],
+      ],
+      theme: "plain",
+      styles: {
+        fontSize: 10,
+        textColor: BFMPalette.black800,
+        cellPadding: 3,
+      },
+      bodyStyles: {
+        lineWidth: 0.5,
+        lineColor: BFMPalette.gray200,
+        fillColor: BFMPalette.gray100,
+      },
+      columnStyles: {
+        0: { fontStyle: "bold", textColor: BFMPalette.black100 },
+        1: { halign: "right" },
+      },
+      margin: { left: 15, right: 15 },
+    });
+    y += 10;
+    autoTable(doc, {
+      startY: y + 40,
+      body: [
+        ["Bank Name", bankDetails.bankName],
+        ["Name", bankDetails.name],
+        ["Account Number", bankDetails.accountNumber],
+        ["SWIFT Code", bankDetails.SWIFTCode],
+        ["Bank Address", bankDetails.bankAddress],
+      ],
+      theme: "plain",
+      styles: {
+        fontSize: 10,
+        textColor: BFMPalette.black800,
+        cellPadding: 3,
+      },
+      bodyStyles: {
+        lineWidth: 0.5,
+        lineColor: BFMPalette.gray200,
+      },
+      columnStyles: {
+        0: {
+          fontStyle: "bold",
+          fillColor: BFMPalette.gray100,
+          textColor: BFMPalette.black100,
+        },
+        1: { textColor: BFMPalette.black800 },
+      },
+      margin: { left: 15, right: 15 },
+    });
+
     doc.save("invoice.pdf");
   };
 
