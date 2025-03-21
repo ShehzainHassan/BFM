@@ -1,15 +1,13 @@
 import { BFMPalette } from "@/Theme";
 import { H5 } from "@/Typography";
 import styled from "styled-components";
+import { NotesProps } from "../../../../Interfaces";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 2px;
 `;
-interface NotesProps {
-  title: string;
-  value: string;
-}
+
 export default function Notes({ title, value }: NotesProps) {
   return (
     <Container>

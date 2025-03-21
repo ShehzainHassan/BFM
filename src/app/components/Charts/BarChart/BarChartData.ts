@@ -1,7 +1,4 @@
-export interface BarData {
-  monthYear: string;
-  value: number;
-}
+import { BarData } from "../../../../../Interfaces";
 
 export const barData: BarData[] = [
   { monthYear: "Jan 2024", value: 2250 },

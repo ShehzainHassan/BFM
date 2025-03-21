@@ -1,15 +1,3 @@
-export interface AccountData {
-  bank: string;
-  account: string;
-  accountType: string;
-  balance: number;
-  amount: {
-    currency: string;
-    value: number;
-    HKDEquivalent: number;
-  };
-}
-
 // export const accountsData: AccountData[] = [
 //   {
 //     bank: "Sample Bank",

@@ -1,11 +1,5 @@
 import { BFMPalette } from "@/Theme";
 
-export interface PieData {
-  month: string;
-  name: string;
-  value: number;
-}
-
 export const PIE_COLORS_1 = [
   BFMPalette.red600,
   BFMPalette.green500,

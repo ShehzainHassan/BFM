@@ -1,11 +1,8 @@
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import styled from "styled-components";
+import { ButtonSecondaryProps } from "../../../../../Interfaces";
 
-interface ButtonProps {
-  btnText?: string;
-  imgSrc?: string;
-}
 const StyledButton = styled("button")`
   color: ${BFMPalette.blue600};
   background-color: ${BFMPalette.white40};
@@ -18,7 +15,10 @@ const StyledButton = styled("button")`
   justify-content: center;
   gap: 6px;
 `;
-export default function ButtonSecondary({ btnText, imgSrc }: ButtonProps) {
+export default function ButtonSecondary({
+  btnText,
+  imgSrc,
+}: ButtonSecondaryProps) {
   return (
     <StyledButton>
       {btnText ?? "Learn More"}

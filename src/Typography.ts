@@ -115,7 +115,7 @@ export const TableTitle = styled.h1<{ color?: string }>`
 
 /*          PARAGRAPHS           */
 
-export const BodyText = styled.p<{ color?: string }>`
+export const BodyText = styled.div<{ color?: string }>`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;

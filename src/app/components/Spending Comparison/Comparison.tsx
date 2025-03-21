@@ -4,6 +4,7 @@ import { BFMPalette } from "@/Theme";
 import { H5 } from "@/Typography";
 import { CURRENCY } from "@/constants";
 import { formatCurrency } from "@/utils";
+import { ComparisonProps } from "../../../../Interfaces";
 const BarsContainer = styled("div")`
   display: flex;
   flex-direction: column;
@@ -41,23 +42,6 @@ const Badge = styled("div")`
   border: 1px solid ${BFMPalette.white25};
   border-radius: 16px;
 `;
-
-export interface Payload {
-  current: {
-    month: string;
-    value: number;
-    currency: string;
-  };
-  previous: {
-    month: string;
-    value: number;
-    currency: string;
-  };
-}
-
-interface ComparisonProps {
-  spendingData: Payload;
-}
 
 export default function Comparison({ spendingData }: ComparisonProps) {
   return (

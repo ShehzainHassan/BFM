@@ -1,13 +1,8 @@
 import { BFMPalette } from "@/Theme";
 import { H3Secondary, H4, H5 } from "@/Typography";
 import styled from "styled-components";
+import { ESGCardProps } from "../../../../Interfaces";
 
-interface ESGCardProps {
-  title?: string;
-  value?: number;
-  kg?: number;
-  circleColor?: string;
-}
 const Container = styled("div")`
   display: flex;
   align-items: center;

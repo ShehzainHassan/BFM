@@ -3,6 +3,7 @@ import { BFMPalette } from "@/Theme";
 import { H3, H4 } from "@/Typography";
 import { useState } from "react";
 import styled from "styled-components";
+import { InputWithLabelProps } from "../../../../Interfaces";
 
 const Container = styled.div`
   display: flex;
@@ -65,21 +66,6 @@ const LabelWrapper = styled.div`
   display: flex;
   gap: 2px;
 `;
-
-interface InputWithLabelProps {
-  label?: string;
-  type?: string;
-  placeholder?: string;
-  isRequired?: boolean;
-  showLabel?: boolean;
-  showAsterik?: boolean;
-  showError?: boolean;
-  showPercentage?: boolean;
-  value: string | number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  minimum?: number;
-  maximum?: number;
-}
 
 export default function InputWithLabel({
   label = "Label",

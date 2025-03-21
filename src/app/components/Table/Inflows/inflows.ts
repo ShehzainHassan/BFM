@@ -1,11 +1,3 @@
-export interface Inflows {
-  inflows: string;
-  month1: string;
-  month2: string;
-  month3: string;
-  month4: string;
-}
-
 // export const inflowData: Inflows[] = [
 //   {
 //     inflows: "Cash Deposit",

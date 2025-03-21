@@ -2,10 +2,10 @@ import { useData } from "@/DataContext";
 import useTranslation from "@/translations";
 import { useState } from "react";
 import styled from "styled-components";
-import Checkbox from "../Checkbox/Checkbox";
-import InputCurrency from "../InputCurrency/InputCurrency";
-import InputDate from "../InputDate/InputDate";
-import InputWithLabel from "../InputWithLabel/Input";
+import Checkbox from "../../Checkbox/Checkbox";
+import InputCurrency from "../../InputCurrency/InputCurrency";
+import InputDate from "../../InputDate/InputDate";
+import InputWithLabel from "../../InputWithLabel/Input";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
 
 const Container = styled("div")`

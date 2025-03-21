@@ -1,14 +1,6 @@
+import { ESGNotificationsProps } from "../../../../Interfaces";
 import CarbonContainer from "../CarbonContainer/CarbonContainer";
 import Card from "../Card/Card";
-type payload = {
-  text: string;
-  value: string;
-};
-interface ESGNotificationsProps {
-  imgSrc?: string;
-  title?: string;
-  data?: payload;
-}
 
 export default function ESGNotifications({
   imgSrc = "ELECTRICITY",

@@ -1,12 +1,6 @@
 import { BFMPalette } from "@/Theme";
 import styled from "styled-components";
-
-interface HorizontalTabProps {
-  tabs: string[];
-  selectedTab: string;
-  tabType?: "button" | "tab";
-  onTabChange: (tab: string) => void;
-}
+import { HorizontalTabProps } from "../../../../Interfaces";
 
 const TabContainer = styled.div<{ $tabType: "button" | "tab" }>`
   display: inline-flex;

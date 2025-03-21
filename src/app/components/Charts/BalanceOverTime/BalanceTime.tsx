@@ -12,7 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
-import { AreaChartData } from "./BalanceOverTime";
+import { AreaChartData, AreaChartProps } from "../../../../../Interfaces";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -100,9 +100,6 @@ const CustomActiveDot = (props: any) => {
   );
 };
 
-interface AreaChartProps {
-  data: AreaChartData[];
-}
 export default function AreaChartGraph({ data }: AreaChartProps) {
   return (
     <GraphContainer>

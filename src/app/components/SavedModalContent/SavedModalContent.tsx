@@ -1,5 +1,10 @@
+import { fromAddress, toAddress } from "@/constants";
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { MediumSpacedText, TextTitle } from "@/Typography";
+import { formatDate, getFirstDayOfMonth } from "@/utils";
+import jsPDF from "jspdf";
+import { autoTable } from "jspdf-autotable";
 import Image from "next/image";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
@@ -33,6 +38,81 @@ const BtnContainer = styled("div")`
   }
 `;
 export default function SavedModalContent() {
+  const { companyAddress, invoiceNumber, invoiceDetails, dueDate, items } =
+    useData();
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+    let y = 15;
+
+    doc.setFontSize(14);
+    doc.setTextColor(BFMPalette.black800);
+    doc.text("Invoice", 105, y, { align: "center" });
+    y += 15;
+
+    const labelStyle = () => {
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(10);
+      doc.setTextColor(BFMPalette.black100);
+    };
+
+    const valueStyle = () => {
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(BFMPalette.black800);
+    };
+
+    labelStyle();
+    doc.text("Invoice number:", 20, y);
+    valueStyle();
+    doc.text(invoiceNumber, 52, y);
+    y += 18;
+
+    labelStyle();
+    doc.text("From:", 20, y);
+    doc.text("To:", 130, y);
+    y += 5;
+
+    valueStyle();
+    doc.text(fromAddress.name, 20, y);
+    doc.text(fromAddress.address, 20, y + 5);
+    doc.text(companyAddress, 130, y);
+    doc.text(toAddress, 130, y + 5);
+    y += 18;
+
+    labelStyle();
+    doc.text("Invoice date:", 20, y);
+    doc.text("Invoice due date:", 130, y);
+    y += 5;
+
+    valueStyle();
+    doc.text(formatDate(getFirstDayOfMonth(dueDate)), 20, y);
+    doc.text(formatDate(dueDate), 130, y);
+    y += 18;
+
+    labelStyle();
+    doc.text("Invoice Detail", 20, y);
+    y += 5;
+    valueStyle();
+    doc.text(invoiceDetails, 20, y);
+    y += 10;
+
+    autoTable(doc, {
+      startY: y,
+      head: [["DESCRIPTIONS", "QUANTITY", "AMOUNT"]],
+      body: items.map((item) => [item.description, item.qty, item.price]),
+      theme: "grid",
+      styles: { fontSize: 10, cellPadding: 3, textColor: BFMPalette.black800 },
+      headStyles: {
+        fillColor: BFMPalette.gray100,
+        textColor: BFMPalette.black800,
+        fontStyle: "bold",
+      },
+      columnStyles: { 2: { halign: "right" } },
+      margin: { left: 15, right: 15 },
+    });
+    doc.save("invoice.pdf");
+  };
+
   return (
     <>
       <ContentContainer>
@@ -54,7 +134,8 @@ export default function SavedModalContent() {
         <NavButton
           imageSrc="/images/download.png"
           imagePosition="right"
-          $textColor={BFMPalette.white}>
+          $textColor={BFMPalette.white}
+          onClick={handleDownloadPDF}>
           Download Invoice (PDF)
         </NavButton>
       </BtnContainer>

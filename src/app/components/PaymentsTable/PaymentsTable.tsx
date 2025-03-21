@@ -1,8 +1,7 @@
-import React from "react";
-import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { SmallH3, SmallH5 } from "@/Typography";
-import { BankDetails } from "@/DataContext";
+import styled from "styled-components";
+import { InfoTableProps } from "../../../../Interfaces";
 
 const TableWrapper = styled.div`
   background-color: ${BFMPalette.white};
@@ -33,10 +32,6 @@ const ValueCell = styled.div`
   background-color: ${BFMPalette.white25};
   flex: 2;
 `;
-
-interface InfoTableProps {
-  data: BankDetails;
-}
 
 export default function PaymentsTable({ data }: InfoTableProps) {
   const formattedData = [

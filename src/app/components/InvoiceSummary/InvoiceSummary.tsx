@@ -1,4 +1,7 @@
+import { useData } from "@/DataContext";
+import { BFMPalette } from "@/Theme";
 import { TableTitle } from "@/Typography";
+import Image from "next/image";
 import {
   Filter,
   Header,
@@ -6,13 +9,8 @@ import {
   SearchAndFilter,
 } from "../Dashboard/Dashboard";
 import Search from "../Search/Search";
-import Image from "next/image";
-import { BFMPalette } from "@/Theme";
-import DataTable from "../Table/Table";
-import { AccountData } from "../Table/Accounts/accounts";
-import { useData } from "@/DataContext";
-import { useAccountsColumns } from "../Table/Accounts/AccountsColumns";
 import { useInvoiceSummaryColumns } from "../Table/InvoiceSummaryTable/InvoiceSummaryTableColumns";
+import DataTable from "../Table/Table";
 
 export default function InvoiceSummary() {
   const { accounts, invoicesSummary } = useData();

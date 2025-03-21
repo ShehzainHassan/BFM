@@ -1,12 +1,12 @@
-import { fromAddress } from "@/constants";
+import { fromAddress, toAddress } from "@/constants";
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
-import { formatDate, generateInvoiceNumber } from "@/utils";
+import { formatDate, generateInvoiceNumber, getFirstDayOfMonth } from "@/utils";
 import Image from "next/image";
 import styled from "styled-components";
 import Address from "../Address/Address";
-import InvoiceTable from "../InvoiceTable/InvoiceTable";
+import InvoiceTable from "./InvoiceTable/InvoiceTable";
 import Notes from "../Notes/Notes";
 import InfoTable from "../PaymentsTable/PaymentsTable";
 
@@ -38,11 +38,11 @@ export default function PreviewDetails() {
     dueDate,
     bankDetails,
     hasPaymentChecked,
+    invoiceNumber,
   } = useData();
-
   return (
     <Container>
-      <Notes title="Invoice number" value={generateInvoiceNumber()} />
+      <Notes title="Invoice number" value={invoiceNumber} />
       <SubContainer>
         <Address
           title="From"
@@ -52,11 +52,16 @@ export default function PreviewDetails() {
         <Address
           title="To"
           company={t(`invoice_creation.dropdown.options.${companyAddress}`)}
-          address="Flat A, 12/F, Block B, Mock Plaza, 88 Example Road, Central"
+          address={toAddress}
         />
       </SubContainer>
       <SubContainer>
-        <Notes title="Invoice date" value="01 October 2024" />
+        {dueDate && (
+          <Notes
+            title="Invoice date"
+            value={formatDate(getFirstDayOfMonth(dueDate))}
+          />
+        )}
         {dueDate && (
           <Notes title="Invoice due date" value={formatDate(dueDate)} />
         )}

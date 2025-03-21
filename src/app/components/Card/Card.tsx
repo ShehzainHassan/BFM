@@ -3,13 +3,7 @@ import { Description, H3Primary } from "@/Typography";
 import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-
-interface CardProps {
-  image: string;
-  title: string;
-  description?: string;
-  children?: React.ReactNode;
-}
+import { CardProps } from "../../../../Interfaces";
 
 const Container = styled("div")`
   display: flex;

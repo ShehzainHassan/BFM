@@ -1,6 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { H3, H5 } from "@/Typography";
 import styled from "styled-components";
+import { AddressProps } from "../../../../Interfaces";
 
 const Container = styled("div")`
   display: flex;
@@ -8,11 +9,7 @@ const Container = styled("div")`
   gap: 6px;
   width: 100%;
 `;
-interface AddressProps {
-  title: string;
-  company: string;
-  address: string;
-}
+
 export default function Address({ title, company, address }: AddressProps) {
   return (
     <Container>

@@ -1,25 +1,6 @@
 import dayjs from "dayjs";
 import { HKD_EQUIVALANT } from "./constants";
-import { RecurringTransaction } from "./app/components/Table/RecurringTransactions/recurringTransactions";
-
-export interface ESGSummary {
-  [key: string]: {
-    totalCo2Amount: number;
-    totalAmount: number;
-    esgTransactions: {
-      yearMonth: number[];
-      category: string;
-      co2Amount: number;
-      amount: number;
-    }[];
-  };
-}
-export interface Reports {
-  [key: string]: {
-    id: string;
-    amount: number;
-  }[];
-}
+import { ESGSummary, RecurringTransaction, Reports } from "../Interfaces";
 
 export const generateMonths = (reports?: ESGSummary | Reports) => {
   if (!reports || typeof reports !== "object") return [];
@@ -227,4 +208,11 @@ export const calculateAverageHKD = (
   const avg = sum / prices.length;
 
   return avg;
+};
+export const getFirstDayOfMonth = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+
+  return `${year}-${month}-01`;
 };

@@ -1,9 +1,3 @@
-export interface ExpandedData {
-  date: string;
-  description: string;
-  amount: string;
-}
-
 // export const expandedData: ExpandedData[] = [
 //   {
 //     date: "14 MAR 2024",

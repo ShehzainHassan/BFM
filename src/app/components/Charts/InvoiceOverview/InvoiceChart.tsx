@@ -1,20 +1,16 @@
+import { BFMPalette } from "@/Theme";
 import {
   Bar,
   BarChart,
   CartesianGrid,
-  Legend,
   Rectangle,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import { Invoice } from "./InvoiceData";
-import { BFMPalette } from "@/Theme";
+import { InvoiceChartProps } from "../../../../../Interfaces";
 
-interface InvoiceChartProps {
-  invoiceData: Invoice[];
-}
 export default function InvoiceChart({ invoiceData }: InvoiceChartProps) {
   return (
     <ResponsiveContainer width="100%" height={300}>

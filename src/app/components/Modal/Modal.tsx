@@ -4,16 +4,7 @@ import Image from "next/image";
 import React from "react";
 import Modal from "react-modal";
 import styled from "styled-components";
-
-interface DetailsModalProps {
-  headerText?: string;
-  modalIsOpen: boolean;
-  closeModal: () => void;
-  children: React.ReactNode;
-  width?: string;
-  height?: string;
-  position?: "left" | "right" | "middle";
-}
+import { DetailsModalProps } from "../../../../Interfaces";
 
 const HeaderContainer = styled.div`
   display: flex;

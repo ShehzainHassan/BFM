@@ -5,11 +5,12 @@ import useTranslation from "@/translations";
 import { H1 } from "@/Typography";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
-import { generateInvoiceNumber } from "@/utils";
+import { formatDate, generateInvoiceNumber, getFirstDayOfMonth } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import DetailsModal from "../Modal/Modal";
 import SavedModalContent from "../SavedModalContent/SavedModalContent";
+import { NavbarProps } from "../../../../Interfaces";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
@@ -66,9 +67,7 @@ const ImageContainer = styled("div")`
   justify-content: center;
   cursor: pointer;
 `;
-interface NavbarProps {
-  navItems: { label: string }[];
-}
+
 export default function Navbar({ navItems }: NavbarProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,17 +86,28 @@ export default function Navbar({ navItems }: NavbarProps) {
     companyAddress,
     discount,
     subTotal,
-    invoicesSummary,
+    invoiceNumber,
     finalTotal,
+    setInvoiceSubject,
+    setCompanyName,
+    setCompanyAddress,
+    setDueDate,
+    setInvoiceDetails,
+    setSubTotal,
+    setDiscount,
+    setFinalTotal,
+    removeItem,
+    setBankDetails,
+    setHasDiscount,
+    setHasPaymentChecked,
   } = useData();
-  console.log(invoicesSummary);
   const saveInvoice = () => {
     const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
     const newInvoice = {
-      invoiceNumber: generateInvoiceNumber(),
+      invoiceNumber: invoiceNumber,
       companyName: companyName,
       address: companyAddress,
-      invoiceDate: "01 October 2024",
+      invoiceDate: formatDate(getFirstDayOfMonth(dueDate)),
       dueDate: dueDate,
       invoiceDetail: invoiceDetails,
       items: items || [],
@@ -108,12 +118,32 @@ export default function Navbar({ navItems }: NavbarProps) {
     const updatedInvoices = [...storedInvoices, newInvoice];
 
     localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
-
     setIsModalOpen(true);
+  };
+  const resetFields = () => {
+    setIsCreatingInvoice(false);
+    setInvoiceSubject("");
+    setCompanyName("");
+    setDueDate("");
+    setInvoiceDetails("");
+    setSubTotal("");
+    setFinalTotal("");
+    setDiscount(0);
+    setCompanyAddress("");
+    setHasDiscount(false);
+    setHasPaymentChecked(false);
+    items.forEach((item) => removeItem(item.id));
+    setBankDetails({
+      bankName: "",
+      name: "",
+      accountNumber: "",
+      SWIFTCode: "",
+      bankAddress: "",
+    });
   };
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setIsCreatingInvoice(false);
+    resetFields();
   };
   const getPageTitle = () => {
     if (

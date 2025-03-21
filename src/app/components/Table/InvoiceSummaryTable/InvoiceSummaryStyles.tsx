@@ -55,7 +55,9 @@ export const InvoiceSummaryStyles = {
         </StatusBadge>
       ) : (
         <StatusBadge status="PENDING">
-          <H5 color={BFMPalette.red550}>{row.category}</H5>
+          <span>
+            <H5 color={BFMPalette.red550}>{row.category}</H5>
+          </span>
         </StatusBadge>
       )}
     </BodyText>

@@ -1,6 +1,6 @@
 import { BFMPalette } from "@/Theme";
 import styled from "styled-components";
-import InvoiceDetails from "../InvoiceDetails/InvoiceDetails";
+import InvoiceDetails from "./InvoiceDetails/InvoiceDetails";
 import SelectDropDown from "../SelectDropDown/SelectDropDown";
 import { H2 } from "@/Typography";
 import PreviewDetails from "../PreviewDetails/PreviewDetails";

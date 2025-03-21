@@ -1,13 +1,3 @@
-export interface TransitionHighlight {
-  date: string;
-  bank: string;
-  account: string;
-  description: string;
-  category: string;
-  payeeORMerchant: string;
-  amount: string;
-  reason: string;
-}
 // export const highlightData: TransitionHighlight[] = [
 //   {
 //     date: "23 JAN 2024",

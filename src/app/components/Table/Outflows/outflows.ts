@@ -1,10 +1,4 @@
-export interface Outflows {
-  outflows: string;
-  month1: string;
-  month2: string;
-  month3: string;
-  month4: string;
-}
+import { Outflows } from "../../../../../Interfaces";
 
 export const outflowData: Outflows[] = [
   {

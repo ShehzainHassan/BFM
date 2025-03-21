@@ -5,19 +5,10 @@ import Image from "next/image";
 import { BFMPalette } from "@/Theme";
 import { H2 } from "@/Typography";
 import ButtonSecondary from "../Button/Secondary/ButtonSecondary";
-import DueDate, { DueDatePayload } from "../DueDate/DueDate";
+import DueDate from "../DueDate/DueDate";
 import useTranslation from "@/translations";
+import { DueDatePayload, NotificationsProps } from "../../../../Interfaces";
 
-interface Notification {
-  id: number;
-  title: string;
-  type: string;
-  payload: Record<string, any>;
-  description?: string;
-}
-interface NotificationsProps {
-  notifications: Notification[];
-}
 const Container = styled("div")`
   display: flex;
   flex-direction: column;

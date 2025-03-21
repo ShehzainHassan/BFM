@@ -1,6 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import styled from "styled-components";
+import { SearchProps } from "../../../../Interfaces";
 const SearchContainer = styled("div")`
   display: flex;
   gap: 8px;
@@ -24,12 +25,6 @@ const SearchInput = styled("input")`
     color: ${BFMPalette.gray700};
   }
 `;
-
-interface SearchProps {
-  placeholder?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 export default function Search({ placeholder, value, onChange }: SearchProps) {
   return (

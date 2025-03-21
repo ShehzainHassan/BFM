@@ -20,42 +20,11 @@ import {
   getFileExtension,
 } from "@/utils";
 import axios from "axios";
-interface TransactionDetailsProps<T = {}> {
-  selectedRow: T;
-  primaryDetail?: string;
-  primaryType?: string;
-  noteTitle?: string;
-  noteContent?: string;
-  lastUpdated?: string;
-  selected?: string;
-}
-
-interface FileData {
-  name: string;
-  size: string;
-  extension: string;
-  url: string;
-}
-
-interface StoredData {
-  rowId: string;
-  files: FileData[];
-}
-interface Note {
-  transactionId: string;
-  note: string;
-  createdDate: string;
-  lastModifiedDate: string;
-}
-interface Attachment {
-  id: number;
-  txnId: string;
-  fileName: string;
-  mimeType: string;
-  fileSize: number;
-  createdDate: string;
-  lastModifiedData: string;
-}
+import {
+  Attachment,
+  Note,
+  TransactionDetailsProps,
+} from "../../../../Interfaces";
 
 const StatsContainer = styled("div")`
   border-radius: 12px;

@@ -1,17 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import styled from "styled-components";
-
-interface ButtonProps {
-  $bgColor?: string;
-  $borderColor?: string;
-  $textColor?: string;
-  imageSrc?: string;
-  imagePosition?: "left" | "right";
-  onClick?: () => void;
-  $isDisabled?: boolean;
-  children: React.ReactNode;
-}
+import { ButtonProps } from "../../../../../Interfaces";
 
 const StyledButton = styled.button<ButtonProps>`
   display: flex;

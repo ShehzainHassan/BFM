@@ -1,7 +1,7 @@
 "use client";
 import styled from "styled-components";
-import InvoiceContainer from "../components/InvoicesContainer/InvoiceContainer";
-import InvoiceOverview from "../components/InvoiceOverview/InvoiceOverview";
+import InvoiceContainer from "./InvoicesContainer/InvoiceContainer";
+import InvoiceOverview from "./InvoiceOverview/InvoiceOverview";
 import InvoiceSummary from "../components/InvoiceSummary/InvoiceSummary";
 const Container = styled("div")`
   display: flex;

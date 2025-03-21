@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
-import InputWithLabel from "../InputWithLabel/Input";
-import InputCurrency from "../InputCurrency/InputCurrency";
+import InputWithLabel from "../../InputWithLabel/Input";
+import InputCurrency from "../../InputCurrency/InputCurrency";
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { H3Secondary } from "@/Typography";

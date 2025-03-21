@@ -1,20 +1,3 @@
-export interface RecurringTransaction {
-  description: {
-    icon: string;
-    text: string;
-  };
-  date: string;
-  transactionAmount: string;
-  account: string;
-  totalAmount: string;
-  noOfOccurences: number;
-  subItems: {
-    date: string;
-    description: string;
-    amount: string;
-  }[];
-}
-
 // export const recurringTransData: RecurringTransaction[] = [
 //   {
 //     description: {

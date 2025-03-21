@@ -3,6 +3,7 @@ import { BFMPalette } from "@/Theme";
 import { H2, H4, H5, SubTitle } from "@/Typography";
 import { formatCurrency, formatString } from "@/utils";
 import styled from "styled-components";
+import { CategoryProps } from "../../../../Interfaces";
 
 const LabelContainer = styled("div")`
   display: flex;
@@ -24,11 +25,6 @@ const Circle = styled("div")<{ $circleColor?: string }>`
   background-color: ${(props) => props.$circleColor || BFMPalette.purple900};
 `;
 
-interface CategoryProps {
-  category: string;
-  circleColor?: string;
-  amount: number;
-}
 export default function Category({
   category,
   circleColor,

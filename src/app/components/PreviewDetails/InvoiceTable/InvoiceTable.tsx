@@ -1,9 +1,10 @@
-import { InvoiceItem, useData } from "@/DataContext";
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { H3, SmallText } from "@/Typography";
 import { formatCurrency } from "@/utils";
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { InvoiceTableProps } from "../../../../../Interfaces";
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -36,11 +37,7 @@ const SummaryRow = styled(TableRow)`
   background-color: ${BFMPalette.gray300};
 `;
 
-interface Props {
-  rows: InvoiceItem[];
-}
-
-const InvoiceTable: React.FC<Props> = ({ rows }) => {
+const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
   if (rows.length === 0) return null;
   const {
     hasDiscount,

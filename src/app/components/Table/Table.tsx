@@ -12,6 +12,7 @@ import styled from "styled-components";
 import { ExpandedColumns } from "./ExpandedTable/ExpandedColumn";
 import { useData } from "@/DataContext";
 import useTranslation from "@/translations";
+import { TableProps } from "../../../../Interfaces";
 
 export const TableContainer = styled.div`
   padding: 12px 16px 16px 16px;
@@ -59,15 +60,6 @@ const TitleContainer = styled("div")`
   margin-bottom: 12px;
 `;
 
-interface TableProps<T> {
-  data: T[];
-  columns: ColumnDef<T>[];
-  searchQuery?: string;
-  searchColumns?: (keyof T)[];
-  title?: string;
-  columnWidths?: string[];
-  showHeader?: boolean;
-}
 export default function DataTable<T>({
   data,
   columns,

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { CalendarOutlined } from "@ant-design/icons";
 import { useData } from "@/DataContext";
+import { InputDateProps } from "../../../../Interfaces";
 
 const Container = styled.div`
   display: flex;
@@ -55,11 +56,6 @@ const LabelWrapper = styled.div`
   gap: 2px;
 `;
 
-interface InputDateProps {
-  label?: string;
-  isRequired?: boolean;
-}
-
 export default function InputDate({
   label = "Select Date",
   isRequired = true,
@@ -69,7 +65,6 @@ export default function InputDate({
   const [isTouched, setIsTouched] = useState(false);
 
   const isError = isRequired && isTouched && !dueDate;
-
 
   const handleIconClick = () => {
     if (inputRef.current) {

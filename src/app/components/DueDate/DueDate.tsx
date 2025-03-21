@@ -3,6 +3,7 @@
 import { BFMPalette } from "@/Theme";
 import { H3, SmallHeading } from "@/Typography";
 import styled from "styled-components";
+import { DueDateProps } from "../../../../Interfaces";
 
 const Container = styled.div`
   display: flex;
@@ -48,14 +49,6 @@ const Border = styled.div`
   border: 4px solid ${BFMPalette.red50};
   border-radius: 100px;
 `;
-
-export interface DueDatePayload {
-  dueDate: string;
-}
-
-interface DueDateProps {
-  payload: DueDatePayload;
-}
 
 const monthNames = [
   "Jan",

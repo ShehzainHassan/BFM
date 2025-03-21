@@ -1,12 +1,8 @@
 "use client";
 import { Select } from "antd";
 import styled from "styled-components";
+import { SelectDropDownProps } from "../../../../Interfaces";
 
-interface SelectDropDownProps {
-  selectedMonths: string[];
-  setSelectedMonths: (months: string[]) => void;
-  months: string[];
-}
 const StyledSelect = styled(Select)`
   width: 115px;
   height: 36px;

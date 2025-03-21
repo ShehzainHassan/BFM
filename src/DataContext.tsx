@@ -1,10 +1,6 @@
 "use client";
 import { createContext, ReactNode, useContext, useState } from "react";
-import { AccountData } from "./app/components/Table/Accounts/accounts";
 import { MOCK_DATA } from "./mockdata";
-import { BuyerSupplierAnalysis } from "./app/components/Table/BuyerSupplierAnalysis/BuyerSupplierAnalysis";
-import { TransitionHighlight } from "./app/components/Table/TransitionHighlight/transitionHighlight";
-import { RecurringTransaction } from "./app/components/Table/RecurringTransactions/recurringTransactions";
 import { CURRENCY } from "./constants";
 import {
   formatDate,
@@ -12,151 +8,29 @@ import {
   formatYearMonth,
   getImagePath,
 } from "./utils";
-import { Transaction } from "./app/components/Table/Transactions/transactions";
-import { Inflows } from "./app/components/Table/Inflows/inflows";
-import { Outflows } from "./app/components/Table/Outflows/outflows";
-import { PieData } from "./app/components/Charts/PieChart/PieChartData";
-import { BarData } from "./app/components/Charts/BarChart/BarChartData";
-import { AreaChartData } from "./app/components/Charts/BalanceOverTime/BalanceOverTime";
-import { CashFlowData } from "./app/components/Charts/CashflowChart/CashflowData";
-import { LineChartData } from "./app/components/Charts/CashflowChart/LineChartData";
 import useTranslation from "./translations";
-import { InvoiceSummary } from "./app/components/Table/InvoiceSummaryTable/InvoiceSummary";
-
-interface DataContextType {
-  rawData: typeof MOCK_DATA.data.rawData;
-  reports: typeof MOCK_DATA.data.reports;
-  metrics: typeof MOCK_DATA.data.metrics;
-  notifications: typeof MOCK_DATA.data.notifications;
-  transactions: Transaction[];
-  accounts: AccountData[];
-  deposits: BuyerSupplierAnalysis[];
-  withdrawals: BuyerSupplierAnalysis[];
-  depositHighlights: TransitionHighlight[];
-  withdrawalHighlights: TransitionHighlight[];
-  depositRecurring: RecurringTransaction[];
-  withdrawalRecurring: RecurringTransaction[];
-  inflows: Inflows[];
-  outflows: Outflows[];
-  pieData: PieData[];
-  depositsDashboard: PieData[];
-  withDrawalsDashboard: PieData[];
-  areaData: AreaChartData[];
-  barData: BarData[];
-  cashflowData: CashFlowData[];
-  lineChartData: LineChartData[];
-  selectedTab: string;
-  setSelectedTab: (tab: string) => void;
-  isCreatingInvoice: boolean;
-  setIsCreatingInvoice: (value: boolean) => void;
-  items: InvoiceItem[];
-  addItem: () => void;
-  removeItem: (id: number) => void;
-  updateItem: (id: number, field: keyof InvoiceItem, value: string) => void;
-  currency: string;
-  setCurrency: (currency: string) => void;
-  handleCurrencyChange: (newCurrency: string) => void;
-  invoiceSubject: string;
-  setInvoiceSubject: (value: string) => void;
-  invoiceDetails: string;
-  setInvoiceDetails: (value: string) => void;
-  dueDate: string;
-  setDueDate: (value: string) => void;
-  companyName: string;
-  setCompanyName: (value: string) => void;
-  companyAddress: string;
-  setCompanyAddress: (value: string) => void;
-  discount: number;
-  setDiscount: (value: number) => void;
-  hasDiscount: boolean;
-  setHasDiscount: (value: boolean) => void;
-  hasPaymentChecked: boolean;
-  setHasPaymentChecked: (value: boolean) => void;
-  bankDetails: BankDetails;
-  setBankDetails: (details: BankDetails) => void;
-  subTotal: string;
-  setSubTotal: (value: string) => void;
-  finalTotal: string;
-  setFinalTotal: (value: string) => void;
-  invoicesSummary: InvoiceSummary[];
-}
-
-export interface BankDetails {
-  bankName: string;
-  name: string;
-  accountNumber: string;
-  SWIFTCode: string;
-  bankAddress: string;
-}
-export interface InvoiceItem {
-  id: number;
-  description: string;
-  qty: number;
-  price: number;
-  currency: string;
-}
-interface ParsedTransaction {
-  transactionId: string;
-  transactionDate: string;
-  accountName: string;
-  accountType: string;
-  description: string;
-  currency: string;
-  amount: number;
-  balance: number;
-  category: string;
-  bank: string;
-  localCurrencyAmount: number;
-  localCurrencyBalance: number;
-}
-interface ParsedAccount {
-  accountName: string;
-  accountType: string;
-  currency: string;
-  balance: number;
-  localCurrencyBalance: number;
-  bank: string;
-}
-interface ParsedDeposit {
-  predictedName: string;
-  daysBetweenTransactions: number;
-  txnCounts: number;
-  totalAmount: number;
-  averageAmount: number;
-}
-interface ParsedTransitionHighlight {
-  transactionDate: string;
-  bank: string;
-  accountName: string;
-  description: string;
-  currency: string;
-  amount: number;
-  category: string;
-  merchant: string;
-  reason: {
-    type: string;
-    value: number;
-  };
-}
-interface ParsedSubItem {
-  transactionDate: number[];
-  description: string;
-  currency: string;
-  amount: number;
-}
-interface ParsedRecurringTransaction {
-  latestDescription: string;
-  latestTransactionDate: string;
-  currency: string;
-  latestAmount: number;
-  latestLocalCurrencyAmount: number;
-  accountName: string;
-  bank: string;
-  occurrences: number;
-  totalAmount: number;
-  totalLocalCurrencyAmount: number;
-  subItems: ParsedSubItem[];
-}
+import {
+  AccountData,
+  AreaChartData,
+  BankDetails,
+  BarData,
+  BuyerSupplierAnalysis,
+  CashFlowData,
+  DataContextType,
+  Inflows,
+  InvoiceSummary,
+  LineChartData,
+  Outflows,
+  ParsedAccount,
+  ParsedDeposit,
+  ParsedRecurringTransaction,
+  ParsedTransaction,
+  ParsedTransitionHighlight,
+  PieData,
+  RecurringTransaction,
+  Transaction,
+  TransitionHighlight,
+} from "../Interfaces";
 
 const DataContext = createContext<DataContextType | null>(null);
 
@@ -166,6 +40,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [selectedTab, setSelectedTab] = useState(t("navbar.tabs.dashboard"));
   const [isCreatingInvoice, setIsCreatingInvoice] = useState(false);
   const [currency, setCurrency] = useState("USD");
+  const [invoiceNumber, setInvoiceNumber] = useState("");
   const [invoiceSubject, setInvoiceSubject] = useState("");
   const [invoiceDetails, setInvoiceDetails] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -413,7 +288,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     return invoices.map((invoice) => {
       const dueDate = new Date(invoice.dueDate);
       const category = dueDate < today ? "OVERDUE" : "PENDING";
-
       return {
         invoiceNo: invoice.invoiceNumber || "",
         clientName: invoice.address || "",
@@ -566,6 +440,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         currency,
         setCurrency,
         handleCurrencyChange,
+        invoiceNumber,
+        setInvoiceNumber,
         invoiceSubject,
         setInvoiceSubject,
         invoiceDetails,

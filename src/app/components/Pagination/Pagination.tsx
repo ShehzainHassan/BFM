@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Select } from "antd";
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
+import { PaginationProps } from "../../../../Interfaces";
 
 const PaginationContainer = styled.div`
   display: flex;
@@ -37,12 +38,6 @@ const PageButton = styled(Image)`
   pointer-events: ${(props) => (props.hidden ? "none" : "auto")};
   transition: opacity 0.2s ease-in-out;
 `;
-
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
 
 export default function Pagination({
   currentPage,

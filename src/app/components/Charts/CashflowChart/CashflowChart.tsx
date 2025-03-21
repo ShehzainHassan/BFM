@@ -4,11 +4,11 @@ import { useData } from "@/DataContext";
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { BarCustomLayerProps } from "@nivo/bar";
-import { CashFlowData } from "./CashflowData";
 import { formatCurrency, getDynamicScale } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
 import { H3, H3Primary, H5 } from "@/Typography";
 import { TooltipProps } from "recharts";
+import { CashFlowData } from "../../../../../Interfaces";
 
 const ChartContainer = styled.div`
   display: flex;

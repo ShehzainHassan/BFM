@@ -3,6 +3,7 @@ import { H4 } from "@/Typography";
 import { useState } from "react";
 import styled from "styled-components";
 import { Select } from "antd";
+import { InputCurrencyProps } from "../../../../Interfaces";
 
 const { Option } = Select;
 
@@ -70,18 +71,6 @@ const LabelWrapper = styled.div`
   display: flex;
   gap: 2px;
 `;
-
-interface InputCurrencyProps {
-  label?: string;
-  placeholder?: string;
-  isRequired?: boolean;
-  showLabel?: boolean;
-  showAsterik?: boolean;
-  price: number;
-  onChangeAmount: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  currency: string;
-  onChangeCurrency: (value: string) => void;
-}
 
 export default function InputCurrency({
   label = "Amount",

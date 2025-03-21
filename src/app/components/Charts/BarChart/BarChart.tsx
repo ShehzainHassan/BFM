@@ -11,19 +11,12 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
-import { BarData } from "./BarChartData";
 import {
   CustomTooltipContainer,
   CustomTooltipLabel,
   CustomTooltipValue,
 } from "../BalanceOverTime/BalanceTime";
-
-interface ChartProps {
-  data: BarData[];
-  color: string;
-  barSize?: number;
-  selectedBarColor?: string;
-}
+import { ChartProps } from "../../../../../Interfaces";
 
 const LabelContainer = styled("div")`
   display: flex;

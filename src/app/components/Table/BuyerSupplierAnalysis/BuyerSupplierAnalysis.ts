@@ -1,11 +1,3 @@
-export interface BuyerSupplierAnalysis {
-  predictedName: string;
-  avgTransactionAmount: string;
-  daysBWTransactions: string;
-  NumberOfTransactions: number;
-  totalAmount: string;
-}
-
 // export const depositData: BuyerSupplierAnalysis[] = [
 //   {
 //     predictedName: "K****MERC**SE***",

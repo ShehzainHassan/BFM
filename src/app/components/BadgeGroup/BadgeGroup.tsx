@@ -4,6 +4,7 @@ import { BFMPalette } from "@/Theme";
 import { H4, MediumBoldHeading } from "@/Typography";
 import { formatCurrency } from "@/utils";
 import styled from "styled-components";
+import { BadgeGroupProps } from "../../../../Interfaces";
 
 const BadgeGroup = styled("div")`
   display: flex;
@@ -26,10 +27,7 @@ const Content = styled("div")`
   align-items: center;
   gap: 4px;
 `;
-interface BadgeGroupProps {
-  title?: string;
-  value?: number;
-}
+
 export default function RenderBadgeGroup({
   title = "Title",
   value = 0,
