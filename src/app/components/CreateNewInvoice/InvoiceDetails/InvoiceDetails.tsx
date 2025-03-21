@@ -1,12 +1,13 @@
 import { useData } from "@/DataContext";
 import useTranslation from "@/translations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Checkbox from "../../Checkbox/Checkbox";
 import InputCurrency from "../../InputCurrency/InputCurrency";
 import InputDate from "../../InputDate/InputDate";
 import InputWithLabel from "../../InputWithLabel/Input";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
+import { formatCurrency } from "@/utils";
 
 const Container = styled("div")`
   display: flex;
@@ -25,7 +26,6 @@ const PaymentsContainer = styled("div")`
 export default function InvoiceDetails() {
   const { t } = useTranslation();
   const [amount, setAmount] = useState(0);
-  const [currency, setCurrency] = useState("USD");
   const {
     invoiceSubject,
     setInvoiceSubject,
@@ -40,7 +40,17 @@ export default function InvoiceDetails() {
     bankDetails,
     setBankDetails,
     items,
+    subTotal,
+    setSubTotal,
+    currency,
+    handleCurrencyChange,
   } = useData();
+  useEffect(() => {
+    if (items.length === 0) {
+      setSubTotal(formatCurrency(`${currency} ${0.0}`, 2));
+    }
+  }, [items]);
+
   return (
     <Container>
       <InputWithLabel
@@ -58,9 +68,8 @@ export default function InvoiceDetails() {
       <CurrencyDateContainer>
         <InputCurrency
           currency={currency}
-          price={amount}
-          onChangeCurrency={setCurrency}
-          onChangeAmount={(e) => setAmount(Number(e.target.value))}
+          value={Number(subTotal.split(" ")[1])}
+          onChangeCurrency={(newCurrency) => handleCurrencyChange(newCurrency)}
           label="Currency"
         />
         <InputDate label="Invoice Due" />

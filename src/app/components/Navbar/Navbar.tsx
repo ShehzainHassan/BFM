@@ -141,9 +141,13 @@ export default function Navbar({ navItems }: NavbarProps) {
       bankAddress: "",
     });
   };
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const cancelInvoice = () => {
     resetFields();
+    setIsCreatingInvoice(false);
+  };
+  const handleCloseModal = () => {
+    resetFields();
+    setIsModalOpen(false);
   };
   const getPageTitle = () => {
     if (
@@ -198,7 +202,7 @@ export default function Navbar({ navItems }: NavbarProps) {
       <Header>
         {pageTitle === t("navbar.titles.create_Invoice") ? (
           <TitleContainer>
-            <ImageContainer onClick={() => setIsCreatingInvoice(false)}>
+            <ImageContainer onClick={cancelInvoice}>
               <Image
                 src="/images/arrow-left.png"
                 alt="back"
@@ -248,7 +252,7 @@ export default function Navbar({ navItems }: NavbarProps) {
             <NavButton
               $bgColor={BFMPalette.white}
               $textColor={BFMPalette.black400}
-              onClick={() => setIsCreatingInvoice(false)}>
+              onClick={cancelInvoice}>
               {t("nav_buttons.cancel")}
             </NavButton>
           )}

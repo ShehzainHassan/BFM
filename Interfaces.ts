@@ -317,10 +317,12 @@ export interface InputCurrencyProps {
   isRequired?: boolean;
   showLabel?: boolean;
   showAsterik?: boolean;
-  price: number;
-  onChangeAmount: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  currency: string;
+  price?: number;
+  onChangeAmount?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  currency?: string;
   onChangeCurrency: (value: string) => void;
+  readonly?: boolean;
+  value?: number;
 }
 export interface InputDateProps {
   label?: string;

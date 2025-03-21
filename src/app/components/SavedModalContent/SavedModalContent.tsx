@@ -96,7 +96,7 @@ export default function SavedModalContent() {
     valueStyle();
     doc.text(formatDate(getFirstDayOfMonth(dueDate)), 20, y);
     doc.text(formatDate(dueDate), 130, y);
-    y += 5;
+    y += 15;
 
     labelStyle();
     doc.text("Invoice Detail", 20, y);
@@ -124,7 +124,7 @@ export default function SavedModalContent() {
       columnStyles: { 2: { halign: "right" } },
       margin: { left: 15, right: 15 },
     });
-    let finalY = (doc as any).lastAutoTable.finalY + 10;
+    let finalY = (doc as any).lastAutoTable.finalY;
 
     autoTable(doc, {
       startY: finalY,

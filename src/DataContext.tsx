@@ -1,14 +1,5 @@
 "use client";
 import { createContext, ReactNode, useContext, useState } from "react";
-import { MOCK_DATA } from "./mockdata";
-import { CURRENCY } from "./constants";
-import {
-  formatDate,
-  formatString,
-  formatYearMonth,
-  getImagePath,
-} from "./utils";
-import useTranslation from "./translations";
 import {
   AccountData,
   AreaChartData,
@@ -31,6 +22,15 @@ import {
   Transaction,
   TransitionHighlight,
 } from "../Interfaces";
+import { CURRENCY } from "./constants";
+import { MOCK_DATA } from "./mockdata";
+import useTranslation from "./translations";
+import {
+  formatDate,
+  formatString,
+  formatYearMonth,
+  getImagePath,
+} from "./utils";
 
 const DataContext = createContext<DataContextType | null>(null);
 

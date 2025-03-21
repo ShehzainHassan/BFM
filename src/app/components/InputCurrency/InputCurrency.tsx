@@ -80,6 +80,8 @@ export default function InputCurrency({
   showAsterik = true,
   price = 0,
   currency = "USD",
+  readonly = false,
+  value,
   onChangeAmount,
   onChangeCurrency,
 }: InputCurrencyProps) {
@@ -89,7 +91,8 @@ export default function InputCurrency({
     setTouched(true);
   };
 
-  const isError = isRequired && touched && Number(price) === 0;
+  const isError =
+    value === undefined && isRequired && touched && Number(price) === 0;
 
   return (
     <Container>
@@ -100,7 +103,7 @@ export default function InputCurrency({
       <InputWrapper $isError={isError}>
         <StyledSelect
           value={currency}
-          onChange={(value) => onChangeCurrency(value as string)}
+          onChange={(value) => !readonly && onChangeCurrency(value as string)}
           popupMatchSelectWidth={false}>
           <Option value="USD">USD</Option>
           <Option value="HKD">HKD</Option>
@@ -109,10 +112,11 @@ export default function InputCurrency({
         <StyledInput
           type="number"
           placeholder={placeholder}
-          value={price}
+          value={value !== undefined ? value : price}
           min={0}
           onChange={onChangeAmount}
           onBlur={handleBlur}
+          readOnly={readonly}
         />
       </InputWrapper>
     </Container>
