@@ -4,7 +4,7 @@ import { BFMPalette } from "@/Theme";
 import { MediumSpacedText, TextTitle } from "@/Typography";
 import { formatCurrency, formatDate, getFirstDayOfMonth } from "@/utils";
 import jsPDF from "jspdf";
-import { autoTable } from "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 import Image from "next/image";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
@@ -74,7 +74,7 @@ export default function SavedModalContent() {
     doc.text("Invoice number:", 20, y);
     valueStyle();
     doc.text(invoiceNumber, 52, y);
-    y += 18;
+    y += 15;
 
     labelStyle();
     doc.text("From:", 20, y);
@@ -86,7 +86,7 @@ export default function SavedModalContent() {
     doc.text(fromAddress.address, 20, y + 5);
     doc.text(companyAddress, 130, y);
     doc.text(toAddress, 130, y + 5);
-    y += 18;
+    y += 15;
 
     labelStyle();
     doc.text("Invoice date:", 20, y);
@@ -96,7 +96,7 @@ export default function SavedModalContent() {
     valueStyle();
     doc.text(formatDate(getFirstDayOfMonth(dueDate)), 20, y);
     doc.text(formatDate(dueDate), 130, y);
-    y += 18;
+    y += 5;
 
     labelStyle();
     doc.text("Invoice Detail", 20, y);
@@ -105,14 +105,15 @@ export default function SavedModalContent() {
     doc.text(invoiceDetails, 20, y);
     y += 10;
 
+    const tableData = items.map((item) => [
+      item.description,
+      item.qty,
+      formatCurrency(`${item.currency} ${item.price}`, 2),
+    ]);
     autoTable(doc, {
       startY: y,
       head: [["DESCRIPTIONS", "QUANTITY", "AMOUNT"]],
-      body: items.map((item) => [
-        item.description,
-        item.qty,
-        formatCurrency(`${item.currency} ${item.price}`, 2),
-      ]),
+      body: tableData,
       theme: "grid",
       styles: { fontSize: 10, cellPadding: 3, textColor: BFMPalette.black800 },
       headStyles: {
@@ -123,10 +124,10 @@ export default function SavedModalContent() {
       columnStyles: { 2: { halign: "right" } },
       margin: { left: 15, right: 15 },
     });
-    y += 10;
+    let finalY = (doc as any).lastAutoTable.finalY + 10;
 
     autoTable(doc, {
-      startY: y + 10,
+      startY: finalY,
       body: [
         ["Subtotal", subTotal],
         ["Discount", discount],
@@ -149,9 +150,9 @@ export default function SavedModalContent() {
       },
       margin: { left: 15, right: 15 },
     });
-    y += 10;
+    finalY = (doc as any).lastAutoTable.finalY + 20;
     autoTable(doc, {
-      startY: y + 40,
+      startY: finalY,
       body: [
         ["Bank Name", bankDetails.bankName],
         ["Name", bankDetails.name],
