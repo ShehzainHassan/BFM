@@ -9,6 +9,9 @@ const SidebarContainer = styled("div")`
   top: 0;
   left: 0;
   z-index: 50;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export default function Sidebar() {
   return <SidebarContainer />;

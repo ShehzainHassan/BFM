@@ -19,6 +19,9 @@ const Container = styled("div")`
   height: 150px;
   gap: 16px;
   padding: 32px;
+  @media (max-width: 768px) {
+    padding: 24px 16px 20px 16px;
+  }
 `;
 const SubContainer = styled("div")`
   display: flex;
@@ -27,6 +30,12 @@ const SubContainer = styled("div")`
   border-radius: 10px;
   padding: 4px;
   background-color: ${BFMPalette.purple950};
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const TitleContainer = styled("div")`
   display: flex;
@@ -200,7 +209,6 @@ export default function Navbar({ navItems }: NavbarProps) {
     }
     return true;
   };
-
   const pageTitle = getPageTitle();
 
   return (

@@ -7,6 +7,11 @@ export const H1 = styled.h1<{ color?: string }>`
   font-size: 20px;
   line-height: 30px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 `;
 
 export const Header = styled.h1<{ color?: string }>`

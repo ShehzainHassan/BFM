@@ -144,7 +144,6 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
             tickFormatter={(value, index) => (index % 15 === 0 ? value : "")}
             tickMargin={10}
           />
-
           <YAxis
             axisLine={false}
             tickLine={false}
@@ -161,12 +160,14 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
             tickFormatter={(value) => formatNumberWithCommas(value)}
             tickMargin={20}
           />
+
           <Tooltip content={<CustomTooltip />} />
           <Area
             type="monotone"
             dataKey="HKDValue"
             stroke={BFMPalette.purple500}
             strokeWidth={3}
+            fill="url(#gradient1)"
             activeDot={<CustomActiveDot color={BFMPalette.purple600} />}
           />
         </AreaChart>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HorizontalTabProps } from "../../../../Interfaces";
 
 const TabContainer = styled.div<{ $tabType: "button" | "tab" }>`
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 8px;
   padding: ${({ $tabType }) => ($tabType === "button" ? "4px" : "0px")};
@@ -13,7 +13,6 @@ const TabContainer = styled.div<{ $tabType: "button" | "tab" }>`
     $tabType === "button" ? `1px solid ${BFMPalette.gray100}` : "none"};
   border-bottom: ${({ $tabType }) =>
     $tabType === "tab" ? `1px solid ${BFMPalette.gray100}` : ""};
-  width: fit-content;
 `;
 
 const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`

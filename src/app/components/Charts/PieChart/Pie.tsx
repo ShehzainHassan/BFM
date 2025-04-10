@@ -26,6 +26,9 @@ const PieContainer = styled.div`
   align-items: center;
   width: 200px;
   height: 200px;
+  @media (max-width: 768px) {
+    margin: 0 auto;
+  }
 `;
 
 const PieGraph = ({

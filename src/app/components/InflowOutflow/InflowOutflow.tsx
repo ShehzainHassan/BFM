@@ -16,6 +16,10 @@ const Container = styled("div")`
   max-width: 500px;
   border-radius: 12px;
   background-color: white;
+  @media (max-width: 768px) {
+    padding: 10px;
+    max-width: unset;
+  }
 `;
 
 const SubContainer = styled("div")`
@@ -32,19 +36,35 @@ const ChartContainer = styled("div")`
   align-items: center;
   padding: 16px 24px;
   height: 100%;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 0px 16px;
+    align-items: unset;
+    gap: 5px;
+  }
 `;
 const Labels = styled("div")`
   display: flex;
   flex-direction: column;
   gap: 14px;
   max-height: 250px;
+  @media (max-width: 768px) {
+    gap: 5px;
+    border: 1px solid ${BFMPalette.gray100};
+    border-radius: 12px;
+    padding: 14px;
+    background-color: ${BFMPalette.white70};
+    max-height: unset;
+  }
 `;
 const NoData = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 10px;
 `;
+
 export default function InflowOutflow() {
   const { reports, depositsDashboard, withDrawalsDashboard } = useData();
   const tabs = ["Deposit", "Withdrawal"];
@@ -89,6 +109,7 @@ export default function InflowOutflow() {
           months={months}
         />
       </SubContainer>
+
       {aggregatedData.length > 0 ? (
         <ChartContainer>
           <PieGraph
@@ -101,8 +122,7 @@ export default function InflowOutflow() {
               <Category
                 key={index}
                 circleColor={PIE_COLORS_2[index % PIE_COLORS_2.length]}
-                category={data.name}
-                amount={data.value}
+                data={data}
               />
             ))}
           </Labels>

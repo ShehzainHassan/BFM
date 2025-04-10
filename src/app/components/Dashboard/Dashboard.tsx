@@ -22,6 +22,9 @@ const MainContainer = styled("div")`
   grid-template-columns: 8.55fr 3.45fr;
   gap: 20px;
   max-width: 1300px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 const Container = styled("div")`
   display: flex;
@@ -32,6 +35,15 @@ const SubContainer = styled("div")`
   display: grid;
   grid-template-columns: 6.2fr 5.8fr;
   gap: 20px;
+`;
+const MobileContainer = styled("div")`
+  display: none;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 120px;
+  }
 `;
 export const Header = styled("div")`
   display: flex;
@@ -46,6 +58,9 @@ export const PaymentsContainer = styled("div")`
   flex-direction: column;
   border-radius: 12px;
   max-width: 1300px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export const SearchAndFilter = styled("div")`
   display: flex;
@@ -152,6 +167,12 @@ export default function Dashboard() {
         onPageChange={handlePageChange}
         totalPages={totalPages}
       />
+      <MobileContainer>
+        <TextContainer />
+        <InflowOutflow />
+        <Payment />
+        <Notifications notifications={notifications.notifications} />
+      </MobileContainer>
     </Container>
   );
 }

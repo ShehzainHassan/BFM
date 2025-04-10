@@ -4,6 +4,7 @@ export const BFMPalette = {
   white40: "#eef4ff",
   white50: "#EFEFFB",
   white60: "#EDEDED",
+  white70: "#FAFAFA",
   white90: "#fffaeb",
   white100: "#fffafe",
   gray100: "#e9eaeb",

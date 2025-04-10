@@ -88,7 +88,7 @@ export const handleDownloadPDF = (invoice: DetailedInvoiceSummary) => {
   const labelStyle = () => {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(10);
-    doc.setTextColor(BFMPalette.black100);
+    doc.setTextColor(BFMPalette.gray700);
   };
 
   const valueStyle = () => {
@@ -99,8 +99,9 @@ export const handleDownloadPDF = (invoice: DetailedInvoiceSummary) => {
 
   labelStyle();
   doc.text("Invoice number:", 20, y);
+  y += 5;
   valueStyle();
-  doc.text(invoice.invoiceNumber, 52, y);
+  doc.text(invoice.invoiceNumber, 20, y);
   y += 15;
 
   labelStyle();
@@ -109,9 +110,13 @@ export const handleDownloadPDF = (invoice: DetailedInvoiceSummary) => {
   y += 5;
 
   valueStyle();
+  doc.setTextColor(BFMPalette.purple900);
   doc.text(fromAddress.name, 20, y);
+  doc.setTextColor(BFMPalette.black800);
   doc.text(fromAddress.address, 20, y + 5);
+  doc.setTextColor(BFMPalette.purple900);
   doc.text(invoice.address, 130, y);
+  doc.setTextColor(BFMPalette.black800);
   doc.text(toAddress, 130, y + 5);
   y += 15;
 

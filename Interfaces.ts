@@ -172,9 +172,15 @@ export interface CardProps {
   description?: string;
   children?: React.ReactNode;
 }
+export interface AggregatedItem {
+  name: string;
+  value: number;
+  month: string;
+}
+
 export interface CategoryProps {
-  category: string;
-  circleColor?: string;
+  data: AggregatedItem;
+  circleColor: string;
 }
 
 export interface AreaChartData {
