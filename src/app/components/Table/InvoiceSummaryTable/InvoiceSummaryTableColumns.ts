@@ -1,10 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import useTranslation from "@/translations";
-import { InvoiceSummaryStyles } from "./InvoiceSummaryStyles";
 import { InvoiceSummary } from "../../../../../Interfaces";
+import { InvoiceSummaryStyles } from "./InvoiceSummaryStyles";
 
 export const useInvoiceSummaryColumns = (): ColumnDef<InvoiceSummary>[] => {
-  const { t } = useTranslation();
   return [
     {
       accessorKey: "INVOICE_NO",

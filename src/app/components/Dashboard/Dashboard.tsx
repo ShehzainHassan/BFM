@@ -5,18 +5,17 @@ import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
-import TextContainer from "../TextContainer/TextContainer";
-import InflowOutflow from "../InflowOutflow/InflowOutflow";
-import Payment from "../Payments/Payment";
-import Notifications from "../Notifications/Notifications";
+import { AccountData, Transaction } from "../../../../Interfaces";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import InflowOutflow from "../InflowOutflow/InflowOutflow";
+import Notifications from "../Notifications/Notifications";
+import Pagination from "../Pagination/Pagination";
+import Payment from "../Payments/Payment";
 import Search from "../Search/Search";
+import { useAccountsColumns } from "../Table/Accounts/AccountsColumns";
 import DataTable from "../Table/Table";
 import { useTransactionColumns } from "../Table/Transactions/TransactionsColumns";
-import Pagination from "../Pagination/Pagination";
-import { useAccountsColumns } from "../Table/Accounts/AccountsColumns";
-import { formatYearMonth } from "@/utils";
-import { AccountData, Transaction } from "../../../../Interfaces";
+import TextContainer from "../TextContainer/TextContainer";
 
 const MainContainer = styled("div")`
   display: grid;

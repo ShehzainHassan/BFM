@@ -1,9 +1,9 @@
-import { BFMPalette } from "@/Theme";
-import { H3, H4 } from "@/Typography";
-import { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
-import { CalendarOutlined } from "@ant-design/icons";
 import { useData } from "@/DataContext";
+import { BFMPalette } from "@/Theme";
+import { H4 } from "@/Typography";
+import { CalendarOutlined } from "@ant-design/icons";
+import { useRef, useState } from "react";
+import styled from "styled-components";
 import { InputDateProps } from "../../../../Interfaces";
 
 const Container = styled.div`

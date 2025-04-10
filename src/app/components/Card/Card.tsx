@@ -30,19 +30,6 @@ const SubContainer2 = styled("div")`
   flex-direction: column;
 `;
 
-const Button = styled("button")`
-  color: ${BFMPalette.blue600};
-  background-color: ${BFMPalette.white40};
-  border: 1px solid ${BFMPalette.blue100};
-  padding: 2px 6px 2px 8px;
-  border-radius: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-`;
-
 export default function Card({
   image,
   title,

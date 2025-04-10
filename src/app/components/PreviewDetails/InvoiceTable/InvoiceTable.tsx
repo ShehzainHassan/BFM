@@ -38,7 +38,6 @@ const SummaryRow = styled(TableRow)`
 `;
 
 const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
-  if (rows.length === 0) return null;
   const {
     hasDiscount,
     discount,
@@ -60,11 +59,20 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
     if (isNaN(discount) || !hasDiscount) {
       setDiscount(0);
     }
-  }, [hasDiscount]);
+  }, [hasDiscount, discount, setDiscount]);
   useEffect(() => {
     setSubTotal(formatCurrency(`${currency} ${totalPrice}`, 2));
     setFinalTotal(formatCurrency(`${currency} ${finalPrice}`, 2));
-  }, [items, discount]);
+  }, [
+    items,
+    discount,
+    currency,
+    totalPrice,
+    finalPrice,
+    setSubTotal,
+    setFinalTotal,
+  ]);
+  if (rows.length === 0) return null;
 
   return (
     <TableWrapper>

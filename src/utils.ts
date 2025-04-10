@@ -7,6 +7,12 @@ import {
   Reports,
 } from "../Interfaces";
 import jsPDF from "jspdf";
+
+declare module "jspdf" {
+  interface jsPDF {
+    lastAutoTable?: { finalY: number };
+  }
+}
 import { BFMPalette } from "./Theme";
 import autoTable from "jspdf-autotable";
 
@@ -34,7 +40,7 @@ export const formatCurrency = (input: string, decimals?: number): string => {
   if (!match) return input;
 
   const currency: string = match[1];
-  let amount: number = parseFloat(match[2]);
+  const amount: number = parseFloat(match[2]);
 
   let formatOptions: Intl.NumberFormatOptions;
   if (decimals !== undefined) {
@@ -49,7 +55,7 @@ export const formatCurrency = (input: string, decimals?: number): string => {
         : { minimumFractionDigits: 2, maximumFractionDigits: 2 };
   }
 
-  let formattedAmount = amount.toLocaleString("en-US", formatOptions);
+  const formattedAmount = amount.toLocaleString("en-US", formatOptions);
 
   return amount < 0
     ? `-${currency} ${formattedAmount.replace("-", "")}`
@@ -145,7 +151,7 @@ export const handleDownloadPDF = (invoice: DetailedInvoiceSummary) => {
     columnStyles: { 2: { halign: "right" } },
     margin: { left: 15, right: 15 },
   });
-  let finalY = (doc as any).lastAutoTable.finalY;
+  let finalY = (doc as jsPDF).lastAutoTable?.finalY ?? 0;
 
   autoTable(doc, {
     startY: finalY,
@@ -171,7 +177,7 @@ export const handleDownloadPDF = (invoice: DetailedInvoiceSummary) => {
     },
     margin: { left: 15, right: 15 },
   });
-  finalY = (doc as any).lastAutoTable.finalY + 20;
+  finalY = ((doc as jsPDF).lastAutoTable?.finalY ?? 0) + 20;
   autoTable(doc, {
     startY: finalY,
     body: [

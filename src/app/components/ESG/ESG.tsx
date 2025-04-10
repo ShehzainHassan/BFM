@@ -1,19 +1,18 @@
 "use client";
-import styled from "styled-components";
-import { BFMPalette } from "@/Theme";
-import { H2, H5 } from "@/Typography";
-import { useState } from "react";
 import { useData } from "@/DataContext";
-import Image from "next/image";
+import { BFMPalette } from "@/Theme";
+import useTranslation from "@/translations";
+import { H2, H5 } from "@/Typography";
 import { convertToYYYYMM, generateMonths, getUniqueYears } from "@/utils";
-import SelectDropDown from "../MonthDropDown/MonthDropDown";
+import Image from "next/image";
+import { useState } from "react";
+import styled from "styled-components";
+import BarGraph from "../Charts/BarChart/BarChart";
 import PieGraph from "../Charts/PieChart/Pie";
 import { PIE_COLORS_1 } from "../Charts/PieChart/PieChartData";
 import ESGCard from "../ESGCard/ESGCard";
-import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
-import BarGraph from "../Charts/BarChart/BarChart";
 import ESGNotifications from "../ESGNotifications/ESGNotifications";
-import useTranslation from "@/translations";
+import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import MonthDropDown from "../MonthDropDown/MonthDropDown";
 
 const Container = styled("div")`

@@ -1,18 +1,17 @@
 "use client";
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
+import useTranslation from "@/translations";
 import { H3, TableTitle } from "@/Typography";
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
+import { RowData, TableProps } from "../../../../Interfaces";
 import { ExpandedColumns } from "./ExpandedTable/ExpandedColumn";
-import { useData } from "@/DataContext";
-import useTranslation from "@/translations";
-import { TableProps } from "../../../../Interfaces";
 
 export const TableContainer = styled.div`
   padding: 12px 16px 16px 16px;
@@ -134,10 +133,10 @@ export default function DataTable<T>({
                 cell.column.id ===
                 t("tables.recurring_transactions.description");
               const isRevenueRow =
-                (row.original as any).inflows === "totalRevenue" ||
-                (row.original as any).inflows === "revenueGrowth" ||
-                (row.original as any).outflows === "totalExpense" ||
-                (row.original as any).outflows === "profitOrLoss";
+                (row.original as RowData).inflows === "totalRevenue" ||
+                (row.original as RowData).inflows === "revenueGrowth" ||
+                (row.original as RowData).outflows === "totalExpense" ||
+                (row.original as RowData).outflows === "profitOrLoss";
               return isRevenueRow ? (
                 <Revenue key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

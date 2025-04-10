@@ -62,7 +62,7 @@ export default function SelectDropDown() {
     if (!companyAddress && options.length > 0) {
       setCompanyAddress(options[0].value);
     }
-  }, [companyAddress, options]);
+  }, [companyAddress, options, setCompanyAddress]);
 
   return (
     <Container>

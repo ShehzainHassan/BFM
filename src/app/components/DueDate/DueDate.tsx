@@ -113,7 +113,12 @@ const generateDates = (dueDateString: string) => {
     31,
   ];
 
-  const dates: { day: number; isDeadline: boolean }[] = [];
+  const dates: {
+    year: number;
+    month: number;
+    day: number;
+    isDeadline: boolean;
+  }[] = [];
 
   for (let i = -2; i <= 2; i++) {
     let newDay = day + i;
@@ -139,6 +144,8 @@ const generateDates = (dueDateString: string) => {
     }
 
     dates.push({
+      year: newYear,
+      month: newMonth,
       day: newDay,
       isDeadline: i === 0,
     });

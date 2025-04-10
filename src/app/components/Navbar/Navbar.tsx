@@ -3,19 +3,14 @@ import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
 import { H1 } from "@/Typography";
-import styled from "styled-components";
-import NavButton from "../Button/Primary/NavButton";
-import {
-  formatDate,
-  generateInvoiceNumber,
-  getFirstDayOfMonth,
-  getLastInvoice,
-} from "@/utils";
+import { formatDate, getFirstDayOfMonth } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
+import styled from "styled-components";
+import { NavbarProps } from "../../../../Interfaces";
+import NavButton from "../Button/Primary/NavButton";
 import DetailsModal from "../Modal/Modal";
 import SavedModalContent from "../SavedModalContent/SavedModalContent";
-import { NavbarProps } from "../../../../Interfaces";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;

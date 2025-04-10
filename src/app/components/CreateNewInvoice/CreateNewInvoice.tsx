@@ -1,10 +1,9 @@
 import { BFMPalette } from "@/Theme";
-import styled from "styled-components";
-import InvoiceDetails from "./InvoiceDetails/InvoiceDetails";
-import SelectDropDown from "../SelectDropDown/SelectDropDown";
 import { H2 } from "@/Typography";
+import styled from "styled-components";
 import PreviewDetails from "../PreviewDetails/PreviewDetails";
-import { useData } from "@/DataContext";
+import SelectDropDown from "../SelectDropDown/SelectDropDown";
+import InvoiceDetails from "./InvoiceDetails/InvoiceDetails";
 
 const Container = styled("div")`
   display: grid;

@@ -1,6 +1,5 @@
 import { BFMPalette } from "@/Theme";
 import { Title } from "@/Typography";
-import { Checkbox } from "antd";
 import styled from "styled-components";
 import { CheckboxProps } from "../../../../Interfaces";
 
@@ -15,23 +14,25 @@ const Container = styled.label`
   cursor: pointer;
 `;
 
-const StyledCheckbox = styled(Checkbox)`
-  .ant-checkbox-inner {
-    width: 20px;
-    height: 22px;
-    border-radius: 4px;
-    border: 2px solid ${BFMPalette.gray200};
-    transition: all 0.2s ease-in-out;
+const StyledCheckbox = styled.input`
+  width: 20px;
+  height: 22px;
+  border-radius: 4px;
+  border: 2px solid ${BFMPalette.gray200};
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  cursor: pointer;
+  position: relative;
+
+  &:checked {
+    background-color: ${BFMPalette.purple500};
+    border-color: ${BFMPalette.purple500};
   }
 
-  .ant-checkbox-checked .ant-checkbox-inner {
-    background-color: ${BFMPalette.purple500} !important;
-    border-color: ${BFMPalette.purple500} !important;
-  }
-
-  .ant-checkbox-checked .ant-checkbox-inner::after {
-    top: 3px;
-    left: 6px;
+  &:checked::after {
+    content: "";
+    position: absolute;
+    left: 4px;
     width: 6px;
     height: 12px;
     border: solid white;
@@ -45,12 +46,13 @@ export default function CustomCheckbox({
   checked,
   setChecked,
 }: CheckboxProps) {
-  const handleChange = (e: any) => {
-    setChecked(e.target.checked);
-  };
   return (
     <Container>
-      <StyledCheckbox checked={checked} onChange={handleChange} />
+      <StyledCheckbox
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => setChecked(e.target.checked)}
+      />
       <Title>{label}</Title>
     </Container>
   );

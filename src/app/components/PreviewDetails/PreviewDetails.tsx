@@ -2,13 +2,13 @@ import { fromAddress, toAddress } from "@/constants";
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
-import { formatDate, generateInvoiceNumber, getFirstDayOfMonth } from "@/utils";
+import { formatDate, getFirstDayOfMonth } from "@/utils";
 import Image from "next/image";
 import styled from "styled-components";
 import Address from "../Address/Address";
-import InvoiceTable from "./InvoiceTable/InvoiceTable";
 import Notes from "../Notes/Notes";
 import InfoTable from "../PaymentsTable/PaymentsTable";
+import InvoiceTable from "./InvoiceTable/InvoiceTable";
 
 const Container = styled("div")`
   background-color: ${BFMPalette.white25};

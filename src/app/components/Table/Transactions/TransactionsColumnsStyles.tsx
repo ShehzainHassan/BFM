@@ -1,16 +1,16 @@
 "use client";
-import { HKD_EQUIVALANT, LOCAL_STORAGE_KEY } from "@/constants";
+import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, H4 } from "@/Typography";
 import { formatCurrency, formatDate, formatString } from "@/utils";
+import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { Transaction } from "../../../../../Interfaces";
 import DetailsModal from "../../Modal/Modal";
 import TransactionDetails from "../../TransactionDetails/TransactionDetails";
 import { AmountText } from "../Accounts/AccountsStyles";
-import { Transaction } from "./transactions";
-import axios from "axios";
 
 const DescriptionWrapper = styled.div`
   display: flex;
@@ -44,25 +44,20 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState("Details");
   const [hasAttachments, setHasAttachments] = useState(false);
-  const checkAttachments = async () => {
-    const response = await axios.get(
-      `https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/attachments/${row.id}`,
-      {
-        headers: {
-          "ngrok-skip-browser-warning": "69420",
-        },
-      }
-    );
-    if (response.data.data.length > 0) {
-      setHasAttachments(true);
-    } else {
-      setHasAttachments(false);
-    }
-  };
-
   useEffect(() => {
+    const checkAttachments = async () => {
+      const response = await axios.get(
+        `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${row.id}`
+      );
+      if (response.data.data.length > 0) {
+        setHasAttachments(true);
+      } else {
+        setHasAttachments(false);
+      }
+    };
+
     checkAttachments();
-  }, [row]);
+  }, [row.id]);
 
   const handleOpenModal = (type: string) => {
     setSelected(type);

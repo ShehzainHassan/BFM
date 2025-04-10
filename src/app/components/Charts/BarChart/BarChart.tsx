@@ -7,6 +7,7 @@ import {
   Rectangle,
   ResponsiveContainer,
   Tooltip,
+  TooltipProps,
   XAxis,
   YAxis,
 } from "recharts";
@@ -16,7 +17,7 @@ import {
   CustomTooltipLabel,
   CustomTooltipValue,
 } from "../BalanceOverTime/BalanceTime";
-import { ChartProps } from "../../../../../Interfaces";
+import { ChartProps, CustomLabelProps } from "../../../../../Interfaces";
 
 const LabelContainer = styled("div")`
   display: flex;
@@ -53,7 +54,11 @@ const CustomTick = (props: {
   );
 };
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
       <CustomTooltipContainer>
@@ -66,11 +71,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-const CustomLabel = (props: any) => {
-  const { x, y, value } = props;
+const CustomLabel = ({ x = 0, y = 0, value }: CustomLabelProps) => {
+  const parsedX = typeof x === "string" ? parseFloat(x) : x;
+  const parsedY = typeof y === "string" ? parseFloat(y) : y;
 
   return (
-    <foreignObject x={x} y={y - 30} width={50} height={30}>
+    <foreignObject x={parsedX} y={parsedY - 30} width={50} height={30}>
       <LabelContainer>
         <LabelText>{value}</LabelText>
       </LabelContainer>

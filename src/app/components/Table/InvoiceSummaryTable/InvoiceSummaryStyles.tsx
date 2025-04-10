@@ -1,20 +1,16 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H5 } from "@/Typography";
-import {
-  formatDate,
-  getInvoiceFromLocalStorage,
-  handleDownloadPDF,
-} from "@/utils";
+import { formatDate } from "@/utils";
+import { useState } from "react";
+import styled from "styled-components";
+import { InvoiceSummary } from "../../../../../Interfaces";
+import DetailsModal from "../../Modal/Modal";
+import SavedModalContent from "../../SavedModalContent/SavedModalContent";
 import {
   ActionContainer,
   AttachmentIcon,
   DetailsIcon,
 } from "../Transactions/TransactionsColumnsStyles";
-import styled from "styled-components";
-import { InvoiceSummary } from "../../../../../Interfaces";
-import DetailsModal from "../../Modal/Modal";
-import { useState } from "react";
-import SavedModalContent from "../../SavedModalContent/SavedModalContent";
 const StatusBadge = styled.div<{ status: "PENDING" | "OVERDUE" }>`
   border-radius: 16px;
   padding: 2px 8px;

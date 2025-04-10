@@ -1,3 +1,4 @@
+import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
 import {
   BodyText,
@@ -7,12 +8,6 @@ import {
   SmallText,
   SubTitle,
 } from "@/Typography";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import NavButton from "../Button/Primary/NavButton";
-import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
-import { HKD_EQUIVALANT, LOCAL_STORAGE_KEY } from "@/constants";
 import {
   formatCurrency,
   formatDate,
@@ -20,11 +15,16 @@ import {
   getFileExtension,
 } from "@/utils";
 import axios from "axios";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 import {
   Attachment,
   Note,
   TransactionDetailsProps,
 } from "../../../../Interfaces";
+import NavButton from "../Button/Primary/NavButton";
+import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 
 const StatsContainer = styled("div")`
   border-radius: 12px;
@@ -170,7 +170,6 @@ export default function TransactionDetails({
   const [allAttachments, setAllAttachments] = useState<Attachment[]>();
   const [editText, setEditText] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [dragging, setDragging] = useState(false);
   const getNoteDetails = async () => {
     const response = await axios.get(
       `https://api.dev.pca.planto.io/v1/businessFinancialManagement/note/${selectedRow.id}`
@@ -184,12 +183,7 @@ export default function TransactionDetails({
     try {
       await axios
         .get(
-          `https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/attachments/${selectedRow.id}`,
-          {
-            headers: {
-              "ngrok-skip-browser-warning": "69420",
-            },
-          }
+          `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${selectedRow.id}`
         )
         .then((response) => setAllAttachments(response.data.data));
     } catch (err) {
@@ -264,12 +258,11 @@ export default function TransactionDetails({
     try {
       await axios
         .post(
-          "https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/upload",
+          "https://api.dev.pca.planto.io/v1/businessFinancialManagement/upload",
           formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              "ngrok-skip-browser-warning": "69420",
             },
           }
         )
@@ -285,16 +278,10 @@ export default function TransactionDetails({
   };
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    setDragging(true);
-  };
-
-  const handleDragLeave = () => {
-    setDragging(false);
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    setDragging(false);
 
     const file = event.dataTransfer.files?.[0];
     if (file) uploadFile(file);
@@ -307,14 +294,9 @@ export default function TransactionDetails({
     try {
       await axios
         .delete(
-          `https://c167-59-103-34-73.ngrok-free.app/v1/businessFinancialManagement/delete-attachment/${index}`,
-          {
-            headers: {
-              "ngrok-skip-browser-warning": "69420",
-            },
-          }
+          `https://api.dev.pca.planto.io/v1/businessFinancialManagement/delete-attachment/${index}`
         )
-        .then((response) => setAllAttachments(updatedAttachments));
+        .then(() => setAllAttachments(updatedAttachments));
     } catch (err) {
       console.error("Error deleting attachment ", err);
     }
@@ -341,7 +323,7 @@ export default function TransactionDetails({
   };
   const saveNote = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api.dev.pca.planto.io/v1/businessFinancialManagement/add-note",
         {
           transactionId: selectedRow.id,
@@ -353,7 +335,7 @@ export default function TransactionDetails({
         return { ...prev, note: editText };
       });
     } catch (err) {
-      console.error("Error saving note");
+      console.error("Error saving note", err);
     }
   };
   const handleCancelNote = () => {
@@ -503,10 +485,7 @@ export default function TransactionDetails({
         </DetailsContainer>
       ) : (
         <>
-          <FileUploadContainer
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-            onDragLeave={handleDragLeave}>
+          <FileUploadContainer onDragOver={handleDragOver} onDrop={handleDrop}>
             <FileContent>
               <IconContainer>
                 <Image

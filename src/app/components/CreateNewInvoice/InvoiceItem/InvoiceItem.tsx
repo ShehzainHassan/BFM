@@ -1,11 +1,10 @@
-import Image from "next/image";
-import { useState } from "react";
-import InputWithLabel from "../../InputWithLabel/Input";
-import InputCurrency from "../../InputCurrency/InputCurrency";
-import styled from "styled-components";
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { H3Secondary } from "@/Typography";
-import { useData } from "@/DataContext";
+import Image from "next/image";
+import styled from "styled-components";
+import InputCurrency from "../../InputCurrency/InputCurrency";
+import InputWithLabel from "../../InputWithLabel/Input";
 
 const AdditionalInfoContainer = styled.div`
   display: flex;

@@ -1,10 +1,10 @@
 "use client";
-import { BFMPalette } from "@/Theme";
-import { BodyText, H3, H3Secondary, H4 } from "@/Typography";
-import { AccountData } from "./accounts";
-import styled from "styled-components";
 import { CURRENCY, HKD_EQUIVALANT } from "@/constants";
+import { BFMPalette } from "@/Theme";
+import { BodyText, H3Secondary, H4 } from "@/Typography";
 import { formatCurrency } from "@/utils";
+import styled from "styled-components";
+import { AccountData } from "../../../../../Interfaces";
 
 export const AmountText = styled.div`
   display: flex;

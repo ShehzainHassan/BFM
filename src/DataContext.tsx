@@ -10,6 +10,7 @@ import {
   DataContextType,
   Inflows,
   InvoiceSummary,
+  Item,
   LineChartData,
   Outflows,
   ParsedAccount,
@@ -285,9 +286,20 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   };
   const parseInvoices = (invoices: any[]): InvoiceSummary[] => {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     return invoices.map((invoice) => {
       const dueDate = new Date(invoice.dueDate);
-      const category = dueDate < today ? "OVERDUE" : "PENDING";
+      dueDate.setHours(0, 0, 0, 0);
+
+      let category = "PENDING";
+      if (dueDate < today) {
+        category = "OVERDUE";
+      } else if (dueDate > today) {
+        category = "PENDING";
+      } else {
+        category = "PENDING";
+      }
+
       return {
         invoiceNo: invoice.invoiceNumber || "",
         clientName: invoice.address || "",
@@ -298,6 +310,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       };
     });
   };
+
   const transformAreaData = (reports: any): AreaChartData[] => {
     if (!reports) {
       return [];
@@ -338,7 +351,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         flattenedFields: Object.fromEntries(
           Object.entries(entry.income.flattenedFields)
             .filter(
-              ([_, value]) =>
+              ([value]) =>
                 value && typeof value === "object" && "amount" in value
             )
             .map(([key, value]) => [key, { amount: value?.amount ?? 0 }])
@@ -353,7 +366,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         flattenedFields: Object.fromEntries(
           Object.entries(entry.expense.flattenedFields)
             .filter(
-              ([_, value]) =>
+              ([value]) =>
                 value && typeof value === "object" && "amount" in value
             )
             .map(([key, value]) => [key, { amount: value?.amount ?? 0 }])
@@ -378,7 +391,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     setItems(items.filter((item) => item.id !== id));
   };
 
-  const updateItem = (id: number, key: string, value: any) => {
+  const updateItem = (id: number, key: string, value: Item[keyof Item]) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, [key]: value } : item

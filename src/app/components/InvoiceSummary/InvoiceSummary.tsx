@@ -13,7 +13,7 @@ import { useInvoiceSummaryColumns } from "../Table/InvoiceSummaryTable/InvoiceSu
 import DataTable from "../Table/Table";
 
 export default function InvoiceSummary() {
-  const { accounts, invoicesSummary } = useData();
+  const { invoicesSummary } = useData();
 
   return (
     <PaymentsContainer>

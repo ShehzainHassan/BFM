@@ -175,7 +175,6 @@ export interface CardProps {
 export interface CategoryProps {
   category: string;
   circleColor?: string;
-  amount: number;
 }
 
 export interface AreaChartData {
@@ -288,6 +287,12 @@ export interface DueDatePayload {
 
 export interface DueDateProps {
   payload: DueDatePayload;
+}
+
+export interface RowData {
+  inflows: string;
+  outflows: string;
+  [key: string]: any;
 }
 
 export interface ESGCardProps {
@@ -524,4 +529,21 @@ export interface TextComponentProps {
   timePeriod: string;
   isIncreased?: boolean;
   valueColor?: string;
+}
+export interface CustomActiveDotProps {
+  cx?: number;
+  cy?: number;
+  color?: string;
+}
+export interface CustomLabelProps {
+  x?: number | string;
+  y?: number | string;
+  value?: number | string;
+}
+
+export interface Item {
+  id: number;
+  description: string;
+  price: number;
+  qty: number;
 }

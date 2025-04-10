@@ -8,11 +8,15 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
+  TooltipProps,
   XAxis,
   YAxis,
 } from "recharts";
 import styled from "styled-components";
-import { AreaChartData, AreaChartProps } from "../../../../../Interfaces";
+import {
+  AreaChartProps,
+  CustomActiveDotProps,
+} from "../../../../../Interfaces";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -40,7 +44,11 @@ export const CustomTooltipValue = styled("p")`
   color: ${BFMPalette.white};
 `;
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
       <CustomTooltipContainer>
@@ -75,25 +83,21 @@ const CustomYAxisTick = (props: {
     </text>
   );
 };
-const CustomActiveDot = (props: any) => {
-  const { cx, cy } = props;
 
+const CustomActiveDot = ({
+  cx = 0,
+  cy = 0,
+  color = BFMPalette.purple600,
+}: CustomActiveDotProps) => {
   return (
     <g>
-      <line
-        x1={cx}
-        y1={cy}
-        x2={cx}
-        y2={cy}
-        stroke={BFMPalette.purple600}
-        strokeWidth={2}
-      />
+      <line x1={cx} y1={cy} x2={cx} y2={cy} stroke={color} strokeWidth={2} />
       <circle
         cx={cx}
         cy={cy}
         r={6}
         fill="white"
-        stroke={BFMPalette.purple600}
+        stroke={color}
         strokeWidth={2}
       />
     </g>
@@ -163,7 +167,6 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
             dataKey="HKDValue"
             stroke={BFMPalette.purple500}
             strokeWidth={3}
-            fill="url(#gradient1)"
             activeDot={<CustomActiveDot color={BFMPalette.purple600} />}
           />
         </AreaChart>

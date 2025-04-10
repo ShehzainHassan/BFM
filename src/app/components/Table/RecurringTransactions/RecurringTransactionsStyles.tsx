@@ -1,10 +1,10 @@
 "use client";
 import { BFMPalette } from "@/Theme";
-import { BodyText, H3, H4 } from "@/Typography";
-import { RecurringTransaction } from "./recurringTransactions";
-import styled from "styled-components";
-import Image from "next/image";
+import { BodyText, H4 } from "@/Typography";
 import { formatCurrency, formatDate } from "@/utils";
+import Image from "next/image";
+import styled from "styled-components";
+import { RecurringTransaction } from "../../../../../Interfaces";
 
 const DescriptionContainer = styled("div")`
   display: flex;

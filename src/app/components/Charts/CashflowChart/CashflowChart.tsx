@@ -1,13 +1,11 @@
-import { BarTooltipProps, ResponsiveBar } from "@nivo/bar";
-import { JSX } from "react";
-import { useData } from "@/DataContext";
-import styled from "styled-components";
-import { BFMPalette } from "@/Theme";
-import { BarCustomLayerProps } from "@nivo/bar";
-import { formatCurrency, getDynamicScale } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
+import { useData } from "@/DataContext";
+import { BFMPalette } from "@/Theme";
 import { H3, H3Primary, H5 } from "@/Typography";
-import { TooltipProps } from "recharts";
+import { formatCurrency, getDynamicScale } from "@/utils";
+import { BarCustomLayerProps, BarTooltipProps, ResponsiveBar } from "@nivo/bar";
+import { JSX } from "react";
+import styled from "styled-components";
 import { CashFlowData } from "../../../../../Interfaces";
 
 const ChartContainer = styled.div`
