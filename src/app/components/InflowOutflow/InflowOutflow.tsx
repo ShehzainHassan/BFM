@@ -52,7 +52,8 @@ const Labels = styled("div")`
     gap: 5px;
     border: 1px solid ${BFMPalette.gray100};
     border-radius: 12px;
-    padding: 14px;
+    padding: 0px 14px;
+    padding-top: 14px;
     background-color: ${BFMPalette.white70};
     max-height: unset;
   }

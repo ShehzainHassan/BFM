@@ -39,13 +39,17 @@ const MobileLayout = styled("div")`
   display: none;
   @media (max-width: 768px) {
     display: flex;
+    flex-direction: column;
     gap: 5px;
   }
 `;
+const Line = styled("div")`
+  border-bottom: 1px solid ${BFMPalette.gray100};
+`;
 const DataContainer = styled("div")`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  gap: 5px;
+  align-items: center;
 `;
 export default function Category({ data, circleColor }: CategoryProps) {
   return (
@@ -55,13 +59,15 @@ export default function Category({ data, circleColor }: CategoryProps) {
         <H5 color={BFMPalette.black400}>{formatString(data.name, true)}</H5>
       </Label>
       <MobileLayout>
-        <Circle $width={10} $height={10} $circleColor={circleColor} />
         <DataContainer>
+          <Circle $width={10} $height={10} $circleColor={circleColor} />
           <H4 color={BFMPalette.black400}>{formatString(data.name, true)}</H4>
-          <H2 color={BFMPalette.black800}>
-            {formatCurrency(`${HKD_EQUIVALANT}${data.value}`)}
-          </H2>
         </DataContainer>
+
+        <H2 color={BFMPalette.black800}>
+          {formatCurrency(`${HKD_EQUIVALANT}${data.value}`)}
+        </H2>
+        <Line />
       </MobileLayout>
     </LabelContainer>
   );
