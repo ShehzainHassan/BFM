@@ -40,3 +40,8 @@ a {
     color-scheme: dark;
   }
 }
+
+:where(.css-dev-only-do-not-override-tjsggz).ant-select-multiple
+  .ant-select-selection-overflow {
+  margin-top: 3px;
+}

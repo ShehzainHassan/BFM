@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Comparison, { Payload } from "../Spending Comparison/Comparison";
+import Comparison from "../Spending Comparison/Comparison";
 import Card from "../Card/Card";
 import Image from "next/image";
 import { BFMPalette } from "@/Theme";
@@ -7,7 +7,11 @@ import { H2 } from "@/Typography";
 import ButtonSecondary from "../Button/Secondary/ButtonSecondary";
 import DueDate from "../DueDate/DueDate";
 import useTranslation from "@/translations";
-import { DueDatePayload, NotificationsProps } from "../../../../Interfaces";
+import {
+  DueDatePayload,
+  NotificationsProps,
+  Payload,
+} from "../../../../Interfaces";
 
 const Container = styled("div")`
   display: flex;

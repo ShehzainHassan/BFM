@@ -65,6 +65,20 @@ const NoData = styled("div")`
   height: 100%;
   padding: 10px;
 `;
+const DesktopMonthContainer = styled("div")`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+const MobileMonthContainer = styled("div")`
+  display: none;
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px;
+  }
+`;
 
 export default function InflowOutflow() {
   const { reports, depositsDashboard, withDrawalsDashboard } = useData();
@@ -104,15 +118,25 @@ export default function InflowOutflow() {
           selectedTab={selectedTab}
           onTabChange={setSelectedTab}
         />
-        <MonthDropDown
-          selectedMonths={selectedMonths}
-          setSelectedMonths={setSelectedMonths}
-          months={months}
-        />
+        <DesktopMonthContainer>
+          <MonthDropDown
+            selectedMonths={selectedMonths}
+            setSelectedMonths={setSelectedMonths}
+            months={months}
+          />
+        </DesktopMonthContainer>
       </SubContainer>
 
       {aggregatedData.length > 0 ? (
         <ChartContainer>
+          <MobileMonthContainer>
+            <MonthDropDown
+              selectedMonths={selectedMonths}
+              setSelectedMonths={setSelectedMonths}
+              months={months}
+            />
+          </MobileMonthContainer>
+
           <PieGraph
             data={aggregatedData}
             colors={PIE_COLORS_2}
@@ -129,7 +153,16 @@ export default function InflowOutflow() {
           </Labels>
         </ChartContainer>
       ) : (
-        <NoData>No data</NoData>
+        <>
+          <MobileMonthContainer>
+            <MonthDropDown
+              selectedMonths={selectedMonths}
+              setSelectedMonths={setSelectedMonths}
+              months={months}
+            />
+          </MobileMonthContainer>
+          <NoData>No data</NoData>
+        </>
       )}
     </Container>
   );

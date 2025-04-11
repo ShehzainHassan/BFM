@@ -44,6 +44,12 @@ const Badge = styled("div")`
 `;
 
 export default function Comparison({ spendingData }: ComparisonProps) {
+  const currentValue = Number(spendingData.current.value);
+  const previousValue = Number(spendingData.previous.value);
+  const maxValue = Math.max(currentValue, previousValue);
+  const getFillPercentage = (value: number) => {
+    return (value / maxValue) * 100;
+  };
   return (
     <Card
       image="/images/Frame 1.png"
@@ -52,7 +58,10 @@ export default function Comparison({ spendingData }: ComparisonProps) {
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
           <H5 color={BFMPalette.black800}>{spendingData.current.month}</H5>
           <BarUI>
-            <Filled $filledColor={BFMPalette.purple600} $filledValue={80} />
+            <Filled
+              $filledColor={BFMPalette.purple600}
+              $filledValue={getFillPercentage(currentValue)}
+            />
             <Badge>
               {formatCurrency(`${CURRENCY}${spendingData.current.value}`)}
             </Badge>
@@ -61,7 +70,10 @@ export default function Comparison({ spendingData }: ComparisonProps) {
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
           <H5 color={BFMPalette.black800}>{spendingData.previous.month}</H5>
           <BarUI>
-            <Filled $filledColor={BFMPalette.purple300} $filledValue={90} />
+            <Filled
+              $filledColor={BFMPalette.purple300}
+              $filledValue={getFillPercentage(previousValue)}
+            />
             <Badge>
               {formatCurrency(`${CURRENCY}${spendingData.previous.value}`)}
             </Badge>
