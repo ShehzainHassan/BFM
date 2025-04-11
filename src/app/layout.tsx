@@ -6,6 +6,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import "./globals.css";
 import { DataProvider } from "@/DataContext";
 import MobileNav from "./components/MobileNav/MobileNav";
+import useTranslation from "@/translations";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -18,7 +19,7 @@ const ContentWrapper = styled("div")`
   align-items: center;
   justify-content: center;
   margin-left: 76px;
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     margin-left: unset;
   }
 `;
@@ -30,7 +31,7 @@ const MainContent = styled("main")`
   padding: 32px;
   width: 100%;
   overflow: auto;
-  @media (max-width: 768px) {
+  @media (max-width: 1023px) {
     display: unset;
     max-width: unset;
     justify-content: unset;
@@ -42,6 +43,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { t } = useTranslation();
   return (
     <html lang="en" className={inter.variable}>
       <body>
@@ -50,20 +52,21 @@ export default function RootLayout({
           <ContentWrapper>
             <Navbar
               navItems={[
-                { label: "Dashboard" },
-                { label: "Analytics" },
-                { label: "Invoices" },
-                { label: "Calendar" },
-                { label: "ESG" },
+                { label: t("navbar.tabs.dashboard") },
+                { label: t("navbar.tabs.analytics") },
+                { label: t("navbar.tabs.invoices") },
+                { label: t("navbar.tabs.calendar") },
+                { label: t("navbar.tabs.esg") },
               ]}
             />
             <MobileNav
               navItems={[
-                { label: "Dashboard" },
-                { label: "Analytics" },
-                { label: "Invoices" },
-                { label: "Calendar" },
-                { label: "ESG" },
+                { label: t("navbar.tabs.dashboard") },
+                { label: t("navbar.tabs.transactions") },
+                { label: t("navbar.tabs.analytics") },
+                { label: t("navbar.tabs.invoices") },
+                { label: t("navbar.tabs.calendar") },
+                { label: t("navbar.tabs.esg") },
               ]}
             />
 

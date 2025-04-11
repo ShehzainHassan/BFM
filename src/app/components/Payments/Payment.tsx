@@ -15,7 +15,6 @@ const Container = styled("div")`
 const SubContainer = styled("div")`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 12px 16px;
   border-bottom: 1px solid ${BFMPalette.gray100};
 `;

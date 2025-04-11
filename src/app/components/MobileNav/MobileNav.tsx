@@ -6,7 +6,7 @@ import { useData } from "@/DataContext";
 
 const Container = styled("div")`
   display: none;
-  @media (max-width: 768px) {
+  @media (max-width: 940px) {
     position: fixed;
     bottom: 0;
     display: flex;
@@ -14,6 +14,7 @@ const Container = styled("div")`
     width: 100%;
     height: 100px;
     z-index: 10;
+
     overflow-x: auto;
   }
 `;
@@ -24,6 +25,7 @@ const TabContainer = styled("div")<{ $isSelected?: boolean }>`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  min-width: 94px;
   width: 100%;
   gap: 4px;
   background-color: ${({ $isSelected }) =>

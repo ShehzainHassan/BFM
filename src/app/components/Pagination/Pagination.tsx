@@ -14,9 +14,6 @@ const PaginationContainer = styled.div`
   font-size: 16px;
   color: ${BFMPalette.gray700};
   font-weight: 600;
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 const StyledSelect = styled(Select)`

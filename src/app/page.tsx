@@ -9,6 +9,7 @@ import CreateNewInvoice from "./components/CreateNewInvoice/CreateNewInvoice";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ESG from "./components/ESG/ESG";
 import Invoices from "./invoices/page";
+import MobileTransactions from "./components/MobileTransactions/MobileTransactions";
 
 export default function Page() {
   const { t } = useTranslation();
@@ -29,6 +30,7 @@ export default function Page() {
     ),
     [t("navbar.tabs.calendar")]: <Calender />,
     [t("navbar.tabs.esg")]: <ESG />,
+    [t("navbar.tabs.transactions")]: <MobileTransactions />,
   };
 
   return componentMap[selectedTab] || <Dashboard />;

@@ -8,9 +8,9 @@ export const H1 = styled.h1<{ color?: string }>`
   line-height: 30px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 
-  @media (max-width: 768px) {
-    font-size: 16px;
-    line-height: 24px;
+  @media (min-width: 941px) and (max-width: 1152px) {
+    font-size: 14px;
+    line-height: 26px;
   }
 `;
 
@@ -39,6 +39,10 @@ export const H3 = styled.h2<{ color?: string }>`
   font-size: 12px;
   line-height: 18px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
+  @media (min-width: 941px) and (max-width: 1023px) {
+    font-size: 10px;
+    line-height: 16px;
+  }
 `;
 export const SmallH3 = styled.h2<{ color?: string }>`
   font-weight: 600;
@@ -125,6 +129,9 @@ export const BodyText = styled.div<{ color?: string }>`
   font-size: 14px;
   line-height: 20px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
+  @media (min-width: 941px) and (max-width: 1152px) {
+    font-size: 11px;
+  }
 `;
 
 export const SmallText = styled.p<{ color?: string }>`
@@ -168,4 +175,9 @@ export const Title = styled.p<{ color?: string }>`
   font-size: 16px;
   line-height: 24px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
+
+  @media (max-width: 1152px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
 `;

@@ -553,3 +553,10 @@ export interface Item {
   price: number;
   qty: number;
 }
+
+export interface TransactionCardProps<T> {
+  data: Transaction;
+}
+export interface AccountCardProps<T> {
+  data: AccountData;
+}

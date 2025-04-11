@@ -15,8 +15,8 @@ const Container = styled("div")`
   flex-direction: column;
   max-width: 500px;
   border-radius: 12px;
-  background-color: white;
-  @media (max-width: 768px) {
+  background-color: ${BFMPalette.white};
+  @media (max-width: 940px) {
     padding: 10px;
     max-width: unset;
   }

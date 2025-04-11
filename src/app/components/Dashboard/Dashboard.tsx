@@ -22,7 +22,7 @@ const MainContainer = styled("div")`
   grid-template-columns: 8.55fr 3.45fr;
   gap: 20px;
   max-width: 1300px;
-  @media (max-width: 768px) {
+  @media (max-width: 940px) {
     display: none;
   }
 `;
@@ -38,7 +38,7 @@ const SubContainer = styled("div")`
 `;
 const MobileContainer = styled("div")`
   display: none;
-  @media (max-width: 768px) {
+  @media (max-width: 940px) {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -58,7 +58,7 @@ export const PaymentsContainer = styled("div")`
   flex-direction: column;
   border-radius: 12px;
   max-width: 1300px;
-  @media (max-width: 768px) {
+  @media (max-width: 940px) {
     display: none;
   }
 `;
@@ -73,7 +73,11 @@ export const Filter = styled("div")`
   border-radius: 12px;
   border: 1px solid ${BFMPalette.purple400};
 `;
-
+const PaginationContainer = styled("div")`
+  @media (max-width: 940px) {
+    display: none;
+  }
+`;
 export const AccountText = styled.div`
   display: flex;
   flex-direction: column;
@@ -162,11 +166,14 @@ export default function Dashboard() {
           />
         )}
       </PaymentsContainer>
-      <Pagination
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-        totalPages={totalPages}
-      />
+      <PaginationContainer>
+        <Pagination
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+          totalPages={totalPages}
+        />
+      </PaginationContainer>
+
       <MobileContainer>
         <TextContainer />
         <InflowOutflow />

@@ -10,6 +10,9 @@ const Container = styled("div")`
   background-color: ${BFMPalette.white25};
   border-radius: 12px;
   padding: 22px 18px;
+  @media (min-width: 941px) and (max-width: 1152px) {
+    padding: 16px 12px;
+  }
 `;
 
 const SubContainer = styled("div")`

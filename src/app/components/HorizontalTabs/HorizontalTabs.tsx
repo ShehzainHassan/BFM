@@ -13,6 +13,9 @@ const TabContainer = styled.div<{ $tabType: "button" | "tab" }>`
     $tabType === "button" ? `1px solid ${BFMPalette.gray100}` : "none"};
   border-bottom: ${({ $tabType }) =>
     $tabType === "tab" ? `1px solid ${BFMPalette.gray100}` : ""};
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
@@ -51,6 +54,9 @@ const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
           border-radius: ${!$isActive ? "12px" : ""}
           }
       `}
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export default function HorizontalTabs({

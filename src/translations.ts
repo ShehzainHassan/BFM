@@ -18,6 +18,7 @@ const i18n = new I18n({
         invoices: "Invoices",
         calendar: "Calendar",
         esg: "ESG",
+        transactions: "Transactions",
       },
     },
     nav_buttons: {
