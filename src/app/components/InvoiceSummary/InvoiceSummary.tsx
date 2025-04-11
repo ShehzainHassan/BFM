@@ -11,16 +11,22 @@ import {
 import Search from "../Search/Search";
 import { useInvoiceSummaryColumns } from "../Table/InvoiceSummaryTable/InvoiceSummaryTableColumns";
 import DataTable from "../Table/Table";
+import { useState } from "react";
 
 export default function InvoiceSummary() {
   const { invoicesSummary } = useData();
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <PaymentsContainer>
       <Header>
         <TableTitle color={BFMPalette.black800}>Invoice Summary</TableTitle>
         <SearchAndFilter>
-          <Search placeholder="Search by invoice..." />
+          <Search
+            placeholder="Search by invoice..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
 
           <Filter>
             <Image
@@ -29,6 +35,7 @@ export default function InvoiceSummary() {
               width={20}
               height={20}
               style={{ cursor: "pointer" }}
+              onClick={() => setSearchQuery("")}
             />
           </Filter>
         </SearchAndFilter>
@@ -37,6 +44,8 @@ export default function InvoiceSummary() {
         key="invoices"
         data={invoicesSummary}
         columns={useInvoiceSummaryColumns()}
+        searchQuery={searchQuery}
+        searchColumns={["invoiceNo"]}
         columnWidths={[
           "2.02fr",
           "2.02fr",

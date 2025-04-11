@@ -4,7 +4,7 @@ import { BFMPalette } from "@/Theme";
 import { H3, H3Primary, H5 } from "@/Typography";
 import { formatCurrency, getDynamicScale } from "@/utils";
 import { BarCustomLayerProps, BarTooltipProps, ResponsiveBar } from "@nivo/bar";
-import { JSX } from "react";
+import { JSX, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CashFlowData } from "../../../../../Interfaces";
 
@@ -84,6 +84,10 @@ const CustomTooltip = ({ data }: BarTooltipProps<CashFlowData>) => {
 };
 export default function CashflowChart(): JSX.Element {
   const { cashflowData } = useData();
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
+
   const maxValue = Math.max(
     ...cashflowData.flatMap((item) => [
       Math.abs(item.positive),
@@ -92,6 +96,20 @@ export default function CashflowChart(): JSX.Element {
   );
 
   const scaleMax = getDynamicScale(maxValue);
+  const scaleMultiplier = isMobile ? 1.2 : 1;
+  const graphScale = scaleMax * scaleMultiplier;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const CustomLineLayer = ({
     bars,
     yScale,
@@ -226,8 +244,8 @@ export default function CashflowChart(): JSX.Element {
           id === "negative" ? BFMPalette.purple925 : BFMPalette.purple800
         }
         enableLabel={false}
-        minValue={-scaleMax}
-        maxValue={scaleMax}
+        minValue={-graphScale}
+        maxValue={graphScale}
         tooltip={CustomTooltip}
         labelSkipWidth={12}
         labelSkipHeight={12}
