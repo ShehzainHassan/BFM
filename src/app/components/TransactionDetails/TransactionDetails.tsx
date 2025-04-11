@@ -74,6 +74,12 @@ const RowDetails = styled("div")`
   justify-content: space-between;
   border-bottom: 1px solid ${BFMPalette.gray100};
   padding: 16px 20px 16px 16px;
+  @media (max-width: 768px) {
+    gap: 5px;
+    flex-direction: column;
+    align-items: unset;
+    justify-content: unset;
+  }
 `;
 const ValueContainer = styled("div")`
   display: flex;

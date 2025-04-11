@@ -361,6 +361,7 @@ export interface DetailsModalProps {
   children: React.ReactNode;
   width?: string;
   height?: string;
+  marginTop?: string;
   position?: "left" | "right" | "middle";
 }
 

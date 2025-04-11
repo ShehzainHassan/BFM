@@ -9,6 +9,9 @@ import {
 } from "../../../../../Interfaces";
 import { formatCurrency, formatDate, formatString } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
+import DetailsModal from "../../Modal/Modal";
+import TransactionDetails from "../../TransactionDetails/TransactionDetails";
+import { useState } from "react";
 
 export const Container = styled("div")`
   display: flex;
@@ -63,6 +66,13 @@ export const MainContainer = styled("div")`
 export default function TransactionCard({
   data,
 }: TransactionCardProps<Transaction>) {
+  const [selected, setSelected] = useState("Details");
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = (type: string) => {
+    setSelected(type);
+    setOpenModal(true);
+  };
   return (
     <MainContainer>
       <H3Secondary color={BFMPalette.black800}>
@@ -78,7 +88,11 @@ export default function TransactionCard({
                 {formatString(data.description.subtitle, true)}
               </BodyText>
             </DescriptionContainer>
-            <Button src="/images/chevron-right.png" alt="icon" />
+            <Button
+              src="/images/chevron-right.png"
+              alt="icon"
+              onClick={() => setOpenModal(true)}
+            />
           </Description_BtnContainer>
         </Card>
         <Amount>
@@ -99,6 +113,15 @@ export default function TransactionCard({
           </AmountContainer>
         </Amount>
       </Container>
+      <DetailsModal
+        marginTop="40px"
+        width="100%"
+        position="middle"
+        headerText="Transaction Details"
+        modalIsOpen={openModal}
+        closeModal={() => setOpenModal(false)}>
+        <TransactionDetails selected={selected} selectedRow={data} />
+      </DetailsModal>
     </MainContainer>
   );
 }
