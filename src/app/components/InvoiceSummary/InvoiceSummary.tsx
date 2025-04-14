@@ -47,12 +47,12 @@ export default function InvoiceSummary() {
         searchQuery={searchQuery}
         searchColumns={["invoiceNo"]}
         columnWidths={[
-          "2.02fr",
-          "2.01fr",
-          "2.01fr",
-          "2.01fr",
-          "2.02fr",
-          "1fr",
+          "2.0fr",
+          "2.0fr",
+          "2.0fr",
+          "2.0fr",
+          "2.0fr",
+          "1.7fr",
           "1.3fr",
         ]}
       />

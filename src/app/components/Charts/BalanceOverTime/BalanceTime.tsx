@@ -17,6 +17,9 @@ import {
   AreaChartProps,
   CustomActiveDotProps,
 } from "../../../../../Interfaces";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { H5, Header } from "@/Typography";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -73,9 +76,9 @@ const CustomYAxisTick = (props: {
     <text
       x={x}
       y={y}
-      dx={-30}
+      dx={0}
       dy={4}
-      textAnchor="start"
+      textAnchor="end"
       fontSize={12}
       fontWeight={400}
       fill={BFMPalette.black100}>
@@ -104,16 +107,88 @@ const CustomActiveDot = ({
   );
 };
 
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return isMobile;
+};
+
 export default function AreaChartGraph({ data }: AreaChartProps) {
+  const isMobile = useIsMobile();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const handleNext = () => {
+    setActiveIndex((prev) => Math.min(prev + 1, data.length - 1));
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => Math.max(prev - 1, 0));
+  };
+  const MobileContainer = styled("div")`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `;
+  const ButtonContainer = styled("div")`
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    padding: 6px;
+    border: 1px solid ${BFMPalette.gray100};
+  `;
+  const ValueContainer = styled("div")`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `;
+
   return (
     <GraphContainer>
-      <ResponsiveContainer width="100%" height="100%">
+      {isMobile && data.length > 0 && (
+        <MobileContainer>
+          <ButtonContainer>
+            <Image
+              onClick={handlePrev}
+              src="/images/prev.png"
+              alt="prev"
+              width={5}
+              height={10}
+            />
+          </ButtonContainer>
+          <ValueContainer>
+            <H5 color={BFMPalette.black800}>{data[activeIndex].name}</H5>
+            <Header color={BFMPalette.black800}>
+              {formatCurrency(`${HKD_EQUIVALANT}${data[activeIndex].HKDValue}`)}
+            </Header>
+          </ValueContainer>
+
+          <ButtonContainer>
+            <Image
+              onClick={handleNext}
+              src="/images/next.png"
+              alt="next"
+              width={5}
+              height={10}
+            />
+          </ButtonContainer>
+        </MobileContainer>
+      )}
+
+      <ResponsiveContainer width="100%" height={isMobile ? "85%" : "100%"}>
         <AreaChart
           data={data}
           margin={{
             top: 10,
             right: 30,
-            left: 0,
+            left: isMobile ? 0 : 40,
             bottom: 0,
           }}>
           <defs>
@@ -130,38 +205,45 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
               />
             </linearGradient>
           </defs>
+
           <CartesianGrid
             stroke={BFMPalette.gray100}
             strokeWidth={1.5}
             strokeDasharray="0"
             vertical={false}
           />
+
           <XAxis
             dataKey="name"
             axisLine={false}
             tickLine={false}
             interval={0}
-            tickFormatter={(value, index) => (index % 15 === 0 ? value : "")}
+            dx={!isMobile ? 30 : 45}
+            tick={{
+              fontSize: 12,
+              fontWeight: 400,
+              fill: BFMPalette.black100,
+            }}
+            tickFormatter={(value, index) => {
+              const step = isMobile ? 30 : 15;
+              return index % step === 0 ? value : "";
+            }}
             tickMargin={10}
           />
-          <YAxis
-            axisLine={false}
-            tickLine={false}
-            interval={0}
-            tick={
-              <CustomYAxisTick
-                x={0}
-                y={0}
-                payload={{
-                  value: "",
-                }}
-              />
-            }
-            tickFormatter={(value) => formatNumberWithCommas(value)}
-            tickMargin={20}
-          />
+
+          {!isMobile && (
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              interval={0}
+              tick={<CustomYAxisTick x={0} y={0} payload={{ value: "" }} />}
+              tickFormatter={(value) => formatNumberWithCommas(value)}
+              tickMargin={20}
+            />
+          )}
 
           <Tooltip content={<CustomTooltip />} />
+
           <Area
             type="monotone"
             dataKey="HKDValue"
