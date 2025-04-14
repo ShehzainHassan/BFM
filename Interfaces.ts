@@ -60,7 +60,6 @@ export interface DataContextType {
   setFinalTotal: (value: string) => void;
   invoicesSummary: InvoiceSummary[];
   setInvoicesSummary: (value: InvoiceSummary[]) => void;
-  
 }
 export interface BankDetails {
   bankName: string;
@@ -488,6 +487,8 @@ export interface DetailedInvoiceSummary {
   items: InvoiceItem[];
   subTotal: string;
   bankDetails: BankDetails;
+  category: "PENDING" | "PAID" | "OVERDUE";
+  previousCategory?: "PENDING" | "PAID" | "OVERDUE";
 }
 export interface RecurringTransaction {
   description: {

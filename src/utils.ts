@@ -415,10 +415,17 @@ export const updateInvoiceStatus = (
 
   const updatedInvoices = invoices.map((invoice) => {
     if (invoice.invoiceNumber === InvoiceNumber) {
-      return { ...invoice, category: "PAID" };
+      const isPaid = invoice.category === "PAID";
+
+      return {
+        ...invoice,
+        category: isPaid ? invoice.previousCategory || "PENDING" : "PAID",
+        previousCategory: isPaid ? undefined : invoice.category,
+      };
     }
     return invoice;
   });
+
   localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
 
   return updatedInvoices;

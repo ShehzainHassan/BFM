@@ -137,6 +137,7 @@ export default function Navbar({ navItems }: NavbarProps) {
       subTotal: subTotal,
       discount: discount,
       amountDue: finalTotal,
+      previousCategory: category,
       category,
       bankDetails: {
         bankName: bankDetails.bankName,
