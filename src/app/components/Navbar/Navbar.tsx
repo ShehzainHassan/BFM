@@ -3,7 +3,7 @@ import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
 import { H1 } from "@/Typography";
-import { formatDate, getFirstDayOfMonth } from "@/utils";
+import { formatDate, getFirstDayOfMonth, parseInvoices } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
@@ -109,9 +109,23 @@ export default function Navbar({ navItems }: NavbarProps) {
     setBankDetails,
     setHasDiscount,
     setHasPaymentChecked,
+    setInvoicesSummary,
   } = useData();
   const saveInvoice = () => {
     const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const _dueDate = new Date(dueDate);
+    _dueDate.setHours(0, 0, 0, 0);
+
+    let category = "PENDING";
+    if (_dueDate < today) {
+      category = "OVERDUE";
+    } else if (_dueDate > today) {
+      category = "PENDING";
+    } else {
+      category = "PENDING";
+    }
     const newInvoice = {
       invoiceNumber: invoiceNumber,
       companyName: companyName,
@@ -123,6 +137,7 @@ export default function Navbar({ navItems }: NavbarProps) {
       subTotal: subTotal,
       discount: discount,
       amountDue: finalTotal,
+      category,
       bankDetails: {
         bankName: bankDetails.bankName,
         name: bankDetails.name,
@@ -133,6 +148,7 @@ export default function Navbar({ navItems }: NavbarProps) {
     };
     const updatedInvoices = [...storedInvoices, newInvoice];
     localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
+    setInvoicesSummary(parseInvoices(updatedInvoices));
     setIsModalOpen(true);
   };
   const resetFields = () => {

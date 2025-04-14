@@ -59,6 +59,8 @@ export interface DataContextType {
   finalTotal: string;
   setFinalTotal: (value: string) => void;
   invoicesSummary: InvoiceSummary[];
+  setInvoicesSummary: (value: InvoiceSummary[]) => void;
+  
 }
 export interface BankDetails {
   bankName: string;

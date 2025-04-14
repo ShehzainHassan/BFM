@@ -1,6 +1,6 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H5 } from "@/Typography";
-import { formatDate } from "@/utils";
+import { formatDate, parseInvoices, updateInvoiceStatus } from "@/utils";
 import { useState } from "react";
 import styled from "styled-components";
 import { InvoiceSummary } from "../../../../../Interfaces";
@@ -11,17 +11,31 @@ import {
   AttachmentIcon,
   DetailsIcon,
 } from "../Transactions/TransactionsColumnsStyles";
-const StatusBadge = styled.div<{ status: "PENDING" | "OVERDUE" }>`
+import { useData } from "@/DataContext";
+const backgroundColor = {
+  PENDING: BFMPalette.white90,
+  OVERDUE: BFMPalette.skin200,
+  PAID: BFMPalette.green0,
+};
+
+const borderColor = {
+  PENDING: BFMPalette.yellow200,
+  OVERDUE: BFMPalette.skin300,
+  PAID: BFMPalette.green600,
+};
+const StatusBadge = styled.div<{ status: "PENDING" | "OVERDUE" | "PAID" }>`
   border-radius: 16px;
   padding: 2px 8px;
-  border: 1px solid
-    ${({ status }) =>
-      status === "PENDING" ? BFMPalette.yellow200 : BFMPalette.skin300};
-  background-color: ${({ status }) =>
-    status === "PENDING" ? BFMPalette.white90 : BFMPalette.skin200};
+  border: 1px solid ${({ status }) => borderColor[status]};
+  background-color: ${({ status }) => backgroundColor[status]};
 `;
 const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setInvoicesSummary } = useData();
+  const updateInvoice = () => {
+    const updatedInvoices = updateInvoiceStatus(row.invoiceNo);
+    setInvoicesSummary(parseInvoices(updatedInvoices));
+  };
   return (
     <ActionContainer>
       <AttachmentIcon
@@ -32,7 +46,13 @@ const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
         onClick={() => setIsModalOpen(true)}
       />
 
-      <DetailsIcon src="/images/Button.png" alt="icon" width={32} height={32} />
+      <DetailsIcon
+        src="/images/Button.png"
+        alt="icon"
+        width={32}
+        height={32}
+        onClick={() => updateInvoice()}
+      />
       {isModalOpen && (
         <DetailsModal
           headerText=""
@@ -62,20 +82,29 @@ export const InvoiceSummaryStyles = {
   INVOICE_AMOUNT: (row: InvoiceSummary) => (
     <BodyText color={BFMPalette.black800}>{row.invoiceAmount}</BodyText>
   ),
-  CATEGORY: (row: InvoiceSummary) => (
-    <BodyText color={BFMPalette.black800}>
-      {row.category === "OVERDUE" ? (
-        <StatusBadge status="OVERDUE">
-          <H5 color={BFMPalette.red700}>{row.category}</H5>
+  CATEGORY: (row: InvoiceSummary) => {
+    let badgeColor;
+    let status: "OVERDUE" | "PENDING" | "PAID";
+
+    if (row.category === "OVERDUE") {
+      badgeColor = BFMPalette.red700;
+      status = "OVERDUE";
+    } else if (row.category === "PENDING") {
+      badgeColor = BFMPalette.red550;
+      status = "PENDING";
+    } else {
+      badgeColor = BFMPalette.green800;
+      status = "PAID";
+    }
+
+    return (
+      <BodyText color={BFMPalette.black800}>
+        <StatusBadge status={status}>
+          <H5 color={badgeColor}>{row.category}</H5>
         </StatusBadge>
-      ) : (
-        <StatusBadge status="PENDING">
-          <span>
-            <H5 color={BFMPalette.red550}>{row.category}</H5>
-          </span>
-        </StatusBadge>
-      )}
-    </BodyText>
-  ),
+      </BodyText>
+    );
+  },
+
   ACTIONS: (row: InvoiceSummary) => <InvoiceActions row={row} />,
 };

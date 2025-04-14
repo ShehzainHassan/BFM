@@ -48,12 +48,12 @@ export default function InvoiceSummary() {
         searchColumns={["invoiceNo"]}
         columnWidths={[
           "2.02fr",
-          "2.02fr",
-          "2.02fr",
-          "2.02fr",
+          "2.01fr",
+          "2.01fr",
+          "2.01fr",
           "2.02fr",
           "1fr",
-          "0.9fr",
+          "1.3fr",
         ]}
       />
     </PaymentsContainer>

@@ -31,6 +31,7 @@ import {
   formatString,
   formatYearMonth,
   getImagePath,
+  parseInvoices,
 } from "./utils";
 
 const DataContext = createContext<DataContextType | null>(null);
@@ -52,6 +53,10 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [subTotal, setSubTotal] = useState("");
   const [finalTotal, setFinalTotal] = useState("");
   const [hasPaymentChecked, setHasPaymentChecked] = useState(false);
+  const [invoicesSummary, setInvoicesSummary] = useState<InvoiceSummary[]>(() =>
+    parseInvoices(JSON.parse(localStorage.getItem("invoices") || "[]"))
+  );
+
   const [bankDetails, setBankDetails] = useState<BankDetails>({
     bankName: "",
     name: "",
@@ -284,32 +289,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       };
     });
   };
-  const parseInvoices = (invoices: any[]): InvoiceSummary[] => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return invoices.map((invoice) => {
-      const dueDate = new Date(invoice.dueDate);
-      dueDate.setHours(0, 0, 0, 0);
-
-      let category = "PENDING";
-      if (dueDate < today) {
-        category = "OVERDUE";
-      } else if (dueDate > today) {
-        category = "PENDING";
-      } else {
-        category = "PENDING";
-      }
-
-      return {
-        invoiceNo: invoice.invoiceNumber || "",
-        clientName: invoice.address || "",
-        issueDate: invoice.invoiceDate || "",
-        dueDate: invoice.dueDate || "",
-        invoiceAmount: invoice.amountDue || "",
-        category,
-      };
-    });
-  };
 
   const transformAreaData = (reports: any): AreaChartData[] => {
     if (!reports) {
@@ -408,9 +387,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       }))
     );
   };
-  const invoicesSummary = parseInvoices(
-    JSON.parse(localStorage.getItem("invoices") || "[]")
-  );
   const pieData = transformESGData(reports.esgSummary);
   const barData = transformBarData(reports.esgSummary);
   const depositsDashboard = transformReportsData(reports.incomeByCategory);
@@ -478,6 +454,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         finalTotal,
         setFinalTotal,
         invoicesSummary,
+        setInvoicesSummary,
       }}>
       {children}
     </DataContext.Provider>

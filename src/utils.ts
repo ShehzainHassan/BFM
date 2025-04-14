@@ -3,6 +3,7 @@ import { fromAddress, HKD_EQUIVALANT, toAddress } from "./constants";
 import {
   DetailedInvoiceSummary,
   ESGSummary,
+  InvoiceSummary,
   RecurringTransaction,
   Reports,
 } from "../Interfaces";
@@ -403,4 +404,35 @@ export const getFirstDayOfMonth = (dateStr: string): string => {
   const month = String(date.getMonth() + 1).padStart(2, "0");
 
   return `${year}-${month}-01`;
+};
+
+export const updateInvoiceStatus = (
+  InvoiceNumber: string
+): DetailedInvoiceSummary[] => {
+  const invoices: DetailedInvoiceSummary[] = JSON.parse(
+    localStorage.getItem("invoices") || "[]"
+  );
+
+  const updatedInvoices = invoices.map((invoice) => {
+    if (invoice.invoiceNumber === InvoiceNumber) {
+      return { ...invoice, category: "PAID" };
+    }
+    return invoice;
+  });
+  localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
+
+  return updatedInvoices;
+};
+
+export const parseInvoices = (invoices: any[]): InvoiceSummary[] => {
+  return invoices.map((invoice) => {
+    return {
+      invoiceNo: invoice.invoiceNumber || "",
+      clientName: invoice.address || "",
+      issueDate: invoice.invoiceDate || "",
+      dueDate: invoice.dueDate || "",
+      invoiceAmount: invoice.amountDue || "",
+      category: invoice.category,
+    };
+  });
 };

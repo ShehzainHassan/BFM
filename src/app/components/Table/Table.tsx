@@ -25,8 +25,8 @@ export const DataRow = styled.div<{
   display: grid;
   grid-template-columns: ${({ $columns, $columnWidths }) =>
     $columnWidths && $columnWidths.length === $columns
-      ? $columnWidths.join(" ")
-      : `repeat(${$columns}, 1fr)`};
+      ? $columnWidths.map((width) => `minmax(0, ${width})`).join(" ")
+      : `repeat(${$columns}, minmax(0, 1fr))`};
   border-bottom: 1px solid ${BFMPalette.gray100};
   align-items: center;
   background-color: ${BFMPalette.white25};
@@ -35,8 +35,12 @@ export const DataRow = styled.div<{
 export const DataCell = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
   padding: 16px 20px;
+  width: 100%;
+  height: 100%;
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 `;
 const Revenue = styled.div`
   display: flex;
@@ -44,13 +48,19 @@ const Revenue = styled.div`
   height: 100%;
   padding: 16px 20px;
   background-color: ${BFMPalette.purple250};
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 `;
 export const HeaderCell = styled.div`
   display: flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 12px;
   height: 100%;
   background-color: ${BFMPalette.white};
+  white-space: normal;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 `;
 
 const TitleContainer = styled("div")`
