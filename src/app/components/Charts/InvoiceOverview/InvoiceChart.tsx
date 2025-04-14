@@ -17,7 +17,12 @@ export default function InvoiceChart({ invoiceData }: InvoiceChartProps) {
       <BarChart
         data={invoiceData}
         margin={{ top: 40, right: 24, left: 40, bottom: 40 }}>
-        <CartesianGrid strokeDasharray="3 3" />
+        <CartesianGrid
+          stroke={BFMPalette.gray100}
+          strokeWidth={1}
+          horizontal={true}
+          vertical={false}
+        />
         <XAxis dataKey="month" />
         <YAxis />
         <Tooltip />

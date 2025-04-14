@@ -3,7 +3,7 @@ import { BFMPalette } from "@/Theme";
 import { BodyText, Title, H1, H3 } from "@/Typography";
 import Image from "next/image";
 import { formatCurrency } from "@/utils";
-import { CURRENCY } from "@/constants";
+import { CURRENCY, HKD_EQUIVALANT } from "@/constants";
 import { TextComponentProps } from "../../../../Interfaces";
 const Container = styled("div")`
   display: flex;
@@ -60,7 +60,9 @@ export default function TextComponent({
       <SubContainer>
         <TextContainer>
           <Title color={BFMPalette.gray700}>{title}</Title>
-          <H1 color={valueColor}>{formatCurrency(`${CURRENCY}${value}`)}</H1>
+          <H1 color={valueColor}>
+            {formatCurrency(`${HKD_EQUIVALANT}${value}`, 2)}
+          </H1>
         </TextContainer>
         <TextContainer>
           <Percentage>
