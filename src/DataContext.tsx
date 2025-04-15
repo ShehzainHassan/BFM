@@ -53,8 +53,18 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [subTotal, setSubTotal] = useState("");
   const [finalTotal, setFinalTotal] = useState("");
   const [hasPaymentChecked, setHasPaymentChecked] = useState(false);
+
+  const transformClientName = (clientName: string): string => {
+    return t(`invoice_creation.dropdown.options.${clientName}`) || "";
+  };
+
   const [invoicesSummary, setInvoicesSummary] = useState<InvoiceSummary[]>(() =>
-    parseInvoices(JSON.parse(localStorage.getItem("invoices") || "[]"))
+    parseInvoices(JSON.parse(localStorage.getItem("invoices") || "[]")).map(
+      (invoice) => ({
+        ...invoice,
+        clientName: transformClientName(invoice.clientName),
+      })
+    )
   );
 
   const [bankDetails, setBankDetails] = useState<BankDetails>({
@@ -249,6 +259,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
 
     return transformedData;
   };
+
   const transformCashflowData = (history: any[]): CashFlowData[] => {
     if (!Array.isArray(history)) return [];
     return history.map((data) => ({

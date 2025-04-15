@@ -12,6 +12,7 @@ import {
   DetailsIcon,
 } from "../Transactions/TransactionsColumnsStyles";
 import { useData } from "@/DataContext";
+import useTranslation from "@/translations";
 const backgroundColor = {
   PENDING: BFMPalette.white90,
   OVERDUE: BFMPalette.skin200,
@@ -31,6 +32,7 @@ const StatusBadge = styled.div<{ status: "PENDING" | "OVERDUE" | "PAID" }>`
 `;
 const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t } = useTranslation();
   const { setInvoicesSummary } = useData();
   const toggleInvoiceCategory = () => {
     const updatedInvoices = updateInvoiceStatus(row.invoiceNo);

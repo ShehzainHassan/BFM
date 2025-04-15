@@ -16,6 +16,7 @@ declare module "jspdf" {
 }
 import { BFMPalette } from "./Theme";
 import autoTable from "jspdf-autotable";
+import useTranslation from "./translations";
 
 export const generateMonths = (reports?: ESGSummary | Reports) => {
   if (!reports || typeof reports !== "object") return [];
