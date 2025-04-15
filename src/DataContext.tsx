@@ -53,7 +53,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [subTotal, setSubTotal] = useState("");
   const [finalTotal, setFinalTotal] = useState("");
   const [hasPaymentChecked, setHasPaymentChecked] = useState(false);
-
   const transformClientName = (clientName: string): string => {
     return t(`invoice_creation.dropdown.options.${clientName}`) || "";
   };

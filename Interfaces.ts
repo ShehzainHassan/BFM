@@ -80,7 +80,7 @@ export interface ParsedTransaction {
   transactionId: string;
   transactionDate: string;
   accountName: string;
-  accountType: string;
+  accountType: string | null;
   description: string;
   currency: string;
   amount: number;
@@ -363,7 +363,7 @@ export interface DetailsModalProps {
   width?: string;
   height?: string;
   marginTop?: string;
-  position?: "left" | "right" | "middle";
+  $position?: "left" | "right" | "middle";
 }
 
 export interface InvoiceTableProps {

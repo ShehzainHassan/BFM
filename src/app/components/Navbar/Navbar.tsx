@@ -237,8 +237,9 @@ export default function Navbar({ navItems }: NavbarProps) {
               <Image
                 src="/images/arrow-left.png"
                 alt="back"
-                width={15}
-                height={15}
+                width={0}
+                height={0}
+                style={{ width: "15px", height: "auto" }}
               />
             </ImageContainer>
 
@@ -313,7 +314,7 @@ export default function Navbar({ navItems }: NavbarProps) {
       </SubContainer>
       <DetailsModal
         headerText=""
-        width="400px"
+        width="100%"
         height="375px"
         modalIsOpen={isModalOpen}
         closeModal={handleCloseModal}>

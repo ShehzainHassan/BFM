@@ -11,6 +11,7 @@ import AccountCard from "./AccountCard/AccountCard";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 const Space = styled("div")`
   padding: 50px 0;

@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { Header } from "@/Typography";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import styled, { css, keyframes } from "styled-components";
 import { DetailsModalProps } from "../../../../Interfaces";
@@ -79,8 +79,24 @@ export default function DetailsModal({
   width = "600px",
   height = "100vh",
   marginTop = "0px",
-  position = "middle",
+  $position = "middle",
 }: DetailsModalProps) {
+  useEffect(() => {
+    if (modalIsOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.position = "unset";
+      document.body.style.width = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [modalIsOpen]);
+
   const modalPositionStyles = {
     left: {
       left: "20px",
@@ -123,10 +139,10 @@ export default function DetailsModal({
           borderRadius: "12px",
           border: "none",
           overflow: "hidden",
-          ...modalPositionStyles[position],
+          ...modalPositionStyles[$position],
         },
       }}>
-      <ContentContainer position={position}>
+      <ContentContainer position={$position}>
         <HeaderContainer>
           <Header color={BFMPalette.black800}>{headerText}</Header>
           <Image

@@ -24,7 +24,13 @@ import { H5, Header } from "@/Typography";
 const GraphContainer = styled("div")`
   width: 100%;
   padding: 14px 16px;
+`;
+const ChartWrapper = styled.div`
+  width: 100%;
   height: 300px;
+  min-width: 300px;
+  min-height: 300px;
+  position: relative;
 `;
 export const CustomTooltipContainer = styled("div")`
   background-color: ${BFMPalette.purple925};
@@ -117,7 +123,27 @@ const useIsMobile = () => {
   }, []);
   return isMobile;
 };
-
+const MobileContainer = styled("div")`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+const ButtonContainer = styled("div")`
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 6px;
+  border: 1px solid ${BFMPalette.gray100};
+`;
+const ValueContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 export default function AreaChartGraph({ data }: AreaChartProps) {
   const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -128,27 +154,6 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
   const handlePrev = () => {
     setActiveIndex((prev) => Math.max(prev - 1, 0));
   };
-  const MobileContainer = styled("div")`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  `;
-  const ButtonContainer = styled("div")`
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    padding: 6px;
-    border: 1px solid ${BFMPalette.gray100};
-  `;
-  const ValueContainer = styled("div")`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  `;
 
   return (
     <GraphContainer>
@@ -182,78 +187,85 @@ export default function AreaChartGraph({ data }: AreaChartProps) {
         </MobileContainer>
       )}
 
-      <ResponsiveContainer width="100%" height={isMobile ? "85%" : "100%"}>
-        <AreaChart
-          data={data}
-          margin={{
-            top: 10,
-            right: 30,
-            left: isMobile ? 0 : 40,
-            bottom: 0,
-          }}>
-          <defs>
-            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop
-                offset="0%"
-                stopColor={BFMPalette.purple120}
-                stopOpacity={1}
-              />
-              <stop
-                offset="100%"
-                stopColor={BFMPalette.purple120}
-                stopOpacity={0}
-              />
-            </linearGradient>
-          </defs>
+      <ChartWrapper>
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            data={data}
+            margin={{
+              top: 10,
+              right: 30,
+              left: isMobile ? 0 : 40,
+              bottom: 0,
+            }}>
+            <defs>
+              <linearGradient
+                id="gradient1"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%">
+                <stop
+                  offset="0%"
+                  stopColor={BFMPalette.purple120}
+                  stopOpacity={1}
+                />
+                <stop
+                  offset="100%"
+                  stopColor={BFMPalette.purple120}
+                  stopOpacity={0}
+                />
+              </linearGradient>
+            </defs>
 
-          <CartesianGrid
-            stroke={BFMPalette.gray100}
-            strokeWidth={1.5}
-            strokeDasharray="0"
-            vertical={false}
-          />
+            <CartesianGrid
+              stroke={BFMPalette.gray100}
+              strokeWidth={1.5}
+              strokeDasharray="0"
+              vertical={false}
+            />
 
-          <XAxis
-            dataKey="name"
-            axisLine={false}
-            tickLine={false}
-            interval={0}
-            dx={!isMobile ? 30 : 45}
-            tick={{
-              fontSize: 12,
-              fontWeight: 400,
-              fill: BFMPalette.black100,
-            }}
-            tickFormatter={(value, index) => {
-              const step = isMobile ? 30 : 15;
-              return index % step === 0 ? value : "";
-            }}
-            tickMargin={10}
-          />
-
-          {!isMobile && (
-            <YAxis
+            <XAxis
+              dataKey="name"
               axisLine={false}
               tickLine={false}
               interval={0}
-              tick={<CustomYAxisTick x={0} y={0} payload={{ value: "" }} />}
-              tickFormatter={(value) => formatNumberWithCommas(value)}
-              tickMargin={20}
+              dx={!isMobile ? 30 : 45}
+              tick={{
+                fontSize: 12,
+                fontWeight: 400,
+                fill: BFMPalette.black100,
+              }}
+              tickFormatter={(value, index) => {
+                const step = isMobile ? 30 : 15;
+                return index % step === 0 ? value : "";
+              }}
+              tickMargin={10}
             />
-          )}
 
-          <Tooltip content={<CustomTooltip />} />
+            {!isMobile && (
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                interval={0}
+                tick={<CustomYAxisTick x={0} y={0} payload={{ value: "" }} />}
+                tickFormatter={(value) => formatNumberWithCommas(value)}
+                tickMargin={20}
+              />
+            )}
 
-          <Area
-            type="monotone"
-            dataKey="HKDValue"
-            stroke={BFMPalette.purple500}
-            strokeWidth={3}
-            fill="url(#gradient1)"
-            activeDot={<CustomActiveDot color={BFMPalette.purple600} />}
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+            <Tooltip content={<CustomTooltip />} />
+
+            <Area
+              type="monotone"
+              dataKey="HKDValue"
+              stroke={BFMPalette.purple500}
+              strokeWidth={3}
+              fill="url(#gradient1)"
+              activeDot={<CustomActiveDot color={BFMPalette.purple600} />}
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </ChartWrapper>
     </GraphContainer>
   );
 }

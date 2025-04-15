@@ -3,6 +3,28 @@ export const MOCK_DATA = {
     rawData: {
       taggedTransactions: [
         {
+          transactionId: "835",
+          transactionDate: "2024-03-30",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "QDM CASH DEP (03APR23)",
+          currency: "HKD",
+          amount: 55000.0,
+          balance: 0,
+          merchant: "",
+          category: "ATM_CASH_DEPOSIT",
+          bank: "Sample Bank",
+          probability: "0.9999999990651087",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: 55000.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
           transactionId: "251",
           transactionDate: "2024-03-28",
           accountName: "Sample HKD Savings (666111***888)",
@@ -21,6 +43,15 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -7000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [
+            {
+              transactionId: "251",
+              note: "New note",
+              createdDate: [2025, 3, 25, 1, 53, 55, 772203000],
+              lastModifiedDate: [2025, 3, 25, 1, 53, 55, 772203000],
+            },
+          ],
         },
         {
           transactionId: "420",
@@ -41,6 +72,15 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -4998.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [
+            {
+              transactionId: "420",
+              note: "Testing",
+              createdDate: [2025, 3, 5, 19, 2, 3, 694285000],
+              lastModifiedDate: [2025, 3, 5, 19, 2, 3, 694285000],
+            },
+          ],
         },
         {
           transactionId: "622",
@@ -61,13 +101,22 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5077.99,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [
+            {
+              transactionId: "622",
+              note: "Note",
+              createdDate: [2025, 3, 25, 1, 53, 22, 645584000],
+              lastModifiedDate: [2025, 3, 25, 1, 53, 22, 645584000],
+            },
+          ],
         },
         {
           transactionId: "703",
           transactionDate: "2024-03-28",
           accountName: "Sample HKD Savings (666111***888)",
           accountType: "SAVINGS",
-          description: "OCTO*** CARDS LTD DS0173552403***(28MAR24)",
+          description: "OCTO*** CARDS LTD        DS0173552403***(28MAR24)",
           currency: "HKD",
           amount: 3893.7,
           balance: 0,
@@ -81,13 +130,60 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3893.7,
           localCurrencyBalance: 0.0,
+          attachments: [
+            {
+              id: 82,
+              txnId: "703",
+              file: "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAOYSURBVHgB1VjNTtRQFD6nMyZsTIqJiVHQujMBkpknsOzcCTtXTnkC4QngDYAnmPIEwM4dZefOJsjaIpIYXTjoxoSZXr87dvT2v3dsJ/olM5O5Pbc9Pb/fuUT/OLiK0PKCY+PHFiweUQ1gwRfM5J9dukelslSiGLPoC0EWNQAoGeB7q0jRFuUq93IbPy4+JjUHee8Xd293r798999kCWRasGM51nAo3tNMwavvPrpecrWdJQrl+hk32GdBPtUBA/EsRC++KKTHvKRoyoKwngkFv8a2Ct46v3L3qEasLDoOlIwZot3meT9wB+qakdw4HFInseTXrZwEEsOV91bXbm7SyWhQKXhAzSFuLSOtYCoGEWeWUBwvxqXgD2QIjG5ojaZA6xZ5cGHw+1nMF3CzKmKWKlgExM0a4vOwWnlPA+Eja2tmtuahgotjmMpyKuCRno68loLwRkB/CTzwVEdey8VwzQ7cHIRET2kKIL4vouytDC0FJaIHuDQj6MbgzKFtQUkiBLNVJmcQn+q6Mwu6ZUa2px0W5bKChIOSYsm4zZVJJF2rle7Fui62dYRRUgoJrlQexXoDHnElm1GL+ARaFsQbu/ipXMfw9sdlMmVJp1tmPLS6x2h1dpks2tpRkplIho5+2wlDMqtSfu0kidzgamyZULhD+MCGcmPIFryy2AvCkNfBlnJ55kzKDJQ7oYz4lbMOZp4TyeDz9mpZMBoF+pSTLHDb3tnlwZa6FmV+p+C2ZnTP1ayLWhYEG9mkgkyGRTajEVVdfZ4Q85G5B4m13Bdo3MVQOsHxxmOmw/EaaD7JcbOWgu02gfpzweDE+yrXk/wRbrfiImJ7abHXF0Zc8RZIcFYsasVglMHdKrIrD6CEEE7qgiA7i+8iWXZHI3oFJWMFuxEXjxODySFNyKxOjryNKIgHdWh6xPZqF+oqQNyZ6izEsteG+Uwah1Kq1WKx2U4LxxkG13NwdHp2lU+9lhd6/bxrKRcjUxNzsGjy8KgUWS4OEv87Sw83eucf+gc0JeQRR5GVipBSUDIQ3MwjpWNwGLpo7DaFnB1HBg1ANv1JeQjBVBAaWuOlqoL6J3ME/9Wuxg1eBwMc/nSlkuPTh5F4O83BJxJqXaVhmQeYn7/5wT2ze40HPKPqmAN1usZe79PA/3H/TvcYp2LzUSeZK9/OHj4b6ESvY6tFW2SrgiV3q1oi+fZ1oNIpi1RUFt+iGUOeGNQxxf13+AlUt38DR5hQ0QAAAABJRU5ErkJggg==",
+              fileName: "CompareSpend (1).png",
+              mimeType: "image/png",
+              createdDate: [2025, 4, 10, 15, 58, 12, 530286000],
+              lastModifiedDate: [2025, 4, 10, 15, 58, 12, 530286000],
+            },
+            {
+              id: 7,
+              txnId: "703",
+              file: "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAOYSURBVHgB1VjNTtRQFD6nMyZsTIqJiVHQujMBkpknsOzcCTtXTnkC4QngDYAnmPIEwM4dZefOJsjaIpIYXTjoxoSZXr87dvT2v3dsJ/olM5O5Pbc9Pb/fuUT/OLiK0PKCY+PHFiweUQ1gwRfM5J9dukelslSiGLPoC0EWNQAoGeB7q0jRFuUq93IbPy4+JjUHee8Xd293r798999kCWRasGM51nAo3tNMwavvPrpecrWdJQrl+hk32GdBPtUBA/EsRC++KKTHvKRoyoKwngkFv8a2Ct46v3L3qEasLDoOlIwZot3meT9wB+qakdw4HFInseTXrZwEEsOV91bXbm7SyWhQKXhAzSFuLSOtYCoGEWeWUBwvxqXgD2QIjG5ojaZA6xZ5cGHw+1nMF3CzKmKWKlgExM0a4vOwWnlPA+Eja2tmtuahgotjmMpyKuCRno68loLwRkB/CTzwVEdey8VwzQ7cHIRET2kKIL4vouytDC0FJaIHuDQj6MbgzKFtQUkiBLNVJmcQn+q6Mwu6ZUa2px0W5bKChIOSYsm4zZVJJF2rle7Fui62dYRRUgoJrlQexXoDHnElm1GL+ARaFsQbu/ipXMfw9sdlMmVJp1tmPLS6x2h1dpks2tpRkplIho5+2wlDMqtSfu0kidzgamyZULhD+MCGcmPIFryy2AvCkNfBlnJ55kzKDJQ7oYz4lbMOZp4TyeDz9mpZMBoF+pSTLHDb3tnlwZa6FmV+p+C2ZnTP1ayLWhYEG9mkgkyGRTajEVVdfZ4Q85G5B4m13Bdo3MVQOsHxxmOmw/EaaD7JcbOWgu02gfpzweDE+yrXk/wRbrfiImJ7abHXF0Zc8RZIcFYsasVglMHdKrIrD6CEEE7qgiA7i+8iWXZHI3oFJWMFuxEXjxODySFNyKxOjryNKIgHdWh6xPZqF+oqQNyZ6izEsteG+Uwah1Kq1WKx2U4LxxkG13NwdHp2lU+9lhd6/bxrKRcjUxNzsGjy8KgUWS4OEv87Sw83eucf+gc0JeQRR5GVipBSUDIQ3MwjpWNwGLpo7DaFnB1HBg1ANv1JeQjBVBAaWuOlqoL6J3ME/9Wuxg1eBwMc/nSlkuPTh5F4O83BJxJqXaVhmQeYn7/5wT2ze40HPKPqmAN1usZe79PA/3H/TvcYp2LzUSeZK9/OHj4b6ESvY6tFW2SrgiV3q1oi+fZ1oNIpi1RUFt+iGUOeGNQxxf13+AlUt38DR5hQ0QAAAABJRU5ErkJggg==",
+              fileName: "CompareSpend.png",
+              mimeType: "image/png",
+              createdDate: [2025, 2, 10, 15, 48, 18, 85195000],
+              lastModifiedDate: [2025, 2, 10, 15, 48, 18, 85195000],
+            },
+            {
+              id: 83,
+              txnId: "703",
+              file: "iVBORw0KGgoAAAANSUhEUgAAAC8AAAAvCAYAAABzJ5OsAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAASnSURBVHgB1VrNbttGEJ7ZlYy2rhqi7o8buzCBxo4RxC5z6y3yE8R9gsi33uw8QaRjT65PPcp+gjpPYOUJyihFENgpzAJR6yIJIiAOkFgiN7N0SJEUaWmXTiR/gC3u8u/j7nDmm1kCXGCgysHXvp63OAcLGZoCxZzfKdAAFAbkg+OTEfiPEK7tdpnz6NmBPeikgeQXpxfNInfXEbBCzbwkVeAIgEbHPak9PnKctAMyyZuGaXwxWbxLh2zAqCGg2vx3v5bsTiUvR3uCe3u0acLYQNjsdWfFbjvtoKeP/HgSDxB/AJbcTfZdh7EkLoGWO1ncDFox8ksz8xV6McswxpCO4/rslbLcZokdd+ECgFyqzzO0+aXvf1hFj/8Bo4IAx2PeWrfQdQrdgsk8Vid2ZtbhHnorhV6L34IRgnXEz81nT4LA5FimecPrTBxCRmyhhyuHZkNTYMHo0LYTEdV2yKN4cO+Mc6xCtAHnREQgNMgu7wvw2jRERIIZ1JaS4maWQ7AoKEZ9uIRgYg6z4ijCjz55i3y7R4+ZC2SzgLjFXr/dTpKIkaR7udwt+y9dz6YN77OJdWhDGEWvzcxbAzyf6T/W9ekrZcbZHugzJ9Kd6lmkk/AHjHtV2rwdXkXALhF6QDN0aRgtlZ88Qq35dL8KmlieXajSrGm56ALkQQZxKepKnxRXA+kcSN2H//29mzxWnr88O2+QtF4HRWiPPJ24/aC1v5bsX768IG1ZKtG0KSeZK2oPWwfbfefNLPwJik7Dd5XI0QRFIOnsaFuONsmLPSJehWxbpZcM60szVzeTOyjo3AFFMNCAHHU7kSCUJic2h9VFCGLDn6EI/nr6pEGz0gAFaJF30duJtk8FHVRABTRDgcDqdbF7KpfQIi9HKdF1GzTABK7G2i7uggLUyQvoS4z1ZTTG9JR99Nihn6FjhTJ5cn2xi8tgA/owU27w4ciPE5TJk4mY0bbqVMeQYoKUaZgwJHRG3pQKEGIcxMACURoQ4+SlGAMFaJlN9/NC7Cb0HtRAA8lAx3UirPJNBYu5xtMAAztqF4Ga3V8JU3K5uhG2sjhtmtE+XjzZUIiQO0lBJ/WVqss9JS+zHUUUebEebcu0jQTXihxRPzFJB90H7zRb+5U+IpzVQRH59HxGDVG+0G6Jl9HlViCJqTLQKBx37bSE5b0SrYIi8icjGQ8wLHSJS3D576tLUwYD/AV0gFD+tjQF/796cV/lNCmh57785vf32l/z1hDmk4eQD5mJRhR+6Vwm29kJy9AI6wqUyQg4H7QpkW4gUunDJUeA9Ceo9MGZQaWQW+RRpC8/j0UKp0f+8tVDldA8aki33PPzQijZ7Kghi1ohebL5bbhAoNrmbqyWRnb/Ej7uopkeSI2Se76RkAeetr/+mKDAtyV/+6qYsnwx3qsjYqvZOvBjQ58w4y5fO0ObjBj+glo1aPWRl5kRFe5Xxu0BfNeYWMrkaQceHT9vfzdV2hGCfUqW9ROMFhTo4FeK3GtHb9pvojsGLt+HpWgBN89aI/oAkKS32PHJb1mlc7UPJyjHLAArU0Azwg8n8q7ZIpU6xGk5xa8mo3Bcst5HrcEfTrwDxHfVNicOIkUAAAAASUVORK5CYII=",
+              fileName: "Vector (1).png",
+              mimeType: "image/png",
+              createdDate: [2025, 4, 10, 15, 58, 58, 82117000],
+              lastModifiedDate: [2025, 4, 10, 15, 58, 58, 82117000],
+            },
+            {
+              id: 64,
+              txnId: "703",
+              file: "iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAeaSURBVHgB7ZzPbxNHFMffzK6T4JDKIUQQKMI5FI4kPZVKgFFPRa0aLr0G2lOrohBxadVKIQfaXihBQuLUEv6CglrRIyv1UE7EPQKHmJYSQgC7BUywd3c6bzbrrH9s7F3vrsd2PpLlTbzxsl/em/djZodAC2GLiwljoCelEyWpUnKAAUkSYEnxGYNk+dkkB4Rl8J2fkzFM8z41QVNfrKbJ6GgOWgSBCLEFYyR2hFA2US2SP/hNZIARDVjxuvK8oEUpaCQCFleWUqDSKX6TKS5jAkKGMDKPYqrbd1+DkAlNQLQ2PbGVi8ZORyFaLdAyTdOcNYqgbRkZyUAIBC6gDMJVgkIyQudjg8OzEDCBClh4snSCUjrDIJixLWhsi+zZPjIPARGIgK+WlpJqn3KFW10K2oNr+mtzOgi3ptAkhezjKbVXWWgj8ZAJtZcuoMdAk/i2QGus65+xxro2htG52NDwNPjEl4DCZXvpz/xwDDqDNHfp435c2rOAKF6sl96UNVD4BQNM8bV51KuIngTsVPFs/IjYsICdLp6NVxEbErBbxLPxImJDaQwGjG4RD8F7FfecXaxbSdUVsJh9fAE6J9p6YUw3t87UO2lDF8ZEk1B6BboYg7HpvqGdc26fuwpo5Xq8wpCkIdBCcjxHHHcbD11dWO2jFzbFEyS4Ibl6YU0BRY3IYAI2WYOl3Ormmi6sP1teDCvqvrxzG/J3F8AvsaERSLx7DKIGUxuF5MfJYPl0gVp5YjG7PBPUXIUTFO7h1W+h+HQJmgW/Y/jDTyFK0KAKZhwbJ2edvy+zwLASZhTv/g+nIEiGP/gkchE5OZXkR51WWGaBSgxSYbguWp4NjW+FwXeOiXcvvORu73T9lV9/Eu8Ri5iotMIyAdfa8YGSv7NQctvY0E5InrkkxjHP/PJj1djZChEpgSlwCFiKwvqT5YkwrO/l3dul4zcOHPYnXgX4H2GDIq5wcSMkIaZp11hPYwj5CELGq9u6kTh4rMzqIhdRoVP2oRCQZbMJRtgJaCMqg0jEIqbsRoMQ0DAKKWhDWihiomDEU3hguXAE7hsWrRKREGsW0orCRP4pSRofKB0/T/9e9TkGluLTR+I4iuhMLaM7reL4p7NCEiRny563SserD+6J10agiGGWfZix4DhIdX21LZql8X3jni0qiLJxI3AcVE0KqaaXJ0QEjneJg+/Df9yFzfzzmudUVixhwjOXJI6BSZCU3B83hK843RDdcui9j93/qEbFEha4qlallOyFoOu3AEDxHs6fK/3cihZWPRgj3AIZka7rjN0bZ6RFMdfr6RFpxMT13NyFSRIkMUEc1/66/FWVC+ZrjGuyiEhlmvf45+q5yMavIBDzxyAJ2PZyui02DJxdFxuZXBiRRkBn2wvF23Xia2gHpEkBnaVaO6GKFewS5ILOUk3kf1DeOO3nlUh8/9sgGTlpXBhLNXzZQcQW0WaFvwbGDsGuyW9ACagx2zwkQ5l4/kwO9nz2vWj7u4FB5sHlL0Eicqppsvu8NQMygJb15uffCSvEZNoG21S2RVq17m1ura13Z94TzKgMSJofT4JE2O5ciS3i6t/3pBBQPDGqMpKBNsBZKxn5FyAD4nFbRenReEMVZEDUvE+qe3gF7sL/OoJK//5xkAFVXU2rZHAwpz9bbnkqU9l9cQMjsRTjH0//cImHSKRNxq5DG4Dj4u5JSSoUAhq+iTyQ5zIas5YstAws3xDbhZ2d5YGxw7CNN1H798nhuohhgDA6IaA1DhZzre7M2CIiMe7SJQEPHJJKPKRHyWv4LgTEcbCYfaTx5qo0q1JLYjL5utE8bZ63l7itl3I6uwhKuAKaHtMPp0U2ivEq/BTHdl+k1I2JDY9oYmuRgOl3NAByt26EOtWI3+3sKYaR7mD07d2+o7SZRVkzwWTGRUpo3YdLvICR0141gAlw5vwpMaYF3RDA787d+q003YnXDCPdwS0DnD+XFcHWKoXiYtDBBINB5vwXECV7z1wKPPCIZ+iIeXTL4PozI2UNVQwmaIUQMGiF1srUnRA2eI0wxEMYg6tO8ZCqNgxaocEKC2FVJpWdliDBhmtY6Q5an7ptx2iN31ez+YxcNcw0T9baLsW1EVh89ugm/zgFmyDXYtt2HK/1geukkk7YyTDSmvaD5HRiuu7q4SogDpaM6bPQ5TDTmK4MHE42nNbsGdo1x0NP4FG5beD3Xm+bqLqTIWsrWPl42HVPraf5uFc3pNedWBcNV2IeF5scdgl4r3jPDZ7bGK+yS8kY65JtTyqqjTrnN06ni+hVvLW/8UaniuhHPMTz4iK8AF6IH6ahc0j7EQ/xtToLLyQiVCekOPweVJL3JR7S9JoOq25W2nCHD5JjzJzt2WBPmIa+BQIAx0UVyAWZ5lQ2hmg6MU76tbqyb4IA2dyENiD43MRZQuikPELypghvFKt0da5y25KmvxlCAt1aMSDVWosMT7jSFSACcD8Gk5gTaJUQOtiCYxoY5kVrpjHkq0GE4OOhhhFPoZh89u9IUJYpxjZmXKdM0RQlr4VlbS7Xbh0oqK73jeETowrQvfj0I/8nJdaenipLi+xmBgOWIYxkdGB/4trGqAWr5H/QJY0Nnh5NLgAAAABJRU5ErkJggg==",
+              fileName: "CHARGE_OR_FEE.png",
+              mimeType: "image/png",
+              createdDate: [2025, 3, 6, 17, 26, 27, 847440000],
+              lastModifiedDate: [2025, 3, 6, 17, 26, 27, 847440000],
+            },
+          ],
+          notes: [
+            {
+              transactionId: "703",
+              note: "OCTO txn",
+              createdDate: [2025, 2, 10, 16, 3, 24, 442685000],
+              lastModifiedDate: [2025, 2, 10, 16, 3, 24, 442685000],
+            },
+          ],
         },
         {
           transactionId: "66",
           transactionDate: "2024-03-27",
           accountName: "Sample HKD Savings (666111***888)",
           accountType: "SAVINGS",
-          description: "CASH DEPOSIT (27MAR24)",
+          description:
+            "CASH DEPOSIT  (27MAR24)                                                                                                                                                                                                                                        ",
           currency: "HKD",
           amount: 19700,
           balance: 0,
@@ -101,13 +197,26 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 19700.0,
           localCurrencyBalance: 0.0,
+          attachments: [
+            {
+              id: 22,
+              txnId: "66",
+              file: "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",
+              fileName: "xls.png",
+              mimeType: "image/png",
+              createdDate: [2025, 2, 18, 10, 37, 54, 751199000],
+              lastModifiedDate: [2025, 2, 18, 10, 37, 54, 751199000],
+            },
+          ],
+          notes: [],
         },
         {
           transactionId: "123",
           transactionDate: "2024-03-27",
           accountName: "Sample HKD Savings (666111***888)",
           accountType: "SAVINGS",
-          description: "CHARGES HC12432744324*** 27MAR",
+          description:
+            "CHARGES                  HC12432744324***   27MAR                                                                                                                                                                                                              ",
           currency: "HKD",
           amount: -5,
           balance: 0,
@@ -121,6 +230,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "124",
@@ -142,6 +253,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "126",
@@ -163,6 +276,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5970.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "139",
@@ -184,6 +299,15 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30967.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [
+            {
+              transactionId: "139",
+              note: "CHEQUE 705*** Note",
+              createdDate: [2025, 2, 10, 12, 24, 26, 364840000],
+              lastModifiedDate: [2025, 2, 10, 12, 24, 26, 364840000],
+            },
+          ],
         },
         {
           transactionId: "413",
@@ -205,6 +329,25 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -13400.0,
           localCurrencyBalance: 0.0,
+          attachments: [
+            {
+              id: 9,
+              txnId: "413",
+              file: "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",
+              fileName: "sample.jpg",
+              mimeType: "image/jpeg",
+              createdDate: [2025, 2, 10, 16, 3, 10, 53286000],
+              lastModifiedDate: [2025, 2, 10, 16, 3, 10, 53286000],
+            },
+          ],
+          notes: [
+            {
+              transactionId: "413",
+              note: "CR TO 711...",
+              createdDate: [2025, 2, 10, 12, 54, 57, 46428000],
+              lastModifiedDate: [2025, 2, 10, 12, 54, 57, 46428000],
+            },
+          ],
         },
         {
           transactionId: "414",
@@ -226,6 +369,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -21600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "520",
@@ -247,6 +392,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1917.74,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "620",
@@ -268,6 +415,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4115.11,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "621",
@@ -289,6 +438,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 14848.47,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "702",
@@ -310,6 +461,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3781.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "786",
@@ -330,6 +483,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 13400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "787",
@@ -350,6 +505,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 21600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "809",
@@ -371,6 +528,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -12000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "812",
@@ -392,6 +551,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "127",
@@ -413,6 +574,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15481.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "412",
@@ -434,6 +597,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -60000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "519",
@@ -455,6 +620,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1644.06,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "619",
@@ -476,6 +643,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10634.26,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "701",
@@ -497,6 +666,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3657.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "785",
@@ -518,6 +689,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 60000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "122",
@@ -539,6 +712,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "144",
@@ -560,6 +735,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "268",
@@ -581,6 +758,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "411",
@@ -602,6 +781,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "516",
@@ -623,6 +804,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3534.1,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "517",
@@ -644,6 +827,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2221.61,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "518",
@@ -665,6 +850,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2345.66,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "618",
@@ -686,6 +873,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 103574.51,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "634",
@@ -707,6 +896,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -16500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "635",
@@ -728,6 +919,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 60000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "700",
@@ -749,6 +942,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9121.1,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "708",
@@ -770,6 +965,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "784",
@@ -791,6 +988,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 14900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "834",
+          transactionDate: "2024-03-25",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "CONSTRUCTION MATERIALS - TAI HING BUILDING MATERIALS",
+          currency: "HKD",
+          amount: -38000.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.9995238116443539",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -38000.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "60",
@@ -812,6 +1033,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 30700.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "410",
@@ -833,6 +1056,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -46900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "783",
@@ -853,6 +1078,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 46900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "58",
@@ -874,6 +1101,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 82000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "128",
@@ -895,6 +1124,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -23084.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "409",
@@ -916,6 +1147,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -92200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "515",
@@ -937,6 +1170,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7302.13,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "531",
@@ -957,6 +1192,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5598.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "617",
@@ -978,6 +1215,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 11381.93,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "699",
@@ -999,6 +1238,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3285.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "782",
@@ -1020,6 +1261,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 92200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "129",
@@ -1041,6 +1284,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -42721.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "514",
@@ -1062,6 +1307,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2870.71,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "616",
@@ -1083,6 +1330,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 97436.53,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "698",
@@ -1104,6 +1353,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3443.6,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "121",
@@ -1125,6 +1376,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "408",
@@ -1146,6 +1399,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8320.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "513",
@@ -1167,6 +1422,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3953.45,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "613",
@@ -1188,6 +1445,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2795.78,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "614",
@@ -1209,6 +1468,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 64258.17,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "615",
@@ -1230,6 +1491,18 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 135.22,
           localCurrencyBalance: 0.0,
+          attachments: [
+            {
+              id: 66,
+              txnId: "615",
+              file: "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJ4SURBVHgB7ZhBctNAEEV7RpaKHT6CcgJ8gyhVgL0DbhBOgBdJih32jjJZmBNgTkCWDlAV5QZwgugIYUekRJ1u2UoUZUZSPJoqJ+W3sTztabXUoz9fBtjwxBHQIp29l4EApycEvGg6BwWcC8DTePLzSBVvrUDv4PUnSjeC1fkTx+IdTOdRcVBCC7RQHNNzXfxWHmzlDnoH/TP68PkYAallIqSD87p5SHNoOfj5XCZNxc7l4TzMv3fAEF53xRPQFb+PJ8dHjRMMg67reWd0Ud1svsC39BHmYeMWI8pu8btusWuZhnTHbwsSEp4Xw8YFSoldMOefLmDcYi3Dge966Q9qXU8RjZAeqmQy/16XppWnWIXnpbua4hifFscQGmCtwDSVYeUPEE6hAdZazFLx7ONg6+oKgnIMEaKilFRhbw0S/z9nu8IMDLDW4rbQ30EWUNclpRc+YoWUSLnNW4IyOZsHml8ep3zU4t8hrFqgu9//AAJHt+pesSNqinP3X5GrkSeqGKej/XtMoj6CGu61mDd+SjDNi1sZlEFlGMQbaMDdAklcW3AlGU5H8JYXqWILQ4FjaMCdFrO4Fg1O2VmooFbuUivv2aTlE7wFhpRb7OcHpFVhU62yiVZmyFVEsAZYFerMaaPwy+P8HpLE4mvZ3quwViCvzeyBUygUD5G97yUAO3V57O0kJSO7KtbuYHJ4PHX3+qB7BXUcMU4a5LG6BrlIMGTtzcKmQFM2BZpyI6PsAUkS+E3LXw5FZDvCugTLvy+CwsAMHspivp+fFzEdJ19+zRYhWDhfKZ0TWCNyJ7VssVU5NKLQ4gG9aOM2rAG0ZP5eTMxFfsOj4BqAIbn4VHc05AAAAABJRU5ErkJggg==",
+              fileName: "building-06.png",
+              mimeType: "image/png",
+              createdDate: [2025, 3, 7, 14, 57, 55, 495081000],
+              lastModifiedDate: [2025, 3, 7, 14, 57, 55, 495081000],
+            },
+          ],
+          notes: [],
         },
         {
           transactionId: "697",
@@ -1251,6 +1524,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4359.6,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "781",
@@ -1272,6 +1547,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8320.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "807",
@@ -1293,6 +1570,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -22028.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "833",
+          transactionDate: "2024-03-20",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "FUEL PURCHASE - SHELL HONG KONG",
+          currency: "HKD",
+          amount: -30560.0,
+          balance: 0,
+          merchant: "",
+          category: "UTILITIES_OR_BILL",
+          bank: "Sample Bank",
+          probability: "0.9874183491512645",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -30560.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "52",
@@ -1314,6 +1615,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "250",
@@ -1335,6 +1638,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -87000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "310",
@@ -1356,6 +1661,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "311",
@@ -1377,6 +1684,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "312",
@@ -1398,6 +1707,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "313",
@@ -1419,6 +1730,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17700.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "406",
@@ -1440,6 +1753,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -57600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "407",
@@ -1461,6 +1776,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -4500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "427",
@@ -1482,6 +1799,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "512",
@@ -1503,6 +1822,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3875.97,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "612",
@@ -1524,6 +1845,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9004.02,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "696",
@@ -1545,6 +1868,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4563.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "779",
@@ -1566,6 +1891,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 57600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "780",
@@ -1587,6 +1914,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "12",
@@ -1608,6 +1937,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9712.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "130",
@@ -1629,6 +1960,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -16075.43,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "249",
@@ -1650,6 +1983,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "309",
@@ -1671,6 +2006,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "343",
@@ -1692,6 +2029,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17940.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "405",
@@ -1713,6 +2052,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "509",
@@ -1734,6 +2075,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2228.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "510",
@@ -1755,6 +2098,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1371.35,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "511",
@@ -1776,6 +2121,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8778.92,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "534",
@@ -1796,6 +2143,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6195.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "611",
@@ -1817,6 +2166,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 26463.69,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "695",
@@ -1838,6 +2189,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9116.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "778",
@@ -1859,6 +2212,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "119",
@@ -1880,6 +2235,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "120",
@@ -1901,6 +2258,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "191",
@@ -1922,6 +2281,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -980.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "404",
@@ -1943,6 +2304,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -11500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "551",
@@ -1964,6 +2327,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -4750.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "777",
@@ -1985,6 +2350,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 11500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "808",
@@ -2006,6 +2373,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -18354.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "46",
@@ -2027,6 +2396,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 60000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "118",
@@ -2048,6 +2419,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "131",
@@ -2069,6 +2442,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -11700.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "259",
@@ -2090,6 +2465,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -40000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "308",
@@ -2111,6 +2488,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -59950.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "403",
@@ -2126,12 +2505,14 @@ export const MOCK_DATA = {
           category: "INTRA_COMPANY_TRANSFER_OUT",
           bank: "Sample Bank",
           probability: "1.0",
-          predictedName: "711-***345-101",
+          predictedName: "CR TO 711-***345-101",
           consentId: "consentId",
           accountId: null,
           bankId: null,
           localCurrencyAmount: -13900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "417",
@@ -2153,6 +2534,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "508",
@@ -2174,6 +2557,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5295.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "533",
@@ -2194,6 +2579,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6216.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "610",
@@ -2215,6 +2602,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 150719.38,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "642",
@@ -2236,6 +2625,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "694",
@@ -2257,6 +2648,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5541.6,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "776",
@@ -2278,6 +2671,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 13900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "792",
@@ -2299,6 +2694,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5289.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "832",
+          transactionDate: "2024-03-15",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "POON WINSOME HD12351689396628 16MAY",
+          currency: "HKD",
+          amount: -7890.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.608108108108108",
+          predictedName: "POON WINSOME",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -7890.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "41",
@@ -2320,6 +2739,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "42",
@@ -2341,6 +2762,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 38000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "43",
@@ -2362,6 +2785,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 19800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "72",
@@ -2383,6 +2808,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -4062.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "117",
@@ -2404,6 +2831,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "248",
@@ -2425,6 +2854,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "275",
@@ -2446,6 +2877,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "402",
@@ -2467,6 +2900,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -53200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "416",
@@ -2488,6 +2923,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1848.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "507",
@@ -2509,6 +2946,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3380.05,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "609",
@@ -2530,6 +2969,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8008.68,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "693",
@@ -2551,6 +2992,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4973.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "775",
@@ -2572,6 +3015,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 53200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "8",
@@ -2593,6 +3038,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -7987.75,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "39",
@@ -2614,6 +3061,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 98000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "116",
@@ -2635,6 +3084,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "247",
@@ -2656,6 +3107,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "401",
@@ -2677,6 +3130,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -109800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "506",
@@ -2698,6 +3153,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3236.88,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "607",
@@ -2719,6 +3176,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 85919.29,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "608",
@@ -2740,6 +3199,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2452.99,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "628",
@@ -2761,6 +3222,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9933.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "692",
@@ -2782,6 +3245,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6431.1,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "774",
@@ -2803,6 +3268,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 109800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "4",
@@ -2824,6 +3291,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "6",
@@ -2845,6 +3314,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "14",
@@ -2866,6 +3337,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "35",
@@ -2887,6 +3360,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 43000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "115",
@@ -2908,6 +3383,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "132",
@@ -2929,6 +3406,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -16440.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "145",
@@ -2950,6 +3429,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8681.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "317",
@@ -2971,6 +3452,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -58900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "318",
@@ -2992,6 +3475,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -80000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "339",
@@ -3013,6 +3498,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1380.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "398",
@@ -3034,6 +3521,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "399",
@@ -3055,6 +3544,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -180000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "400",
@@ -3076,6 +3567,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -51450.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "505",
@@ -3097,6 +3590,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3737.11,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "606",
@@ -3118,6 +3613,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 89675.25,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "643",
@@ -3139,6 +3636,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 188448.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "691",
@@ -3160,6 +3659,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4021.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "771",
@@ -3181,6 +3682,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "772",
@@ -3202,6 +3705,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 180000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "773",
@@ -3223,6 +3728,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 51450.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "793",
@@ -3244,6 +3751,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2191.45,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "33",
@@ -3265,6 +3774,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "146",
@@ -3286,6 +3797,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -40579.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "147",
@@ -3307,6 +3820,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2827.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "148",
@@ -3328,6 +3843,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -23931.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "334",
@@ -3349,6 +3866,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "338",
@@ -3370,6 +3889,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "396",
@@ -3391,6 +3912,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -7534.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "397",
@@ -3412,6 +3935,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "502",
@@ -3433,6 +3958,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5280.92,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "503",
@@ -3454,6 +3981,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2246.19,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "504",
@@ -3475,6 +4004,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4237.31,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "605",
@@ -3496,6 +4027,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 25505.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "690",
@@ -3517,6 +4050,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5670.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "769",
@@ -3538,6 +4073,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7534.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "770",
@@ -3559,6 +4096,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "831",
+          transactionDate: "2024-03-10",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "ELECTRICITY BILL - HK ELECTRIC",
+          currency: "HKD",
+          amount: -8760.0,
+          balance: 0,
+          merchant: "",
+          category: "UTILITIES_OR_BILL",
+          bank: "Sample Bank",
+          probability: "0.9997177198268915",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -8760.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "30",
@@ -3580,6 +4141,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "114",
@@ -3601,6 +4164,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "258",
@@ -3622,6 +4187,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "263",
@@ -3643,6 +4210,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -7255.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "316",
@@ -3664,6 +4233,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "395",
@@ -3685,6 +4256,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -101260.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "537",
@@ -3706,6 +4279,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14750.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "768",
@@ -3727,6 +4302,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 101260.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "27",
@@ -3748,6 +4325,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 12000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "28",
@@ -3769,6 +4348,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "149",
@@ -3790,6 +4371,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "199",
@@ -3811,6 +4394,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -104080.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "245",
@@ -3832,6 +4417,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "246",
@@ -3853,6 +4440,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10054.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "315",
@@ -3874,6 +4463,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -39000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "328",
@@ -3895,6 +4486,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9477.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "330",
@@ -3916,6 +4509,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -23000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "394",
@@ -3937,6 +4532,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -7400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "501",
@@ -3958,6 +4555,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1263.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "604",
@@ -3979,6 +4578,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 18677.59,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "689",
@@ -4000,6 +4601,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4140.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "767",
@@ -4021,6 +4624,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "71",
@@ -4042,6 +4647,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50678.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "109",
@@ -4063,6 +4670,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "110",
@@ -4084,6 +4693,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "111",
@@ -4105,6 +4716,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "112",
@@ -4126,6 +4739,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "113",
@@ -4147,6 +4762,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "150",
@@ -4168,6 +4785,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -27806.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "276",
@@ -4189,6 +4808,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "392",
@@ -4210,6 +4831,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "393",
@@ -4231,6 +4854,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -25500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "500",
@@ -4252,6 +4877,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3188.31,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "530",
@@ -4272,6 +4899,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 20982.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "539",
@@ -4293,6 +4922,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10464.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "542",
@@ -4314,6 +4945,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10464.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "543",
@@ -4335,6 +4968,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10464.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "544",
@@ -4356,6 +4991,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10464.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "545",
@@ -4377,6 +5014,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10464.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "603",
@@ -4398,6 +5037,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 156924.45,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "688",
@@ -4419,6 +5060,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5050.1,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "765",
@@ -4440,6 +5083,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "766",
@@ -4461,6 +5106,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 25500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "806",
@@ -4482,6 +5129,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15504.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "23",
@@ -4503,6 +5152,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 39600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "24",
@@ -4524,6 +5175,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "198",
@@ -4545,6 +5198,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -120000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "243",
@@ -4566,6 +5221,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "244",
@@ -4587,6 +5244,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -18000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "419",
@@ -4608,6 +5267,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9146.6,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "499",
@@ -4629,6 +5290,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4728.65,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "601",
@@ -4650,6 +5313,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 285375.99,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "602",
@@ -4671,6 +5336,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5083.38,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "687",
@@ -4692,6 +5359,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4189.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "22",
@@ -4713,6 +5382,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 57700.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "151",
@@ -4734,6 +5405,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -32723.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "391",
@@ -4755,6 +5428,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -70000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "600",
@@ -4776,6 +5451,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5507.14,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "686",
@@ -4797,6 +5474,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4815.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "764",
@@ -4818,6 +5497,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 70000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "830",
+          transactionDate: "2024-03-05",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "TRANSPORT - MTR CORPORATION LTD",
+          currency: "HKD",
+          amount: -1450.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.9672911888550608",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -1450.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "19",
@@ -4839,6 +5542,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 51000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "108",
@@ -4860,6 +5565,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "133",
@@ -4881,6 +5588,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -3240.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "134",
@@ -4902,6 +5611,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -28117.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "152",
@@ -4923,6 +5634,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -12634.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "190",
@@ -4944,6 +5657,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1120.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "496",
@@ -4965,6 +5680,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1735.95,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "497",
@@ -4986,6 +5703,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 896.13,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "498",
@@ -5007,6 +5726,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1437.56,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "599",
@@ -5028,6 +5749,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3325.81,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "685",
@@ -5049,6 +5772,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5196.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "802",
@@ -5070,6 +5795,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "106",
@@ -5091,6 +5818,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "107",
@@ -5112,6 +5841,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "200",
@@ -5133,6 +5864,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -6450.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "524",
@@ -5154,6 +5887,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "525",
@@ -5175,6 +5910,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "526",
@@ -5196,6 +5933,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "104",
@@ -5217,6 +5956,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "105",
@@ -5238,6 +5979,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "153",
@@ -5259,6 +6002,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14980.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "242",
@@ -5280,6 +6025,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -80000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "305",
@@ -5301,6 +6048,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "306",
@@ -5322,6 +6071,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "307",
@@ -5343,6 +6094,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -40000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "431",
@@ -5364,6 +6117,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15450.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "495",
@@ -5385,6 +6140,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1521.55,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "598",
@@ -5406,6 +6163,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 123189.95,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "627",
@@ -5427,6 +6186,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -33500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "641",
@@ -5448,6 +6209,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "684",
@@ -5469,6 +6232,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3817.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "829",
+          transactionDate: "2024-03-01",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "POON TSZ YEUNG HD122C2635313765 26DEC",
+          currency: "HKD",
+          amount: -3210.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.608108108108108",
+          predictedName: "POON TSZ YEUNG",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -3210.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "68",
@@ -5490,6 +6277,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "69",
@@ -5511,6 +6300,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "70",
@@ -5532,6 +6323,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "103",
@@ -5553,6 +6346,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "241",
@@ -5574,6 +6369,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -25000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "267",
@@ -5595,6 +6392,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "304",
@@ -5616,6 +6415,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -19600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "321",
@@ -5637,6 +6438,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5320.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "390",
@@ -5658,6 +6461,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -42300.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "494",
@@ -5679,6 +6484,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3318.04,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "522",
@@ -5700,6 +6507,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6963.38,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "552",
@@ -5721,6 +6530,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -135.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "597",
@@ -5742,6 +6553,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 11006.51,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "683",
@@ -5763,6 +6576,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4370.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "763",
@@ -5784,6 +6599,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 42300.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "102",
@@ -5805,6 +6622,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "154",
@@ -5826,6 +6645,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -25074.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "239",
@@ -5847,6 +6668,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -150000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "240",
@@ -5868,6 +6691,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "389",
@@ -5889,6 +6714,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "432",
@@ -5910,6 +6737,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 13.37,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "493",
@@ -5931,6 +6760,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7089.23,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "595",
@@ -5952,6 +6783,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6353.84,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "596",
@@ -5973,6 +6806,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 14072.99,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "682",
@@ -5994,6 +6829,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4968.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "762",
@@ -6015,6 +6852,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "813",
@@ -6036,6 +6875,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "828",
+          transactionDate: "2024-02-28",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "QDM CASH DEP (02MAY23)",
+          currency: "HKD",
+          amount: 60000.0,
+          balance: 0,
+          merchant: "",
+          category: "ATM_CASH_DEPOSIT",
+          bank: "Sample Bank",
+          probability: "0.9999999990651087",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: 60000.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "155",
@@ -6057,6 +6920,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -632.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "301",
@@ -6078,6 +6943,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "302",
@@ -6099,6 +6966,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "303",
@@ -6120,6 +6989,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -68000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "388",
@@ -6141,6 +7012,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -16600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "492",
@@ -6162,6 +7035,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9773.17,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "593",
@@ -6183,6 +7058,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 22325.35,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "594",
@@ -6204,6 +7081,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1269.54,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "681",
@@ -6225,6 +7104,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7417.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "761",
@@ -6246,6 +7127,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 16600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "805",
@@ -6267,6 +7150,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "61",
@@ -6288,6 +7173,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 31900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "62",
@@ -6309,6 +7196,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "299",
@@ -6330,6 +7219,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "300",
@@ -6351,6 +7242,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9300.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "387",
@@ -6372,6 +7265,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -34200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "489",
@@ -6393,6 +7288,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1541.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "490",
@@ -6414,6 +7311,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2299.35,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "491",
@@ -6435,6 +7334,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6952.16,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "592",
@@ -6456,6 +7357,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8143.07,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "680",
@@ -6477,6 +7380,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7341.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "718",
@@ -6498,6 +7403,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 84.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "719",
@@ -6519,6 +7426,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8209.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "760",
@@ -6540,6 +7449,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 34200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "827",
+          transactionDate: "2024-02-25",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "CONSTRUCTION MATERIALS - VICTORY BUILDING SUPPLIES",
+          currency: "HKD",
+          amount: -45000.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.608108108108108",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -45000.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "63",
@@ -6561,6 +7494,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 43000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "386",
@@ -6582,6 +7517,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -53000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "759",
@@ -6603,6 +7540,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 53000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "59",
@@ -6624,6 +7563,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "135",
@@ -6645,6 +7586,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -6185.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "136",
@@ -6666,6 +7609,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -53777.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "384",
@@ -6687,6 +7632,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "385",
@@ -6708,6 +7655,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -102100.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "426",
@@ -6729,6 +7678,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "488",
@@ -6750,6 +7701,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3522.11,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "550",
@@ -6771,6 +7724,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 88434.47,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "591",
@@ -6792,6 +7747,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 134183.94,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "679",
@@ -6813,6 +7770,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7009.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "757",
@@ -6834,6 +7793,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "758",
@@ -6855,6 +7816,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 102100.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "55",
@@ -6876,6 +7839,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 12500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "56",
@@ -6897,6 +7862,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 75000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "320",
@@ -6918,6 +7885,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "487",
@@ -6939,6 +7908,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7904.6,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "590",
@@ -6960,6 +7931,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7977.85,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "678",
@@ -6981,6 +7954,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5259.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "53",
@@ -7002,6 +7977,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 18300.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "54",
@@ -7023,6 +8000,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 75000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "156",
@@ -7044,6 +8023,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -22362.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "157",
@@ -7065,6 +8046,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "383",
@@ -7086,6 +8069,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "486",
@@ -7107,6 +8092,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 16111.68,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "589",
@@ -7128,6 +8115,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10178.33,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "624",
@@ -7149,6 +8138,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "677",
@@ -7170,6 +8161,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5290.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "756",
@@ -7191,6 +8184,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "158",
@@ -7212,6 +8207,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -51926.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "189",
@@ -7233,6 +8230,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -680.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "238",
@@ -7254,6 +8253,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -87000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "381",
@@ -7275,6 +8276,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "382",
@@ -7296,6 +8299,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "485",
@@ -7317,6 +8322,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5964.62,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "676",
@@ -7338,6 +8345,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6083.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "754",
@@ -7359,6 +8368,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "755",
@@ -7380,6 +8391,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "826",
+          transactionDate: "2024-02-20",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "POSTAGE FOR CHEQUE BK",
+          currency: "HKD",
+          amount: -120.0,
+          balance: 0,
+          merchant: "",
+          category: "POSTING_OR_COURIER",
+          bank: "Sample Bank",
+          probability: "1",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -120.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "100",
@@ -7401,6 +8436,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "101",
@@ -7422,6 +8459,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "197",
@@ -7443,6 +8482,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -60000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "237",
@@ -7464,6 +8505,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "298",
@@ -7485,6 +8528,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "380",
@@ -7506,6 +8551,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -112600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "482",
@@ -7527,6 +8574,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3005.37,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "483",
@@ -7548,6 +8597,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9538.36,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "484",
@@ -7569,6 +8620,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4034.16,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "633",
@@ -7590,6 +8643,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -22000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "640",
@@ -7611,6 +8666,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "675",
@@ -7632,6 +8689,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1580.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "753",
@@ -7653,6 +8712,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 112600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "48",
@@ -7674,6 +8735,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "379",
@@ -7695,6 +8758,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -13600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "752",
@@ -7716,6 +8781,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 13600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "9",
@@ -7737,6 +8804,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8270.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "47",
@@ -7758,6 +8827,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 42000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "159",
@@ -7779,6 +8850,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2827.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "270",
@@ -7800,6 +8873,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -3000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "297",
@@ -7821,6 +8896,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -13502.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "378",
@@ -7842,6 +8919,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -44000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "425",
@@ -7863,6 +8942,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -40000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "481",
@@ -7884,6 +8965,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4237.29,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "588",
@@ -7905,6 +8988,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 93448.09,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "751",
@@ -7926,6 +9011,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 44000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "236",
@@ -7947,6 +9034,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -35000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "296",
@@ -7968,6 +9057,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14235.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "480",
@@ -7989,6 +9080,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6792.02,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "587",
@@ -8010,6 +9103,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 64717.94,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "825",
+          transactionDate: "2024-02-15",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "PONG CHUNG HANG HD12350568132850 05MAY",
+          currency: "HKD",
+          amount: -6780.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.608108108108108",
+          predictedName: "PONG CHUNG HANG",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -6780.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "40",
@@ -8031,6 +9148,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "235",
@@ -8052,6 +9171,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -48888.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "295",
@@ -8073,6 +9194,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "333",
@@ -8094,6 +9217,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "377",
@@ -8115,6 +9240,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -19900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "475",
@@ -8136,6 +9263,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1422.61,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "476",
@@ -8157,6 +9286,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 347.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "477",
@@ -8178,6 +9309,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4553.53,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "478",
@@ -8199,6 +9332,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3912.32,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "479",
@@ -8220,6 +9355,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3873.78,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "586",
@@ -8241,6 +9378,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8960.31,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "674",
@@ -8262,6 +9401,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2149.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "750",
@@ -8283,6 +9424,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 19900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "824",
+          transactionDate: "2024-02-10",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "GAS SPEND - HONG KONG & CHINA GAS CO. LTD",
+          currency: "HKD",
+          amount: -2340.0,
+          balance: 0,
+          merchant: "",
+          category: "UTILITIES_OR_BILL",
+          bank: "Sample Bank",
+          probability: "0.9999921733462682",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -2340.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "3",
@@ -8304,6 +9469,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "5",
@@ -8325,6 +9492,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "98",
@@ -8346,6 +9515,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "99",
@@ -8367,6 +9538,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "160",
@@ -8388,6 +9561,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -22825.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "161",
@@ -8409,6 +9584,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -29000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "183",
@@ -8430,6 +9607,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -975.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "188",
@@ -8451,6 +9630,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -420.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "231",
@@ -8472,6 +9653,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "232",
@@ -8493,6 +9676,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -60000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "233",
@@ -8514,6 +9699,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "234",
@@ -8535,6 +9722,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -59000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "256",
@@ -8556,6 +9745,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2033.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "257",
@@ -8577,6 +9768,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -6600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "294",
@@ -8598,6 +9791,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -80000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "323",
@@ -8619,6 +9814,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -4850.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "336",
@@ -8640,6 +9837,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "340",
@@ -8661,6 +9860,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1230.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "341",
@@ -8682,6 +9883,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1971.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "375",
@@ -8703,6 +9906,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "376",
@@ -8724,6 +9929,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "474",
@@ -8745,6 +9952,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3707.02,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "584",
@@ -8766,6 +9975,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 265409.1,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "585",
@@ -8787,6 +9998,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 151906.06,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "644",
@@ -8808,6 +10021,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 106579.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "673",
@@ -8829,6 +10044,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5359.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "705",
@@ -8850,6 +10067,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "748",
@@ -8871,6 +10090,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "749",
@@ -8892,6 +10113,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "790",
@@ -8913,6 +10136,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1090.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "794",
@@ -8934,6 +10159,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -46223.76,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "26",
@@ -8955,6 +10182,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 28300.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "230",
@@ -8976,6 +10205,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -80000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "265",
@@ -8997,6 +10228,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "374",
@@ -9018,6 +10251,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -28800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "473",
@@ -9039,6 +10274,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4465.6,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "583",
@@ -9060,6 +10297,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 23093.36,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "672",
@@ -9081,6 +10320,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3417.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "747",
@@ -9102,6 +10343,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 28800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "25",
@@ -9123,6 +10366,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 12100.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "97",
@@ -9144,6 +10389,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "162",
@@ -9165,6 +10412,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -25585.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "196",
@@ -9186,6 +10435,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -35000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "293",
@@ -9207,6 +10458,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "472",
@@ -9228,6 +10481,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9602.05,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "671",
@@ -9249,6 +10504,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5710.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "811",
@@ -9270,6 +10527,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -16040.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "96",
@@ -9291,6 +10550,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "227",
@@ -9312,6 +10573,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "228",
@@ -9333,6 +10596,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "229",
@@ -9354,6 +10619,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -60000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "292",
@@ -9375,6 +10642,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -68000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "373",
@@ -9396,6 +10665,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -25000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "471",
@@ -9417,6 +10688,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6022.25,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "541",
@@ -9438,6 +10711,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14251.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "582",
@@ -9459,6 +10734,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 148707.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "670",
@@ -9480,6 +10757,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4106.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "707",
@@ -9501,6 +10780,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10475.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "746",
@@ -9522,6 +10803,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 25000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "20",
@@ -9543,6 +10826,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 49200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "163",
@@ -9564,6 +10849,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9120.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "291",
@@ -9585,6 +10872,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -109000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "372",
@@ -9606,6 +10895,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -55000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "468",
@@ -9627,6 +10918,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4368.53,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "469",
@@ -9648,6 +10941,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1437.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "470",
@@ -9669,6 +10964,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7751.89,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "581",
@@ -9690,6 +10987,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 15111.34,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "669",
@@ -9711,6 +11010,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8895.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "745",
@@ -9732,6 +11033,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 55000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "823",
+          transactionDate: "2024-02-05",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "OOLLET LTD 954847411000291",
+          currency: "HKD",
+          amount: -9800.0,
+          balance: 0,
+          merchant: "OOLLET",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "1",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -9800.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "16",
@@ -9753,6 +11078,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 15200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "95",
@@ -9774,6 +11101,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "187",
@@ -9795,6 +11124,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1240.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "262",
@@ -9816,6 +11147,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -11216.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "371",
@@ -9837,6 +11170,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -27500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "536",
@@ -9858,6 +11193,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -13800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "744",
@@ -9879,6 +11216,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 27500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "226",
@@ -9900,6 +11239,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -43821.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "370",
@@ -9921,6 +11262,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -29400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "430",
@@ -9942,6 +11285,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14950.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "580",
@@ -9963,6 +11308,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10623.22,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "646",
@@ -9984,6 +11331,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3983.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "15",
@@ -10005,6 +11354,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 13600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "164",
@@ -10026,6 +11377,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -36590.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "225",
@@ -10047,6 +11400,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "266",
@@ -10068,6 +11423,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "290",
@@ -10089,6 +11446,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "322",
@@ -10110,6 +11469,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -6000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "521",
@@ -10131,6 +11492,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7610.82,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "626",
@@ -10152,6 +11515,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -33500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "668",
@@ -10173,6 +11538,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3096.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "822",
+          transactionDate: "2024-02-01",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "POON EUCHAR HD12332797921761 27MAR",
+          currency: "HKD",
+          amount: -4560.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.608108108108108",
+          predictedName: "POON EUCHAR",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -4560.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "93",
@@ -10194,6 +11583,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "94",
@@ -10215,6 +11606,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "165",
@@ -10236,6 +11629,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -24425.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "319",
@@ -10257,6 +11652,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "467",
@@ -10278,6 +11675,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2907.39,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "523",
@@ -10299,6 +11698,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -294068.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "578",
@@ -10320,6 +11721,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 183006.94,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "579",
@@ -10341,6 +11744,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6128.98,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "637",
@@ -10362,6 +11767,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -77903.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "667",
@@ -10383,6 +11790,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4260.1,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "166",
@@ -10404,6 +11813,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "195",
@@ -10425,6 +11836,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "327",
@@ -10446,6 +11859,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20132.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "466",
@@ -10467,6 +11882,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3660.27,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "546",
@@ -10488,6 +11905,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -57707.93,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "547",
@@ -10509,6 +11928,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -125.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "576",
@@ -10530,6 +11951,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5718.34,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "577",
@@ -10551,6 +11974,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 531949.48,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "821",
+          transactionDate: "2024-01-30",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "QDM CASH DEP (01FEB23)",
+          currency: "HKD",
+          amount: 50000.0,
+          balance: 0,
+          merchant: "",
+          category: "ATM_CASH_DEPOSIT",
+          bank: "Sample Bank",
+          probability: "0.9999999990651087",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: 50000.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "90",
@@ -10572,6 +12019,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "91",
@@ -10593,6 +12042,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "92",
@@ -10614,6 +12065,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "167",
@@ -10635,6 +12088,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -18180.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "224",
@@ -10656,6 +12111,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -3469.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "255",
@@ -10677,6 +12134,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -150000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "369",
@@ -10698,6 +12157,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "463",
@@ -10719,6 +12180,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1867.33,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "464",
@@ -10740,6 +12203,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2184.09,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "465",
@@ -10761,6 +12226,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4023.04,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "540",
@@ -10782,6 +12249,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8535.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "575",
@@ -10803,6 +12272,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3570.05,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "638",
@@ -10824,6 +12295,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "639",
@@ -10845,6 +12318,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "666",
@@ -10866,6 +12341,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5196.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "743",
@@ -10887,6 +12364,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "11",
@@ -10908,6 +12387,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 27314.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "65",
@@ -10929,6 +12410,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 11200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "89",
@@ -10950,6 +12433,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "192",
@@ -10971,6 +12456,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -40000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "220",
@@ -10992,6 +12479,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "221",
@@ -11013,6 +12502,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "222",
@@ -11034,6 +12525,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "223",
@@ -11055,6 +12548,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "289",
@@ -11076,6 +12571,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -122600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "342",
@@ -11097,6 +12594,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -23000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "367",
@@ -11118,6 +12617,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -27000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "368",
@@ -11139,6 +12640,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -11000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "424",
@@ -11160,6 +12663,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -26875.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "433",
@@ -11181,6 +12686,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 11.51,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "741",
@@ -11202,6 +12709,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 27000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "742",
@@ -11223,6 +12732,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 11000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "87",
@@ -11244,6 +12755,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "88",
@@ -11265,6 +12778,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "219",
@@ -11286,6 +12801,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "462",
@@ -11307,6 +12824,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4811.61,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "574",
@@ -11328,6 +12847,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 99800.84,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "631",
@@ -11349,6 +12870,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -22000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "636",
@@ -11370,6 +12893,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "665",
@@ -11391,6 +12916,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5007.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "795",
@@ -11412,6 +12939,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5316.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "140",
@@ -11433,6 +12962,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14766.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "168",
@@ -11454,6 +12985,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -22460.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "218",
@@ -11475,6 +13008,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "366",
@@ -11496,6 +13031,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "461",
@@ -11517,6 +13054,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2649.86,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "573",
@@ -11538,6 +13077,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5771.72,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "664",
@@ -11559,6 +13100,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5177.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "740",
@@ -11580,6 +13123,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "820",
+          transactionDate: "2024-01-25",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "TRANSPORT - KOWLOON MOTOR BUS CO. LTD",
+          currency: "HKD",
+          amount: -1230.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.9999842988481967",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -1230.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "64",
@@ -11601,6 +13168,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "85",
@@ -11622,6 +13191,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "86",
@@ -11643,6 +13214,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "169",
@@ -11664,6 +13237,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8948.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "170",
@@ -11685,6 +13260,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -35818.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "272",
@@ -11706,6 +13283,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -13920.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "288",
@@ -11727,6 +13306,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "365",
@@ -11748,6 +13329,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -27000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "460",
@@ -11769,6 +13352,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3710.02,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "571",
@@ -11790,6 +13375,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 11357.05,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "572",
@@ -11811,6 +13398,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 18608.25,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "663",
@@ -11832,6 +13421,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4544.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "704",
@@ -11853,6 +13444,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "739",
@@ -11874,6 +13467,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 27000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "789",
@@ -11895,6 +13490,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -4200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "84",
@@ -11916,6 +13513,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "186",
@@ -11937,6 +13536,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -520.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "194",
@@ -11958,6 +13559,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8180.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "363",
@@ -11979,6 +13582,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "364",
@@ -12000,6 +13605,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -590000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "434",
@@ -12021,6 +13628,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -235058.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "459",
@@ -12042,6 +13651,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3905.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "570",
@@ -12063,6 +13674,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 16729.33,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "662",
@@ -12084,6 +13697,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4808.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "737",
@@ -12105,6 +13720,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "738",
@@ -12126,6 +13743,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "804",
@@ -12147,6 +13766,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "814",
@@ -12168,6 +13789,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 592800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "57",
@@ -12189,6 +13812,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 26400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "82",
@@ -12210,6 +13835,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "83",
@@ -12231,6 +13858,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "171",
@@ -12252,6 +13881,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -19565.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "215",
@@ -12273,6 +13904,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "216",
@@ -12294,6 +13927,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "217",
@@ -12315,6 +13950,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "261",
@@ -12336,6 +13973,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1322.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "287",
@@ -12357,6 +13996,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -105000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "362",
@@ -12378,6 +14019,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -27800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "429",
@@ -12399,6 +14042,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1322.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "456",
@@ -12420,6 +14065,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7934.83,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "457",
@@ -12441,6 +14088,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3461.13,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "458",
@@ -12462,6 +14111,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4416.45,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "535",
@@ -12483,6 +14134,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1322.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "569",
@@ -12504,6 +14157,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 14460.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "661",
@@ -12525,6 +14180,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7781.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "736",
@@ -12546,6 +14203,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 27800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "796",
@@ -12567,6 +14226,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -26500.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "810",
@@ -12588,6 +14249,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -12000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "361",
@@ -12609,6 +14272,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -12600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "735",
@@ -12630,6 +14295,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 12600.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "819",
+          transactionDate: "2024-01-20",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "ELECTRICITY BILL - CLP POWER HONG KONG",
+          currency: "HKD",
+          amount: -7890.0,
+          balance: 0,
+          merchant: "",
+          category: "UTILITIES_OR_BILL",
+          bank: "Sample Bank",
+          probability: "0.9874183491512645",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -7890.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "50",
@@ -12651,6 +14340,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 75000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "51",
@@ -12672,6 +14363,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 14800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "360",
@@ -12693,6 +14386,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -107000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "423",
@@ -12714,6 +14409,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "455",
@@ -12735,6 +14432,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9017.83,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "568",
@@ -12756,6 +14455,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10702.04,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "660",
@@ -12777,6 +14478,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3525.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "734",
@@ -12798,6 +14501,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 107000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "49",
@@ -12819,6 +14524,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 29100.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "211",
@@ -12840,6 +14547,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "212",
@@ -12861,6 +14570,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1092.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "213",
@@ -12882,6 +14593,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -439.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "214",
@@ -12903,6 +14616,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "359",
@@ -12924,6 +14639,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "418",
@@ -12945,6 +14662,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -6747.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "454",
@@ -12966,6 +14685,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8002.03,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "529",
@@ -12986,6 +14707,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 12845.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "567",
@@ -13007,6 +14730,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 92814.47,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "659",
@@ -13028,6 +14753,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5237.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "733",
@@ -13049,6 +14776,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "10",
@@ -13070,6 +14799,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5408.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "13",
@@ -13091,6 +14822,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "80",
@@ -13112,6 +14845,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "81",
@@ -13133,6 +14868,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "358",
@@ -13154,6 +14891,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -24000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "566",
@@ -13175,6 +14914,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6782.02,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "658",
@@ -13196,6 +14937,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5519.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "732",
@@ -13217,6 +14960,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 24000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "797",
@@ -13238,6 +14983,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -26649.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "210",
@@ -13259,6 +15006,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -83569.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "254",
@@ -13280,6 +15029,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "286",
@@ -13301,6 +15052,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "357",
@@ -13322,6 +15075,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -35000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "453",
@@ -13343,6 +15098,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9619.99,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "528",
@@ -13364,6 +15121,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -70000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "44",
@@ -13385,6 +15144,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 15500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "45",
@@ -13406,6 +15167,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "125",
@@ -13427,6 +15190,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "172",
@@ -13448,6 +15213,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15726.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "173",
@@ -13469,6 +15236,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -25665.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "209",
@@ -13490,6 +15259,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "285",
@@ -13511,6 +15282,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -80000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "332",
@@ -13532,6 +15305,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -13000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "356",
@@ -13553,6 +15328,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "450",
@@ -13574,6 +15351,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8251.07,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "451",
@@ -13595,6 +15374,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3355.13,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "452",
@@ -13616,6 +15397,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7080.61,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "532",
@@ -13636,6 +15419,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 13588.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "549",
@@ -13657,6 +15442,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100722.27,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "565",
@@ -13678,6 +15465,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 103756.84,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "657",
@@ -13699,6 +15488,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5696.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "706",
@@ -13720,6 +15511,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10254.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "709",
@@ -13741,6 +15534,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9042.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "714",
@@ -13762,6 +15557,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10254.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "716",
@@ -13783,6 +15580,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7503.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "717",
@@ -13804,6 +15603,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10254.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "720",
@@ -13825,6 +15626,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 8732.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "731",
@@ -13846,6 +15649,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "798",
@@ -13867,6 +15672,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -37701.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "818",
+          transactionDate: "2024-01-15",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "FUEL PURCHASE - SINOPEC HONG KONG",
+          currency: "HKD",
+          amount: -30450.0,
+          balance: 0,
+          merchant: "",
+          category: "UTILITIES_OR_BILL",
+          bank: "Sample Bank",
+          probability: "0.9874183491512645",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -30450.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "36",
@@ -13888,6 +15717,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 22000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "37",
@@ -13909,6 +15740,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 75000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "38",
@@ -13930,6 +15763,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 10100.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "185",
@@ -13951,6 +15786,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -880.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "208",
@@ -13972,6 +15809,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "284",
@@ -13993,6 +15832,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "329",
@@ -14014,6 +15855,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1830.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "354",
@@ -14035,6 +15878,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -76000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "355",
@@ -14056,6 +15901,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -98000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "645",
@@ -14077,6 +15924,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 70786.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "729",
@@ -14098,6 +15947,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 98000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "730",
@@ -14119,6 +15970,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 76000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "7",
@@ -14140,6 +15993,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8270.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "34",
@@ -14161,6 +16016,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 45000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "79",
@@ -14182,6 +16039,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "174",
@@ -14203,6 +16062,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "175",
@@ -14224,6 +16085,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "271",
@@ -14245,6 +16108,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1980.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "283",
@@ -14266,6 +16131,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "353",
@@ -14287,6 +16154,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -48000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "422",
@@ -14308,6 +16177,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "449",
@@ -14329,6 +16200,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3517.82,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "527",
@@ -14350,6 +16223,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "564",
@@ -14371,6 +16246,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 46331.46,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "656",
@@ -14392,6 +16269,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2962.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "728",
@@ -14413,6 +16292,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 48000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "799",
@@ -14434,6 +16315,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -27071.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "2",
@@ -14455,6 +16338,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "31",
@@ -14476,6 +16361,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 12900.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "32",
@@ -14497,6 +16384,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 40500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "176",
@@ -14518,6 +16407,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -18378.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "177",
@@ -14539,6 +16430,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8320.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "207",
@@ -14560,6 +16453,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -17000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "337",
@@ -14581,6 +16476,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "351",
@@ -14602,6 +16499,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "352",
@@ -14623,6 +16522,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -18000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "448",
@@ -14644,6 +16545,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4503.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "563",
@@ -14665,6 +16568,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 49268.69,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "655",
@@ -14686,6 +16591,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4667.9,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "726",
@@ -14707,6 +16614,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "727",
@@ -14728,6 +16637,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 18000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "76",
@@ -14749,6 +16660,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "77",
@@ -14770,6 +16683,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "78",
@@ -14791,6 +16706,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "206",
@@ -14812,6 +16729,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "282",
@@ -14833,6 +16752,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "331",
@@ -14854,6 +16775,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -12000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "349",
@@ -14875,6 +16798,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8700.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "350",
@@ -14896,6 +16821,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -37800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "447",
@@ -14917,6 +16844,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5100.11,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "562",
@@ -14938,6 +16867,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 87635.48,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "629",
@@ -14959,6 +16890,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -28000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "654",
@@ -14980,6 +16913,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5618.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "711",
@@ -15001,6 +16936,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 516.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "712",
@@ -15022,6 +16959,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9894.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "715",
@@ -15043,6 +16982,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7558.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "803",
@@ -15064,6 +17005,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "817",
+          transactionDate: "2024-01-10",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "PONG CHUNG HANG HD12332796391973 27MAR",
+          currency: "HKD",
+          amount: -5670.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.608108108108108",
+          predictedName: "PONG CHUNG HANG",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -5670.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "29",
@@ -15085,6 +17050,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 23800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "75",
@@ -15106,6 +17073,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "205",
@@ -15127,6 +17096,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -80000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "260",
@@ -15148,6 +17119,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8791.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "281",
@@ -15169,6 +17142,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "348",
@@ -15190,6 +17165,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -29750.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "446",
@@ -15211,6 +17188,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4159.68,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "538",
@@ -15232,6 +17211,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "548",
@@ -15253,6 +17234,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 27050.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "561",
@@ -15274,6 +17257,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 45253.18,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "653",
@@ -15295,6 +17280,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4549.7,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "713",
@@ -15316,6 +17303,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 12260.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "725",
@@ -15337,6 +17326,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 29750.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "141",
@@ -15358,6 +17349,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -3555.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "142",
@@ -15379,6 +17372,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -28000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "178",
@@ -15400,6 +17395,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -88000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "179",
@@ -15421,6 +17418,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5582.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "180",
@@ -15442,6 +17441,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -19381.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "193",
@@ -15463,6 +17464,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -30000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "280",
@@ -15484,6 +17487,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -39643.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "347",
@@ -15505,6 +17510,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -9000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "443",
@@ -15526,6 +17533,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1965.16,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "444",
@@ -15547,6 +17556,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 1089.29,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "445",
@@ -15568,6 +17579,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5900.45,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "560",
@@ -15589,6 +17602,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 62160.07,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "652",
@@ -15610,6 +17625,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6682.2,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "724",
@@ -15631,6 +17648,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "21",
@@ -15652,6 +17671,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "137",
@@ -15673,6 +17694,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -40586.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "181",
@@ -15694,6 +17717,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "252",
@@ -15715,6 +17740,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "253",
@@ -15736,6 +17763,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -50000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "279",
@@ -15757,6 +17786,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -93000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "346",
@@ -15778,6 +17809,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -133000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "442",
@@ -15799,6 +17832,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3251.55,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "559",
@@ -15820,6 +17855,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 393151.32,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "651",
@@ -15841,6 +17878,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3266.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "710",
@@ -15862,6 +17901,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5580.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "723",
@@ -15883,6 +17924,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 133000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "800",
@@ -15904,6 +17947,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -27062.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "816",
+          transactionDate: "2024-01-05",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "OOLLET LTD 935041496000372",
+          currency: "HKD",
+          amount: -8900.0,
+          balance: 0,
+          merchant: "OOLLET",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "1",
+          predictedName: "",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -8900.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "74",
@@ -15925,6 +17992,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "182",
@@ -15946,6 +18015,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100040.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "203",
@@ -15967,6 +18038,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2380.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "204",
@@ -15988,6 +18061,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -330.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "441",
@@ -16009,6 +18084,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7875.4,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "557",
@@ -16030,6 +18107,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 7474.64,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "558",
@@ -16051,6 +18130,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 2461.35,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "625",
@@ -16072,6 +18153,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -33500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "650",
@@ -16093,6 +18176,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3806.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "801",
@@ -16114,6 +18199,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 14037.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "17",
@@ -16135,6 +18222,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 9500.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "18",
@@ -16156,6 +18245,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 62000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "278",
@@ -16177,6 +18268,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -86000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "345",
@@ -16198,6 +18291,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -23000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "428",
@@ -16219,6 +18314,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -14950.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "440",
@@ -16240,6 +18337,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6911.62,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "556",
@@ -16261,6 +18360,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 116046.17,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "649",
@@ -16282,6 +18383,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 3668.1,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "722",
@@ -16303,6 +18406,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 23000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "1",
@@ -16324,6 +18429,15 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1040.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [
+            {
+              transactionId: "1",
+              note: "This is a test note",
+              createdDate: [2025, 2, 7, 11, 46, 40, 184504000],
+              lastModifiedDate: [2025, 2, 7, 11, 46, 40, 184504000],
+            },
+          ],
         },
         {
           transactionId: "138",
@@ -16345,6 +18459,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -33783.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "143",
@@ -16366,6 +18482,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -15997.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "184",
@@ -16387,6 +18505,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -520.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "201",
@@ -16408,6 +18528,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -560.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "202",
@@ -16429,6 +18551,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -40000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "264",
@@ -16450,6 +18574,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "273",
@@ -16471,6 +18597,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -24750.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "274",
@@ -16492,6 +18620,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -38800.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "277",
@@ -16513,6 +18643,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -100000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "344",
@@ -16534,6 +18666,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "436",
@@ -16555,6 +18689,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6325.66,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "437",
@@ -16576,6 +18712,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4936.89,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "438",
@@ -16597,6 +18735,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4878.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "439",
@@ -16618,6 +18758,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4085.46,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "555",
@@ -16639,6 +18781,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 179991.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "623",
@@ -16660,6 +18804,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "648",
@@ -16681,6 +18827,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 5434.3,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "721",
@@ -16702,6 +18850,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 20000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "791",
@@ -16723,6 +18873,30 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -1106.75,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
+        },
+        {
+          transactionId: "815",
+          transactionDate: "2024-01-01",
+          accountName: "Sample HKD Savings (666111***888)",
+          accountType: null,
+          description: "PANG TSZ CHING GIGI HD122C3043422076 30DEC",
+          currency: "HKD",
+          amount: -12345.0,
+          balance: 0,
+          merchant: "",
+          category: "GENERAL_PAYMENT_OUT",
+          bank: "Sample Bank",
+          probability: "0.608108108108108",
+          predictedName: "PANG TSZ CHING GIGI",
+          consentId: "consentId",
+          accountId: "1VwKtOAClJgYCTNFKbXYU3*****",
+          bankId: null,
+          localCurrencyAmount: -12345.0,
+          localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "630",
@@ -16744,6 +18918,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -12950.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "67",
@@ -16765,6 +18941,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 21200.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "73",
@@ -16786,6 +18964,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -5.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "269",
@@ -16807,6 +18987,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -16333.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "314",
@@ -16828,6 +19010,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -7470.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "324",
@@ -16849,6 +19033,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -2814.5,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "325",
@@ -16870,6 +19056,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -6570.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "326",
@@ -16891,6 +19079,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -8523.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "335",
@@ -16912,6 +19102,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -10000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "415",
@@ -16933,6 +19125,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -41400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "421",
@@ -16954,6 +19148,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -4386.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "435",
@@ -16975,6 +19171,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6124.78,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "553",
@@ -16996,6 +19194,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 48156.98,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "554",
@@ -17017,6 +19217,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 6023.19,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "632",
@@ -17038,6 +19240,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: -22000.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "647",
@@ -17059,6 +19263,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 4082.8,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
         {
           transactionId: "788",
@@ -17080,6 +19286,8 @@ export const MOCK_DATA = {
           bankId: null,
           localCurrencyAmount: 41400.0,
           localCurrencyBalance: 0.0,
+          attachments: [],
+          notes: [],
         },
       ],
       parsedAccounts: [
@@ -17128,45 +19336,45 @@ export const MOCK_DATA = {
           {
             yearMonth: "2024-01",
             totalDeposit: {
-              amount: 3944202.96,
+              amount: 3994202.96,
               type: "TOTAL",
             },
             totalWithdrawal: {
-              amount: -4624419.98,
+              amount: -4690904.98,
               type: "TOTAL",
             },
             net: {
-              amount: -680217.02,
+              amount: -696702.02,
               type: "TOTAL",
             },
           },
           {
             yearMonth: "2024-02",
             totalDeposit: {
-              amount: 2059944.02,
+              amount: 2119944.02,
               type: "TOTAL",
             },
             totalWithdrawal: {
-              amount: -2366889.76,
+              amount: -2435489.76,
               type: "TOTAL",
             },
             net: {
-              amount: -306945.74,
+              amount: -315545.74,
               type: "TOTAL",
             },
           },
           {
             yearMonth: "2024-03",
             totalDeposit: {
-              amount: 2354443.29,
+              amount: 2409443.29,
               type: "TOTAL",
             },
             totalWithdrawal: {
-              amount: -2178782.73,
+              amount: -2268652.73,
               type: "TOTAL",
             },
             net: {
-              amount: 175660.56,
+              amount: 140790.56,
               type: "TOTAL",
             },
           },
@@ -17191,6 +19399,12 @@ export const MOCK_DATA = {
           averageAmount: 4941.43,
           totalAmount: 286603.2,
           txnCounts: 58,
+        },
+        {
+          merchant: "OOLLET",
+          averageAmount: -9350.0,
+          totalAmount: -18700.0,
+          txnCounts: 2,
         },
       ],
       incomeRelationshipBreakdown: [
@@ -24663,7 +26877,7 @@ export const MOCK_DATA = {
             },
             otherIncomes: {
               atmCashDeposit: {
-                amount: 493200.0,
+                amount: 543200.0,
                 type: "REGULAR",
               },
               autoPayReturned: {
@@ -24689,11 +26903,11 @@ export const MOCK_DATA = {
             },
             basicIncomes: null,
             totalRevenue: {
-              amount: 4983506.96,
+              amount: 5033506.96,
               type: "TOTAL",
             },
             revenueGrowth: {
-              amount: 3824.4,
+              amount: 3863.77,
               type: "GROWTH",
             },
             flattenedFields: {
@@ -24706,7 +26920,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               atmCashDeposit: {
-                amount: 493200.0,
+                amount: 543200.0,
                 type: "REGULAR",
               },
               autoPayReturned: {
@@ -24730,11 +26944,11 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               totalRevenue: {
-                amount: 4983506.96,
+                amount: 5033506.96,
                 type: "TOTAL",
               },
               revenueGrowth: {
-                amount: 3824.4,
+                amount: 3863.77,
                 type: "GROWTH",
               },
             },
@@ -24798,7 +27012,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               utilities: {
-                amount: 0,
+                amount: -38340.0,
                 type: "REGULAR",
               },
               rent: {
@@ -24840,11 +27054,11 @@ export const MOCK_DATA = {
             },
             basicExpenses: null,
             totalExpense: {
-              amount: -5663723.98,
+              amount: -5730208.98,
               type: "TOTAL",
             },
             profitOrLoss: {
-              amount: -680217.02,
+              amount: -696702.02,
               type: "TOTAL",
             },
             flattenedFields: {
@@ -24901,7 +27115,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               utilities: {
-                amount: 0,
+                amount: -38340.0,
                 type: "REGULAR",
               },
               rent: {
@@ -24941,17 +27155,17 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               totalExpense: {
-                amount: -5663723.98,
+                amount: -5730208.98,
                 type: "TOTAL",
               },
               profitOrLoss: {
-                amount: -680217.02,
+                amount: -696702.02,
                 type: "TOTAL",
               },
             },
           },
           profitOrLoss: {
-            amount: -680217.02,
+            amount: -696702.02,
             type: "TOTAL",
           },
         },
@@ -24970,7 +27184,7 @@ export const MOCK_DATA = {
             },
             otherIncomes: {
               atmCashDeposit: {
-                amount: 554500.0,
+                amount: 614500.0,
                 type: "REGULAR",
               },
               autoPayReturned: {
@@ -24996,11 +27210,11 @@ export const MOCK_DATA = {
             },
             basicIncomes: null,
             totalRevenue: {
-              amount: 2928544.02,
+              amount: 2988544.02,
               type: "TOTAL",
             },
             revenueGrowth: {
-              amount: -41.24,
+              amount: -40.63,
               type: "GROWTH",
             },
             flattenedFields: {
@@ -25013,7 +27227,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               atmCashDeposit: {
-                amount: 554500.0,
+                amount: 614500.0,
                 type: "REGULAR",
               },
               autoPayReturned: {
@@ -25037,11 +27251,11 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               totalRevenue: {
-                amount: 2928544.02,
+                amount: 2988544.02,
                 type: "TOTAL",
               },
               revenueGrowth: {
-                amount: -41.24,
+                amount: -40.63,
                 type: "GROWTH",
               },
             },
@@ -25053,7 +27267,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               postage: {
-                amount: 0,
+                amount: -120.0,
                 type: "REGULAR",
               },
               inventory: {
@@ -25105,7 +27319,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               utilities: {
-                amount: 0,
+                amount: -2340.0,
                 type: "REGULAR",
               },
               rent: {
@@ -25147,11 +27361,11 @@ export const MOCK_DATA = {
             },
             basicExpenses: null,
             totalExpense: {
-              amount: -3235489.76,
+              amount: -3304089.76,
               type: "TOTAL",
             },
             profitOrLoss: {
-              amount: -306945.74,
+              amount: -315545.74,
               type: "TOTAL",
             },
             flattenedFields: {
@@ -25160,7 +27374,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               postage: {
-                amount: 0,
+                amount: -120.0,
                 type: "REGULAR",
               },
               inventory: {
@@ -25208,7 +27422,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               utilities: {
-                amount: 0,
+                amount: -2340.0,
                 type: "REGULAR",
               },
               rent: {
@@ -25248,17 +27462,17 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               totalExpense: {
-                amount: -3235489.76,
+                amount: -3304089.76,
                 type: "TOTAL",
               },
               profitOrLoss: {
-                amount: -306945.74,
+                amount: -315545.74,
                 type: "TOTAL",
               },
             },
           },
           profitOrLoss: {
-            amount: -306945.74,
+            amount: -315545.74,
             type: "TOTAL",
           },
         },
@@ -25277,7 +27491,7 @@ export const MOCK_DATA = {
             },
             otherIncomes: {
               atmCashDeposit: {
-                amount: 561900.0,
+                amount: 616900.0,
                 type: "REGULAR",
               },
               autoPayReturned: {
@@ -25303,11 +27517,11 @@ export const MOCK_DATA = {
             },
             basicIncomes: null,
             totalRevenue: {
-              amount: 3761535.29,
+              amount: 3816535.29,
               type: "TOTAL",
             },
             revenueGrowth: {
-              amount: 28.44,
+              amount: 27.71,
               type: "GROWTH",
             },
             flattenedFields: {
@@ -25320,7 +27534,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               atmCashDeposit: {
-                amount: 561900.0,
+                amount: 616900.0,
                 type: "REGULAR",
               },
               autoPayReturned: {
@@ -25344,11 +27558,11 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               totalRevenue: {
-                amount: 3761535.29,
+                amount: 3816535.29,
                 type: "TOTAL",
               },
               revenueGrowth: {
-                amount: 28.44,
+                amount: 27.71,
                 type: "GROWTH",
               },
             },
@@ -25412,7 +27626,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               utilities: {
-                amount: 0,
+                amount: -39320.0,
                 type: "REGULAR",
               },
               rent: {
@@ -25454,11 +27668,11 @@ export const MOCK_DATA = {
             },
             basicExpenses: null,
             totalExpense: {
-              amount: -3585874.73,
+              amount: -3675744.73,
               type: "TOTAL",
             },
             profitOrLoss: {
-              amount: 175660.56,
+              amount: 140790.56,
               type: "TOTAL",
             },
             flattenedFields: {
@@ -25515,7 +27729,7 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               utilities: {
-                amount: 0,
+                amount: -39320.0,
                 type: "REGULAR",
               },
               rent: {
@@ -25555,17 +27769,17 @@ export const MOCK_DATA = {
                 type: "REGULAR",
               },
               totalExpense: {
-                amount: -3585874.73,
+                amount: -3675744.73,
                 type: "TOTAL",
               },
               profitOrLoss: {
-                amount: 175660.56,
+                amount: 140790.56,
                 type: "TOTAL",
               },
             },
           },
           profitOrLoss: {
-            amount: 175660.56,
+            amount: 140790.56,
             type: "TOTAL",
           },
         },
@@ -25573,385 +27787,393 @@ export const MOCK_DATA = {
       dailyBankBalanceDtos: [
         {
           date: "2023-12-28",
-          balance: 1270058.22,
+          balance: 1330013.22,
         },
         {
           date: "2023-12-29",
-          balance: 1277544.47,
+          balance: 1337499.47,
         },
         {
           date: "2023-12-30",
-          balance: 1264594.47,
+          balance: 1324549.47,
         },
         {
           date: "2023-12-31",
-          balance: 1264594.47,
+          balance: 1324549.47,
         },
         {
           date: "2024-01-01",
-          balance: 1264594.47,
+          balance: 1312204.47,
         },
         {
           date: "2024-01-02",
-          balance: 1197890.13,
+          balance: 1245500.13,
         },
         {
           date: "2024-01-03",
-          balance: 1295066.02,
+          balance: 1342676.02,
         },
         {
           date: "2024-01-04",
-          balance: 1194465.41,
+          balance: 1242075.41,
         },
         {
           date: "2024-01-05",
-          balance: 1339066.08,
+          balance: 1377776.08,
         },
         {
           date: "2024-01-06",
-          balance: 1339066.08,
+          balance: 1377776.08,
         },
         {
           date: "2024-01-07",
-          balance: 1339066.08,
+          balance: 1377776.08,
         },
         {
           date: "2024-01-08",
-          balance: 1202702.25,
+          balance: 1241412.25,
         },
         {
           date: "2024-01-09",
-          balance: 1215978.81,
+          balance: 1254688.81,
         },
         {
           date: "2024-01-10",
-          balance: 1175785.8,
+          balance: 1208825.8,
         },
         {
           date: "2024-01-11",
-          balance: 1225927.79,
+          balance: 1258967.79,
         },
         {
           date: "2024-01-12",
-          balance: 1156413.97,
+          balance: 1189453.97,
         },
         {
           date: "2024-01-13",
-          balance: 1181590.47,
+          balance: 1214630.47,
         },
         {
           date: "2024-01-14",
-          balance: 1181590.47,
+          balance: 1214630.47,
         },
         {
           date: "2024-01-15",
-          balance: 1292480.09,
+          balance: 1295070.09,
         },
         {
           date: "2024-01-16",
-          balance: 1043531.08,
+          balance: 1046121.08,
         },
         {
           date: "2024-01-17",
-          balance: 1029080.6,
+          balance: 1031670.6,
         },
         {
           date: "2024-01-18",
-          balance: 1133801.3,
+          balance: 1136391.3,
         },
         {
           date: "2024-01-19",
-          balance: 1216846.47,
+          balance: 1219436.47,
         },
         {
           date: "2024-01-20",
-          balance: 1216846.47,
+          balance: 1211546.47,
         },
         {
           date: "2024-01-21",
-          balance: 1216846.47,
+          balance: 1211546.47,
         },
         {
           date: "2024-01-22",
-          balance: 1079257.58,
+          balance: 1073957.58,
         },
         {
           date: "2024-01-23",
-          balance: 970938.61,
+          balance: 965638.61,
         },
         {
           date: "2024-01-24",
-          balance: 921462.23,
+          balance: 916162.23,
         },
         {
           date: "2024-01-25",
-          balance: 895335.01,
+          balance: 888805.01,
         },
         {
           date: "2024-01-26",
-          balance: 966828.66,
+          balance: 960298.66,
         },
         {
           date: "2024-01-27",
-          balance: 560874.57,
+          balance: 554344.57,
         },
         {
           date: "2024-01-28",
-          balance: 560874.57,
+          balance: 554344.57,
         },
         {
           date: "2024-01-29",
-          balance: 357516.88,
+          balance: 350986.88,
         },
         {
           date: "2024-01-30",
-          balance: 790380.04,
+          balance: 833850.04,
         },
         {
           date: "2024-01-31",
-          balance: 584377.45,
+          balance: 627847.45,
         },
         {
           date: "2024-02-01",
-          balance: 493095.07,
+          balance: 532005.07,
         },
         {
           date: "2024-02-02",
-          balance: 419530.59,
+          balance: 458440.59,
         },
         {
           date: "2024-02-03",
-          balance: 408469.09,
+          balance: 447379.09,
         },
         {
           date: "2024-02-04",
-          balance: 408469.09,
+          balance: 447379.09,
         },
         {
           date: "2024-02-05",
-          balance: 377113.55,
+          balance: 406223.55,
         },
         {
           date: "2024-02-06",
-          balance: 284168.3,
+          balance: 313278.3,
         },
         {
           date: "2024-02-07",
-          balance: 214950.35,
+          balance: 244060.35,
         },
         {
           date: "2024-02-08",
-          balance: 174227.21,
+          balance: 203337.21,
         },
         {
           date: "2024-02-09",
-          balance: 324760.03,
+          balance: 353870.03,
         },
         {
           date: "2024-02-10",
-          balance: 324760.03,
+          balance: 351530.03,
         },
         {
           date: "2024-02-11",
-          balance: 324760.03,
+          balance: 351530.03,
         },
         {
           date: "2024-02-12",
-          balance: 324760.03,
+          balance: 351530.03,
         },
         {
           date: "2024-02-13",
-          balance: 324760.03,
+          balance: 351530.03,
         },
         {
           date: "2024-02-14",
-          balance: 178591.58,
+          balance: 205361.58,
         },
         {
           date: "2024-02-15",
-          balance: 200866.54,
+          balance: 220856.54,
         },
         {
           date: "2024-02-16",
-          balance: 272952.92,
+          balance: 292942.92,
         },
         {
           date: "2024-02-17",
-          balance: 372952.92,
+          balance: 392942.92,
         },
         {
           date: "2024-02-18",
-          balance: 372952.92,
+          balance: 392942.92,
         },
         {
           date: "2024-02-19",
-          balance: 184101.71,
+          balance: 204091.71,
         },
         {
           date: "2024-02-20",
-          balance: 56543.73,
+          balance: 76413.73,
         },
         {
           date: "2024-02-21",
-          balance: 189062.14,
+          balance: 208932.14,
         },
         {
           date: "2024-02-22",
-          balance: 294904.49,
+          balance: 314774.49,
         },
         {
           date: "2024-02-23",
-          balance: 548092.31,
+          balance: 567962.31,
         },
         {
           date: "2024-02-24",
-          balance: 591092.31,
+          balance: 610962.31,
         },
         {
           date: "2024-02-25",
-          balance: 591092.31,
+          balance: 565962.31,
         },
         {
           date: "2024-02-26",
-          balance: 639062.09,
+          balance: 613932.09,
         },
         {
           date: "2024-02-27",
-          balance: 536214.65,
+          balance: 511084.65,
         },
         {
           date: "2024-02-28",
-          balance: 288633.38,
+          balance: 323503.38,
         },
         {
           date: "2024-02-29",
-          balance: 277431.71,
+          balance: 312301.71,
         },
         {
           date: "2024-03-01",
-          balance: 162021.11,
+          balance: 193681.11,
         },
         {
           date: "2024-03-02",
-          balance: 125561.11,
+          balance: 157221.11,
         },
         {
           date: "2024-03-03",
-          balance: 125561.11,
+          balance: 157221.11,
         },
         {
           date: "2024-03-04",
-          balance: 133537.36,
+          balance: 165197.36,
         },
         {
           date: "2024-03-05",
-          balance: 168837.2,
+          balance: 199047.2,
         },
         {
           date: "2024-03-06",
-          balance: 362167.82,
+          balance: 392377.82,
         },
         {
           date: "2024-03-07",
-          balance: 434335.68,
+          balance: 464545.68,
         },
         {
           date: "2024-03-08",
-          balance: 221206.87,
+          balance: 251416.87,
         },
         {
           date: "2024-03-09",
-          balance: 189196.87,
+          balance: 219406.87,
         },
         {
           date: "2024-03-10",
-          balance: 189196.87,
+          balance: 210646.87,
         },
         {
           date: "2024-03-11",
-          balance: 156800.49,
+          balance: 178250.49,
         },
         {
           date: "2024-03-12",
-          balance: 310585.7,
+          balance: 332035.7,
         },
         {
           date: "2024-03-13",
-          balance: 438700.21,
+          balance: 460150.21,
         },
         {
           date: "2024-03-14",
-          balance: 362447.24,
+          balance: 383897.24,
         },
         {
           date: "2024-03-15",
-          balance: 448274.92,
+          balance: 461834.92,
         },
         {
           date: "2024-03-16",
-          balance: 424180.92,
+          balance: 437740.92,
         },
         {
           date: "2024-03-17",
-          balance: 424180.92,
+          balance: 437740.92,
         },
         {
           date: "2024-03-18",
-          balance: 324031.35,
+          balance: 337591.35,
         },
         {
           date: "2024-03-19",
-          balance: 126774.84,
+          balance: 140334.84,
         },
         {
           date: "2024-03-20",
-          balance: 180244.06,
+          balance: 163244.06,
         },
         {
           date: "2024-03-21",
-          balance: 241273.9,
+          balance: 224273.9,
         },
         {
           date: "2024-03-22",
-          balance: 327756.96,
+          balance: 310756.96,
         },
         {
           date: "2024-03-23",
-          balance: 358456.96,
+          balance: 341456.96,
         },
         {
           date: "2024-03-24",
-          balance: 358456.96,
+          balance: 341456.96,
         },
         {
           date: "2024-03-25",
-          balance: 490248.94,
+          balance: 435248.94,
         },
         {
           date: "2024-03-26",
-          balance: 490703.56,
+          balance: 435703.56,
         },
         {
           date: "2024-03-27",
-          balance: 456119.28,
+          balance: 401119.28,
         },
         {
           date: "2024-03-28",
+          balance: 398092.27,
+        },
+        {
+          date: "2024-03-29",
+          balance: 398092.27,
+        },
+        {
+          date: "2024-03-30",
           balance: 453092.27,
         },
       ],
       monthlyBankBalanceDtos: [
         {
           yearMonth: "2023-12",
-          balance: 1264594.47,
+          balance: 1324549.47,
         },
         {
           yearMonth: "2024-01",
-          balance: 584377.45,
+          balance: 627847.45,
         },
         {
           yearMonth: "2024-02",
-          balance: 277431.71,
+          balance: 312301.71,
         },
         {
           yearMonth: "2024-03",
@@ -25961,24 +28183,24 @@ export const MOCK_DATA = {
       incomeByCategory: {
         "2024-02": [
           {
-            id: "ATM_CASH_DEPOSIT",
-            amount: 554500.0,
-          },
-          {
-            id: "OTHER_REVENUE",
-            amount: 1278540.81,
-          },
-          {
             id: "CREDIT_INTEREST",
             amount: 13.37,
+          },
+          {
+            id: "ATM_CASH_DEPOSIT",
+            amount: 614500.0,
+          },
+          {
+            id: "GENERAL_PAYMENT_IN",
+            amount: 208121.84,
           },
           {
             id: "CHEQUE_DEPOSIT",
             amount: 18768.0,
           },
           {
-            id: "GENERAL_PAYMENT_IN",
-            amount: 208121.84,
+            id: "OTHER_REVENUE",
+            amount: 1278540.81,
           },
         ],
         "2023-12": [
@@ -25987,68 +28209,76 @@ export const MOCK_DATA = {
             amount: 21200.0,
           },
           {
-            id: "OTHER_REVENUE",
-            amount: 58262.97,
-          },
-          {
             id: "GENERAL_PAYMENT_IN",
             amount: 6124.78,
+          },
+          {
+            id: "OTHER_REVENUE",
+            amount: 58262.97,
           },
         ],
         "2024-01": [
           {
-            id: "ATM_CASH_DEPOSIT",
-            amount: 493200.0,
-          },
-          {
-            id: "OTHER_REVENUE",
-            amount: 3224292.28,
-          },
-          {
             id: "CREDIT_INTEREST",
             amount: 11.51,
+          },
+          {
+            id: "ATM_CASH_DEPOSIT",
+            amount: 543200.0,
+          },
+          {
+            id: "GENERAL_PAYMENT_IN",
+            amount: 155359.37,
           },
           {
             id: "CHEQUE_DEPOSIT",
             amount: 71339.8,
           },
           {
-            id: "GENERAL_PAYMENT_IN",
-            amount: 155359.37,
+            id: "OTHER_REVENUE",
+            amount: 3224292.28,
           },
         ],
         "2024-03": [
           {
             id: "ATM_CASH_DEPOSIT",
-            amount: 561900.0,
+            amount: 616900.0,
           },
           {
-            id: "OTHER_REVENUE",
-            amount: 1646313.08,
+            id: "GENERAL_PAYMENT_IN",
+            amount: 144230.21,
           },
           {
             id: "CHEQUE_DEPOSIT",
             amount: 2000.0,
           },
           {
-            id: "GENERAL_PAYMENT_IN",
-            amount: 144230.21,
+            id: "OTHER_REVENUE",
+            amount: 1646313.08,
           },
         ],
       },
       expenseByCategory: {
         "2024-02": [
           {
-            id: "GENERAL_PAYMENT_OUT",
-            amount: -2033627.5,
-          },
-          {
-            id: "DEBIT_INTEREST_OUT",
-            amount: -47313.76,
+            id: "POSTING_OR_COURIER",
+            amount: -120.0,
           },
           {
             id: "CHEQUE_WITHDRAWAL",
             amount: -285903.5,
+          },
+          {
+            id: "GENERAL_PAYMENT_OUT",
+            amount: -2099767.5,
+          },
+          {
+            id: "UTILITIES_OR_BILL",
+            amount: -2340.0,
+          },
+          {
+            id: "DEBIT_INTEREST_OUT",
+            amount: -47313.76,
           },
           {
             id: "CHARGE_OR_FEE",
@@ -26068,15 +28298,19 @@ export const MOCK_DATA = {
         "2024-01": [
           {
             id: "GENERAL_PAYMENT_OUT",
-            amount: -3850106.43,
-          },
-          {
-            id: "DEBIT_INTEREST_OUT",
-            amount: -151408.05,
+            amount: -3878251.43,
           },
           {
             id: "CHEQUE_WITHDRAWAL",
             amount: -622675.5,
+          },
+          {
+            id: "UTILITIES_OR_BILL",
+            amount: -38340.0,
+          },
+          {
+            id: "DEBIT_INTEREST_OUT",
+            amount: -151408.05,
           },
           {
             id: "CHARGE_OR_FEE",
@@ -26085,16 +28319,20 @@ export const MOCK_DATA = {
         ],
         "2024-03": [
           {
+            id: "CHEQUE_WITHDRAWAL",
+            amount: -391956.43,
+          },
+          {
             id: "GENERAL_PAYMENT_OUT",
-            amount: -1779240.05,
+            amount: -1829790.05,
+          },
+          {
+            id: "UTILITIES_OR_BILL",
+            amount: -39320.0,
           },
           {
             id: "DEBIT_INTEREST_OUT",
             amount: -7481.25,
-          },
-          {
-            id: "CHEQUE_WITHDRAWAL",
-            amount: -391956.43,
           },
           {
             id: "CHARGE_OR_FEE",
@@ -26108,7 +28346,8 @@ export const MOCK_DATA = {
             id: "814",
             transactionDate: "2024-01-23",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "Y*** LIMITED HC12412399562***23JAN",
+            description:
+              "Y*** LIMITED             HC12412399562***   23JAN                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 592800,
@@ -26116,14 +28355,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 21.34,
+              value: 21.13,
             },
           },
           {
             id: "577",
             transactionDate: "2024-01-30",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12413015723***30JAN",
+            description:
+              "K*** MERC* SE***     HC12413015723***   30JAN                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 531949.48,
@@ -26131,14 +28371,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 19.15,
+              value: 18.96,
             },
           },
           {
             id: "559",
             transactionDate: "2024-01-05",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC1241056046***805JAN",
+            description:
+              "K*** MERC* SE***     HC1241056046***8   05JAN                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 393151.32,
@@ -26146,14 +28387,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 14.15,
+              value: 14.01,
             },
           },
           {
             id: "601",
             transactionDate: "2024-03-06",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12430698471***06MAR",
+            description:
+              "K*** MERC* SE***     HC12430698471***   06MAR                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 285375.99,
@@ -26161,14 +28403,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 10.27,
+              value: 10.17,
             },
           },
           {
             id: "584",
             transactionDate: "2024-02-09",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12420942258***09FEB",
+            description:
+              "K*** MERC* SE***     HC12420942258***   09FEB                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 265409.1,
@@ -26176,14 +28419,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 9.55,
+              value: 9.46,
             },
           },
           {
             id: "643",
             transactionDate: "2024-03-12",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "GAIN*** LIMITED STAFF CLAIM",
+            description:
+              "GAIN*** LIMITED          STAFF CLAIM                                                                                                                                                                                                                           ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 188448.5,
@@ -26191,14 +28435,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 6.78,
+              value: 6.72,
             },
           },
           {
             id: "578",
             transactionDate: "2024-01-31",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12413117401***31JAN",
+            description:
+              "K*** MERC* SE***     HC12413117401***   31JAN                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 183006.94,
@@ -26206,14 +28451,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 6.58,
+              value: 6.52,
             },
           },
           {
             id: "555",
             transactionDate: "2024-01-02",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12410252***35502JAN",
+            description:
+              "K*** MERC* SE***     HC12410252***355   02JAN                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 179991.8,
@@ -26221,14 +28467,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 6.47,
+              value: 6.41,
             },
           },
           {
             id: "603",
             transactionDate: "2024-03-07",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12430701111***07MAR",
+            description:
+              "K*** MERC* SE***     HC12430701111***   07MAR                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 156924.45,
@@ -26236,14 +28483,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 5.64,
+              value: 5.59,
             },
           },
           {
             id: "585",
             transactionDate: "2024-02-09",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12420942260***09FEB",
+            description:
+              "K*** MERC* SE***     HC12420942260***   09FEB                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 151906.06,
@@ -26251,14 +28499,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 5.46,
+              value: 5.41,
             },
           },
           {
             id: "610",
             transactionDate: "2024-03-15",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12431519188***15MAR",
+            description:
+              "K*** MERC* SE***     HC12431519188***  15MAR                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 150719.38,
@@ -26266,14 +28515,15 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 5.42,
+              value: 5.37,
             },
           },
           {
             id: "582",
             transactionDate: "2024-02-06",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "K*** MERC* SE***HC12420634072***06FEB",
+            description:
+              "K*** MERC* SE***     HC12420634072***   06FEB                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: 148707,
@@ -26281,11 +28531,11 @@ export const MOCK_DATA = {
             category: "OTHER_REVENUE",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 5.35,
+              value: 5.3,
             },
           },
         ],
-        averageAmount: 27776.9,
+        averageAmount: 28042.93,
       },
       expenseIrregularReport: {
         transactions: [
@@ -26293,7 +28543,8 @@ export const MOCK_DATA = {
             id: "364",
             transactionDate: "2024-01-23",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "CR TO 711-***345-101N12342434***(23JAN24)",
+            description:
+              "CR TO 711-***345-101     N12342434***(23JAN24)                                                                                                                                                                                                                 ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -590000,
@@ -26301,14 +28552,15 @@ export const MOCK_DATA = {
             category: "GENERAL_PAYMENT_OUT",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 22.67,
+              value: 23.26,
             },
           },
           {
             id: "523",
             transactionDate: "2024-01-31",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "B***T C***IT FI****EHC12413116837***31JAN",
+            description:
+              "B***T C***IT FI****E     HC12413116837***   31JAN                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -294068,
@@ -26316,14 +28568,15 @@ export const MOCK_DATA = {
             category: "GENERAL_PAYMENT_OUT",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 11.3,
+              value: 11.59,
             },
           },
           {
             id: "434",
             transactionDate: "2024-01-23",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "D**R C*E G***ITCOLHC124123991***2323JAN",
+            description:
+              "D**R C*E G***IT CO L     HC124123991***23   23JAN                                                                                                                                                                                                              ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -235058,
@@ -26331,14 +28584,15 @@ export const MOCK_DATA = {
             category: "GENERAL_PAYMENT_OUT",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 9.03,
+              value: 9.26,
             },
           },
           {
             id: "255",
             transactionDate: "2024-01-29",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "CR TO 030-1***56-998 N12752983***(27JAN24)",
+            description:
+              "CR TO 030-1***56-998     N12752983***(27JAN24)                                                                                                                                                                                                                 ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -150000,
@@ -26346,14 +28600,15 @@ export const MOCK_DATA = {
             category: "GENERAL_PAYMENT_OUT",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 5.76,
+              value: 5.91,
             },
           },
           {
             id: "239",
             transactionDate: "2024-02-28",
             accountName: "Sample HKD Savings (666111***888)",
-            description: "CR TO 040-5-201*** N22840395***(28FEB24)",
+            description:
+              "CR TO 040-5-201***    N22840395***(28FEB24)                                                                                                                                                                                                                 ",
             bank: "Sample Bank",
             currency: "HKD",
             amount: -150000,
@@ -26361,16 +28616,17 @@ export const MOCK_DATA = {
             category: "GENERAL_PAYMENT_OUT",
             reason: {
               type: "MORE_THAN_AVERAGE",
-              value: 5.76,
+              value: 5.91,
             },
           },
         ],
-        averageAmount: -26014.45,
+        averageAmount: -25363.9,
       },
       incomeRecurringTransactions: [],
       expenseRecurringTransactions: [
         {
-          latestDescription: "CHARGES HC1243274434***27MAR",
+          latestDescription:
+            "CHARGES                  HC1243274434***   27MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-27",
           currency: "HKD",
           latestAmount: -5,
@@ -26385,7 +28641,8 @@ export const MOCK_DATA = {
               transactionId: "124",
               transactionDate: [2024, 3, 27],
               accountName: "Sample HKD Savings (666111***888)",
-              description: "CHARGES HC1243274434*** 27MAR",
+              description:
+                "CHARGES                  HC1243274434***   27MAR                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26404,7 +28661,8 @@ export const MOCK_DATA = {
               transactionId: "103",
               transactionDate: [2024, 2, 29],
               accountName: "Sample HKD Savings (666111***888)",
-              description: "CHARGES HC12422983262*** 29FEB",
+              description:
+                "CHARGES                  HC12422983262***   29FEB                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26420,10 +28678,11 @@ export const MOCK_DATA = {
               uniqueId: "103",
             },
             {
-              transactionId: "93",
+              transactionId: "94",
               transactionDate: [2024, 1, 31],
               accountName: "Sample HKD Savings (666111***888)",
-              description: "CHARGES HC12413116837*** 31JAN",
+              description:
+                "CHARGES                  HC12413118178***   31JAN                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26436,13 +28695,14 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "93",
+              uniqueId: "94",
             },
             {
               transactionId: "73",
               transactionDate: [2023, 12, 29],
               accountName: "Sample HKD Savings (666111***888)",
-              description: "CHARGES HC123C2943***86 29DEC",
+              description:
+                "CHARGES                  HC123C2943***86   29DEC                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26460,7 +28720,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CHARGES HC12432744324***27MAR",
+          latestDescription:
+            "CHARGES                  HC12432744324***   27MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-27",
           currency: "HKD",
           latestAmount: -5,
@@ -26512,11 +28773,11 @@ export const MOCK_DATA = {
               uniqueId: "102",
             },
             {
-              transactionId: "94",
+              transactionId: "93",
               transactionDate: [2024, 1, 31],
               accountName: "Sample HKD Savings (666111***888)",
               description:
-                "CHARGES                  HC12413118178***   31JAN                                                                                                                                                                                                              ",
+                "CHARGES                  HC12413116837***   31JAN                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26529,12 +28790,13 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "94",
+              uniqueId: "93",
             },
           ],
         },
         {
-          latestDescription: "CHARGES HC12432029557***20MAR",
+          latestDescription:
+            "CHARGES                  HC12432029557***   20MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-20",
           currency: "HKD",
           latestAmount: -5,
@@ -26566,11 +28828,11 @@ export const MOCK_DATA = {
               uniqueId: "121",
             },
             {
-              transactionId: "100",
+              transactionId: "101",
               transactionDate: [2024, 2, 19],
               accountName: "Sample HKD Savings (666111***888)",
               description:
-                "CHARGES                  HC12421961419***   19FEB                                                                                                                                                                                                              ",
+                "CHARGES                  HC12421961700***   19FEB                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26583,7 +28845,7 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "100",
+              uniqueId: "101",
             },
             {
               transactionId: "85",
@@ -26608,7 +28870,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CHARGES HC12431621698***16MAR",
+          latestDescription:
+            "CHARGES                  HC12431621025***   16MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-16",
           currency: "HKD",
           latestAmount: -5,
@@ -26620,11 +28883,11 @@ export const MOCK_DATA = {
           totalLocalCurrencyAmount: -15.0,
           subItems: [
             {
-              transactionId: "120",
+              transactionId: "119",
               transactionDate: [2024, 3, 16],
               accountName: "Sample HKD Savings (666111***888)",
               description:
-                "CHARGES                  HC12431621698***   16MAR                                                                                                                                                                                                              ",
+                "CHARGES                  HC12431621025***   16MAR                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26637,14 +28900,14 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "120",
+              uniqueId: "119",
             },
             {
-              transactionId: "101",
+              transactionId: "100",
               transactionDate: [2024, 2, 19],
               accountName: "Sample HKD Savings (666111***888)",
               description:
-                "CHARGES                  HC12421961700***   19FEB                                                                                                                                                                                                              ",
+                "CHARGES                  HC12421961419***   19FEB                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26657,7 +28920,7 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "101",
+              uniqueId: "100",
             },
             {
               transactionId: "81",
@@ -26682,7 +28945,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CHARGES HC12431417451***14MAR",
+          latestDescription:
+            "CHARGES                  HC12431417451***   14MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-14",
           currency: "HKD",
           latestAmount: -5,
@@ -26756,7 +29020,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CR TO 343-***405-***N31485657***(14MAR24)",
+          latestDescription:
+            "CR TO 343-***405-***     N31485657***(14MAR24)                                                                                                                                                                                                                 ",
           latestTransactionDate: "2024-03-14",
           currency: "HKD",
           latestAmount: -100000,
@@ -26830,7 +29095,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CHARGES HC12431314964***13MAR",
+          latestDescription:
+            "CHARGES                  HC12431314964***   13MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-13",
           currency: "HKD",
           latestAmount: -5,
@@ -26904,7 +29170,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CHARGES HC12431111240***11MAR",
+          latestDescription:
+            "CHARGES                  HC12431111240***   11MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-12",
           currency: "HKD",
           latestAmount: -5,
@@ -26956,11 +29223,11 @@ export const MOCK_DATA = {
               uniqueId: "97",
             },
             {
-              transactionId: "76",
+              transactionId: "78",
               transactionDate: [2024, 1, 10],
               accountName: "Sample HKD Savings (666111***888)",
               description:
-                "CHARGES                  HC1241107208***9   10JAN                                                                                                                                                                                                              ",
+                "CHARGES                  HC1241107299****   10JAN                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -26973,12 +29240,13 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "76",
+              uniqueId: "78",
             },
           ],
         },
         {
-          latestDescription: "CR TO 67***96 N31177954***(11MAR24)",
+          latestDescription:
+            "CR TO 67***96     N31177954***(11MAR24)                                                                                                                                                                                                                 ",
           latestTransactionDate: "2024-03-11",
           currency: "HKD",
           latestAmount: -8000,
@@ -27052,7 +29320,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CHARGES HC12430906353***09MAR",
+          latestDescription:
+            "CHARGES                  HC12430906353***   09MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-09",
           currency: "HKD",
           latestAmount: -5,
@@ -27126,7 +29395,8 @@ export const MOCK_DATA = {
           ],
         },
         {
-          latestDescription: "CHARGES HC12430701240***07MAR",
+          latestDescription:
+            "CHARGES                  HC12430701920***   07MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-07",
           currency: "HKD",
           latestAmount: -5,
@@ -27138,11 +29408,11 @@ export const MOCK_DATA = {
           totalLocalCurrencyAmount: -15.0,
           subItems: [
             {
-              transactionId: "109",
+              transactionId: "112",
               transactionDate: [2024, 3, 7],
               accountName: "Sample HKD Savings (666111***888)",
               description:
-                "CHARGES                  HC12430701240***   07MAR                                                                                                                                                                                                              ",
+                "CHARGES                  HC12430701920***   07MAR                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -27155,7 +29425,7 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "109",
+              uniqueId: "112",
             },
             {
               transactionId: "95",
@@ -27178,11 +29448,11 @@ export const MOCK_DATA = {
               uniqueId: "95",
             },
             {
-              transactionId: "78",
+              transactionId: "76",
               transactionDate: [2024, 1, 10],
               accountName: "Sample HKD Savings (666111***888)",
               description:
-                "CHARGES                  HC1241107299****   10JAN                                                                                                                                                                                                              ",
+                "CHARGES                  HC1241107208***9   10JAN                                                                                                                                                                                                              ",
               currency: "HKD",
               amount: -5,
               balance: 0,
@@ -27195,12 +29465,13 @@ export const MOCK_DATA = {
               predictedName: "",
               localCurrencyAmount: -5.0,
               localCurrencyBalance: 0.0,
-              uniqueId: "78",
+              uniqueId: "76",
             },
           ],
         },
         {
-          latestDescription: "C** K* D**G HC12430187138***01MAR",
+          latestDescription:
+            "C** K* D**G              HC12430187138***   01MAR                                                                                                                                                                                                              ",
           latestTransactionDate: "2024-03-01",
           currency: "HKD",
           latestAmount: -33500,
@@ -27280,43 +29551,43 @@ export const MOCK_DATA = {
           totalInflow: 85587.75,
           totalOutflow: -91051.5,
           netFlow: -5463.75,
-          averageDailyBalance: 1269197.91,
+          averageDailyBalance: 1329152.91,
           averageDailyBalancePercentageMoM: null,
-          monthEndBalance: 1264594.47,
+          monthEndBalance: 1324549.47,
           monthEndBalancePercentageMoM: null,
           incompleteMonthData: true,
         },
         {
           yearMonth: "2024-01",
-          totalInflow: 3944202.96,
-          totalOutflow: -4624419.98,
-          netFlow: -680217.02,
-          averageDailyBalance: 1069241.35,
-          averageDailyBalancePercentageMoM: -15.75,
-          monthEndBalance: 584377.45,
-          monthEndBalancePercentageMoM: -53.79,
+          totalInflow: 3994202.96,
+          totalOutflow: -4690904.98,
+          netFlow: -696702.02,
+          averageDailyBalance: 1088271.35,
+          averageDailyBalancePercentageMoM: -18.12,
+          monthEndBalance: 627847.45,
+          monthEndBalancePercentageMoM: -52.6,
           incompleteMonthData: false,
         },
         {
           yearMonth: "2024-02",
-          totalInflow: 2059944.02,
-          totalOutflow: -2366889.76,
-          netFlow: -306945.74,
-          averageDailyBalance: 344771.42,
-          averageDailyBalancePercentageMoM: -67.76,
-          monthEndBalance: 277431.71,
-          monthEndBalancePercentageMoM: -52.53,
+          totalInflow: 2119944.02,
+          totalOutflow: -2435489.76,
+          netFlow: -315545.74,
+          averageDailyBalance: 366450.38,
+          averageDailyBalancePercentageMoM: -66.33,
+          monthEndBalance: 312301.71,
+          monthEndBalancePercentageMoM: -50.26,
           incompleteMonthData: false,
         },
         {
           yearMonth: "2024-03",
-          totalInflow: 2354443.29,
-          totalOutflow: -2178782.73,
-          netFlow: 175660.56,
-          averageDailyBalance: 302998.27,
-          averageDailyBalancePercentageMoM: -12.12,
+          totalInflow: 2409443.29,
+          totalOutflow: -2268652.73,
+          netFlow: 140790.56,
+          averageDailyBalance: 316095.87,
+          averageDailyBalancePercentageMoM: -13.74,
           monthEndBalance: 453092.27,
-          monthEndBalancePercentageMoM: 63.32,
+          monthEndBalancePercentageMoM: 45.08,
           incompleteMonthData: true,
         },
       ],
@@ -27883,7 +30154,7 @@ export const MOCK_DATA = {
             accountType: "SAVINGS",
             merchant: "",
             probability: "1.0",
-            predictedName: "711-***345-101",
+            predictedName: "CR TO 711-***345-101",
             localCurrencyAmount: -13900.0,
             localCurrencyBalance: 0.0,
             internalTransferId: "776",
@@ -30708,107 +32979,77 @@ export const MOCK_DATA = {
         },
       ],
       overviewReport: {
-        totalInflow: 2354443.29,
-        totalOutflow: -2178782.73,
+        totalInflow: 2409443.29,
+        totalOutflow: -2268652.73,
         currentBalance: 453092.27,
-        inflowPercentageMoM: 14.3,
-        outflowPercentageMoM: -7.95,
-        netFlowPercentageMoM: 63.32,
+        inflowPercentageMoM: 13.66,
+        outflowPercentageMoM: -6.85,
+        netFlowPercentageMoM: 45.08,
       },
       esgSummary: {
-        "2024-11": {
-          totalCo2Amount: 881,
-          totalAmount: 3600,
+        "2024-02": {
+          totalCo2Amount: 419.20692,
+          totalAmount: 2460.0,
           esgTransactions: [
             {
-              yearMonth: [2024, 11],
-              category: "TRANSPORT",
-              co2Amount: 44,
-              amount: 1750,
+              yearMonth: [2024, 2],
+              category: "GAS",
+              co2Amount: 407.83392,
+              amount: 2340.0,
             },
             {
-              yearMonth: [2024, 11],
-              category: "ELECTRICITY",
-              co2Amount: 12,
-              amount: 200,
-            },
-            {
-              yearMonth: [2024, 11],
-              category: "WATER",
-              co2Amount: 825,
-              amount: 1650,
+              yearMonth: [2024, 2],
+              category: "LOGISTICS",
+              co2Amount: 11.373,
+              amount: 120.0,
             },
           ],
         },
-        "2025-01": {
-          totalCo2Amount: 160,
-          totalAmount: 1750,
+        "2024-01": {
+          totalCo2Amount: 5556.42651,
+          totalAmount: 39570.0,
           esgTransactions: [
             {
-              yearMonth: [2025, 1],
-              category: "TRANSPORT",
-              co2Amount: 124,
-              amount: 1450,
+              yearMonth: [2024, 1],
+              category: "FUEL",
+              co2Amount: 3135.8628,
+              amount: 30450.0,
             },
             {
-              yearMonth: [2025, 1],
+              yearMonth: [2024, 1],
               category: "ELECTRICITY",
-              co2Amount: 12,
-              amount: 200,
+              co2Amount: 2298.16764,
+              amount: 7890.0,
             },
             {
-              yearMonth: [2025, 1],
-              category: "WATER",
-              co2Amount: 24,
-              amount: 100,
+              yearMonth: [2024, 1],
+              category: "TRANSPORT",
+              co2Amount: 122.39607,
+              amount: 1230.0,
             },
           ],
         },
-        "2024-10": {
-          totalCo2Amount: 1310,
-          totalAmount: 1250,
+        "2024-03": {
+          totalCo2Amount: 5843.05685,
+          totalAmount: 40770.0,
           esgTransactions: [
             {
-              yearMonth: [2024, 10],
+              yearMonth: [2024, 3],
               category: "TRANSPORT",
-              co2Amount: 1110,
-              amount: 800,
+              co2Amount: 144.28805,
+              amount: 1450.0,
             },
             {
-              yearMonth: [2024, 10],
+              yearMonth: [2024, 3],
               category: "ELECTRICITY",
-              co2Amount: 75,
-              amount: 300,
+              co2Amount: 2551.57776,
+              amount: 8760.0,
             },
             {
-              yearMonth: [2024, 10],
-              category: "WATER",
-              co2Amount: 125,
-              amount: 150,
-            },
-          ],
-        },
-        "2024-12": {
-          totalCo2Amount: 870,
-          totalAmount: 1150,
-          esgTransactions: [
-            {
-              yearMonth: [2024, 12],
-              category: "TRANSPORT",
-              co2Amount: 710,
-              amount: 800,
-            },
-            {
-              yearMonth: [2024, 12],
-              category: "ELECTRICITY",
-              co2Amount: 35,
-              amount: 200,
-            },
-            {
-              yearMonth: [2024, 12],
-              category: "WATER",
-              co2Amount: 125,
-              amount: 150,
+              yearMonth: [2024, 3],
+              category: "FUEL",
+              co2Amount: 3147.19104,
+              amount: 30560.0,
             },
           ],
         },
@@ -30820,7 +33061,7 @@ export const MOCK_DATA = {
         name: "TOTAL_DEPOSITS",
         unit: "AMOUNT",
         value: {
-          amount: 8444178.02,
+          amount: 8609178.02,
           type: "REGULAR",
         },
       },
@@ -30828,7 +33069,7 @@ export const MOCK_DATA = {
         name: "TOTAL_NUMBER_OF_DEPOSITS",
         unit: "COUNT",
         value: {
-          amount: 304,
+          amount: 307,
           type: "REGULAR",
         },
       },
@@ -30836,7 +33077,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_DEPOSITS_AMOUNT",
         unit: "AMOUNT",
         value: {
-          amount: 27776.9,
+          amount: 28042.93,
           type: "REGULAR",
         },
       },
@@ -30884,7 +33125,7 @@ export const MOCK_DATA = {
         name: "TOTAL_WITHDRAW",
         unit: "AMOUNT",
         value: {
-          amount: -9261143.97,
+          amount: -9486098.97,
           type: "REGULAR",
         },
       },
@@ -30892,7 +33133,7 @@ export const MOCK_DATA = {
         name: "TOTAL_NUMBER_OF_WITHDRAWS",
         unit: "COUNT",
         value: {
-          amount: 356,
+          amount: 374,
           type: "REGULAR",
         },
       },
@@ -30900,7 +33141,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_WITHDRAW_AMOUNT",
         unit: "AMOUNT",
         value: {
-          amount: -26014.45,
+          amount: -25363.9,
           type: "REGULAR",
         },
       },
@@ -30948,7 +33189,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_OF_LAST_THREE_MONTH_END_BALANCE",
         unit: "AMOUNT",
         value: {
-          amount: 438300.48,
+          amount: 464413.81,
           type: "REGULAR",
         },
       },
@@ -30956,7 +33197,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_OF_LAST_THREE_MONTH_DAY_END_BALANCE",
         unit: "AMOUNT",
         value: {
-          amount: 616365.18,
+          amount: 614080.96,
           type: "REGULAR",
         },
       },
@@ -30964,7 +33205,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_OF_LAST_SIX_MONTH_END_BALANCE",
         unit: "AMOUNT",
         value: {
-          amount: 429915.98,
+          amount: 452965.15,
           type: "REGULAR",
         },
       },
@@ -30972,7 +33213,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_OF_LAST_SIX_MONTH_DAY_END_BALANCE",
         unit: "AMOUNT",
         value: {
-          amount: 616365.18,
+          amount: 629393.2,
           type: "REGULAR",
         },
       },
@@ -30980,7 +33221,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_OF_LAST_THREE_MONTH_TOTAL_DEPOSIT_PER_MONTH",
         unit: "AMOUNT",
         value: {
-          amount: 2786196.76,
+          amount: 2841196.76,
           type: "REGULAR",
         },
       },
@@ -30988,7 +33229,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_OF_LAST_SIX_MONTH_TOTAL_DEPOSIT_PER_MONTH",
         unit: "AMOUNT",
         value: {
-          amount: 2111044.51,
+          amount: 2152294.51,
           type: "REGULAR",
         },
       },
@@ -31004,7 +33245,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_BANK_CHARGE_AND_FEES_ACROSS_SIX_MONTH",
         unit: "AMOUNT",
         value: {
-          amount: -93.59,
+          amount: -95.28,
           type: "REGULAR",
         },
       },
@@ -31012,7 +33253,7 @@ export const MOCK_DATA = {
         name: "AVERAGE_BILL_PAYMENT_PER_MONTH",
         unit: "AMOUNT",
         value: {
-          amount: 0.0,
+          amount: -19682.9,
           type: "REGULAR",
         },
       },
@@ -31078,26 +33319,118 @@ export const MOCK_DATA = {
       ],
       esgNotifications: [
         {
-          id: "1",
-          type: "ImproveEfficiency",
-          category: "ELECTRICITY",
-          title: "Improve the energy efficiency of your premises",
-          payload: {
-            text: "Reduce up to:",
-            value: "2t Carbon",
-          },
-          createdDate: [2024, 12, 27],
+          createdDate: null,
+          type: "ELECTRIC_VEHICLE",
+          title: "Switch your fleet to electric vehicles",
+          description:
+            "EVs produce no harmful emissions when you drive which improves local air quality and reduces carbon emissions.\n\nThere are several government incentives to make it easier for small businesses to switch to EVs <a target='_blank' href='https://www.epd.gov.hk/epd/english/environmentinhk/air/promotion_ev/promotion_ev.html'>here</a>.",
+          didYouKnow:
+            "The total cost of ownership of an EV is typically less than that of a petrol or diesel vehicle. EVs are much more efficient, using only about 1/3 of the energy required by petrol or diesel equivalents. They also have fewer moving parts, require less maintenance and may be <a target='_blank' href='https://www.td.gov.hk/en/public_services/licences_and_permits/vehicle_first_registration/new_frt_concessions_for_electric_vehicles_2018/index.html'>more tax-efficient</a> for your business.",
+          tasks: [
+            {
+              title: "Learn more about EVs",
+              description:
+                "You can learn more about EVs and their potential benefits <a target='_blank' href='https://www.clp.com.hk/en/emobility/about-electric-vehicles'>here</a>",
+            },
+            {
+              title: "Assess your vehicle requirements",
+              description:
+                "Identify which of your vehicle needs can be met by the increasingly wide range of EVs available.",
+            },
+            {
+              title: "Read some EV reviews",
+              description:
+                "Check out some EV and fleet reviews to see which options will best suit your business.",
+            },
+            {
+              title: "Develop a schedule to switch to electric vehicles",
+              description:
+                "Make a schedule to switch your fleet to EVs, identifying when leases are due for renewal.",
+            },
+            {
+              title: "Figure out financing",
+              description:
+                "Find out what incentives are available to help you switch to EVs.",
+            },
+            {
+              title: "Assess your vehicle charging options",
+              description:
+                "Find out more about your local charging options, including public chargers or installing your own.",
+            },
+          ],
         },
         {
-          id: "2",
-          type: "ImproveEfficiency",
-          category: "TRANSPORT",
-          title: "Reduce use of fossil fuel transport",
-          payload: {
-            text: "Reduce up to:",
-            value: "4t Carbon",
-          },
-          createdDate: [2024, 12, 27],
+          createdDate: null,
+          type: "EFFICIENT_AIR_CONDITIONER",
+          title: "Upgrade to more efficient air conditioning equipment",
+          description:
+            "Upgrading to more efficient air conditioning equipment can reduce your carbon footprint.",
+          didYouKnow:
+            "Improvements in technology mean that newer air conditioning systems are more efficient.",
+          tasks: [
+            {
+              title: "Identify all your air conditioning equipment",
+              description:
+                "Compile a list of all your air conditioning equipment, including specifications like age and cooling power. Use this to prioritize upgrades and replacements.",
+            },
+            {
+              title: "Contact local installers",
+              description:
+                "Local providers will be able to advise you on your upgrade options, including costs and likely payback times.",
+            },
+            {
+              title: "Check your settings",
+              description:
+                "Check that you're not over conditioning your spaces by having the temperature settings too low. Also check that you're not conditioning spaces that aren't occupied.",
+            },
+          ],
+        },
+        {
+          createdDate: null,
+          type: "EFFICIENT_LIGHTING",
+          title: "Upgrade to more efficient lighting equipment",
+          description:
+            "Old and inefficient lighting will often create unnecessary heat and use more electricity.",
+          didYouKnow:
+            "LED lighting is often the most cost effective and efficient replacement option. LEDs will typically also have much longer lifetimes, reducing maintenance costs associated with replacements.",
+          tasks: [
+            {
+              title: "Assess your current lighting",
+              description:
+                "Check whether you operate any non-LED lights and whether there are areas where your current lighting is not adequate.",
+            },
+            {
+              title: "Book a lighting assessment",
+              description:
+                "Many lighting providers offer a free assessment and will advise on replacement options with expected savings.",
+            },
+          ],
+        },
+        {
+          createdDate: null,
+          type: "REDUCE_FREIGHT_EMISSIONS",
+          title: "Reduce freight emissions",
+          description:
+            "For many businesses, the transportation of goods is a significant area of emissions. This includes both the freight of goods purchased and sold by a business.",
+          didYouKnow:
+            "Air freight is by far the worst mode option in terms of emissions intensity, typically ten times that of land options, and sea freight is the <a target='_blank' href='https://transportgeography.org/contents/chapter4/transportation-and-environment/co2-emissions-passenger-freight-transport-mode/'>best</a>.",
+          tasks: [
+            {
+              title: "Avoid air freight",
+              description:
+                "Explore mode options for transporting goods, including shipping, rail, and road. Contact your providers to find out what transport modes they’re using and whether alternatives are available.",
+            },
+            {
+              title: "Bulk order wherever possible",
+              description:
+                "By reducing trips associated with delivery, you’ll be reducing emissions and potentially the costs of your purchases. Check that you don’t run into issues with space and potential expiry dates.",
+            },
+            {
+              title: "Use backhauling",
+              description:
+                "Backhauling is making use of spare freight capacity on return journeys. Work with your freight providers to see if this is an option.",
+            },
+          ],
         },
       ],
     },

@@ -91,7 +91,7 @@ export default function TransactionCard({
             <Button
               src="/images/chevron-right.png"
               alt="icon"
-              onClick={() => setOpenModal(true)}
+              onClick={() => handleOpenModal(selected)}
             />
           </Description_BtnContainer>
         </Card>
@@ -116,7 +116,7 @@ export default function TransactionCard({
       <DetailsModal
         marginTop="40px"
         width="100%"
-        position="middle"
+        $position="middle"
         headerText="Transaction Details"
         modalIsOpen={openModal}
         closeModal={() => setOpenModal(false)}>

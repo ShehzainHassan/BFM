@@ -30,6 +30,13 @@ const PieContainer = styled.div`
     margin: 0 auto;
   }
 `;
+const ToolTip = styled("div")`
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background-color: ${BFMPalette.gray100};
+`;
 
 const PieGraph = ({
   data,
@@ -112,13 +119,6 @@ const PieGraph = ({
     color: colors[index % colors.length],
   }));
 
-  const ToolTip = styled("div")`
-    display: flex;
-    flex-direction: column;
-    padding: 6px 10px;
-    border-radius: 4px;
-    background-color: ${BFMPalette.gray100};
-  `;
   return (
     <PieContainer>
       <ResponsivePie

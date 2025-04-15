@@ -1,4 +1,6 @@
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
+import useTranslation from "@/translations";
 import { BodyText, H5 } from "@/Typography";
 import { formatDate, parseInvoices, updateInvoiceStatus } from "@/utils";
 import { useState } from "react";
@@ -11,8 +13,6 @@ import {
   AttachmentIcon,
   DetailsIcon,
 } from "../Transactions/TransactionsColumnsStyles";
-import { useData } from "@/DataContext";
-import useTranslation from "@/translations";
 const backgroundColor = {
   PENDING: BFMPalette.white90,
   OVERDUE: BFMPalette.skin200,
@@ -24,15 +24,14 @@ const borderColor = {
   OVERDUE: BFMPalette.skin300,
   PAID: BFMPalette.green600,
 };
-const StatusBadge = styled.div<{ status: "PENDING" | "OVERDUE" | "PAID" }>`
+const StatusBadge = styled.div<{ $status: "PENDING" | "OVERDUE" | "PAID" }>`
   border-radius: 16px;
   padding: 2px 8px;
-  border: 1px solid ${({ status }) => borderColor[status]};
-  background-color: ${({ status }) => backgroundColor[status]};
+  border: 1px solid ${({ $status }) => borderColor[$status]};
+  background-color: ${({ $status }) => backgroundColor[$status]};
 `;
 const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { t } = useTranslation();
   const { setInvoicesSummary } = useData();
   const toggleInvoiceCategory = () => {
     const updatedInvoices = updateInvoiceStatus(row.invoiceNo);
@@ -86,22 +85,22 @@ export const InvoiceSummaryStyles = {
   ),
   CATEGORY: (row: InvoiceSummary) => {
     let badgeColor;
-    let status: "OVERDUE" | "PENDING" | "PAID";
+    let $status: "OVERDUE" | "PENDING" | "PAID";
 
     if (row.category === "OVERDUE") {
       badgeColor = BFMPalette.red700;
-      status = "OVERDUE";
+      $status = "OVERDUE";
     } else if (row.category === "PENDING") {
       badgeColor = BFMPalette.red550;
-      status = "PENDING";
+      $status = "PENDING";
     } else {
       badgeColor = BFMPalette.green800;
-      status = "PAID";
+      $status = "PAID";
     }
 
     return (
       <BodyText color={BFMPalette.black800}>
-        <StatusBadge status={status}>
+        <StatusBadge $status={$status}>
           <H5 color={badgeColor}>{row.category}</H5>
         </StatusBadge>
       </BodyText>
