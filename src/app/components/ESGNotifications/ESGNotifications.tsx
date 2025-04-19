@@ -1,15 +1,37 @@
+import useTranslation from "@/translations";
 import { ESGNotificationsProps } from "../../../../Interfaces";
 import CarbonContainer from "../CarbonContainer/CarbonContainer";
 import Card from "../Card/Card";
 
 export default function ESGNotifications({
-  imgSrc = "ELECTRICITY",
+  type = "ELECTRIC_VEHICLE",
   title = "TITLE",
-  data,
 }: ESGNotificationsProps) {
+  const { t } = useTranslation();
+
+  let imageSrc = "/images/CAR.png";
+  switch (type) {
+    case "EFFICIENT_AIR_CONDITIONER":
+      imageSrc = "/images/temperature.png";
+      break;
+    case "EFFICIENT_LIGHTING":
+      imageSrc = "/images/lighting.png";
+      break;
+    case "REDUCE_FREIGHT_EMISSIONS":
+      imageSrc = "/images/TRUCK.png";
+      break;
+    case "ELECTRIC_VEHICLE":
+    default:
+      imageSrc = "/images/CAR.png";
+      break;
+  }
+
   return (
-    <Card image={`/images/${imgSrc}.png`} title={title}>
-      <CarbonContainer text={data?.text} carbonVal={data?.value} />
+    <Card image={imageSrc} title={title} expandable={true}>
+      <CarbonContainer
+        text={t("esg.notifications.label")}
+        carbonVal={t("esg.notifications.carbonVal")}
+      />
     </Card>
   );
 }

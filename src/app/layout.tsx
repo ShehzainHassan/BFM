@@ -4,25 +4,16 @@ import styled from "styled-components";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./globals.css";
-import { DataProvider } from "@/DataContext";
+import { DataProvider, useData } from "@/DataContext";
 import MobileNav from "./components/MobileNav/MobileNav";
 import useTranslation from "@/translations";
+import ContentWrapper from "./components/ContentWrapper/ContentWrapper";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const ContentWrapper = styled("div")`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-left: 76px;
-  @media (max-width: 1023px) {
-    margin-left: unset;
-  }
-`;
 const MainContent = styled("main")`
   display: flex;
   align-items: center;
@@ -31,6 +22,9 @@ const MainContent = styled("main")`
   padding: 32px;
   width: 100%;
   overflow: auto;
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
   @media (max-width: 1023px) {
     display: unset;
     max-width: unset;

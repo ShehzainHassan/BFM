@@ -13,9 +13,9 @@ const BarsContainer = styled("div")`
 
 const BarUI = styled("div")`
   position: relative;
-  background-color: ${BFMPalette.purple125};
   width: 100%;
   height: 25px;
+  background-color: ${BFMPalette.purple125};
   border-radius: 8px;
 `;
 
@@ -23,8 +23,8 @@ const Filled = styled.div<{ $filledValue?: number; $filledColor?: string }>`
   height: 100%;
   width: ${({ $filledValue }) => ($filledValue ? `${$filledValue}%` : "0%")};
   background-color: ${({ $filledColor }) => $filledColor || "purple"};
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-radius: ${({ $filledValue }) =>
+    $filledValue === 100 ? "8px" : "8px 0 0 8px"};
 `;
 
 const Badge = styled("div")`
@@ -52,7 +52,7 @@ export default function Comparison({ spendingData }: ComparisonProps) {
   };
   return (
     <Card
-      image="/images/Frame 1.png"
+      image="/images/spend.png"
       title="Your advertising / marketing spend is less than last month">
       <BarsContainer>
         <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>

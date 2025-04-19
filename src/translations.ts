@@ -1,3 +1,4 @@
+import { notification } from "antd";
 import { I18n } from "i18n-js";
 import { useMemo } from "react";
 
@@ -112,6 +113,12 @@ const i18n = new I18n({
       invoice_detail: {
         label: "Invoice Detail",
         placeholder: "Summary (e.g project name, descriptions of invoice)",
+      },
+    },
+    esg: {
+      notifications: {
+        label: "Reduce up to: ",
+        carbonVal: "2 t Carbon",
       },
     },
   },

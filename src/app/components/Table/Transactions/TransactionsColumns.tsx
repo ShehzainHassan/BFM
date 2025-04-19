@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Transaction } from "./transactions";
 import { TransactionStyles } from "./TransactionsColumnsStyles";
 import useTranslation from "@/translations";
+import { Transaction } from "../../../../../Interfaces";
 
 export const useTransactionColumns = (): ColumnDef<Transaction>[] => {
   const { t } = useTranslation();

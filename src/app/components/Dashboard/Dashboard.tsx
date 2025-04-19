@@ -110,7 +110,7 @@ export default function Dashboard() {
           </SubContainer>
           <Payment />
         </Container>
-        <Notifications notifications={notifications.notifications} />
+        <Notifications notifications={notifications?.notifications ?? []} />
       </MainContainer>
       <PaymentsContainer>
         <Header>
@@ -178,7 +178,7 @@ export default function Dashboard() {
         <TextContainer />
         <InflowOutflow />
         <Payment />
-        <Notifications notifications={notifications.notifications} />
+        <Notifications notifications={notifications?.notifications ?? []} />
       </MobileContainer>
     </Container>
   );

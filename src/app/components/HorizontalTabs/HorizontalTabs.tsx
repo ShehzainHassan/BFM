@@ -18,7 +18,11 @@ const TabContainer = styled.div<{ $tabType: "button" | "tab" }>`
   }
 `;
 
-const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
+const Tab = styled.button<{
+  $isActive: boolean;
+  $tabType: "button" | "tab";
+  $width?: string;
+}>`
   padding: 8px 12px;
   cursor: pointer;
   font-weight: 600;
@@ -27,6 +31,7 @@ const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
   transition: background-color 0.3s ease-in-out, border-bottom 0.3s ease-in-out,
     color 0.3s ease-in-out;
   border-radius: ${({ $tabType }) => ($tabType === "button" ? "1000px" : "0")};
+  width: ${({ $width }) => $width ?? "auto"};
 
   ${({ $isActive, $tabType }) =>
     $tabType === "button"
@@ -51,9 +56,10 @@ const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
           background-color: ${
             $isActive ? BFMPalette.white25 : BFMPalette.purple200
           };
-          border-radius: ${!$isActive ? "12px" : ""}
-          }
-      `}
+          border-radius: ${!$isActive ? "12px" : ""};
+        }
+      `};
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -62,6 +68,7 @@ const Tab = styled.button<{ $isActive: boolean; $tabType: "button" | "tab" }>`
 export default function HorizontalTabs({
   tabs,
   selectedTab,
+  width,
   tabType = "button",
   onTabChange,
 }: HorizontalTabProps) {
@@ -72,7 +79,8 @@ export default function HorizontalTabs({
           key={tab}
           $isActive={selectedTab === tab}
           $tabType={tabType}
-          onClick={() => onTabChange(tab)}>
+          onClick={() => onTabChange(tab)}
+          $width={width}>
           {tab}
         </Tab>
       ))}

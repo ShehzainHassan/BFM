@@ -20,6 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { H5, Header } from "@/Typography";
+import useIsMobile from "@/useIsMobile";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -113,22 +114,12 @@ const CustomActiveDot = ({
   );
 };
 
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  return isMobile;
-};
-const MobileContainer = styled("div")`
+export const MobileContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
-const ButtonContainer = styled("div")`
+export const ButtonContainer = styled("div")`
   width: 32px;
   height: 32px;
   display: flex;
@@ -138,14 +129,14 @@ const ButtonContainer = styled("div")`
   padding: 6px;
   border: 1px solid ${BFMPalette.gray100};
 `;
-const ValueContainer = styled("div")`
+export const ValueContainer = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 export default function AreaChartGraph({ data }: AreaChartProps) {
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(768);
   const [activeIndex, setActiveIndex] = useState(0);
   const handleNext = () => {
     setActiveIndex((prev) => Math.min(prev + 1, data.length - 1));

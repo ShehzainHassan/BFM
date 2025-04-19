@@ -82,7 +82,7 @@ const PieGraph = ({
                 fontWeight: 600,
                 fill: BFMPalette.black800,
               }}>
-              {totalCarbon}
+              {Number(totalCarbon).toFixed(2)}
             </tspan>
             <tspan
               dx="4"

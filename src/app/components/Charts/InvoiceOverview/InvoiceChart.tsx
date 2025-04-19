@@ -8,14 +8,8 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-  XAxisProps,
-  YAxisProps,
 } from "recharts";
 import { InvoiceChartProps } from "../../../../../Interfaces";
-import {
-  ValueType,
-  NameType,
-} from "recharts/types/component/DefaultTooltipContent";
 import {
   CustomTooltipContainer,
   CustomTooltipLabel,

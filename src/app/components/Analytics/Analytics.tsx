@@ -4,9 +4,6 @@ import { BFMPalette } from "@/Theme";
 import { useState } from "react";
 import styled from "styled-components";
 import { calculateAverageHKD } from "@/utils";
-import { BuyerSupplierAnalysis } from "../Table/BuyerSupplierAnalysis/BuyerSupplierAnalysis";
-import { TransitionHighlight } from "../Table/TransitionHighlight/transitionHighlight";
-import { RecurringTransaction } from "../Table/RecurringTransactions/recurringTransactions";
 import { ITEMS_PER_PAGE } from "@/constants";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import RenderBadgeGroup from "../BadgeGroup/BadgeGroup";
@@ -19,6 +16,11 @@ import { useTransitionHighlightColumns } from "../Table/TransitionHighlight/Tran
 import Pagination from "../Pagination/Pagination";
 import useTranslation from "@/translations";
 import { useBuyerSupplierAnalysisColumns } from "../Table/BuyerSupplierAnalysis/BuyerSupplierAnalysisColumns";
+import {
+  BuyerSupplierAnalysis,
+  RecurringTransaction,
+  TransitionHighlight,
+} from "../../../../Interfaces";
 
 const TabContainer1 = styled("div")`
   padding: 20px 16px 0px 16px;

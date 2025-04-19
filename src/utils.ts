@@ -1,24 +1,26 @@
 import dayjs from "dayjs";
-import { fromAddress, HKD_EQUIVALANT, toAddress } from "./constants";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 import {
   DetailedInvoiceSummary,
   ESGSummary,
+  IncomeExpenseCategory,
   InvoiceSummary,
+  MonthYearData,
   RecurringTransaction,
-  Reports,
 } from "../Interfaces";
-import jsPDF from "jspdf";
+import { fromAddress, HKD_EQUIVALANT, toAddress } from "./constants";
+import { BFMPalette } from "./Theme";
 
 declare module "jspdf" {
   interface jsPDF {
     lastAutoTable?: { finalY: number };
   }
 }
-import { BFMPalette } from "./Theme";
-import autoTable from "jspdf-autotable";
-import useTranslation from "./translations";
 
-export const generateMonths = (reports?: ESGSummary | Reports) => {
+export const generateMonths = (
+  reports?: ESGSummary | IncomeExpenseCategory
+) => {
   if (!reports || typeof reports !== "object") return [];
 
   return Object.keys(reports)
@@ -279,10 +281,17 @@ export const getDynamicScale = (maxValue: number) => {
   const roundedMax = Math.ceil(maxValue / magnitude) * magnitude;
   return roundedMax + 2 * magnitude;
 };
-export const formatLastUpdated = (timestamp: string): string => {
-  const date = new Date(timestamp);
+export const formatLastUpdated = (timestamp: string | number[]): string => {
+  let date: Date;
 
-  const monthAbbreviations = [
+  if (Array.isArray(timestamp)) {
+    const [year, month, day] = timestamp;
+    date = new Date(Date.UTC(year, month - 1, day));
+  } else {
+    date = new Date(timestamp);
+  }
+
+  const months = [
     "Jan",
     "Feb",
     "Mar",
@@ -297,11 +306,38 @@ export const formatLastUpdated = (timestamp: string): string => {
     "Dec",
   ];
 
-  const day = date.getDate();
-  const month = monthAbbreviations[date.getMonth()];
-  const year = date.getFullYear();
+  const day = date.getUTCDate();
+  const month = months[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
 
   return `last updated: ${day} ${month} ${year}`;
+};
+
+export const sortByMonthYear = (data: MonthYearData[]): MonthYearData[] => {
+  const monthMap: Record<string, number> = {
+    Jan: 0,
+    Feb: 1,
+    Mar: 2,
+    Apr: 3,
+    May: 4,
+    Jun: 5,
+    Jul: 6,
+    Aug: 7,
+    Sep: 8,
+    Oct: 9,
+    Nov: 10,
+    Dec: 11,
+  };
+
+  return [...data].sort((a, b) => {
+    const [monthA, yearA] = a.monthYear.split(" ");
+    const [monthB, yearB] = b.monthYear.split(" ");
+
+    const dateA = new Date(2000 + parseInt(yearA), monthMap[monthA]);
+    const dateB = new Date(2000 + parseInt(yearB), monthMap[monthB]);
+
+    return dateA.getTime() - dateB.getTime();
+  });
 };
 
 export const formatKeys = (key: string): string => {
@@ -443,4 +479,21 @@ export const parseInvoices = (invoices: any[]): InvoiceSummary[] => {
       category: invoice.category,
     };
   });
+};
+
+export const getColorByName = (name: string): string => {
+  switch (name.toUpperCase()) {
+    case "TRANSPORT":
+      return BFMPalette.red300;
+    case "ELECTRICITY":
+      return BFMPalette.yellow500;
+    case "FUEL":
+      return BFMPalette.blue500;
+    case "GAS":
+      return BFMPalette.red600;
+    case "LOGISTICS":
+      return BFMPalette.purple600;
+    default:
+      return BFMPalette.purple600;
+  }
 };

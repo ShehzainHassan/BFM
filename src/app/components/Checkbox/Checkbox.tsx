@@ -41,7 +41,7 @@ const StyledCheckbox = styled.input`
   }
 `;
 
-export default function CustomCheckbox({
+export default function Checkbox({
   label = "Label",
   checked,
   setChecked,

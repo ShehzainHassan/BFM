@@ -79,6 +79,7 @@ const ImageContainer = styled("div")`
 
 export default function Navbar({ navItems }: NavbarProps) {
   const { t } = useTranslation();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     selectedTab,
@@ -314,7 +315,7 @@ export default function Navbar({ navItems }: NavbarProps) {
       </SubContainer>
       <DetailsModal
         headerText=""
-        width="100%"
+        width="400px"
         height="375px"
         modalIsOpen={isModalOpen}
         closeModal={handleCloseModal}>

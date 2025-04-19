@@ -1,8 +1,16 @@
 "use client";
-import { createContext, ReactNode, useContext, useState } from "react";
+import axios from "axios";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   AccountData,
   AreaChartData,
+  Attachment,
   BankDetails,
   BarData,
   BuyerSupplierAnalysis,
@@ -12,6 +20,9 @@ import {
   InvoiceSummary,
   Item,
   LineChartData,
+  Metrics,
+  Note,
+  Notifications,
   Outflows,
   ParsedAccount,
   ParsedDeposit,
@@ -19,12 +30,14 @@ import {
   ParsedTransaction,
   ParsedTransitionHighlight,
   PieData,
+  RawData,
   RecurringTransaction,
+  Reports,
+  TaggedTransaction,
   Transaction,
   TransitionHighlight,
 } from "../Interfaces";
 import { CURRENCY } from "./constants";
-import { MOCK_DATA } from "./mockdata";
 import useTranslation from "./translations";
 import {
   formatDate,
@@ -37,7 +50,18 @@ import {
 const DataContext = createContext<DataContextType | null>(null);
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
-  const { rawData, reports, metrics, notifications } = MOCK_DATA.data;
+  const [loading, setIsLoading] = useState(true);
+  const [rawData, setRawData] = useState<RawData | null>(null);
+  const [metrics, setMetrics] = useState<Metrics | null>(null);
+  const [reports, setReports] = useState<Reports | null>(null);
+  const [notifications, setNotifications] = useState<Notifications | null>(
+    null
+  );
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [inflows, setInflows] = useState<Inflows[]>([]);
+  const [outflows, setOutflows] = useState<Outflows[]>([]);
+
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(t("navbar.tabs.dashboard"));
   const [isCreatingInvoice, setIsCreatingInvoice] = useState(false);
@@ -87,7 +111,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   ): Transaction[] => {
     return parsedTransaction.map((transaction) => ({
       id: transaction.transactionId,
-      date: transaction.transactionDate,
+      date: formatDate(transaction.transactionDate),
       description: {
         imgSrc: getImagePath(transaction.category),
         title: transaction.description,
@@ -221,10 +245,17 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
 
     Object.keys(esgSummary).forEach((month) => {
       esgSummary[month].esgTransactions.forEach(
-        (transaction: { category: string; co2Amount: number }) => {
+        (transaction: {
+          category: string;
+          co2Amount: number;
+          amount: number;
+          color: string;
+        }) => {
           transformedData.push({
             name: transaction.category,
             value: transaction.co2Amount,
+            amount: transaction.amount,
+            color: transaction.color,
             month: month,
           });
         }
@@ -315,54 +346,29 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
-  const transactions = transformTransactions(rawData.taggedTransactions);
-  const accounts = transformAccounts(rawData.parsedAccounts);
-  const deposits = transformDeposits(reports.incomeRelationshipBreakdown);
-  const withdrawals = transformDeposits(reports.expenseRelationshipBreakdown);
+  const transactions = transformTransactions(rawData?.taggedTransactions ?? []);
+  const accounts = transformAccounts(rawData?.parsedAccounts ?? []);
+  const deposits = transformDeposits(
+    reports?.incomeRelationshipBreakdown ?? []
+  );
+  const withdrawals = transformDeposits(
+    reports?.expenseRelationshipBreakdown ?? []
+  );
   const depositHighlights = transformHighlights(
-    reports.incomeIrregularReport.transactions
+    reports?.incomeIrregularReport.transactions ?? []
   );
   const withdrawalHighlights = transformHighlights(
-    reports.expenseIrregularReport.transactions
+    reports?.expenseIrregularReport.transactions ?? []
   );
 
   const depositRecurring = transformRecurringTransactions(
-    reports.incomeRecurringTransactions
+    reports?.incomeRecurringTransactions ?? []
   );
 
   const withdrawalRecurring = transformRecurringTransactions(
-    reports.expenseRecurringTransactions
+    reports?.expenseRecurringTransactions ?? []
   );
-  const inflows = transformInflows(
-    reports.profitAndLost.map((entry) => ({
-      yearMonth: entry.yearMonth,
-      income: {
-        flattenedFields: Object.fromEntries(
-          Object.entries(entry.income.flattenedFields)
-            .filter(
-              ([value]) =>
-                value && typeof value === "object" && "amount" in value
-            )
-            .map(([key, value]) => [key, { amount: value?.amount ?? 0 }])
-        ),
-      },
-    }))
-  );
-  const outflows = transformOutflows(
-    reports.profitAndLost.map((entry) => ({
-      yearMonth: entry.yearMonth,
-      expense: {
-        flattenedFields: Object.fromEntries(
-          Object.entries(entry.expense.flattenedFields)
-            .filter(
-              ([value]) =>
-                value && typeof value === "object" && "amount" in value
-            )
-            .map(([key, value]) => [key, { amount: value?.amount ?? 0 }])
-        ),
-      },
-    }))
-  );
+
   const addItem = () => {
     setItems([
       ...items,
@@ -397,20 +403,137 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       }))
     );
   };
-  const pieData = transformESGData(reports.esgSummary);
-  const barData = transformBarData(reports.esgSummary);
-  const depositsDashboard = transformReportsData(reports.incomeByCategory);
-  const withDrawalsDashboard = transformReportsData(reports.expenseByCategory);
-  const areaData = transformAreaData(reports.dailyBankBalanceDtos);
-  const cashflowData = transformCashflowData(reports.cashFlow.history);
-  const lineChartData = lineData(reports.cashFlow.history);
+
+  const pieData = transformESGData(reports?.esgSummary ?? []);
+  const barData = transformBarData(reports?.esgSummary ?? []);
+  const depositsDashboard = transformReportsData(
+    reports?.incomeByCategory ?? {}
+  );
+  const withDrawalsDashboard = transformReportsData(
+    reports?.expenseByCategory ?? {}
+  );
+  const areaData = transformAreaData(reports?.dailyBankBalanceDtos ?? []);
+  const cashflowData = transformCashflowData(reports?.cashFlow.history ?? []);
+  const lineChartData = lineData(reports?.cashFlow.history ?? []);
+
+  useEffect(() => {
+    const loadBFMData = async () => {
+      try {
+        const response = await axios.post(
+          "https://api.dev.pca.planto.io/v1/businessFinancialManagement/mock",
+          {
+            CATEGORIZATION_TYPE: "ADVANCED",
+            SHOW_CONFIDENCE_TAG: false,
+            ENABLE_FORECAST: false,
+            SHOW_INSIGHTS: false,
+            SHOW_STRESS_TEST: false,
+            SHOW_ACCOUNT_ID: false,
+            SHOW_PROMINENT_FX_MESSAGE: true,
+            SHOW_INTRA_COMPANY_TRANSFERS: false,
+          },
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        setRawData(response.data.data.rawData);
+        setMetrics(response.data.data.metrics);
+        setReports(response.data.data.reports);
+        setNotifications(response.data.data.notifications);
+
+        setInflows(
+          transformInflows(
+            response.data.data.reports.profitAndLost.map(
+              (entry: {
+                yearMonth: string;
+                income: {
+                  flattenedFields: Record<string, { amount: number }>;
+                };
+              }) => ({
+                yearMonth: entry.yearMonth,
+                income: {
+                  flattenedFields: Object.fromEntries(
+                    Object.entries(entry.income.flattenedFields)
+                      .filter(
+                        ([, value]) =>
+                          value &&
+                          typeof value === "object" &&
+                          "amount" in value
+                      )
+                      .map(([key, value]) => [
+                        key,
+                        { amount: value?.amount ?? 0 },
+                      ])
+                  ),
+                },
+              })
+            )
+          )
+        );
+
+        setOutflows(
+          transformOutflows(
+            response.data.data.reports.profitAndLost.map(
+              (entry: {
+                yearMonth: string;
+                expense: {
+                  flattenedFields: Record<string, { amount: number }>;
+                };
+              }) => ({
+                yearMonth: entry.yearMonth,
+                expense: {
+                  flattenedFields: Object.fromEntries(
+                    Object.entries(entry.expense.flattenedFields)
+                      .filter(
+                        ([, value]) =>
+                          value &&
+                          typeof value === "object" &&
+                          "amount" in value
+                      )
+                      .map(([key, value]) => [
+                        key,
+                        { amount: value?.amount ?? 0 },
+                      ])
+                  ),
+                },
+              })
+            )
+          )
+        );
+        const allAttachments: Attachment[] =
+          response.data.data.rawData.taggedTransactions.flatMap(
+            (txn: TaggedTransaction) => txn.attachments
+          );
+        const allNotes: Note[] =
+          response.data.data.rawData.taggedTransactions.flatMap(
+            (txn: TaggedTransaction) => txn.notes
+          );
+        setAttachments(allAttachments);
+        setNotes(allNotes);
+      } catch (err) {
+        console.error("Error loading data ", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadBFMData();
+  }, []);
+
   return (
     <DataContext.Provider
       value={{
         rawData,
+        setRawData,
         reports,
+        setReports,
         metrics,
+        setMetrics,
         notifications,
+        setNotifications,
+        attachments,
+        setAttachments,
+        notes,
+        setNotes,
         transactions,
         accounts,
         deposits,
@@ -465,6 +588,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setFinalTotal,
         invoicesSummary,
         setInvoicesSummary,
+        loading,
       }}>
       {children}
     </DataContext.Provider>

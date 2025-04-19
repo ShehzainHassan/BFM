@@ -12,6 +12,7 @@ import {
   formatCurrency,
   formatDate,
   formatLastUpdated,
+  formatString,
   getFileExtension,
 } from "@/utils";
 import axios from "axios";
@@ -25,6 +26,7 @@ import {
 } from "../../../../Interfaces";
 import NavButton from "../Button/Primary/NavButton";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
+import { useData } from "@/DataContext";
 
 const StatsContainer = styled("div")`
   border-radius: 12px;
@@ -163,42 +165,37 @@ const ButtonContainer = styled("div")`
 `;
 export default function TransactionDetails({
   selectedRow,
-  primaryDetail = "CR TO 022-170458-*** N32823454***(28MAR24)",
-  primaryType = "General Payment",
   noteTitle = "Notes",
   selected = "Details",
 }: TransactionDetailsProps<any>) {
+  const { attachments, setAttachments, notes, setNotes } = useData();
   const [selectedTab, setSelectedTab] = useState(selected);
-
+  const [selectedTransactionAttachments, setSelectedTransactionAttachments] =
+    useState<Attachment[]>([]);
   const [isEditingNotes, setIsEditingNotes] = useState(false);
   const [isAddingNotes, setIsAddingNotes] = useState(false);
   const [noteDetails, setNoteDetails] = useState<Note>();
-  const [allAttachments, setAllAttachments] = useState<Attachment[]>();
   const [editText, setEditText] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const getNoteDetails = async () => {
-    const response = await axios.get(
-      `https://api.dev.pca.planto.io/v1/businessFinancialManagement/note/${selectedRow.id}`
+  const getNoteDetails = () => {
+    const selectedNote = notes.find(
+      (note) => note.transactionId === selectedRow.id
     );
-    if (!response.data.data) {
+    if (!selectedNote) {
       setIsEditingNotes(true);
+      setIsAddingNotes(false);
     }
-    setNoteDetails(response.data.data);
+    setNoteDetails(selectedNote);
   };
-  const getAttachmentsDetails = async () => {
-    try {
-      await axios
-        .get(
-          `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${selectedRow.id}`
-        )
-        .then((response) => setAllAttachments(response.data.data));
-    } catch (err) {
-      console.error("Error fetching attachment details ", err);
-    }
+  const getAttachments = () => {
+    const selectedAttachments = attachments.filter(
+      (attachment) => attachment.txnId === selectedRow.id
+    );
+    setSelectedTransactionAttachments(selectedAttachments);
   };
   useEffect(() => {
     getNoteDetails();
-    getAttachmentsDetails();
+    getAttachments();
   }, [selectedRow]);
 
   const getStyledValues = (label: string, values: string[]) => {
@@ -246,11 +243,11 @@ export default function TransactionDetails({
       ],
     },
   ];
-  const formatFileSize = (fileSize: number) => {
-    if (fileSize < 1024) return `${fileSize} B`;
-    if (fileSize < 1024 * 1024) return `${(fileSize / 1024).toFixed(2)} KB`;
-    return `${(fileSize / (1024 * 1024)).toFixed(2)} MB`;
-  };
+  // const formatFileSize = (fileSize: number) => {
+  //   if (fileSize < 1024) return `${fileSize} B`;
+  //   if (fileSize < 1024 * 1024) return `${(fileSize / 1024).toFixed(2)} KB`;
+  //   return `${(fileSize / (1024 * 1024)).toFixed(2)} MB`;
+  // };
 
   const uploadFile = async (file: File) => {
     if (!file) return;
@@ -260,19 +257,30 @@ export default function TransactionDetails({
       "data",
       new Blob([JSON.stringify(selectedRow.id)], { type: "application/json" })
     );
-
     try {
-      await axios
-        .post(
-          "https://api.dev.pca.planto.io/v1/businessFinancialManagement/upload",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        )
-        .then(() => getAttachmentsDetails());
+      const response = await axios.post(
+        "https://api.dev.pca.planto.io/v1/businessFinancialManagement/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const newAttachment: Attachment = {
+        id: response.data.data.id,
+        txnId: response.data.data.txnId,
+        file: response.data.data.content,
+        fileName: response.data.data.fileName,
+        mimeType: response.data.data.mimeType,
+        createdDate: response.data.data.createdDate,
+        lastModifiedDate: response.data.data.lastModifiedDate,
+      };
+
+      const updatedAttachments = [...attachments];
+      updatedAttachments.push(newAttachment);
+      setAttachments(updatedAttachments);
+      getAttachments();
     } catch (error) {
       console.error("File upload failed:", error);
     }
@@ -292,9 +300,8 @@ export default function TransactionDetails({
     const file = event.dataTransfer.files?.[0];
     if (file) uploadFile(file);
   };
-
   const removeAttachment = async (index: number) => {
-    const updatedAttachments = allAttachments?.filter(
+    const updatedAttachments = attachments?.filter(
       (attachment) => attachment.id != index
     );
     try {
@@ -302,12 +309,11 @@ export default function TransactionDetails({
         .delete(
           `https://api.dev.pca.planto.io/v1/businessFinancialManagement/delete-attachment/${index}`
         )
-        .then(() => setAllAttachments(updatedAttachments));
+        .then(() => setAttachments(updatedAttachments));
     } catch (err) {
       console.error("Error deleting attachment ", err);
     }
   };
-
   const openFile = (attachment: any) => {
     if (!attachment?.content || !attachment?.mimeType) return;
 
@@ -327,32 +333,46 @@ export default function TransactionDetails({
     link.click();
     document.body.removeChild(link);
   };
-  const saveNote = async () => {
+  const handleEditNote = () => {
+    setIsEditingNotes(true);
+    setIsAddingNotes(true);
+  };
+  const handleCancelNote = () => {
+    if (!noteDetails) {
+      setIsEditingNotes(true);
+      setIsAddingNotes(false);
+    } else {
+      setIsEditingNotes(false);
+      setEditText("");
+    }
+  };
+  const handleSaveNote = async () => {
     try {
-      await axios.post(
+      const response = await axios.post(
         "https://api.dev.pca.planto.io/v1/businessFinancialManagement/add-note",
         {
           transactionId: selectedRow.id,
           note: editText,
         }
       );
-      setNoteDetails((prev) => {
-        if (!prev) return undefined;
-        return { ...prev, note: editText };
-      });
+      const updatedNote: Note = {
+        note: response.data.data.note,
+        transactionId: response.data.data.transactionId,
+        createdDate: response.data.data.createdDate,
+        lastModifiedDate: response.data.data.lastModifiedDate,
+      };
+      setNoteDetails(updatedNote);
+      const allNotes = [...notes];
+      const filteredNotes = allNotes.filter(
+        (note) => note.transactionId !== updatedNote.transactionId
+      );
+      filteredNotes.push(updatedNote);
+      setNotes(filteredNotes);
+      setIsEditingNotes(false);
+      setIsAddingNotes(false);
     } catch (err) {
       console.error("Error saving note", err);
     }
-  };
-  const handleCancelNote = () => {
-    setIsEditingNotes(true);
-    setIsAddingNotes(false);
-    setEditText("");
-  };
-  const handleSaveNote = () => {
-    saveNote();
-    setIsEditingNotes(false);
-    setIsAddingNotes(false);
   };
 
   return (
@@ -368,8 +388,10 @@ export default function TransactionDetails({
             />
           </ImageContainer>
           <InfoContainer>
-            <H4 color={BFMPalette.black800}>{primaryDetail}</H4>
-            <BodyText>{primaryType}</BodyText>
+            <H4 color={BFMPalette.black800}>{selectedRow.description.title}</H4>
+            <BodyText>
+              {formatString(selectedRow.description.subtitle, true)}
+            </BodyText>
           </InfoContainer>
         </Descriptions>
         {/* <>
@@ -403,7 +425,7 @@ export default function TransactionDetails({
               $borderColor={BFMPalette.purple300}
               imagePosition="right"
               imageSrc="/images/edit.png"
-              onClick={() => setIsEditingNotes(true)}>
+              onClick={handleEditNote}>
               Edit
             </NavButton>
           </>
@@ -464,6 +486,7 @@ export default function TransactionDetails({
                 <NavButton
                   $bgColor={BFMPalette.purple500}
                   $textColor={BFMPalette.white}
+                  $isDisabled={editText.trim() === ""}
                   onClick={handleSaveNote}>
                   Save Notes
                 </NavButton>
@@ -522,50 +545,51 @@ export default function TransactionDetails({
               onChange={handleFileChange}
             />
           </FileUploadContainer>
-          {allAttachments && allAttachments.length > 0 && (
-            <SelectedFilesContainer>
-              {allAttachments.map((attachment, index) => (
-                <StatsContainer key={index}>
-                  <Descriptions>
-                    <Image
-                      src="/images/file.png"
-                      alt="file"
-                      width={32}
-                      height={40}
-                    />
-                    <FileTypeWrap
-                      $fileExtension={getFileExtension(attachment.fileName)}>
-                      <SmallHeading color={BFMPalette.white}>
-                        {getFileExtension(attachment.fileName)}
-                      </SmallHeading>
-                    </FileTypeWrap>
-                    <InfoContainer>
-                      <H4
-                        $cursor="pointer"
-                        $hoverColor={BFMPalette.purple375}
-                        $hoverUnderline={true}
-                        $transitionEffect="color 0.3s ease-in out"
-                        color={BFMPalette.black400}
-                        onClick={() => openFile(attachment)}>
-                        {attachment.fileName}
-                      </H4>
-                      <BodyText>{formatFileSize(attachment.fileSize)}</BodyText>
-                    </InfoContainer>
-                  </Descriptions>
-                  <>
-                    <Image
-                      src="/images/trash.png"
-                      alt="delete"
-                      width={16}
-                      height={16}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => removeAttachment(attachment.id)}
-                    />
-                  </>
-                </StatsContainer>
-              ))}
-            </SelectedFilesContainer>
-          )}
+          {selectedTransactionAttachments &&
+            selectedTransactionAttachments.length > 0 && (
+              <SelectedFilesContainer>
+                {selectedTransactionAttachments.map((attachment, index) => (
+                  <StatsContainer key={index}>
+                    <Descriptions>
+                      <Image
+                        src="/images/file.png"
+                        alt="file"
+                        width={32}
+                        height={40}
+                      />
+                      <FileTypeWrap
+                        $fileExtension={getFileExtension(attachment.fileName)}>
+                        <SmallHeading color={BFMPalette.white}>
+                          {getFileExtension(attachment.fileName)}
+                        </SmallHeading>
+                      </FileTypeWrap>
+                      <InfoContainer>
+                        <H4
+                          $cursor="pointer"
+                          $hoverColor={BFMPalette.purple375}
+                          $hoverUnderline={true}
+                          $transitionEffect="color 0.3s ease-in out"
+                          color={BFMPalette.black400}
+                          onClick={() => openFile(attachment)}>
+                          {attachment.fileName}
+                        </H4>
+                        {/* <BodyText>{formatFileSize(attachment.fileSize)}</BodyText> */}
+                      </InfoContainer>
+                    </Descriptions>
+                    <>
+                      <Image
+                        src="/images/trash.png"
+                        alt="delete"
+                        width={16}
+                        height={16}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => removeAttachment(attachment.id)}
+                      />
+                    </>
+                  </StatsContainer>
+                ))}
+              </SelectedFilesContainer>
+            )}
         </>
       )}
     </Container>

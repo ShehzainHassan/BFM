@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { Header } from "@/Typography";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import Modal from "react-modal";
 import styled, { css, keyframes } from "styled-components";
 import { DetailsModalProps } from "../../../../Interfaces";
@@ -81,22 +81,20 @@ export default function DetailsModal({
   marginTop = "0px",
   $position = "middle",
 }: DetailsModalProps) {
-  useEffect(() => {
-    if (modalIsOpen) {
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.width = "100%";
-    } else {
-      document.body.style.overflow = "auto";
-      document.body.style.position = "unset";
-      document.body.style.width = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [modalIsOpen]);
-
+  // useEffect(() => {
+  //   if (modalIsOpen) {
+  //     document.body.style.overflow = "hidden";
+  //     document.body.style.position = "fixed";
+  //     document.body.style.width = "100%";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //     document.body.style.position = "unset";
+  //     document.body.style.width = "unset";
+  //   }
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //   };
+  // }, [modalIsOpen]);
   const modalPositionStyles = {
     left: {
       left: "20px",

@@ -73,7 +73,7 @@ export default function Notifications({ notifications }: NotificationsProps) {
               return (
                 <Card
                   key={notification.id}
-                  image="/images/Frame 3.png"
+                  image="/images/tick.png"
                   title={notification.title}
                   description={notification.description}>
                   <DueDate payload={notification.payload as DueDatePayload} />
@@ -87,7 +87,7 @@ export default function Notifications({ notifications }: NotificationsProps) {
               return (
                 <Card
                   key={notification.id}
-                  image="/images/Frame 3.png"
+                  image="/images/tick.png"
                   title={notification.title}
                   description={notification.description}>
                   <ButtonContainer>

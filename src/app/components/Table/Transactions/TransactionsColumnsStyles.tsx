@@ -1,15 +1,14 @@
 "use client";
 import { HKD_EQUIVALANT } from "@/constants";
+import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, H4 } from "@/Typography";
 import { formatCurrency, formatDate, formatString } from "@/utils";
-import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Transaction } from "../../../../../Interfaces";
-import DetailsModal from "../../Modal/Modal";
-import TransactionDetails from "../../TransactionDetails/TransactionDetails";
+import TransactionDetailsModal from "../../Modal/TransactionModal/TransactionModal";
 import { AmountText } from "../Accounts/AccountsStyles";
 
 const DescriptionWrapper = styled.div`
@@ -41,28 +40,25 @@ export const DetailsIcon = styled(Image)`
   cursor: pointer;
 `;
 const TransactionActions = ({ row }: { row: Transaction }) => {
-  const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState("Details");
   const [hasAttachments, setHasAttachments] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
+  const { attachments } = useData();
   useEffect(() => {
-    const checkAttachments = async () => {
-      const response = await axios.get(
-        `https://api.dev.pca.planto.io/v1/businessFinancialManagement/attachments/${row.id}`
+    const checkAttachments = () => {
+      setHasAttachments(
+        attachments.some((attachment) => attachment.txnId === row.id)
       );
-      if (response.data.data.length > 0) {
-        setHasAttachments(true);
-      } else {
-        setHasAttachments(false);
-      }
     };
 
     checkAttachments();
   }, [row.id]);
-
   const handleOpenModal = (type: string) => {
     setSelected(type);
-    setOpenModal(true);
+    setSelectedTransaction(row);
   };
+
   return (
     <ActionContainer>
       {hasAttachments && (
@@ -82,14 +78,11 @@ const TransactionActions = ({ row }: { row: Transaction }) => {
         height={32}
         onClick={() => handleOpenModal("Details")}
       />
-
-      <DetailsModal
-        $position="right"
-        headerText="Transaction Details"
-        modalIsOpen={openModal}
-        closeModal={() => setOpenModal(false)}>
-        <TransactionDetails selected={selected} selectedRow={row} />
-      </DetailsModal>
+      <TransactionDetailsModal
+        selected={selected}
+        selectedTransaction={selectedTransaction}
+        onClose={() => setSelectedTransaction(null)}
+      />
     </ActionContainer>
   );
 };

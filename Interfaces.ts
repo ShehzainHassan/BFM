@@ -1,11 +1,18 @@
-import { MOCK_DATA } from "@/mockdata";
 import { ColumnDef } from "@tanstack/react-table";
 
 export interface DataContextType {
-  rawData: typeof MOCK_DATA.data.rawData;
-  reports: typeof MOCK_DATA.data.reports;
-  metrics: typeof MOCK_DATA.data.metrics;
-  notifications: typeof MOCK_DATA.data.notifications;
+  rawData: RawData | null;
+  setRawData: (data: RawData) => void;
+  reports: Reports | null;
+  setReports: (data: Reports) => void;
+  metrics: Metrics | null;
+  setMetrics: (data: Metrics) => void;
+  notifications: Notifications | null;
+  setNotifications: (data: Notifications) => void;
+  attachments: Attachment[];
+  setAttachments: (data: Attachment[]) => void;
+  notes: Note[];
+  setNotes: (data: Note[]) => void;
   transactions: Transaction[];
   accounts: AccountData[];
   deposits: BuyerSupplierAnalysis[];
@@ -60,6 +67,80 @@ export interface DataContextType {
   setFinalTotal: (value: string) => void;
   invoicesSummary: InvoiceSummary[];
   setInvoicesSummary: (value: InvoiceSummary[]) => void;
+  loading: boolean;
+}
+export interface TaggedTransaction {
+  transactionId: string;
+  transactionDate: string;
+  accountName: string;
+  accountType: string | null;
+  description: string;
+  currency: string;
+  amount: number;
+  balance: number;
+  merchant: string;
+  category: string;
+  bank: string;
+  probability: string;
+  predictedName: string;
+  consentId: string;
+  accountId: string | null;
+  bankId: string | null;
+  localCurrencyAmount: number;
+  localCurrencyBalance: number;
+  attachments: Attachment[];
+  notes: Note[];
+}
+export interface ParsedAccount {
+  consentId: string;
+  bankId: string;
+  accountId: string | null;
+  accountName: string;
+  accountType: string;
+  currency: string;
+  balance: number;
+  localCurrencyBalance: number;
+  bank: string;
+}
+export interface RawData {
+  taggedTransactions: TaggedTransaction[];
+  parsedAccounts: ParsedAccount[];
+}
+export interface MetricValue {
+  amount: number;
+  type: string;
+}
+
+export interface AmountType {
+  amount: number;
+  type: string;
+}
+
+export interface CashFlowHistoryItem {
+  yearMonth: string;
+  totalDeposit: AmountType;
+  totalWithdrawal: AmountType;
+  net: AmountType;
+}
+
+export interface CashFlow {
+  history: CashFlowHistoryItem[];
+  forecast: CashFlowHistoryItem[];
+}
+
+export interface Metrics {
+  name: string;
+  unit: string;
+  value: MetricValue;
+}
+
+export interface IncomeRelationshipBreakdown {
+  predictedName: string;
+  daysBetweenTransactions: number;
+  txnCounts: number;
+  totalAmount: number;
+  averageAmount: number;
+  transactions: ParsedTransaction[];
 }
 export interface BankDetails {
   bankName: string;
@@ -104,6 +185,9 @@ export interface ParsedDeposit {
   txnCounts: number;
   totalAmount: number;
   averageAmount: number;
+}
+export interface IrregularReport {
+  transactions: ParsedTransitionHighlight[];
 }
 export interface ParsedTransitionHighlight {
   transactionDate: string;
@@ -171,6 +255,7 @@ export interface CardProps {
   image: string;
   title: string;
   description?: string;
+  expandable?: boolean;
   children?: React.ReactNode;
 }
 export interface AggregatedItem {
@@ -194,7 +279,7 @@ export interface ESGSummary {
     totalCo2Amount: number;
     totalAmount: number;
     esgTransactions: {
-      yearMonth: number[];
+      yearMonth: [number, number];
       category: string;
       co2Amount: number;
       amount: number;
@@ -202,6 +287,21 @@ export interface ESGSummary {
   };
 }
 export interface Reports {
+  cashFlow: CashFlow;
+  incomeRelationshipBreakdown: ParsedDeposit[];
+  expenseRelationshipBreakdown: ParsedDeposit[];
+  profitAndLost: ProfitAndLoss[];
+  dailyBankBalanceDtos: DailyBankBalance[];
+  incomeByCategory: IncomeExpenseCategory;
+  expenseByCategory: IncomeExpenseCategory;
+  incomeIrregularReport: IrregularReport;
+  expenseIrregularReport: IrregularReport;
+  incomeRecurringTransactions: [];
+  expenseRecurringTransactions: ParsedRecurringTransaction[];
+  overviewReport: OverviewReport;
+  esgSummary: ESGSummary;
+}
+export interface IncomeExpenseCategory {
   [key: string]: {
     id: string;
     amount: number;
@@ -244,8 +344,6 @@ export interface InvoiceChartProps {
 
 export interface TransactionDetailsProps<T = {}> {
   selectedRow: T;
-  primaryDetail?: string;
-  primaryType?: string;
   noteTitle?: string;
   noteContent?: string;
   lastUpdated?: string;
@@ -266,27 +364,29 @@ export interface StoredData {
 export interface Note {
   transactionId: string;
   note: string;
-  createdDate: string;
-  lastModifiedDate: string;
+  createdDate: number[];
+  lastModifiedDate: number[];
 }
 export interface Attachment {
   id: number;
   txnId: string;
+  file: string;
   fileName: string;
   mimeType: string;
-  fileSize: number;
-  createdDate: string;
-  lastModifiedData: string;
+  createdDate: number[];
+  lastModifiedDate: number[];
 }
 export interface PieData {
   month: string;
   name: string;
   value: number;
+  amount?: number;
+  color?: string;
 }
 export interface CheckboxProps {
   label?: string;
   checked: boolean;
-  setChecked: (e: any) => void;
+  setChecked: (e: boolean) => void;
 }
 export interface DueDatePayload {
   dueDate: string;
@@ -307,19 +407,20 @@ export interface ESGCardProps {
   value?: number;
   kg?: number;
   circleColor?: string;
+  amount?: number;
 }
 export interface payload {
   text: string;
   value: string;
 }
 export interface ESGNotificationsProps {
-  imgSrc?: string;
+  type?: string;
   title?: string;
-  data?: payload;
 }
 export interface HorizontalTabProps {
   tabs: string[];
   selectedTab: string;
+  width?: string;
   tabType?: "button" | "tab";
   onTabChange: (tab: string) => void;
 }
@@ -563,4 +664,100 @@ export interface TransactionCardProps<T> {
 }
 export interface AccountCardProps<T> {
   data: AccountData;
+}
+
+export type NotificationType =
+  | "CompareSpend"
+  | "InvoiceDueSoon"
+  | "Link"
+  | string;
+
+export interface DateArray extends Array<number> {}
+
+export interface CompareSpendPayload {
+  current: {
+    month: string;
+    value: number;
+    currency: string;
+  };
+  previous: {
+    month: string;
+    value: number;
+    currency: string;
+  };
+}
+
+export interface InvoiceDueSoonPayload {
+  dueDate: string;
+}
+
+export interface LinkPayload {
+  linkLabel: string;
+  linkUrl: string;
+}
+
+export interface NotificationItem {
+  id: number;
+  title: string;
+  description?: string;
+  type: NotificationType;
+  payload: CompareSpendPayload | InvoiceDueSoonPayload | LinkPayload | object;
+  createdDate: DateArray;
+}
+
+export interface ESGTask {
+  title: string;
+  description: string;
+}
+
+export interface ESGNotification {
+  createdDate: DateArray | null;
+  type: string;
+  title: string;
+  description: string;
+  didYouKnow: string;
+  tasks: ESGTask[];
+}
+
+export interface Notifications {
+  notifications: NotificationItem[];
+  esgNotifications: ESGNotification[];
+}
+
+export interface MonthYearData {
+  monthYear: string;
+  value: number;
+}
+
+export interface OverviewReport {
+  totalInflow: number;
+  totalOutflow: number;
+  currentBalance: number;
+  inflowPercentageMoM: number;
+  outflowPercentageMoM: number;
+  netFlowPercentageMoM: number;
+}
+
+export interface DailyBankBalance {
+  date: string;
+  balance: number;
+}
+
+export interface FlattenedField {
+  amount: number;
+  type: "REGULAR" | "TOTAL";
+}
+
+export interface ProfitAndLoss {
+  yearMonth: string;
+  income: {
+    flattenedFields: {
+      [key: string]: FlattenedField | null;
+    };
+  };
+  expense: {
+    flattenedFields: {
+      [key: string]: FlattenedField;
+    };
+  };
 }

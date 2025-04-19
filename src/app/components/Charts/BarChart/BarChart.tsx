@@ -13,11 +13,18 @@ import {
 } from "recharts";
 import styled from "styled-components";
 import {
+  ButtonContainer,
   CustomTooltipContainer,
   CustomTooltipLabel,
   CustomTooltipValue,
+  MobileContainer,
+  ValueContainer,
 } from "../BalanceOverTime/BalanceTime";
 import { ChartProps, CustomLabelProps } from "../../../../../Interfaces";
+import useIsMobile from "@/useIsMobile";
+import Image from "next/image";
+import { H5, Header } from "@/Typography";
+import { useState } from "react";
 
 const LabelContainer = styled("div")`
   display: flex;
@@ -90,63 +97,125 @@ export default function BarGraph({
   barSize = 48,
   selectedBarColor,
 }: ChartProps) {
+  const isMobile = useIsMobile(768);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const handlePrev = () => setSelectedIndex((prev) => Math.max(prev - 1, 0));
+  const handleNext = () =>
+    setSelectedIndex((prev) => Math.min(prev + 1, data.length - 1));
+
+  const coloredData = data.map((entry, index) => ({
+    ...entry,
+    fill:
+      index === selectedIndex
+        ? selectedBarColor ?? BFMPalette.purple600
+        : `${BFMPalette.purple200}80`,
+  }));
+
+  const selectedData = data[selectedIndex];
   return (
-    <ResponsiveContainer width="100%" height={400}>
-      <BarChart
-        barSize={barSize}
-        data={data}
-        margin={{
-          top: 25,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}>
-        <CartesianGrid
-          stroke={BFMPalette.gray100}
-          strokeWidth={1.5}
-          strokeDasharray="0"
-          vertical={false}
-        />
-        <XAxis
-          dataKey="monthYear"
-          axisLine={false}
-          tickLine={false}
-          interval={0}
-          tick={
-            <CustomTick
-              x={0}
-              y={0}
-              payload={{
-                value: "",
-              }}
+    <>
+      {isMobile && data.length > 0 && (
+        <MobileContainer>
+          <ButtonContainer>
+            <Image
+              onClick={handlePrev}
+              src="/images/prev.png"
+              alt="prev"
+              width={10}
+              height={10}
             />
-          }
-        />
-        <YAxis
-          axisLine={false}
-          tickLine={false}
-          interval="preserveStartEnd"
-          tickCount={6}
-          tick={
-            <CustomTick
-              x={0}
-              y={0}
-              payload={{
-                value: "",
-              }}
+          </ButtonContainer>
+          <ValueContainer>
+            <H5 color={BFMPalette.black800}>
+              {selectedData.monthYear ?? "--"}
+            </H5>
+            <Header color={BFMPalette.black800}>
+              {selectedData.value?.toLocaleString() ?? "--"}
+            </Header>
+          </ValueContainer>
+
+          <ButtonContainer>
+            <Image
+              onClick={handleNext}
+              src="/images/next.png"
+              alt="next"
+              width={10}
+              height={10}
             />
-          }
-        />
-        <Tooltip content={<CustomTooltip />} />
-        <Bar
-          dataKey="value"
-          fill={color}
-          activeBar={
-            <Rectangle fill={selectedBarColor ?? BFMPalette.purple1000} />
-          }>
-          <LabelList dataKey="value" position="top" content={CustomLabel} />
-        </Bar>
-      </BarChart>
-    </ResponsiveContainer>
+          </ButtonContainer>
+        </MobileContainer>
+      )}
+      <ResponsiveContainer width="100%" height={400}>
+        <BarChart
+          barSize={barSize}
+          data={coloredData}
+          margin={{
+            top: 25,
+            right: isMobile ? 0 : 30,
+            left: isMobile ? -60 : 20,
+            bottom: 5,
+          }}>
+          <CartesianGrid
+            stroke={BFMPalette.gray100}
+            strokeWidth={1.5}
+            strokeDasharray="0"
+            vertical={false}
+          />
+          <XAxis
+            dataKey="monthYear"
+            axisLine={false}
+            tickLine={false}
+            interval={0}
+            tick={
+              <CustomTick
+                x={0}
+                y={0}
+                payload={{
+                  value: "",
+                }}
+              />
+            }
+          />
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            interval="preserveStartEnd"
+            tickCount={6}
+            tick={
+              !isMobile ? (
+                <CustomTick
+                  x={0}
+                  y={0}
+                  payload={{
+                    value: "",
+                  }}
+                />
+              ) : (
+                ({ x, y, payload }) => (
+                  <text
+                    x={0}
+                    y={y - 10}
+                    fontSize={12}
+                    fontWeight={500}
+                    fill={BFMPalette.black100}>
+                    {payload.value}
+                  </text>
+                )
+              )
+            }
+          />
+          {!isMobile && <Tooltip content={<CustomTooltip />} />}
+          <Bar
+            dataKey="value"
+            fill={color}
+            activeBar={
+              <Rectangle fill={selectedBarColor ?? BFMPalette.purple1000} />
+            }>
+            <LabelList dataKey="value" position="top" content={CustomLabel} />
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </>
   );
 }
