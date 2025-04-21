@@ -1,66 +1,17 @@
 import { BFMPalette } from "@/Theme";
 import { Header } from "@/Typography";
 import Image from "next/image";
-import React from "react";
 import Modal from "react-modal";
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 import { DetailsModalProps } from "../../../../Interfaces";
 
-const slideFromRight = keyframes`
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
 
-const slideFromLeft = keyframes`
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
-
-const slideFromBottom = keyframes`
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
-const getAnimation = (position: string) => {
-  switch (position) {
-    case "right":
-      return slideFromRight;
-    case "left":
-      return slideFromLeft;
-    case "middle":
-      return slideFromBottom;
-    default:
-      return slideFromBottom;
-  }
-};
 
 const ContentContainer = styled.div<{ position: string }>`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  animation: ${({ position }) =>
-    css`
-      ${getAnimation(position)} 0.4s ease-out
-    `};
 `;
 
 const HeaderContainer = styled.div`

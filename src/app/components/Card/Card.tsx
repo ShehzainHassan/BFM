@@ -3,8 +3,9 @@ import { Description, H3Primary } from "@/Typography";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
-import { CardProps } from "../../../../Interfaces";
+import { CardProps, ESGNotification } from "../../../../Interfaces";
 import ESGModal from "../Modal/ESGModal/ESGModal";
+import { useData } from "@/DataContext";
 
 const MainContainer = styled("div")`
   display: flex;
@@ -55,6 +56,14 @@ export default function Card({
   children,
 }: CardProps) {
   const [showModal, setShowModal] = useState(false);
+  const {notifications, selectedESGNotification, setSelectedESGNotification} = useData();
+
+  const handleExpand = () => {
+    const esgNotifs = notifications?.esgNotifications;
+    const selectedNotif: ESGNotification | null = esgNotifs?.find(notification => notification.title === title) as ESGNotification;
+      setSelectedESGNotification(selectedNotif);
+    setShowModal(true)
+  }
   return (
     <MainContainer>
       <Container>
@@ -74,13 +83,13 @@ export default function Card({
             width={24}
             height={24}
             style={{ cursor: "pointer" }}
-            onClick={() => setShowModal(true)}
+            onClick={handleExpand}
           />
         )}
       </Container>
 
       {children}
-      {showModal && <ESGModal />}
+      {showModal && <ESGModal closeModal={()=>setShowModal(false)} notification={selectedESGNotification}  />}
     </MainContainer>
   );
 }

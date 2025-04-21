@@ -45,6 +45,7 @@ export const BFMPalette = {
 
   green0: "#ecfdf3",
   green50: "#DCFAE6",
+  green90: "#F6FEF9",
   green100: "#ABEFC6",
   green400: "#75E0A7",
   green500: "#1ac192",

@@ -6,14 +6,12 @@ import { AccountCardProps, AccountData } from "../../../../../Interfaces";
 import {
   Amount,
   AmountContainer,
-  Button,
   Card,
   Container,
   Description_BtnContainer,
   DescriptionContainer,
-  MainContainer,
+  MainContainer
 } from "../TransactionCard/TransactionCard";
-import styled from "styled-components";
 
 export default function AccountCard({ data }: AccountCardProps<AccountData>) {
   return (

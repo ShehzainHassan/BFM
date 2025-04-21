@@ -1,11 +1,11 @@
 :root {
-  --background: #ffffff;
+  --background: #e9eaeb;
   --foreground: #000000;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background: #ededed;
+    --background: #e9eaeb;
     --foreground: #0a0a0a;
   }
 }
@@ -33,16 +33,6 @@ body {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-  html {
-    color-scheme: dark;
-  }
 }
 
 :where(.css-dev-only-do-not-override-tjsggz).ant-select-multiple

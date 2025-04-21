@@ -16,6 +16,7 @@ import {
   BuyerSupplierAnalysis,
   CashFlowData,
   DataContextType,
+  ESGNotification,
   Inflows,
   InvoiceSummary,
   Item,
@@ -77,6 +78,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [subTotal, setSubTotal] = useState("");
   const [finalTotal, setFinalTotal] = useState("");
   const [hasPaymentChecked, setHasPaymentChecked] = useState(false);
+  const [selectedESGNotification, setSelectedESGNotification] = useState<ESGNotification | null>(null)
   const transformClientName = (clientName: string): string => {
     return t(`invoice_creation.dropdown.options.${clientName}`) || "";
   };
@@ -589,6 +591,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         invoicesSummary,
         setInvoicesSummary,
         loading,
+        selectedESGNotification,
+        setSelectedESGNotification,
       }}>
       {children}
     </DataContext.Provider>

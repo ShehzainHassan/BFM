@@ -68,6 +68,8 @@ export interface DataContextType {
   invoicesSummary: InvoiceSummary[];
   setInvoicesSummary: (value: InvoiceSummary[]) => void;
   loading: boolean;
+  selectedESGNotification: ESGNotification | null,
+  setSelectedESGNotification: (notification: ESGNotification) =>void
 }
 export interface TaggedTransaction {
   transactionId: string;
