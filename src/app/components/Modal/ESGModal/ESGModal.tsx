@@ -12,6 +12,7 @@ import styled from "styled-components";
 import HorizontalTabs from "../../HorizontalTabs/HorizontalTabs";
 import DetailsModal from "../Modal";
 import { ESGNotification } from "../../../../../Interfaces";
+import useIsMobile from "@/useIsMobile";
 
 type ESGModalProps = {
   closeModal: () => void;
@@ -124,11 +125,12 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
     default:
       bannerSrc = "/images/cars.png";
   }
-
+  const isMobile = useIsMobile(768);
   return (
     <DetailsModal
-      width="600px"
-      height="828px"
+      width={!isMobile ? "600px" : "100%"}
+      height={!isMobile ? "828px" : "100vh"}
+      marginTop={isMobile ? "40px" : "0"}
       headerText="Switch your fleet to electric vehicles"
       modalIsOpen={true}
       closeModal={closeModal}
@@ -145,7 +147,13 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
       <ModalContent>
         {selectedTab === tabs[0] ? (
           <OverviewContent>
-            <Image src={bannerSrc} alt="banner" width={560} height={200} />
+            <Image
+              src={bannerSrc}
+              alt="banner"
+              layout="responsive"
+              width={560}
+              height={200}
+            />
             <TitleContainer>
               <TextTitle color={BFMPalette.black800}>
                 {notification?.title || ""}
@@ -222,8 +230,7 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
                       {taskLink}
                     </URL>
                   )}
-                  {index !== notification.tasks.length - 1 &&
-                  <Line />}
+                  {index !== notification.tasks.length - 1 && <Line />}
                 </TaskContainer>
               );
             })}

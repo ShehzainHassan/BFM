@@ -1,6 +1,5 @@
 import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
-import useTranslation from "@/translations";
 import { BodyText, H5 } from "@/Typography";
 import { formatDate, parseInvoices, updateInvoiceStatus } from "@/utils";
 import { useState } from "react";
@@ -60,7 +59,8 @@ const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
           width="400px"
           height="375px"
           modalIsOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}>
+          closeModal={() => setIsModalOpen(false)}
+        >
           <SavedModalContent invoiceNo={row.invoiceNo} />
         </DetailsModal>
       )}
