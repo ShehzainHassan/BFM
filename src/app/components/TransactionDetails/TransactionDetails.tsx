@@ -167,28 +167,32 @@ export default function TransactionDetails({
   selectedRow,
   noteTitle = "Notes",
   selected = "Details",
-}: TransactionDetailsProps<any>) {
+}: TransactionDetailsProps<{
+  id: string;
+  description: { title: string; subtitle: string };
+  date: string;
+  bank: string;
+  account: string;
+  amount: { currency: string; value: number; HKDEquivalent: number };
+}>) {
   const { attachments, setAttachments, notes, setNotes } = useData();
   const [selectedTab, setSelectedTab] = useState(selected);
-  const [selectedTransactionAttachments, setSelectedTransactionAttachments] =
-    useState<Attachment[]>([]);
+  const [selectedTransactionAttachments, setSelectedTransactionAttachments] = useState<Attachment[]>([]);
   const [isEditingNotes, setIsEditingNotes] = useState(false);
   const [isAddingNotes, setIsAddingNotes] = useState(false);
   const [noteDetails, setNoteDetails] = useState<Note>();
   const [editText, setEditText] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const getNoteDetails = () => {
-    const selectedNote = notes.find(
-      (note) => note.transactionId === selectedRow.id
-    );
+    const selectedNote = notes.find((note) => note.transactionId === selectedRow.id);
     if (!selectedNote) {
       setIsEditingNotes(true);
       setIsAddingNotes(false);
     }
     setNoteDetails(selectedNote);
   };
-  const getAttachments = () => {
-    const selectedAttachments = attachments.filter(
+  const getAttachments = (currentAttachments = attachments) => {
+    const selectedAttachments = currentAttachments.filter(
       (attachment) => attachment.txnId === selectedRow.id
     );
     setSelectedTransactionAttachments(selectedAttachments);
@@ -243,11 +247,12 @@ export default function TransactionDetails({
       ],
     },
   ];
-  // const formatFileSize = (fileSize: number) => {
-  //   if (fileSize < 1024) return `${fileSize} B`;
-  //   if (fileSize < 1024 * 1024) return `${(fileSize / 1024).toFixed(2)} KB`;
-  //   return `${(fileSize / (1024 * 1024)).toFixed(2)} MB`;
-  // };
+  const formatFileSize = (fileContent: string) => {
+    const sizeInBytes =
+      4 * Math.ceil(fileContent.length / 3) * 0.5624896334383812;
+    const sizeInKb = sizeInBytes / 1024;
+    return `${sizeInKb.toFixed(2)} KB`;
+  };
 
   const uploadFile = async (file: File) => {
     if (!file) return;
@@ -280,7 +285,7 @@ export default function TransactionDetails({
       const updatedAttachments = [...attachments];
       updatedAttachments.push(newAttachment);
       setAttachments(updatedAttachments);
-      getAttachments();
+      getAttachments(updatedAttachments);
     } catch (error) {
       console.error("File upload failed:", error);
     }
@@ -309,15 +314,16 @@ export default function TransactionDetails({
         .delete(
           `https://api.dev.pca.planto.io/v1/businessFinancialManagement/delete-attachment/${index}`
         )
-        .then(() => setAttachments(updatedAttachments));
+        .then(() => setAttachments(updatedAttachments))
+        .then(() => getAttachments(updatedAttachments));
     } catch (err) {
       console.error("Error deleting attachment ", err);
     }
   };
-  const openFile = (attachment: any) => {
-    if (!attachment?.content || !attachment?.mimeType) return;
+  const openFile = (attachment: Attachment) => {
+    if (!attachment?.file || !attachment?.mimeType) return;
 
-    const byteCharacters = atob(attachment.content);
+    const byteCharacters = atob(attachment.file);
     const byteNumbers = new Array(byteCharacters.length);
     for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
@@ -425,7 +431,8 @@ export default function TransactionDetails({
               $borderColor={BFMPalette.purple300}
               imagePosition="right"
               imageSrc="/images/edit.png"
-              onClick={handleEditNote}>
+              onClick={handleEditNote}
+            >
               Edit
             </NavButton>
           </>
@@ -452,7 +459,8 @@ export default function TransactionDetails({
                   $borderColor={BFMPalette.gray200}
                   $bgColor={BFMPalette.white}
                   $textColor={BFMPalette.black800}
-                  onClick={() => setIsAddingNotes(true)}>
+                  onClick={() => setIsAddingNotes(true)}
+                >
                   Add Notes
                 </NavButton>
               </FileTextContainer>
@@ -474,20 +482,23 @@ export default function TransactionDetails({
                   color: BFMPalette.black400,
                   outline: "none",
                   fontFamily: "Inter, Arial",
-                }}></textarea>
+                }}
+              ></textarea>
               <ButtonContainer>
                 <NavButton
                   $bgColor={BFMPalette.white}
                   $textColor={BFMPalette.black400}
                   $borderColor={BFMPalette.gray200}
-                  onClick={handleCancelNote}>
+                  onClick={handleCancelNote}
+                >
                   Cancel
                 </NavButton>
                 <NavButton
                   $bgColor={BFMPalette.purple500}
                   $textColor={BFMPalette.white}
                   $isDisabled={editText.trim() === ""}
-                  onClick={handleSaveNote}>
+                  onClick={handleSaveNote}
+                >
                   Save Notes
                 </NavButton>
               </ButtonContainer>
@@ -558,7 +569,8 @@ export default function TransactionDetails({
                         height={40}
                       />
                       <FileTypeWrap
-                        $fileExtension={getFileExtension(attachment.fileName)}>
+                        $fileExtension={getFileExtension(attachment.fileName)}
+                      >
                         <SmallHeading color={BFMPalette.white}>
                           {getFileExtension(attachment.fileName)}
                         </SmallHeading>
@@ -570,10 +582,11 @@ export default function TransactionDetails({
                           $hoverUnderline={true}
                           $transitionEffect="color 0.3s ease-in out"
                           color={BFMPalette.black400}
-                          onClick={() => openFile(attachment)}>
+                          onClick={() => openFile(attachment)}
+                        >
                           {attachment.fileName}
                         </H4>
-                        {/* <BodyText>{formatFileSize(attachment.fileSize)}</BodyText> */}
+                        <BodyText>{formatFileSize(attachment.file)}</BodyText>
                       </InfoContainer>
                     </Descriptions>
                     <>

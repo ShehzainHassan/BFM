@@ -68,7 +68,7 @@ export const MainContainer = styled("div")`
 function TransactionCard({
   data,
   onOpenDetails,
-}: TransactionCardProps<Transaction> & {
+}: TransactionCardProps & {
   onOpenDetails: (data: Transaction) => void;
 }) {
   return (

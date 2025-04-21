@@ -344,7 +344,7 @@ export interface InvoiceChartProps {
   invoiceData: Invoice[];
 }
 
-export interface TransactionDetailsProps<T = {}> {
+export interface TransactionDetailsProps<T = object> {
   selectedRow: T;
   noteTitle?: string;
   noteContent?: string;
@@ -401,7 +401,7 @@ export interface DueDateProps {
 export interface RowData {
   inflows: string;
   outflows: string;
-  [key: string]: any;
+  [key: string]: string | number | boolean | null | undefined;
 }
 
 export interface ESGCardProps {
@@ -488,7 +488,7 @@ export interface Notification {
   id: number;
   title: string;
   type: string;
-  payload: Record<string, any>;
+  payload: { [key: string]: string | number | boolean | null };
   description?: string;
 }
 export interface NotificationsProps {
@@ -527,7 +527,7 @@ export interface TableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
   searchQuery?: string;
-  searchColumns?: (keyof T)[];
+  searchColumns?: string[];
   title?: string;
   columnWidths?: string[];
   showHeader?: boolean;
@@ -661,10 +661,10 @@ export interface Item {
   qty: number;
 }
 
-export interface TransactionCardProps<T> {
+export interface TransactionCardProps {
   data: Transaction;
 }
-export interface AccountCardProps<T> {
+export interface AccountCardProps {
   data: AccountData;
 }
 

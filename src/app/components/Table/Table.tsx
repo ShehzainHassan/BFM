@@ -78,18 +78,29 @@ export default function DataTable<T>({
   columnWidths,
   showHeader = true,
 }: TableProps<T>) {
+  function getNestedValue<T>(obj: T, path: string): unknown {
+    return path.split(".").reduce<unknown>((acc, key) => {
+      if (typeof acc === "object" && acc !== null) {
+        return (acc as Record<string, unknown>)[key];
+      }
+      return undefined;
+    }, obj);
+  }
+  
   const filteredData = useMemo(() => {
     if (!searchQuery) return data;
+  
     return data.filter((row) =>
-      searchColumns.some((column) => {
-        const cellValue = row[column];
-        return cellValue
-          ? String(cellValue).toLowerCase().includes(searchQuery.toLowerCase())
-          : false;
+      (searchColumns || []).some((column) => {
+        const value = getNestedValue(row, column as string);
+        return (
+          typeof value === "string" &&
+          value.toLowerCase().includes(searchQuery.toLowerCase())
+        );
       })
     );
   }, [data, searchQuery, searchColumns]);
-
+  
   const table = useReactTable({
     data: filteredData,
     columns: useMemo(() => columns, [columns]),
