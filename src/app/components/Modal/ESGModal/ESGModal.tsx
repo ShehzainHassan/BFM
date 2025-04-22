@@ -6,13 +6,13 @@ import {
   MediumSpacedText,
   TextTitle,
 } from "@/Typography";
+import useIsMobile from "@/useIsMobile";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
+import { ESGNotification } from "../../../../../Interfaces";
 import HorizontalTabs from "../../HorizontalTabs/HorizontalTabs";
 import DetailsModal from "../Modal";
-import { ESGNotification } from "../../../../../Interfaces";
-import useIsMobile from "@/useIsMobile";
 
 type ESGModalProps = {
   closeModal: () => void;
@@ -133,8 +133,7 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
       marginTop={isMobile ? "40px" : "0"}
       headerText="Switch your fleet to electric vehicles"
       modalIsOpen={true}
-      closeModal={closeModal}
-    >
+      closeModal={closeModal}>
       <TabsContainer>
         <HorizontalTabs
           tabs={tabs}
@@ -167,8 +166,7 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
               {descriptionUrl && (
                 <UrlText
                   onClick={() => window.open(descriptionUrl, "_blank")}
-                  color={BFMPalette.black800}
-                >
+                  color={BFMPalette.black800}>
                   {descriptionUrl}
                 </UrlText>
               )}
@@ -192,8 +190,7 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
               {learnMoreUrl && (
                 <Button
                   onClick={() => window.open(learnMoreUrl, "_blank")}
-                  color={BFMPalette.purple600}
-                >
+                  color={BFMPalette.purple600}>
                   Learn more
                 </Button>
               )}
@@ -225,8 +222,7 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
                   {taskLink && (
                     <URL
                       onClick={() => window.open(taskLink, "_blank")}
-                      color={BFMPalette.black800}
-                    >
+                      color={BFMPalette.black800}>
                       {taskLink}
                     </URL>
                   )}

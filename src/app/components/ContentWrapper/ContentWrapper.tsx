@@ -12,21 +12,14 @@ const Wrapper = styled("div")`
   }
 `;
 import { ReactNode } from "react";
+import LoadingModal from "../Modal/LoadingModal/LoadingModal";
 
 interface ContentWrapperProps {
   children: ReactNode;
 }
 
-const Loading = styled("div")`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-  height: 100vh;
-`;
 export default function ContentWrapper({ children }: ContentWrapperProps) {
   const { loading } = useData();
-  if (loading) return <Loading>Loading...</Loading>;
+  if (loading) return <LoadingModal />;
   return <Wrapper>{children}</Wrapper>;
 }
