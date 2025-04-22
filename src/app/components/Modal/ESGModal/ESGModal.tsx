@@ -129,10 +129,11 @@ export default function ESGModal({ closeModal, notification }: ESGModalProps) {
   return (
     <DetailsModal
       width={!isMobile ? "600px" : "100%"}
-      height={!isMobile ? "828px" : "100vh"}
+      height={!isMobile ? "828px" : "auto"}
       marginTop={isMobile ? "40px" : "0"}
-      headerText="Switch your fleet to electric vehicles"
+      headerText={notification?.title}
       modalIsOpen={true}
+      $position="middle"
       closeModal={closeModal}>
       <TabsContainer>
         <HorizontalTabs

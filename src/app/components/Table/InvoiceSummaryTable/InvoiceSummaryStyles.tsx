@@ -59,8 +59,7 @@ const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
           width="400px"
           height="375px"
           modalIsOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
-        >
+          closeModal={() => setIsModalOpen(false)}>
           <SavedModalContent invoiceNo={row.invoiceNo} />
         </DetailsModal>
       )}

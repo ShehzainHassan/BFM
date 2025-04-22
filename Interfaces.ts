@@ -68,8 +68,8 @@ export interface DataContextType {
   invoicesSummary: InvoiceSummary[];
   setInvoicesSummary: (value: InvoiceSummary[]) => void;
   loading: boolean;
-  selectedESGNotification: ESGNotification | null,
-  setSelectedESGNotification: (notification: ESGNotification) =>void
+  selectedESGNotification: ESGNotification | null;
+  setSelectedESGNotification: (notification: ESGNotification) => void;
 }
 export interface TaggedTransaction {
   transactionId: string;
@@ -466,7 +466,7 @@ export interface DetailsModalProps {
   width?: string;
   height?: string;
   marginTop?: string;
-  $position?: "left" | "right" | "middle";
+  $position?: "right" | "middle";
 }
 
 export interface InvoiceTableProps {

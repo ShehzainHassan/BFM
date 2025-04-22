@@ -7,7 +7,7 @@ type TransactionModalProps = {
   onClose: () => void;
   marginTop?: string;
   width?: string;
-  position?: "right" | "left" | "middle";
+  position?: "right" | "middle";
   selected?: string;
 };
 

@@ -1,11 +1,10 @@
 import { BFMPalette } from "@/Theme";
 import { Header } from "@/Typography";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { DetailsModalProps } from "../../../../Interfaces";
-
-
 
 const ContentContainer = styled.div<{ position: string }>`
   width: 100%;
@@ -22,6 +21,48 @@ const HeaderContainer = styled.div`
   border-bottom: 1px solid ${BFMPalette.gray100};
 `;
 
+const slideInFromRight = keyframes`
+  from { right: -600px; opacity: 0; }
+  to { right: 20px; opacity: 1; }
+`;
+
+const slideOutToRight = keyframes`
+  from { right: 20px; opacity: 1; }
+  to { right: -600px; opacity: 0; }
+`;
+
+const slideInFromTop = keyframes`
+  from { top: 0; opacity: 0; }
+  to { top: 50%; opacity: 1; }
+`;
+
+const slideOutToTop = keyframes`
+  from { top: 50%; opacity: 1; }
+  to { top: 0px; opacity: 0; }
+`;
+
+const AnimatedModalContent = styled.div<{
+  $direction: "right" | "top";
+  $closing: boolean;
+}>`
+  position: fixed;
+  padding: 0px;
+  background-color: ${BFMPalette.white25};
+  border-radius: 12px;
+  border: none;
+  overflow: hidden;
+  z-index: 10;
+  outline: none;
+  animation: ${({ $direction, $closing }) => {
+      if ($direction === "top") {
+        return $closing ? slideOutToTop : slideInFromTop;
+      } else {
+        return $closing ? slideOutToRight : slideInFromRight;
+      }
+    }}
+    0.3s ease-out forwards;
+`;
+
 export default function DetailsModal({
   headerText = "Modal Header",
   modalIsOpen,
@@ -32,27 +73,30 @@ export default function DetailsModal({
   marginTop = "0px",
   $position = "middle",
 }: DetailsModalProps) {
-  // useEffect(() => {
-  //   if (modalIsOpen) {
-  //     document.body.style.overflow = "hidden";
-  //     document.body.style.position = "fixed";
-  //     document.body.style.width = "100%";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //     document.body.style.position = "unset";
-  //     document.body.style.width = "unset";
-  //   }
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //   };
-  // }, [modalIsOpen]);
+  const [internalOpen, setInternalOpen] = useState(modalIsOpen);
+  const [isClosing, setIsClosing] = useState(false);
+
+  useEffect(() => {
+    if (modalIsOpen) {
+      setInternalOpen(true);
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+    } else if (internalOpen) {
+      setIsClosing(true);
+      setTimeout(() => {
+        setInternalOpen(false);
+        setIsClosing(false);
+      }, 300);
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+      document.body.style.position = "unset";
+      document.body.style.width = "unset";
+    };
+  }, [modalIsOpen]);
+
   const modalPositionStyles = {
-    left: {
-      left: "20px",
-      right: "auto",
-      top: "20px",
-      bottom: "20px",
-    },
     right: {
       left: "auto",
       right: "20px",
@@ -68,9 +112,11 @@ export default function DetailsModal({
     },
   };
 
+  const slideDirection = $position === "right" ? "right" : "top";
+
   return (
     <Modal
-      isOpen={modalIsOpen}
+      isOpen={internalOpen}
       onRequestClose={closeModal}
       ariaHideApp={false}
       style={{
@@ -78,19 +124,21 @@ export default function DetailsModal({
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           zIndex: 20,
         },
-        content: {
-          position: "fixed",
-          padding: "0px",
-          width,
-          height,
-          marginTop,
-          backgroundColor: BFMPalette.white25,
-          borderRadius: "12px",
-          border: "none",
-          overflow: "hidden",
-          ...modalPositionStyles[$position],
-        },
-      }}>
+      }}
+      contentElement={(props, children) => (
+        <AnimatedModalContent
+          {...props}
+          $direction={slideDirection}
+          $closing={isClosing}
+          style={{
+            width,
+            height,
+            marginTop,
+            ...modalPositionStyles[$position],
+          }}>
+          {children}
+        </AnimatedModalContent>
+      )}>
       <ContentContainer position={$position}>
         <HeaderContainer>
           <Header color={BFMPalette.black800}>{headerText}</Header>
