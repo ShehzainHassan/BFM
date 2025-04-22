@@ -47,6 +47,9 @@ const SubContainer = styled("div")`
 `;
 const Button = styled(H3Secondary)`
   cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 const TitleContainer = styled("div")`
   display: flex;
@@ -76,12 +79,10 @@ const Circle = styled("div")`
 const TaskContainer = styled("div")`
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  padding-bottom: 0;
 `;
 const Line = styled("div")`
   border-bottom: 1px solid ${BFMPalette.gray100};
-  padding-bottom: 16px;
+  margin: 16px 0;
 `;
 const Task = styled("div")`
   display: flex;
@@ -97,6 +98,7 @@ const Tasks = styled("div")`
   border: 1px solid ${BFMPalette.gray100};
   border-radius: 12px;
   background-color: ${BFMPalette.white};
+  padding: 16px;
 `;
 export default function ESGModal({ closeModal, notification }: ESGModalProps) {
   const tabs = ["Overview", "Tasks"];

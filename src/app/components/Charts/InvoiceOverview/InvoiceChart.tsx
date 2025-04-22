@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
+  TooltipProps,
   YAxis,
 } from "recharts";
 import { InvoiceChartProps } from "../../../../../Interfaces";
@@ -37,12 +38,17 @@ export default function InvoiceChart({ invoiceData }: InvoiceChartProps) {
       {payload.value}
     </text>
   );
-  const CustomTooltip = ({ active, payload, label }: any) => {
+
+  const CustomTooltip = ({
+    active,
+    payload,
+    label,
+  }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
       return (
         <CustomTooltipContainer>
           <CustomTooltipLabel>{label}</CustomTooltipLabel>
-          {payload.map((entry: any, index: number) => (
+          {payload.map((entry, index) => (
             <CustomTooltipValue key={index}>
               {entry.name}: {Number(entry.value).toLocaleString()}
             </CustomTooltipValue>
@@ -53,6 +59,7 @@ export default function InvoiceChart({ invoiceData }: InvoiceChartProps) {
 
     return null;
   };
+
   const CustomYAxisTick = ({ x, y, payload }: TickProps) => (
     <text
       x={x - 10}

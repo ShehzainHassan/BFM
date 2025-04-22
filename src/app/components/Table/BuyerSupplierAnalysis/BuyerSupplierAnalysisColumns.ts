@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { BuyerSupplierAnalysis } from "./BuyerSupplierAnalysis";
 import { BuyerSupplierAnalysisStyles } from "./BuyerSupplierAnalysisStyles";
 import useTranslation from "@/translations";
+import { BuyerSupplierAnalysis } from "../../../../../Interfaces";
 
 export const useBuyerSupplierAnalysisColumns =
   (): ColumnDef<BuyerSupplierAnalysis>[] => {

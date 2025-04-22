@@ -1,9 +1,9 @@
-import styled from "styled-components";
+import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
-import { BodyText, Title, H1, H3 } from "@/Typography";
-import Image from "next/image";
+import { BodyText, H1, H3, Title } from "@/Typography";
 import { formatCurrency } from "@/utils";
-import { CURRENCY, HKD_EQUIVALANT } from "@/constants";
+import Image from "next/image";
+import styled from "styled-components";
 import { TextComponentProps } from "../../../../Interfaces";
 const Container = styled("div")`
   display: flex;

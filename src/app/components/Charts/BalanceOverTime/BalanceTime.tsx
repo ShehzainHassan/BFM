@@ -1,7 +1,11 @@
 "use client";
 import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
+import { H5, Header } from "@/Typography";
+import useIsMobile from "@/useIsMobile";
 import { formatCurrency, formatNumberWithCommas } from "@/utils";
+import Image from "next/image";
+import { useState } from "react";
 import {
   Area,
   AreaChart,
@@ -17,10 +21,6 @@ import {
   AreaChartProps,
   CustomActiveDotProps,
 } from "../../../../../Interfaces";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { H5, Header } from "@/Typography";
-import useIsMobile from "@/useIsMobile";
 
 const GraphContainer = styled("div")`
   width: 100%;

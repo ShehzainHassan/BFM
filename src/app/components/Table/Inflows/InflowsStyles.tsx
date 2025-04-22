@@ -1,8 +1,8 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H4, MediumBoldHeading } from "@/Typography";
-import { Inflows } from "./inflows";
 import { formatCurrency, formatKeys } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
+import { Inflows } from "../../../../../Interfaces";
 
 const getTextColor = (value: string, row: Inflows) => {
   if (value.startsWith("-") && value !== "-") return BFMPalette.red600;

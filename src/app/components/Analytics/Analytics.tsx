@@ -152,13 +152,13 @@ export default function Analytics() {
           {selectedTab === tabs[3] && selectedButton === tabButtons[0] && (
             <RenderBadgeGroup
               title={t("tables.transition_highlight.average_deposit_text")}
-              value={reports.incomeIrregularReport?.averageAmount || 0}
+              value={reports?.incomeIrregularReport?.averageAmount || 0}
             />
           )}
           {selectedTab === tabs[3] && selectedButton === tabButtons[1] && (
             <RenderBadgeGroup
               title={t("tables.transition_highlight.average_withdrawal_text")}
-              value={reports.expenseIrregularReport?.averageAmount || 0}
+              value={reports?.expenseIrregularReport?.averageAmount || 0}
             />
           )}
         </TabContainer2>

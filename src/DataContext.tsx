@@ -15,8 +15,11 @@ import {
   BarData,
   BuyerSupplierAnalysis,
   CashFlowData,
+  CashFlowHistoryItem,
+  DailyBankBalance,
   DataContextType,
   ESGNotification,
+  ESGSummary,
   Inflows,
   InvoiceSummary,
   Item,
@@ -211,7 +214,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
             month4: "-",
           };
         }
-        (inflowsMap[key] as any)[`month${index + 1}`] = value.amount.toString();
+        inflowsMap[key][`month${index + 1}` as keyof Inflows] =
+          value.amount.toString();
       });
     });
 
@@ -236,14 +240,15 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
             month4: "-",
           };
         }
-        (outflowsMap[key] as any)[`month${index + 1}`] =
+        outflowsMap[key][`month${index + 1}` as keyof Outflows] =
           value.amount.toString();
       });
     });
     return Object.values(outflowsMap);
   };
 
-  const transformESGData = (esgSummary: any): PieData[] => {
+  const transformESGData = (esgSummary: ESGSummary): PieData[] => {
+    console.log("ESG Summary = ", esgSummary);
     const transformedData: PieData[] = [];
 
     Object.keys(esgSummary).forEach((month) => {
@@ -293,7 +298,9 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     return transformedData;
   };
 
-  const transformCashflowData = (history: any[]): CashFlowData[] => {
+  const transformCashflowData = (
+    history: CashFlowHistoryItem[]
+  ): CashFlowData[] => {
     if (!Array.isArray(history)) return [];
     return history.map((data) => ({
       category: formatYearMonth(data.yearMonth),
@@ -302,14 +309,14 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     }));
   };
 
-  const lineData = (history: any[]): LineChartData[] => {
+  const lineData = (history: CashFlowHistoryItem[]): LineChartData[] => {
     if (!Array.isArray(history)) return [];
     return history.map((data, index) => ({
       value: data.net?.amount || 0,
       index: index,
     }));
   };
-  const transformBarData = (esgSummary: any): BarData[] => {
+  const transformBarData = (esgSummary: ESGSummary): BarData[] => {
     const monthNames = [
       "Jan",
       "Feb",
@@ -334,18 +341,20 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const transformAreaData = (reports: any): AreaChartData[] => {
-    if (!reports) {
+  const transformAreaData = (
+    dailyBankBalanceDtos: DailyBankBalance[]
+  ): AreaChartData[] => {
+    if (!dailyBankBalanceDtos) {
       return [];
     }
 
-    return reports.map((report: any) => ({
-      name: new Date(report.date).toLocaleDateString("en-GB", {
+    return dailyBankBalanceDtos.map((dto: DailyBankBalance) => ({
+      name: new Date(dto.date).toLocaleDateString("en-GB", {
         day: "2-digit",
         month: "short",
         year: "numeric",
       }),
-      HKDValue: report.balance,
+      HKDValue: dto.balance,
     }));
   };
 
@@ -407,8 +416,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const pieData = transformESGData(reports?.esgSummary ?? []);
-  const barData = transformBarData(reports?.esgSummary ?? []);
+  const pieData = transformESGData(reports?.esgSummary ?? {});
+  const barData = transformBarData(reports?.esgSummary ?? {});
   const depositsDashboard = transformReportsData(
     reports?.incomeByCategory ?? {}
   );
@@ -594,6 +603,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         loading,
         selectedESGNotification,
         setSelectedESGNotification,
+        transformClientName,
       }}>
       {children}
     </DataContext.Provider>

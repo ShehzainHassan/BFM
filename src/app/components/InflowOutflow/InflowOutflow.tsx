@@ -88,8 +88,8 @@ export default function InflowOutflow() {
   const [selectedTab, setSelectedTab] = useState(tabs[0]);
   const months =
     selectedTab === tabs[0]
-      ? generateMonths(reports.incomeByCategory)
-      : generateMonths(reports.expenseByCategory);
+      ? generateMonths(reports?.incomeByCategory)
+      : generateMonths(reports?.expenseByCategory);
 
   const selectedData =
     selectedTab === tabs[0] ? depositsDashboard : withDrawalsDashboard;

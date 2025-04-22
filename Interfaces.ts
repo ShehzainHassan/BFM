@@ -70,6 +70,7 @@ export interface DataContextType {
   loading: boolean;
   selectedESGNotification: ESGNotification | null;
   setSelectedESGNotification: (notification: ESGNotification) => void;
+  transformClientName: (clientName: string) => void;
 }
 export interface TaggedTransaction {
   transactionId: string;
@@ -190,6 +191,7 @@ export interface ParsedDeposit {
 }
 export interface IrregularReport {
   transactions: ParsedTransitionHighlight[];
+  averageAmount: number;
 }
 export interface ParsedTransitionHighlight {
   transactionDate: string;
@@ -285,6 +287,7 @@ export interface ESGSummary {
       category: string;
       co2Amount: number;
       amount: number;
+      color: string;
     }[];
   };
 }
@@ -674,7 +677,7 @@ export type NotificationType =
   | "Link"
   | string;
 
-export interface DateArray extends Array<number> {}
+export type DateArray = number[];
 
 export interface CompareSpendPayload {
   current: {

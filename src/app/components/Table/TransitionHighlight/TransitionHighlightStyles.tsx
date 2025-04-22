@@ -1,9 +1,9 @@
 "use client";
 import { BFMPalette } from "@/Theme";
-import { TransitionHighlight } from "@/app/components/Table/TransitionHighlight/transitionHighlight";
 import { BodyText, H3Secondary, H5 } from "@/Typography";
 import styled from "styled-components";
 import { formatCurrency, formatDate, formatString } from "@/utils";
+import { TransitionHighlight } from "../../../../../Interfaces";
 
 const ReasonContainer = styled("div")`
   display: flex;

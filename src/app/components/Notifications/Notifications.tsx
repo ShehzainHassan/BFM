@@ -65,7 +65,7 @@ export default function Notifications({ notifications }: NotificationsProps) {
         {notifications.map((notification) => {
           switch (notification.type) {
             case "CompareSpend":
-              const spendingData = notification.payload as Payload;
+              const spendingData = notification.payload as unknown as Payload;
               return (
                 <Comparison key={notification.id} spendingData={spendingData} />
               );
@@ -76,7 +76,9 @@ export default function Notifications({ notifications }: NotificationsProps) {
                   image="/images/tick.png"
                   title={notification.title}
                   description={notification.description}>
-                  <DueDate payload={notification.payload as DueDatePayload} />
+                  <DueDate
+                    payload={notification.payload as unknown as DueDatePayload}
+                  />
                   <ButtonContainer>
                     <ButtonSecondary btnText="Send Reminder" />
                   </ButtonContainer>

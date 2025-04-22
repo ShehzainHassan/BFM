@@ -31,9 +31,10 @@ const StatusBadge = styled.div<{ $status: "PENDING" | "OVERDUE" | "PAID" }>`
 `;
 const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setInvoicesSummary } = useData();
+  const { setInvoicesSummary, transformClientName } = useData();
   const toggleInvoiceCategory = () => {
     const updatedInvoices = updateInvoiceStatus(row.invoiceNo);
+    transformClientName(row.clientName);
     setInvoicesSummary(parseInvoices(updatedInvoices));
   };
   return (

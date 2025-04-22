@@ -194,7 +194,7 @@ export default function BarGraph({
               ) : (
                 ({ x, y, payload }) => (
                   <text
-                    x={0}
+                    x={x}
                     y={y - 10}
                     fontSize={12}
                     fontWeight={500}

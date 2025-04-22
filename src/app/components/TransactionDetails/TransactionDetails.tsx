@@ -177,17 +177,22 @@ export default function TransactionDetails({
 }>) {
   const { attachments, setAttachments, notes, setNotes } = useData();
   const [selectedTab, setSelectedTab] = useState(selected);
-  const [selectedTransactionAttachments, setSelectedTransactionAttachments] = useState<Attachment[]>([]);
+  const [selectedTransactionAttachments, setSelectedTransactionAttachments] =
+    useState<Attachment[]>([]);
   const [isEditingNotes, setIsEditingNotes] = useState(false);
   const [isAddingNotes, setIsAddingNotes] = useState(false);
   const [noteDetails, setNoteDetails] = useState<Note>();
   const [editText, setEditText] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const getNoteDetails = () => {
-    const selectedNote = notes.find((note) => note.transactionId === selectedRow.id);
+    const selectedNote = notes.find(
+      (note) => note.transactionId === selectedRow.id
+    );
     if (!selectedNote) {
       setIsEditingNotes(true);
       setIsAddingNotes(false);
+    } else {
+      setEditText(selectedNote.note);
     }
     setNoteDetails(selectedNote);
   };
@@ -431,8 +436,7 @@ export default function TransactionDetails({
               $borderColor={BFMPalette.purple300}
               imagePosition="right"
               imageSrc="/images/edit.png"
-              onClick={handleEditNote}
-            >
+              onClick={handleEditNote}>
               Edit
             </NavButton>
           </>
@@ -459,8 +463,7 @@ export default function TransactionDetails({
                   $borderColor={BFMPalette.gray200}
                   $bgColor={BFMPalette.white}
                   $textColor={BFMPalette.black800}
-                  onClick={() => setIsAddingNotes(true)}
-                >
+                  onClick={() => setIsAddingNotes(true)}>
                   Add Notes
                 </NavButton>
               </FileTextContainer>
@@ -482,23 +485,20 @@ export default function TransactionDetails({
                   color: BFMPalette.black400,
                   outline: "none",
                   fontFamily: "Inter, Arial",
-                }}
-              ></textarea>
+                }}></textarea>
               <ButtonContainer>
                 <NavButton
                   $bgColor={BFMPalette.white}
                   $textColor={BFMPalette.black400}
                   $borderColor={BFMPalette.gray200}
-                  onClick={handleCancelNote}
-                >
+                  onClick={handleCancelNote}>
                   Cancel
                 </NavButton>
                 <NavButton
                   $bgColor={BFMPalette.purple500}
                   $textColor={BFMPalette.white}
                   $isDisabled={editText.trim() === ""}
-                  onClick={handleSaveNote}
-                >
+                  onClick={handleSaveNote}>
                   Save Notes
                 </NavButton>
               </ButtonContainer>
@@ -569,8 +569,7 @@ export default function TransactionDetails({
                         height={40}
                       />
                       <FileTypeWrap
-                        $fileExtension={getFileExtension(attachment.fileName)}
-                      >
+                        $fileExtension={getFileExtension(attachment.fileName)}>
                         <SmallHeading color={BFMPalette.white}>
                           {getFileExtension(attachment.fileName)}
                         </SmallHeading>
@@ -582,8 +581,7 @@ export default function TransactionDetails({
                           $hoverUnderline={true}
                           $transitionEffect="color 0.3s ease-in out"
                           color={BFMPalette.black400}
-                          onClick={() => openFile(attachment)}
-                        >
+                          onClick={() => openFile(attachment)}>
                           {attachment.fileName}
                         </H4>
                         <BodyText>{formatFileSize(attachment.file)}</BodyText>

@@ -1,15 +1,15 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Inflows } from "./inflows";
 import { InflowsStyles } from "./InflowsStyles";
 import useTranslation from "@/translations";
 import { useData } from "@/DataContext";
 import { formatYearMonth } from "@/utils";
+import { Inflows } from "../../../../../Interfaces";
 
 export const useInflowsColumns = (): ColumnDef<Inflows>[] => {
   const { t } = useTranslation();
   const { reports } = useData();
 
-  const monthColumns: ColumnDef<Inflows>[] = reports.profitAndLost.map(
+  const monthColumns: ColumnDef<Inflows>[] = (reports?.profitAndLost ?? []).map(
     (item, index) => {
       const accessorKey = `MONTH_${index + 1}` as keyof typeof InflowsStyles;
 

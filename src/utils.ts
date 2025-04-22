@@ -468,7 +468,9 @@ export const updateInvoiceStatus = (
   return updatedInvoices;
 };
 
-export const parseInvoices = (invoices: any[]): InvoiceSummary[] => {
+export const parseInvoices = (
+  invoices: DetailedInvoiceSummary[]
+): InvoiceSummary[] => {
   return invoices.map((invoice) => {
     return {
       invoiceNo: invoice.invoiceNumber || "",

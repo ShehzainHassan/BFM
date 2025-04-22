@@ -161,7 +161,7 @@ export default function Dashboard() {
           <DataTable
             key="accounts"
             data={paginatedData as AccountData[]}
-            columns={accountColumns}  
+            columns={accountColumns}
             searchQuery={searchQuery}
             searchColumns={["bank", "account"]}
             columnWidths={["2.5fr", "2.5fr", "2.5fr", "2.5fr", "2fr"]}
