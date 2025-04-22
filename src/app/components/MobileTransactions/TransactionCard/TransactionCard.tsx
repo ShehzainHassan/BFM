@@ -65,7 +65,7 @@ export const MainContainer = styled("div")`
   padding: 10px 0px;
 `;
 
-function TransactionCard({
+export default function TransactionCard({
   data,
   onOpenDetails,
 }: TransactionCardProps & {
@@ -114,5 +114,3 @@ function TransactionCard({
     </MainContainer>
   );
 }
-
-export default React.memo(TransactionCard);

@@ -1,14 +1,11 @@
 "use client";
 import { HKD_EQUIVALANT } from "@/constants";
-import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, H4 } from "@/Typography";
 import { formatCurrency, formatDate, formatString } from "@/utils";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Transaction } from "../../../../../Interfaces";
-import TransactionDetailsModal from "../../Modal/TransactionModal/TransactionModal";
 import { AmountText } from "../Accounts/AccountsStyles";
 
 const DescriptionWrapper = styled.div`
@@ -39,53 +36,6 @@ export const DetailsIcon = styled(Image)`
   right: 0;
   cursor: pointer;
 `;
-const TransactionActions = ({ row }: { row: Transaction }) => {
-  const [selected, setSelected] = useState("Details");
-  const [hasAttachments, setHasAttachments] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] =
-    useState<Transaction | null>(null);
-  const { attachments } = useData();
-  useEffect(() => {
-    const checkAttachments = () => {
-      setHasAttachments(
-        attachments.some((attachment) => attachment.txnId === row.id)
-      );
-    };
-
-    checkAttachments();
-  }, [row.id]);
-  const handleOpenModal = (type: string) => {
-    setSelected(type);
-    setSelectedTransaction(row);
-  };
-
-  return (
-    <ActionContainer>
-      {hasAttachments && (
-        <AttachmentIcon
-          src="/images/Button utility.png"
-          alt="icon"
-          width={32}
-          height={32}
-          onClick={() => handleOpenModal("Attachments")}
-        />
-      )}
-
-      <DetailsIcon
-        src="/images/Button.png"
-        alt="icon"
-        width={32}
-        height={32}
-        onClick={() => handleOpenModal("Details")}
-      />
-      <TransactionDetailsModal
-        selected={selected}
-        selectedTransaction={selectedTransaction}
-        onClose={() => setSelectedTransaction(null)}
-      />
-    </ActionContainer>
-  );
-};
 export const TransactionStyles = {
   DATE: (row: Transaction) => (
     <BodyText color={BFMPalette.black800}>{formatDate(row.date)}</BodyText>
@@ -123,5 +73,4 @@ export const TransactionStyles = {
   ACCOUNT: (row: Transaction) => (
     <H4 color={BFMPalette.black800}>{row.account}</H4>
   ),
-  ACTION: (row: Transaction) => <TransactionActions row={row} />,
 };

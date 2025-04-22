@@ -1,13 +1,13 @@
 "use client";
+import { DataProvider } from "@/DataContext";
+import useTranslation from "@/translations";
 import { Inter } from "next/font/google";
 import styled from "styled-components";
+import ContentWrapper from "./components/ContentWrapper/ContentWrapper";
+import MobileNav from "./components/MobileNav/MobileNav";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./globals.css";
-import { DataProvider, useData } from "@/DataContext";
-import MobileNav from "./components/MobileNav/MobileNav";
-import useTranslation from "@/translations";
-import ContentWrapper from "./components/ContentWrapper/ContentWrapper";
 
 const inter = Inter({
   variable: "--font-inter",

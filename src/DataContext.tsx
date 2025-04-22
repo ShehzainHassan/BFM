@@ -87,14 +87,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     return t(`invoice_creation.dropdown.options.${clientName}`) || "";
   };
 
-  const [invoicesSummary, setInvoicesSummary] = useState<InvoiceSummary[]>(() =>
-    parseInvoices(JSON.parse(localStorage.getItem("invoices") || "[]")).map(
-      (invoice) => ({
-        ...invoice,
-        clientName: transformClientName(invoice.clientName),
-      })
-    )
-  );
+  const [invoicesSummary, setInvoicesSummary] = useState<InvoiceSummary[]>([]);
 
   const [bankDetails, setBankDetails] = useState<BankDetails>({
     bankName: "",
@@ -130,6 +123,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
       },
       bank: transaction.bank,
       account: transaction.accountName,
+      attachments: transaction.attachments,
+      notes: transaction.notes,
     }));
   };
   const transformAccounts = (
@@ -248,7 +243,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const transformESGData = (esgSummary: ESGSummary): PieData[] => {
-    console.log("ESG Summary = ", esgSummary);
     const transformedData: PieData[] = [];
 
     Object.keys(esgSummary).forEach((month) => {
@@ -521,6 +515,17 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
           );
         setAttachments(allAttachments);
         setNotes(allNotes);
+
+        const storedInvoices = localStorage.getItem("invoices");
+        if (storedInvoices) {
+          const parsed = parseInvoices(JSON.parse(storedInvoices)).map(
+            (invoice) => ({
+              ...invoice,
+              clientName: transformClientName(invoice.clientName),
+            })
+          );
+          setInvoicesSummary(parsed);
+        }
       } catch (err) {
         console.error("Error loading data ", err);
       } finally {

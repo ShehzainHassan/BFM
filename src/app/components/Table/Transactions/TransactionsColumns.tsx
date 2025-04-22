@@ -1,7 +1,8 @@
-import { ColumnDef } from "@tanstack/react-table";
-import { TransactionStyles } from "./TransactionsColumnsStyles";
 import useTranslation from "@/translations";
+import { ColumnDef } from "@tanstack/react-table";
 import { Transaction } from "../../../../../Interfaces";
+import TransactionActions from "./TransactionActions";
+import { TransactionStyles } from "./TransactionsColumnsStyles";
 
 export const useTransactionColumns = (): ColumnDef<Transaction>[] => {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ export const useTransactionColumns = (): ColumnDef<Transaction>[] => {
     {
       accessorKey: t("tables.transactions.action") || "ACTION",
       header: t("tables.transactions.action"),
-      cell: ({ row }) => TransactionStyles.ACTION(row.original),
+      cell: ({ row }) => <TransactionActions row={row.original} />,
     },
   ];
 };

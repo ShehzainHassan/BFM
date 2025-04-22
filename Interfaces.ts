@@ -173,6 +173,8 @@ export interface ParsedTransaction {
   bank: string;
   localCurrencyAmount: number;
   localCurrencyBalance: number;
+  attachments: Attachment[];
+  notes: Note[];
 }
 export interface ParsedAccount {
   accountName: string;
@@ -627,6 +629,8 @@ export interface Transaction {
   };
   bank: string;
   account: string;
+  attachments: Attachment[];
+  notes: Note[];
 }
 export interface TransitionHighlight {
   date: string;
