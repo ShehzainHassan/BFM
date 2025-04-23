@@ -10,8 +10,9 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import "./globals.css";
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
 });
 
 const MainContent = styled("main")`

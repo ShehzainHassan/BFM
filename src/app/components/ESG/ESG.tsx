@@ -12,6 +12,9 @@ import {
 } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import styled from "styled-components";
 import BarGraph from "../Charts/BarChart/BarChart";
 import PieGraph from "../Charts/PieChart/Pie";
@@ -137,17 +140,11 @@ const ESGNotificationsContainer = styled("div")`
     display: none;
   }
 `;
-const CardsContainer = styled("div")`
+const CardsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 22px;
   padding: 16px;
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-    padding: unset;
-    overflow-x: auto;
-  }
 `;
 
 const TitleContainer = styled("div")`
@@ -243,6 +240,14 @@ export default function ESG() {
     (sum, item) => sum + item.value,
     0
   );
+
+  const settings = {
+    infinte: true,
+    speed: 500,
+    cssEase: "linear",
+    slidesToShow: 1.05,
+    slidesToScroll: 1,
+  };
   return (
     <Container>
       <GraphsContainer>
@@ -320,15 +325,15 @@ export default function ESG() {
           <Image src="/images/icon.png" alt="icon" width={28} height={28} />
           <H2 color={BFMPalette.black800}>{t("notification_title.esg")}</H2>
         </TitleContainer>
-        <CardsContainer>
+        <Slider {...settings}>
           {notifications?.esgNotifications.map((item) => (
-            <ESGNotifications
+            <div
               key={item.title}
-              type={item.type}
-              title={item.title}
-            />
+              style={{ width: "90%", paddingRight: "10px" }}>
+              <ESGNotifications type={item.type} title={item.title} />
+            </div>
           ))}
-        </CardsContainer>
+        </Slider>
         <MobileGraphsContainer>
           <PieChartContainer>
             <StyledHeading>{t("charts.co2_emission_text")}</StyledHeading>

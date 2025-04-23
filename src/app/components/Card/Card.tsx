@@ -19,9 +19,6 @@ const MainContainer = styled("div")`
     ${BFMPalette.white},
     ${BFMPalette.white50}
   );
-  @media (max-width: 768px) {
-    min-width: 311px;
-  }
 `;
 const Container = styled("div")`
   display: flex;
@@ -56,14 +53,17 @@ export default function Card({
   children,
 }: CardProps) {
   const [showModal, setShowModal] = useState(false);
-  const {notifications, selectedESGNotification, setSelectedESGNotification} = useData();
+  const { notifications, selectedESGNotification, setSelectedESGNotification } =
+    useData();
 
   const handleExpand = () => {
     const esgNotifs = notifications?.esgNotifications;
-    const selectedNotif: ESGNotification | null = esgNotifs?.find(notification => notification.title === title) as ESGNotification;
-      setSelectedESGNotification(selectedNotif);
-    setShowModal(true)
-  }
+    const selectedNotif: ESGNotification | null = esgNotifs?.find(
+      (notification) => notification.title === title
+    ) as ESGNotification;
+    setSelectedESGNotification(selectedNotif);
+    setShowModal(true);
+  };
   return (
     <MainContainer>
       <Container>
@@ -89,7 +89,12 @@ export default function Card({
       </Container>
 
       {children}
-      {showModal && <ESGModal closeModal={()=>setShowModal(false)} notification={selectedESGNotification}  />}
+      {showModal && (
+        <ESGModal
+          closeModal={() => setShowModal(false)}
+          notification={selectedESGNotification}
+        />
+      )}
     </MainContainer>
   );
 }

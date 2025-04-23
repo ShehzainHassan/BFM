@@ -59,8 +59,18 @@ export default function TextComponent({
     <Container>
       <SubContainer>
         <TextContainer>
-          <Title color={BFMPalette.gray700}>{title}</Title>
-          <H1 color={valueColor}>
+          <Title
+            $mobileFontSize="14px"
+            $mobileFontWeight={500}
+            $mobileLineHeight="20px"
+            color={BFMPalette.gray700}>
+            {title}
+          </Title>
+          <H1
+            $mobileFontSize="18px"
+            $mobileFontWeight={700}
+            $mobileLineHeight="28px"
+            color={valueColor}>
             {formatCurrency(`${HKD_EQUIVALANT}${value}`, 2)}
           </H1>
         </TextContainer>

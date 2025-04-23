@@ -1,6 +1,7 @@
 :root {
   --background: #e9eaeb;
   --foreground: #000000;
+  font-family: var(--font-inter), sans-serif;
 }
 
 @media (prefers-color-scheme: light) {
@@ -38,4 +39,8 @@ a {
 :where(.css-dev-only-do-not-override-tjsggz).ant-select-multiple
   .ant-select-selection-overflow {
   margin-top: 3px;
+}
+
+.slick-slide > div {
+  margin-right: 20px;
 }

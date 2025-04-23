@@ -24,7 +24,7 @@ import { ChartProps, CustomLabelProps } from "../../../../../Interfaces";
 import useIsMobile from "@/useIsMobile";
 import Image from "next/image";
 import { H5, Header } from "@/Typography";
-import { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 const LabelContainer = styled("div")`
   display: flex;
@@ -77,19 +77,25 @@ const CustomTooltip = ({
 
   return null;
 };
-
 const CustomLabel = ({ x = 0, y = 0, value }: CustomLabelProps) => {
   const parsedX = typeof x === "string" ? parseFloat(x) : x;
   const parsedY = typeof y === "string" ? parseFloat(y) : y;
 
   return (
-    <foreignObject x={parsedX} y={parsedY - 30} width={50} height={30}>
+    <foreignObject
+      key={`label-${value}`}
+      x={parsedX - 6}
+      y={parsedY - 30}
+      width={60}
+      height={30}>
       <LabelContainer>
         <LabelText>{value}</LabelText>
       </LabelContainer>
     </foreignObject>
   );
 };
+
+CustomLabel.displayName = "CustomLabel";
 
 export default function BarGraph({
   data,
@@ -104,13 +110,15 @@ export default function BarGraph({
   const handleNext = () =>
     setSelectedIndex((prev) => Math.min(prev + 1, data.length - 1));
 
-  const coloredData = data.map((entry, index) => ({
-    ...entry,
-    fill:
-      index === selectedIndex
-        ? selectedBarColor ?? BFMPalette.purple600
-        : `${BFMPalette.purple200}80`,
-  }));
+  const coloredData = useMemo(() => {
+    return data.map((entry, index) => ({
+      ...entry,
+      fill:
+        index === selectedIndex
+          ? selectedBarColor ?? BFMPalette.purple600
+          : `${BFMPalette.purple200}80`,
+    }));
+  }, [data, selectedIndex, selectedBarColor]);
 
   const selectedData = data[selectedIndex];
   return (

@@ -2,15 +2,24 @@ import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 
 /*          HEADINGS           */
-export const H1 = styled.h1<{ color?: string }>`
+export const H1 = styled.h1<{
+  color?: string;
+  $mobileFontWeight?: number;
+  $mobileFontSize?: string;
+  $mobileLineHeight?: string;
+}>`
   font-weight: 700;
   font-size: 20px;
   line-height: 30px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 
-  @media (min-width: 941px) and (max-width: 1152px) {
-    font-size: 14px;
-    line-height: 26px;
+  @media (max-width: 768px) {
+    ${({ $mobileFontWeight }) =>
+      $mobileFontWeight !== undefined && `font-weight: ${$mobileFontWeight};`}
+    ${({ $mobileFontSize }) =>
+      $mobileFontSize && `font-size: ${$mobileFontSize};`}
+    ${({ $mobileLineHeight }) =>
+      $mobileLineHeight && `line-height: ${$mobileLineHeight};`}
   }
 `;
 
@@ -39,10 +48,6 @@ export const H3 = styled.h2<{ color?: string }>`
   font-size: 12px;
   line-height: 18px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
-  @media (min-width: 941px) and (max-width: 1023px) {
-    font-size: 10px;
-    line-height: 16px;
-  }
 `;
 export const SmallH3 = styled.h2<{ color?: string }>`
   font-weight: 600;
@@ -115,11 +120,25 @@ export const MediumBoldHeading = styled.h6<{ color?: string }>`
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 
-export const TableTitle = styled.h1<{ color?: string }>`
+export const TableTitle = styled.h1<{
+  color?: string;
+  $mobileFontWeight?: number;
+  $mobileFontSize?: string;
+  $mobileLineHeight?: string;
+}>`
   font-weight: 700;
   font-size: 18px;
   line-height: 28px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
+
+  @media (max-width: 768px) {
+    ${({ $mobileFontWeight }) =>
+      $mobileFontWeight !== undefined && `font-weight: ${$mobileFontWeight};`}
+    ${({ $mobileFontSize }) =>
+      $mobileFontSize && `font-size: ${$mobileFontSize};`}
+    ${({ $mobileLineHeight }) =>
+      $mobileLineHeight && `line-height: ${$mobileLineHeight};`}
+  }
 `;
 
 /*          PARAGRAPHS           */
@@ -129,16 +148,27 @@ export const BodyText = styled.div<{ color?: string }>`
   font-size: 14px;
   line-height: 20px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
-  @media (min-width: 941px) and (max-width: 1152px) {
-    font-size: 11px;
-  }
 `;
 
-export const SmallText = styled.p<{ color?: string }>`
+export const SmallText = styled.h1<{
+  color?: string;
+  $mobileFontWeight?: number;
+  $mobileFontSize?: string;
+  $mobileLineHeight?: string;
+}>`
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
+
+  @media (max-width: 768px) {
+    ${({ $mobileFontWeight }) =>
+      $mobileFontWeight !== undefined && `font-weight: ${$mobileFontWeight};`}
+    ${({ $mobileFontSize }) =>
+      $mobileFontSize && `font-size: ${$mobileFontSize};`}
+    ${({ $mobileLineHeight }) =>
+      $mobileLineHeight && `line-height: ${$mobileLineHeight};`}
+  }
 `;
 
 export const MediumText = styled.p<{ color?: string; width?: string }>`
@@ -170,14 +200,23 @@ export const SubTitle = styled.p<{ color?: string }>`
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 `;
 
-export const Title = styled.p<{ color?: string }>`
+export const Title = styled.p<{
+  color?: string;
+  $mobileFontWeight?: number;
+  $mobileFontSize?: string;
+  $mobileLineHeight?: string;
+}>`
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   color: ${({ color }) => (color ? color : BFMPalette.black100)};
 
-  @media (max-width: 1152px) {
-    font-size: 14px;
-    line-height: 20px;
+  @media (max-width: 768px) {
+    ${({ $mobileFontWeight }) =>
+      $mobileFontWeight !== undefined && `font-weight: ${$mobileFontWeight};`}
+    ${({ $mobileFontSize }) =>
+      $mobileFontSize && `font-size: ${$mobileFontSize};`}
+    ${({ $mobileLineHeight }) =>
+      $mobileLineHeight && `line-height: ${$mobileLineHeight};`}
   }
 `;

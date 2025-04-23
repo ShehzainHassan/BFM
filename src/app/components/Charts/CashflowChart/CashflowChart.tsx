@@ -157,6 +157,7 @@ export default function CashflowChart(): JSX.Element {
   };
 
   const CustomLabels = ({ bars }: BarCustomLayerProps<CashFlowData>) => {
+    const isMobile = useIsMobile(768);
     return (
       <>
         {bars.map((bar) => {
@@ -179,8 +180,8 @@ export default function CashflowChart(): JSX.Element {
               <rect
                 x={-45}
                 y={-10}
-                width={100}
-                height={20}
+                width={!isMobile ? 100 : 80}
+                height={!isMobile ? 20 : 15}
                 fill={bgColor}
                 stroke={borderColor}
                 strokeWidth={1}
@@ -188,10 +189,10 @@ export default function CashflowChart(): JSX.Element {
                 ry={10}
               />
               <text
-                x={5}
-                y={4}
+                x={!isMobile ? 5 : -2}
+                y={!isMobile ? 4 : 2}
                 textAnchor="middle"
-                fontSize={10}
+                fontSize={!isMobile ? 10 : 9}
                 fontWeight={500}
                 fill={textColor}>
                 {formatCurrency(`${HKD_EQUIVALANT}${formattedValue}`, 2)}
@@ -224,7 +225,11 @@ export default function CashflowChart(): JSX.Element {
         data={cashflowData}
         keys={["positive", "negative"]}
         indexBy="category"
-        margin={{ top: 20, right: 20, bottom: 40, left: 60 }}
+        margin={
+          !isMobile
+            ? { top: 20, right: 20, bottom: 40, left: 60 }
+            : { top: 0, right: -20, bottom: 30, left: -26 }
+        }
         padding={0.65}
         layout="vertical"
         colors={({ id }) =>
