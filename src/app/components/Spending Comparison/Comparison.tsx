@@ -4,7 +4,7 @@ import { BFMPalette } from "@/Theme";
 import { H5 } from "@/Typography";
 import { CURRENCY } from "@/constants";
 import { formatCurrency } from "@/utils";
-import { ComparisonProps } from "../../../../Interfaces";
+import { Payload } from "../../../../Interfaces";
 const BarsContainer = styled("div")`
   display: flex;
   flex-direction: column;
@@ -43,6 +43,9 @@ const Badge = styled("div")`
   border-radius: 16px;
 `;
 
+type ComparisonProps = {
+  spendingData: Payload;
+};
 export default function Comparison({ spendingData }: ComparisonProps) {
   const currentValue = Number(spendingData.current.value);
   const previousValue = Number(spendingData.previous.value);

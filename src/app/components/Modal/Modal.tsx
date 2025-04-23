@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import styled, { keyframes } from "styled-components";
-import { DetailsModalProps } from "../../../../Interfaces";
 
 const ContentContainer = styled.div<{ position: string }>`
   width: 100%;
@@ -63,6 +62,16 @@ const AnimatedModalContent = styled.div<{
     0.3s ease-out forwards;
 `;
 
+type DetailsModalProps = {
+  headerText?: string;
+  modalIsOpen: boolean;
+  closeModal: () => void;
+  children: React.ReactNode;
+  width?: string;
+  height?: string;
+  marginTop?: string;
+  $position?: "right" | "middle";
+};
 export default function DetailsModal({
   headerText = "Modal Header",
   modalIsOpen,

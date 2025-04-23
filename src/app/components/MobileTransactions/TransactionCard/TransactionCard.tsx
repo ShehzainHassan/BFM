@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H2, H3Secondary, H5 } from "@/Typography";
 import styled from "styled-components";
-import { Transaction, TransactionCardProps } from "../../../../../Interfaces";
+import { Transaction } from "../../../../../Interfaces";
 import { formatCurrency, formatDate, formatString } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
 import React from "react";
@@ -65,6 +65,9 @@ export const MainContainer = styled("div")`
   padding: 10px 0px;
 `;
 
+type TransactionCardProps = {
+  data: Transaction;
+};
 export default function TransactionCard({
   data,
   onOpenDetails,

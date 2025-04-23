@@ -4,7 +4,6 @@ import { BodyText, H1, H3, Title } from "@/Typography";
 import { formatCurrency } from "@/utils";
 import Image from "next/image";
 import styled from "styled-components";
-import { TextComponentProps } from "../../../../Interfaces";
 const Container = styled("div")`
   display: flex;
   background-color: ${BFMPalette.white25};
@@ -47,6 +46,14 @@ const Border = styled("div")<{ $isIncreased: boolean }>`
     $isIncreased ? BFMPalette.green0 : BFMPalette.skin200};
 `;
 
+type TextComponentProps = {
+  title: string;
+  value: number;
+  percentage: number;
+  timePeriod: string;
+  isIncreased?: boolean;
+  valueColor?: string;
+};
 export default function TextComponent({
   title,
   value,

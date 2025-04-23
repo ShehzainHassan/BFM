@@ -1,7 +1,6 @@
 import { BFMPalette } from "@/Theme";
 import { H3Secondary, H4, H5 } from "@/Typography";
 import styled from "styled-components";
-import { ESGCardProps } from "../../../../Interfaces";
 import { HKD_EQUIVALANT } from "@/constants";
 import Image from "next/image";
 
@@ -45,6 +44,15 @@ const LabelContainer = styled("div")`
   display: flex;
   gap: 10px;
 `;
+
+type ESGCardProps = {
+  title?: string;
+  value?: number;
+  kg?: number;
+  circleColor?: string;
+  amount?: number;
+};
+
 export default function ESGCard({
   title = "Title",
   value,

@@ -10,7 +10,7 @@ import {
   TooltipProps,
   YAxis,
 } from "recharts";
-import { InvoiceChartProps } from "../../../../../Interfaces";
+import { Invoice } from "../../../../../Interfaces";
 import {
   CustomTooltipContainer,
   CustomTooltipLabel,
@@ -24,6 +24,9 @@ type TickProps = {
     value: string | number;
     coordinate: number;
   };
+};
+type InvoiceChartProps = {
+  invoiceData: Invoice[];
 };
 
 export default function InvoiceChart({ invoiceData }: InvoiceChartProps) {

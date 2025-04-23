@@ -1,7 +1,6 @@
 import { BFMPalette } from "@/Theme";
 import { H5 } from "@/Typography";
 import styled from "styled-components";
-import { CarbonContainerProps } from "../../../../Interfaces";
 
 const InputContainer = styled("div")`
   display: flex;
@@ -16,6 +15,10 @@ const ValueContainer = styled("div")`
   padding: 2px 8px;
   background-color: ${BFMPalette.green600};
 `;
+type CarbonContainerProps = {
+  text?: string;
+  carbonVal?: string;
+};
 
 export default function CarbonContainer({
   text = "Text",

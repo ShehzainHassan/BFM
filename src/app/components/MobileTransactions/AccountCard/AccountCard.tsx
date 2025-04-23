@@ -2,7 +2,7 @@ import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
 import { H2, H3Secondary, H5 } from "@/Typography";
 import { formatCurrency } from "@/utils";
-import { AccountCardProps} from "../../../../../Interfaces";
+import { AccountData } from "../../../../../Interfaces";
 import {
   Amount,
   AmountContainer,
@@ -10,9 +10,12 @@ import {
   Container,
   Description_BtnContainer,
   DescriptionContainer,
-  MainContainer
+  MainContainer,
 } from "../TransactionCard/TransactionCard";
 
+type AccountCardProps = {
+  data: AccountData;
+};
 export default function AccountCard({ data }: AccountCardProps) {
   return (
     <MainContainer>

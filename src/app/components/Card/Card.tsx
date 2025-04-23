@@ -3,9 +3,9 @@ import { Description, H3Primary } from "@/Typography";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
-import { CardProps, ESGNotification } from "../../../../Interfaces";
 import ESGModal from "../Modal/ESGModal/ESGModal";
 import { useData } from "@/DataContext";
+import { ESGNotification } from "../../../../Interfaces";
 
 const MainContainer = styled("div")`
   display: flex;
@@ -45,6 +45,14 @@ const ImageContainer = styled("div")`
   border: 1px solid ${BFMPalette.purple200};
   gap: 14px;
 `;
+type CardProps = {
+  image: string;
+  title: string;
+  description?: string;
+  expandable?: boolean;
+  children?: React.ReactNode;
+};
+
 export default function Card({
   image,
   title,

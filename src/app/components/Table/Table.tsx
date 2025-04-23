@@ -4,13 +4,14 @@ import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
 import { H3, TableTitle } from "@/Typography";
 import {
+  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import { RowData, TableProps } from "../../../../Interfaces";
+import { RowData } from "../../../../Interfaces";
 import { ExpandedColumns } from "./ExpandedTable/ExpandedColumn";
 
 export const TableContainer = styled.div`
@@ -69,6 +70,15 @@ const TitleContainer = styled("div")`
   margin-bottom: 12px;
 `;
 
+type TableProps<T> = {
+  data: T[];
+  columns: ColumnDef<T>[];
+  searchQuery?: string;
+  searchColumns?: string[];
+  title?: string;
+  columnWidths?: string[];
+  showHeader?: boolean;
+};
 export default function DataTable<T>({
   data,
   columns,
@@ -86,10 +96,10 @@ export default function DataTable<T>({
       return undefined;
     }, obj);
   }
-  
+
   const filteredData = useMemo(() => {
     if (!searchQuery) return data;
-  
+
     return data.filter((row) =>
       (searchColumns || []).some((column) => {
         const value = getNestedValue(row, column as string);
@@ -100,7 +110,7 @@ export default function DataTable<T>({
       })
     );
   }, [data, searchQuery, searchColumns]);
-  
+
   const table = useReactTable({
     data: filteredData,
     columns: useMemo(() => columns, [columns]),

@@ -1,7 +1,6 @@
 import { BFMPalette } from "@/Theme";
 import { Title } from "@/Typography";
 import styled from "styled-components";
-import { CheckboxProps } from "../../../../Interfaces";
 
 const Container = styled.label`
   display: flex;
@@ -40,7 +39,11 @@ const StyledCheckbox = styled.input`
     transform: rotate(45deg);
   }
 `;
-
+type CheckboxProps = {
+  label?: string;
+  checked: boolean;
+  setChecked: (e: boolean) => void;
+};
 export default function Checkbox({
   label = "Label",
   checked,

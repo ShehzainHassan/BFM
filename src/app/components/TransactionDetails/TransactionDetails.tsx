@@ -19,11 +19,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import {
-  Attachment,
-  Note,
-  TransactionDetailsProps,
-} from "../../../../Interfaces";
+import { Attachment, Note } from "../../../../Interfaces";
 import NavButton from "../Button/Primary/NavButton";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { useData } from "@/DataContext";
@@ -163,6 +159,13 @@ const ButtonContainer = styled("div")`
   outline: none;
   border: none;
 `;
+type TransactionDetailsProps<T = object> = {
+  selectedRow: T;
+  noteTitle?: string;
+  noteContent?: string;
+  lastUpdated?: string;
+  selected?: string;
+};
 export default function TransactionDetails({
   selectedRow,
   noteTitle = "Notes",

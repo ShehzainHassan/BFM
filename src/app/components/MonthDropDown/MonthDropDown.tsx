@@ -1,8 +1,12 @@
 "use client";
 import { Select } from "antd";
-import { SelectDropDownProps } from "../../../../Interfaces";
 import { useEffect } from "react";
 
+type SelectDropDownProps = {
+  selectedMonths: string[];
+  setSelectedMonths: (months: string[]) => void;
+  months: string[];
+};
 export default function MonthDropDown({
   selectedMonths,
   setSelectedMonths,

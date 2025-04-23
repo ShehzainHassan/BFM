@@ -17,10 +17,7 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
-import {
-  AreaChartProps,
-  CustomActiveDotProps,
-} from "../../../../../Interfaces";
+import { AreaChartData } from "../../../../../Interfaces";
 
 const GraphContainer = styled("div")`
   width: 100%;
@@ -93,7 +90,11 @@ const CustomYAxisTick = (props: {
     </text>
   );
 };
-
+type CustomActiveDotProps = {
+  cx?: number;
+  cy?: number;
+  color?: string;
+};
 const CustomActiveDot = ({
   cx = 0,
   cy = 0,
@@ -135,6 +136,10 @@ export const ValueContainer = styled("div")`
   align-items: center;
   justify-content: center;
 `;
+type AreaChartProps = {
+  data: AreaChartData[];
+};
+
 export default function AreaChartGraph({ data }: AreaChartProps) {
   const isMobile = useIsMobile(768);
   const [activeIndex, setActiveIndex] = useState(0);

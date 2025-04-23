@@ -7,11 +7,7 @@ import { H2 } from "@/Typography";
 import ButtonSecondary from "../Button/Secondary/ButtonSecondary";
 import DueDate from "../DueDate/DueDate";
 import useTranslation from "@/translations";
-import {
-  DueDatePayload,
-  NotificationsProps,
-  Payload,
-} from "../../../../Interfaces";
+import { DueDatePayload, Notification, Payload } from "../../../../Interfaces";
 
 const Container = styled("div")`
   display: flex;
@@ -53,6 +49,10 @@ const ButtonContainer = styled("div")`
   display: flex;
   justify-content: flex-end;
 `;
+type NotificationsProps = {
+  notifications: Notification[];
+};
+
 export default function Notifications({ notifications }: NotificationsProps) {
   const { t } = useTranslation();
   return (

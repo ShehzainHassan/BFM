@@ -1,7 +1,6 @@
 import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import styled from "styled-components";
-import { ButtonProps } from "../../../../../Interfaces";
 
 const StyledButton = styled.button<ButtonProps>`
   display: flex;
@@ -34,7 +33,16 @@ const ButtonContent = styled.div<{ $imagePosition: string }>`
   align-items: center;
   gap: 8px;
 `;
-
+type ButtonProps = {
+  $bgColor?: string;
+  $borderColor?: string;
+  $textColor?: string;
+  imageSrc?: string;
+  imagePosition?: "left" | "right";
+  onClick?: () => void;
+  $isDisabled?: boolean;
+  children: React.ReactNode;
+};
 export default function NavButton({
   $bgColor,
   $borderColor,

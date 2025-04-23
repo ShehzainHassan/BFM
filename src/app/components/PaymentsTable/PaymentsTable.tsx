@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { SmallH3, SmallH5 } from "@/Typography";
 import styled from "styled-components";
-import { InfoTableProps } from "../../../../Interfaces";
+import { BankDetails } from "../../../../Interfaces";
 
 const TableWrapper = styled.div`
   background-color: ${BFMPalette.white};
@@ -33,6 +33,9 @@ const ValueCell = styled.div`
   flex: 2;
 `;
 
+type InfoTableProps = {
+  data: BankDetails;
+};
 export default function PaymentsTable({ data }: InfoTableProps) {
   const formattedData = [
     { label: "Bank Name", value: data.bankName },

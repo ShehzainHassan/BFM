@@ -20,7 +20,7 @@ import {
   MobileContainer,
   ValueContainer,
 } from "../BalanceOverTime/BalanceTime";
-import { ChartProps, CustomLabelProps } from "../../../../../Interfaces";
+import { BarData } from "../../../../../Interfaces";
 import useIsMobile from "@/useIsMobile";
 import Image from "next/image";
 import { H5, Header } from "@/Typography";
@@ -77,6 +77,11 @@ const CustomTooltip = ({
 
   return null;
 };
+type CustomLabelProps = {
+  x?: number | string;
+  y?: number | string;
+  value?: number | string;
+};
 const CustomLabel = ({ x = 0, y = 0, value }: CustomLabelProps) => {
   const parsedX = typeof x === "string" ? parseFloat(x) : x;
   const parsedY = typeof y === "string" ? parseFloat(y) : y;
@@ -97,6 +102,12 @@ const CustomLabel = ({ x = 0, y = 0, value }: CustomLabelProps) => {
 
 CustomLabel.displayName = "CustomLabel";
 
+type ChartProps = {
+  data: BarData[];
+  color: string;
+  barSize?: number;
+  selectedBarColor?: string;
+};
 export default function BarGraph({
   data,
   color,

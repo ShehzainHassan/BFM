@@ -1,8 +1,11 @@
 import useTranslation from "@/translations";
-import { ESGNotificationsProps } from "../../../../Interfaces";
 import CarbonContainer from "../CarbonContainer/CarbonContainer";
 import Card from "../Card/Card";
 
+type ESGNotificationsProps = {
+  type?: string;
+  title?: string;
+};
 export default function ESGNotifications({
   type = "ELECTRIC_VEHICLE",
   title = "TITLE",

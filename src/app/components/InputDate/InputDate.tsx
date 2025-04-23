@@ -4,7 +4,6 @@ import { H4 } from "@/Typography";
 import { CalendarOutlined } from "@ant-design/icons";
 import { useRef, useState } from "react";
 import styled from "styled-components";
-import { InputDateProps } from "../../../../Interfaces";
 
 const Container = styled.div`
   display: flex;
@@ -56,6 +55,10 @@ const LabelWrapper = styled.div`
   gap: 2px;
 `;
 
+type InputDateProps = {
+  label?: string;
+  isRequired?: boolean;
+};
 export default function InputDate({
   label = "Select Date",
   isRequired = true,

@@ -3,7 +3,7 @@
 import { BFMPalette } from "@/Theme";
 import { H3, SmallHeading } from "@/Typography";
 import styled from "styled-components";
-import { DueDateProps } from "../../../../Interfaces";
+import { DueDatePayload } from "../../../../Interfaces";
 
 const Container = styled.div`
   display: flex;
@@ -152,6 +152,9 @@ const generateDates = (dueDateString: string) => {
   }
 
   return dates;
+};
+type DueDateProps = {
+  payload: DueDatePayload;
 };
 
 export default function DueDate({ payload }: DueDateProps) {

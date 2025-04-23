@@ -2,7 +2,7 @@ import { BFMPalette } from "@/Theme";
 import { H2, H4, H5 } from "@/Typography";
 import { formatCurrency, formatString } from "@/utils";
 import styled from "styled-components";
-import { CategoryProps } from "../../../../Interfaces";
+import { AggregatedItem } from "../../../../Interfaces";
 import { HKD_EQUIVALANT } from "@/constants";
 
 const LabelContainer = styled("div")`
@@ -51,6 +51,11 @@ const DataContainer = styled("div")`
   gap: 5px;
   align-items: center;
 `;
+type CategoryProps = {
+  data: AggregatedItem;
+  circleColor: string;
+};
+
 export default function Category({ data, circleColor }: CategoryProps) {
   return (
     <LabelContainer>
