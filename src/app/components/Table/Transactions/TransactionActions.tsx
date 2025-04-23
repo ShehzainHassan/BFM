@@ -1,6 +1,4 @@
-import { useState } from "react";
 import { Transaction } from "../../../../../Interfaces";
-import TransactionDetailsModal from "../../Modal/TransactionModal/TransactionModal";
 import {
   ActionContainer,
   AttachmentIcon,
@@ -9,15 +7,14 @@ import {
 
 type TransactionActionsProps = {
   row: Transaction;
+  onOpenDetails: (data: Transaction) => void;
+  onSelectType: (type: string) => void;
 };
-export default function TransactionActions({ row }: TransactionActionsProps) {
-  const [selectedTab, setSelectedTab] = useState("Details");
-  const [openModal, setOpenModal] = useState(false);
-  const handleModal = (tab: string) => {
-    setSelectedTab(tab);
-    setOpenModal(true);
-  };
-
+export default function TransactionActions({
+  row,
+  onOpenDetails,
+  onSelectType,
+}: TransactionActionsProps) {
   return (
     <ActionContainer>
       {row.attachments.length > 0 && (
@@ -26,7 +23,10 @@ export default function TransactionActions({ row }: TransactionActionsProps) {
           alt="icon"
           width={32}
           height={32}
-          onClick={() => handleModal("Attachments")}
+          onClick={() => {
+            onOpenDetails(row);
+            onSelectType("Attachment");
+          }}
         />
       )}
 
@@ -35,15 +35,11 @@ export default function TransactionActions({ row }: TransactionActionsProps) {
         alt="icon"
         width={32}
         height={32}
-        onClick={() => handleModal("Details")}
+        onClick={() => {
+          onOpenDetails(row);
+          onSelectType("Details");
+        }}
       />
-      {openModal && (
-        <TransactionDetailsModal
-          selected={selectedTab}
-          selectedTransaction={row}
-          onClose={() => setOpenModal(false)}
-        />
-      )}
     </ActionContainer>
   );
 }

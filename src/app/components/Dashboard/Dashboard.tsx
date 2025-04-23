@@ -16,6 +16,7 @@ import { useAccountsColumns } from "../Table/Accounts/AccountsColumns";
 import DataTable from "../Table/Table";
 import { useTransactionColumns } from "../Table/Transactions/TransactionsColumns";
 import TextContainer from "../TextContainer/TextContainer";
+import TransactionDetailsModal from "../Modal/TransactionModal/TransactionModal";
 
 const MainContainer = styled("div")`
   display: grid;
@@ -89,7 +90,10 @@ export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const { notifications, transactions, accounts } = useData();
   const accountColumns = useAccountsColumns();
-  const transactionColumns = useTransactionColumns();
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<Transaction | null>(null);
+  const [modalTab, setModalTab] = useState("Details");
+  const columns = useTransactionColumns(setSelectedTransaction, setModalTab);
   const [currentPage, setCurrentPage] = useState(0);
   const data: Transaction[] | AccountData[] =
     selectedTab === tabs[0] ? transactions : accounts;
@@ -152,7 +156,7 @@ export default function Dashboard() {
           <DataTable
             key="transactions"
             data={paginatedData as Transaction[]}
-            columns={transactionColumns}
+            columns={columns}
             searchQuery={searchQuery}
             searchColumns={["description.title", "description.subtitle"]}
             columnWidths={["1.2fr", "4fr", "2fr", "1.5fr", "2fr", "1.3fr"]}
@@ -175,6 +179,12 @@ export default function Dashboard() {
           totalPages={totalPages}
         />
       </PaginationContainer>
+
+      <TransactionDetailsModal
+        selected={modalTab}
+        selectedTransaction={selectedTransaction}
+        onClose={() => setSelectedTransaction(null)}
+      />
 
       <MobileContainer>
         <TextContainer />

@@ -4,8 +4,13 @@ import { Transaction } from "../../../../../Interfaces";
 import TransactionActions from "./TransactionActions";
 import { TransactionStyles } from "./TransactionsColumnsStyles";
 
-export const useTransactionColumns = (): ColumnDef<Transaction>[] => {
+export const useTransactionColumns = (
+  setSelectedTransaction: (transaction: Transaction) => void,
+  setType: (type: string) => void
+
+): ColumnDef<Transaction>[] => {
   const { t } = useTranslation();
+
   return [
     {
       accessorKey: t("tables.transactions.date"),
@@ -35,7 +40,13 @@ export const useTransactionColumns = (): ColumnDef<Transaction>[] => {
     {
       accessorKey: t("tables.transactions.action") || "ACTION",
       header: t("tables.transactions.action"),
-      cell: ({ row }) => <TransactionActions row={row.original} />,
+      cell: ({ row }) => (
+        <TransactionActions
+          row={row.original}
+          onOpenDetails={() => setSelectedTransaction(row.original)}
+          onSelectType={(type)=>setType(type)}
+        />
+      ),
     },
   ];
 };
