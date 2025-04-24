@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { RecurringTransactionStyles } from "./RecurringTransactionsStyles";
 import useTranslation from "@/translations";
-import { RecurringTransaction } from "../../../../../Interfaces";
+import { RecurringTransaction } from "../../../../Interfaces/Interfaces";
 
 export const useRecurringTransactionColumns =
   (): ColumnDef<RecurringTransaction>[] => {

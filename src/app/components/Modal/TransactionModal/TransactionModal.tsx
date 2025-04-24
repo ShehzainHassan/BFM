@@ -1,4 +1,4 @@
-import { Transaction } from "../../../../../Interfaces";
+import { Transaction } from "../../../../Interfaces/Interfaces";
 import TransactionDetails from "../../TransactionDetails/TransactionDetails";
 import DetailsModal from "../Modal";
 

@@ -3,23 +3,23 @@ import { OutflowsStyles } from "./OutflowsStyles";
 import useTranslation from "@/translations";
 import { useData } from "@/DataContext";
 import { formatYearMonth } from "@/utils";
-import { Outflows } from "../../../../../Interfaces";
+import { Outflows } from "../../../../Interfaces/Interfaces";
 
 export const useOutflowsColumns = (): ColumnDef<Outflows>[] => {
   const { t } = useTranslation();
   const { reports } = useData();
 
-  const monthColumns: ColumnDef<Outflows>[] = (reports?.profitAndLost ?? []).map(
-    (item, index) => {
-      const accessorKey = `MONTH_${index + 1}` as keyof typeof OutflowsStyles;
+  const monthColumns: ColumnDef<Outflows>[] = (
+    reports?.profitAndLost ?? []
+  ).map((item, index) => {
+    const accessorKey = `MONTH_${index + 1}` as keyof typeof OutflowsStyles;
 
-      return {
-        accessorKey,
-        header: formatYearMonth(item.yearMonth),
-        cell: ({ row }) => OutflowsStyles[accessorKey](row.original),
-      };
-    }
-  );
+    return {
+      accessorKey,
+      header: formatYearMonth(item.yearMonth),
+      cell: ({ row }) => OutflowsStyles[accessorKey](row.original),
+    };
+  });
 
   return [
     {

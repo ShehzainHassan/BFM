@@ -5,7 +5,7 @@ import { BodyText, H3Secondary, H4 } from "@/Typography";
 import { formatCurrency, formatDate, formatString } from "@/utils";
 import Image from "next/image";
 import styled from "styled-components";
-import { Transaction } from "../../../../../Interfaces";
+import { Transaction } from "../../../../Interfaces/Interfaces";
 import { AmountText } from "../Accounts/AccountsStyles";
 
 const DescriptionWrapper = styled.div`

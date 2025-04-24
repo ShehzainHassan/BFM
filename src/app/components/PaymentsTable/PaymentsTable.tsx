@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { SmallH3, SmallH5 } from "@/Typography";
 import styled from "styled-components";
-import { BankDetails } from "../../../../Interfaces";
+import { BankDetails } from "../../../Interfaces/Interfaces";
 
 const TableWrapper = styled.div`
   background-color: ${BFMPalette.white};

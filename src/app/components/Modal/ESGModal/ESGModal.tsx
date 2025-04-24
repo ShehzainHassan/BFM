@@ -10,7 +10,7 @@ import useIsMobile from "@/useIsMobile";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
-import { ESGNotification } from "../../../../../Interfaces";
+import { ESGNotification } from "../../../../Interfaces/Interfaces";
 import HorizontalTabs from "../../HorizontalTabs/HorizontalTabs";
 import DetailsModal from "../Modal";
 

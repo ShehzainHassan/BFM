@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { H5 } from "@/Typography";
 import styled from "styled-components";
-import { NavbarProps } from "../../../../Interfaces";
+import { NavbarProps } from "../../../Interfaces/Interfaces";
 import { useData } from "@/DataContext";
 
 const Container = styled("div")`

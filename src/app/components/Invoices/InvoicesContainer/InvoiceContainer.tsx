@@ -1,7 +1,7 @@
-import { useData } from "@/DataContext";
+import { useInvoice } from "@/InvoiceContext";
 import { BFMPalette } from "@/Theme";
 import styled from "styled-components";
-import TextComponent from "../../components/TextComponent/TextComponent";
+import TextComponent from "../../TextComponent/TextComponent";
 
 const Container = styled.div`
   display: grid;
@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 export default function InvoiceContainer() {
-  const { invoicesSummary } = useData();
+  const { invoicesSummary } = useInvoice();
   const parseAmount = (amount: string) => {
     const parts = amount.split(" ");
     return parseFloat(parts[1] || "0");

@@ -1,13 +1,12 @@
 import useTranslation from "@/translations";
 import { ColumnDef } from "@tanstack/react-table";
-import { Transaction } from "../../../../../Interfaces";
+import { Transaction } from "../../../../Interfaces/Interfaces";
 import TransactionActions from "./TransactionActions";
 import { TransactionStyles } from "./TransactionsColumnsStyles";
 
 export const useTransactionColumns = (
   setSelectedTransaction: (transaction: Transaction) => void,
   setType: (type: string) => void
-
 ): ColumnDef<Transaction>[] => {
   const { t } = useTranslation();
 
@@ -44,7 +43,7 @@ export const useTransactionColumns = (
         <TransactionActions
           row={row.original}
           onOpenDetails={() => setSelectedTransaction(row.original)}
-          onSelectType={(type)=>setType(type)}
+          onSelectType={(type) => setType(type)}
         />
       ),
     },

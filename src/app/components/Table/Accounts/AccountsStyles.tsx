@@ -4,7 +4,7 @@ import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, H4 } from "@/Typography";
 import { formatCurrency } from "@/utils";
 import styled from "styled-components";
-import { AccountData } from "../../../../../Interfaces";
+import { AccountData } from "../../../../Interfaces/Interfaces";
 
 export const AmountText = styled.div`
   display: flex;

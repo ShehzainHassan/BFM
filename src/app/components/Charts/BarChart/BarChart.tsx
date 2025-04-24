@@ -20,7 +20,7 @@ import {
   MobileContainer,
   ValueContainer,
 } from "../BalanceOverTime/BalanceTime";
-import { BarData } from "../../../../../Interfaces";
+import { BarData } from "../../../../Interfaces/Interfaces";
 import useIsMobile from "@/useIsMobile";
 import Image from "next/image";
 import { H5, Header } from "@/Typography";

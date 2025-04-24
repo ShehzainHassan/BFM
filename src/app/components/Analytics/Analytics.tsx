@@ -20,7 +20,7 @@ import {
   BuyerSupplierAnalysis,
   RecurringTransaction,
   TransitionHighlight,
-} from "../../../../Interfaces";
+} from "../../../Interfaces/Interfaces";
 
 const TabContainer1 = styled("div")`
   padding: 20px 16px 0px 16px;

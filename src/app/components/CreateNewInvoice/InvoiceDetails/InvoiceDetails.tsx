@@ -1,4 +1,4 @@
-import { useData } from "@/DataContext";
+import { useInvoice } from "@/InvoiceContext";
 import useTranslation from "@/translations";
 import { formatCurrency } from "@/utils";
 import { useEffect } from "react";
@@ -43,13 +43,12 @@ export default function InvoiceDetails() {
     setSubTotal,
     currency,
     handleCurrencyChange,
-  } = useData();
+  } = useInvoice();
   useEffect(() => {
     if (items.length === 0) {
       setSubTotal(formatCurrency(`${currency} ${0.0}`, 2));
     }
   }, [items, currency, setSubTotal]);
-  
 
   return (
     <Container>

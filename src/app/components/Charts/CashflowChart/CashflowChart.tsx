@@ -7,7 +7,7 @@ import { formatCurrency, getDynamicScale } from "@/utils";
 import { BarCustomLayerProps, BarTooltipProps, ResponsiveBar } from "@nivo/bar";
 import { JSX } from "react";
 import styled from "styled-components";
-import { CashFlowData } from "../../../../../Interfaces";
+import { CashFlowData } from "../../../../Interfaces/Interfaces";
 
 const ChartContainer = styled.div`
   display: flex;

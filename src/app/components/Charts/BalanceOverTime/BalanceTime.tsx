@@ -17,7 +17,7 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
-import { AreaChartData } from "../../../../../Interfaces";
+import { AreaChartData } from "../../../../Interfaces/Interfaces";
 
 const GraphContainer = styled("div")`
   width: 100%;

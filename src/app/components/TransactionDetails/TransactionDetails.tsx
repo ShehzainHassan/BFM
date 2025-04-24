@@ -19,7 +19,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Attachment, Note } from "../../../../Interfaces";
+import { Attachment, Note } from "../../../Interfaces/Interfaces";
 import NavButton from "../Button/Primary/NavButton";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import { useData } from "@/DataContext";

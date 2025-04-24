@@ -1,0 +1,40 @@
+import { BankDetails, InvoiceItem, InvoiceSummary } from "./Interfaces";
+
+export interface InvoiceContextType {
+  isCreatingInvoice: boolean;
+  setIsCreatingInvoice: (value: boolean) => void;
+  items: InvoiceItem[];
+  addItem: () => void;
+  removeItem: (id: number) => void;
+  updateItem: (id: number, field: keyof InvoiceItem, value: string) => void;
+  currency: string;
+  setCurrency: (currency: string) => void;
+  handleCurrencyChange: (newCurrency: string) => void;
+  invoiceNumber: string;
+  setInvoiceNumber: (value: string) => void;
+  invoiceSubject: string;
+  setInvoiceSubject: (value: string) => void;
+  invoiceDetails: string;
+  setInvoiceDetails: (value: string) => void;
+  dueDate: string;
+  setDueDate: (value: string) => void;
+  companyName: string;
+  setCompanyName: (value: string) => void;
+  companyAddress: string;
+  setCompanyAddress: (value: string) => void;
+  discount: number;
+  setDiscount: (value: number) => void;
+  hasDiscount: boolean;
+  setHasDiscount: (value: boolean) => void;
+  hasPaymentChecked: boolean;
+  setHasPaymentChecked: (value: boolean) => void;
+  bankDetails: BankDetails;
+  setBankDetails: (details: BankDetails) => void;
+  subTotal: string;
+  setSubTotal: (value: string) => void;
+  finalTotal: string;
+  setFinalTotal: (value: string) => void;
+  invoicesSummary: InvoiceSummary[];
+  setInvoicesSummary: (value: InvoiceSummary[]) => void;
+  transformClientName: (clientName: string) => void;
+}

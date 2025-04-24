@@ -1,10 +1,10 @@
 import { useState } from "react";
-import HorizontalTabs from "../../components/HorizontalTabs/HorizontalTabs";
 import styled from "styled-components";
 import { BFMPalette } from "@/Theme";
 import { TableTitle } from "@/Typography";
-import InvoiceChart from "../../components/Charts/InvoiceOverview/InvoiceChart";
-import { invoiceData } from "../../components/Charts/InvoiceOverview/InvoiceData";
+import HorizontalTabs from "../../HorizontalTabs/HorizontalTabs";
+import InvoiceChart from "../../Charts/InvoiceOverview/InvoiceChart";
+import { invoiceData } from "../../Charts/InvoiceOverview/InvoiceData";
 const MainContainer = styled("div")`
   border-radius: 12px;
   background-color: ${BFMPalette.white};

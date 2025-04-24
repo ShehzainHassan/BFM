@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ExpandedTableStyles } from "./ExpandedTableStyles";
-import { ExpandedData } from "../../../../../Interfaces";
+import { ExpandedData } from "../../../../Interfaces/Interfaces";
 
 export const ExpandedColumns: ColumnDef<ExpandedData>[] = [
   {

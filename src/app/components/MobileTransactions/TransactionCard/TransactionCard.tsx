@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H2, H3Secondary, H5 } from "@/Typography";
 import styled from "styled-components";
-import { Transaction } from "../../../../../Interfaces";
+import { Transaction } from "../../../../Interfaces/Interfaces";
 import { formatCurrency, formatDate, formatString } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
 import React from "react";

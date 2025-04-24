@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { TransitionCellStyles } from "./TransitionHighlightStyles";
 import useTranslation from "@/translations";
-import { TransitionHighlight } from "../../../../../Interfaces";
+import { TransitionHighlight } from "../../../../Interfaces/Interfaces";
 
 export const useTransitionHighlightColumns =
   (): ColumnDef<TransitionHighlight>[] => {

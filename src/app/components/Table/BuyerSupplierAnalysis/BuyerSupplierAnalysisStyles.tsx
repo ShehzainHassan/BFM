@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary } from "@/Typography";
 import { formatCurrency } from "@/utils";
-import { BuyerSupplierAnalysis } from "../../../../../Interfaces";
+import { BuyerSupplierAnalysis } from "../../../../Interfaces/Interfaces";
 
 export const BuyerSupplierAnalysisStyles = {
   PREDICTED_NAME: (row: BuyerSupplierAnalysis) => (

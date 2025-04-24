@@ -5,7 +5,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import ESGModal from "../Modal/ESGModal/ESGModal";
 import { useData } from "@/DataContext";
-import { ESGNotification } from "../../../../Interfaces";
+import { ESGNotification } from "../../../Interfaces/Interfaces";
 
 const MainContainer = styled("div")`
   display: flex;

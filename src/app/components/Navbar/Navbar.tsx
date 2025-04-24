@@ -7,10 +7,11 @@ import { formatDate, getFirstDayOfMonth, parseInvoices } from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
-import { NavbarProps } from "../../../../Interfaces";
+import { NavbarProps } from "../../../Interfaces/Interfaces";
 import NavButton from "../Button/Primary/NavButton";
 import DetailsModal from "../Modal/Modal";
 import SavedModalContent from "../SavedModalContent/SavedModalContent";
+import { useInvoice } from "@/InvoiceContext";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
@@ -81,9 +82,8 @@ export default function Navbar({ navItems }: NavbarProps) {
   const { t } = useTranslation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { selectedTab, setSelectedTab } = useData();
   const {
-    selectedTab,
-    setSelectedTab,
     isCreatingInvoice,
     setIsCreatingInvoice,
     items,
@@ -111,7 +111,7 @@ export default function Navbar({ navItems }: NavbarProps) {
     setHasDiscount,
     setHasPaymentChecked,
     setInvoicesSummary,
-  } = useData();
+  } = useInvoice();
   const saveInvoice = () => {
     const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
     const today = new Date();

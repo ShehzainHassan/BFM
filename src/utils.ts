@@ -8,7 +8,7 @@ import {
   InvoiceSummary,
   MonthYearData,
   RecurringTransaction,
-} from "../Interfaces";
+} from "./Interfaces/Interfaces";
 import { fromAddress, HKD_EQUIVALANT, toAddress } from "./constants";
 import { BFMPalette } from "./Theme";
 

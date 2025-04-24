@@ -1,4 +1,4 @@
-import { useData } from "@/DataContext";
+import { useInvoice } from "@/InvoiceContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
 import { Description } from "@/Typography";
@@ -56,7 +56,7 @@ export default function SelectDropDown() {
     ([value, label]) => ({ value, label })
   );
 
-  const { companyAddress, setCompanyAddress } = useData();
+  const { companyAddress, setCompanyAddress } = useInvoice();
 
   useEffect(() => {
     if (!companyAddress && options.length > 0) {

@@ -3,7 +3,7 @@
 import { BFMPalette } from "@/Theme";
 import { H3, SmallHeading } from "@/Typography";
 import styled from "styled-components";
-import { DueDatePayload } from "../../../../Interfaces";
+import { DueDatePayload } from "../../../Interfaces/Interfaces";
 
 const Container = styled.div`
   display: flex;

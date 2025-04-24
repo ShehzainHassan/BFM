@@ -8,12 +8,14 @@ import Calender from "./components/Calender/Calender";
 import CreateNewInvoice from "./components/CreateNewInvoice/CreateNewInvoice";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ESG from "./components/ESG/ESG";
-import Invoices from "./invoices/page";
 import MobileTransactions from "./components/MobileTransactions/MobileTransactions";
+import { useInvoice } from "@/InvoiceContext";
+import Invoices from "./components/Invoices/page";
 
 export default function Page() {
   const { t } = useTranslation();
-  const { selectedTab, isCreatingInvoice, setInvoiceNumber } = useData();
+  const { selectedTab } = useData();
+  const { isCreatingInvoice, setInvoiceNumber } = useInvoice();
   useEffect(() => {
     if (isCreatingInvoice) {
       const newInvoiceNumber = generateInvoiceNumber();

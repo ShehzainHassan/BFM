@@ -2,7 +2,7 @@ import { BFMPalette } from "@/Theme";
 import { H2, H4, H5 } from "@/Typography";
 import { formatCurrency, formatString } from "@/utils";
 import styled from "styled-components";
-import { AggregatedItem } from "../../../../Interfaces";
+import { AggregatedItem } from "../../../Interfaces/Interfaces";
 import { HKD_EQUIVALANT } from "@/constants";
 
 const LabelContainer = styled("div")`

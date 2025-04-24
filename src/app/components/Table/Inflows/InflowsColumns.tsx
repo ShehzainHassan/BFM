@@ -3,7 +3,7 @@ import { InflowsStyles } from "./InflowsStyles";
 import useTranslation from "@/translations";
 import { useData } from "@/DataContext";
 import { formatYearMonth } from "@/utils";
-import { Inflows } from "../../../../../Interfaces";
+import { Inflows } from "../../../../Interfaces/Interfaces";
 
 export const useInflowsColumns = (): ColumnDef<Inflows>[] => {
   const { t } = useTranslation();

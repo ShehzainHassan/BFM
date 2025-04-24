@@ -11,7 +11,6 @@ import {
   AccountData,
   AreaChartData,
   Attachment,
-  BankDetails,
   BarData,
   BuyerSupplierAnalysis,
   CashFlowData,
@@ -21,8 +20,6 @@ import {
   ESGNotification,
   ESGSummary,
   Inflows,
-  InvoiceSummary,
-  Item,
   LineChartData,
   Metrics,
   Note,
@@ -40,7 +37,7 @@ import {
   TaggedTransaction,
   Transaction,
   TransitionHighlight,
-} from "../Interfaces";
+} from "./Interfaces/Interfaces";
 import { CURRENCY } from "./constants";
 import useTranslation from "./translations";
 import {
@@ -48,7 +45,6 @@ import {
   formatString,
   formatYearMonth,
   getImagePath,
-  parseInvoices,
 } from "./utils";
 
 const DataContext = createContext<DataContextType | null>(null);
@@ -65,46 +61,12 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [inflows, setInflows] = useState<Inflows[]>([]);
   const [outflows, setOutflows] = useState<Outflows[]>([]);
-
   const { t } = useTranslation();
   const [selectedTab, setSelectedTab] = useState(t("navbar.tabs.dashboard"));
-  const [isCreatingInvoice, setIsCreatingInvoice] = useState(false);
-  const [currency, setCurrency] = useState("USD");
-  const [invoiceNumber, setInvoiceNumber] = useState("");
-  const [invoiceSubject, setInvoiceSubject] = useState("");
-  const [invoiceDetails, setInvoiceDetails] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [companyAddress, setCompanyAddress] = useState("");
-  const [discount, setDiscount] = useState(0);
-  const [hasDiscount, setHasDiscount] = useState(false);
-  const [subTotal, setSubTotal] = useState("");
-  const [finalTotal, setFinalTotal] = useState("");
-  const [hasPaymentChecked, setHasPaymentChecked] = useState(false);
+
   const [selectedESGNotification, setSelectedESGNotification] =
     useState<ESGNotification | null>(null);
-  const transformClientName = (clientName: string): string => {
-    return t(`invoice_creation.dropdown.options.${clientName}`) || "";
-  };
 
-  const [invoicesSummary, setInvoicesSummary] = useState<InvoiceSummary[]>([]);
-
-  const [bankDetails, setBankDetails] = useState<BankDetails>({
-    bankName: "",
-    name: "",
-    accountNumber: "",
-    SWIFTCode: "",
-    bankAddress: "",
-  });
-  const [items, setItems] = useState([
-    {
-      id: Date.now(),
-      description: "Enter item description",
-      qty: 1,
-      price: 0,
-      currency: currency,
-    },
-  ]);
   const transformTransactions = (
     parsedTransaction: ParsedTransaction[]
   ): Transaction[] => {
@@ -375,41 +337,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     reports?.expenseRecurringTransactions ?? []
   );
 
-  const addItem = () => {
-    setItems([
-      ...items,
-      {
-        id: Date.now(),
-        description: "Enter item description",
-        qty: 1,
-        price: 0,
-        currency,
-      },
-    ]);
-  };
-
-  const removeItem = (id: number) => {
-    setItems(items.filter((item) => item.id !== id));
-  };
-
-  const updateItem = (id: number, key: string, value: Item[keyof Item]) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, [key]: value } : item
-      )
-    );
-  };
-  const handleCurrencyChange = (newCurrency: string) => {
-    setCurrency(newCurrency);
-
-    setItems((prevItems) =>
-      prevItems.map((item) => ({
-        ...item,
-        currency: newCurrency,
-      }))
-    );
-  };
-
   const pieData = transformESGData(reports?.esgSummary ?? {});
   const barData = transformBarData(reports?.esgSummary ?? {});
   const depositsDashboard = transformReportsData(
@@ -515,17 +442,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
           );
         setAttachments(allAttachments);
         setNotes(allNotes);
-
-        const storedInvoices = localStorage.getItem("invoices");
-        if (storedInvoices) {
-          const parsed = parseInvoices(JSON.parse(storedInvoices)).map(
-            (invoice) => ({
-              ...invoice,
-              clientName: transformClientName(invoice.clientName),
-            })
-          );
-          setInvoicesSummary(parsed);
-        }
       } catch (err) {
         console.error("Error loading data ", err);
       } finally {
@@ -570,45 +486,9 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         lineChartData,
         selectedTab,
         setSelectedTab,
-        isCreatingInvoice,
-        setIsCreatingInvoice,
-        items,
-        addItem,
-        removeItem,
-        updateItem,
-        currency,
-        setCurrency,
-        handleCurrencyChange,
-        invoiceNumber,
-        setInvoiceNumber,
-        invoiceSubject,
-        setInvoiceSubject,
-        invoiceDetails,
-        setInvoiceDetails,
-        dueDate,
-        setDueDate,
-        companyName,
-        setCompanyName,
-        companyAddress,
-        setCompanyAddress,
-        discount,
-        setDiscount,
-        hasDiscount,
-        setHasDiscount,
-        hasPaymentChecked,
-        setHasPaymentChecked,
-        bankDetails,
-        setBankDetails,
-        subTotal,
-        setSubTotal,
-        finalTotal,
-        setFinalTotal,
-        invoicesSummary,
-        setInvoicesSummary,
         loading,
         selectedESGNotification,
         setSelectedESGNotification,
-        transformClientName,
       }}>
       {children}
     </DataContext.Provider>

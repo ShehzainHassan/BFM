@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { InvoiceSummary } from "../../../../../Interfaces";
+import { InvoiceSummary } from "../../../../Interfaces/Interfaces";
 import { InvoiceSummaryStyles } from "./InvoiceSummaryStyles";
 
 export const useInvoiceSummaryColumns = (): ColumnDef<InvoiceSummary>[] => {

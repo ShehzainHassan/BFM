@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { AccountsStyles } from "./AccountsStyles";
 import useTranslation from "@/translations";
-import { AccountData } from "../../../../../Interfaces";
+import { AccountData } from "../../../../Interfaces/Interfaces";
 export const useAccountsColumns = (): ColumnDef<AccountData>[] => {
   const { t } = useTranslation();
   return [

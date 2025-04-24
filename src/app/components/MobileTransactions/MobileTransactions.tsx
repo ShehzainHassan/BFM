@@ -2,7 +2,7 @@ import { ITEMS_PER_PAGE } from "@/constants";
 import { useData } from "@/DataContext";
 import { useState } from "react";
 import styled from "styled-components";
-import { AccountData, Transaction } from "../../../../Interfaces";
+import { AccountData, Transaction } from "../../../Interfaces/Interfaces";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import TransactionDetailsModal from "../Modal/TransactionModal/TransactionModal";
 import Pagination from "../Pagination/Pagination";

@@ -5,7 +5,7 @@ import { BFMPalette } from "@/Theme";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
-import { AccountData, Transaction } from "../../../../Interfaces";
+import { AccountData, Transaction } from "../../../Interfaces/Interfaces";
 import HorizontalTabs from "../HorizontalTabs/HorizontalTabs";
 import InflowOutflow from "../InflowOutflow/InflowOutflow";
 import Notifications from "../Notifications/Notifications";

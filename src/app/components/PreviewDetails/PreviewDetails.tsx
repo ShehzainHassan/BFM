@@ -1,5 +1,5 @@
 import { fromAddress, toAddress } from "@/constants";
-import { useData } from "@/DataContext";
+import { useInvoice } from "@/InvoiceContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
 import { formatDate, getFirstDayOfMonth } from "@/utils";
@@ -39,7 +39,7 @@ export default function PreviewDetails() {
     bankDetails,
     hasPaymentChecked,
     invoiceNumber,
-  } = useData();
+  } = useInvoice();
   return (
     <Container>
       <Notes title="Invoice number" value={invoiceNumber} />

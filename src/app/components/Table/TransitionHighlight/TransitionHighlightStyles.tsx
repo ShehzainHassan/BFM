@@ -3,7 +3,7 @@ import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, H5 } from "@/Typography";
 import styled from "styled-components";
 import { formatCurrency, formatDate, formatString } from "@/utils";
-import { TransitionHighlight } from "../../../../../Interfaces";
+import { TransitionHighlight } from "../../../../Interfaces/Interfaces";
 
 const ReasonContainer = styled("div")`
   display: flex;

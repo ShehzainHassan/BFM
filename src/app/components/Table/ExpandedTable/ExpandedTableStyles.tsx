@@ -1,7 +1,7 @@
 import { BFMPalette } from "@/Theme";
 import { BodyText, H4 } from "@/Typography";
 import { formatCurrency } from "@/utils";
-import { ExpandedData } from "../../../../../Interfaces";
+import { ExpandedData } from "../../../../Interfaces/Interfaces";
 
 export const ExpandedTableStyles = {
   DESCRIPTION: (row: ExpandedData) => (

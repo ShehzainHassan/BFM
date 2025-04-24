@@ -1,4 +1,4 @@
-import { Invoice } from "../../../../../Interfaces";
+import { Invoice } from "../../../../Interfaces/Interfaces";
 
 export const invoiceData: Invoice[] = [
   { month: "Jan 2024", value1: 4000, value2: 2400, value3: 2400 },

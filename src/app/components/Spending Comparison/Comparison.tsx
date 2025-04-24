@@ -4,7 +4,7 @@ import { BFMPalette } from "@/Theme";
 import { H5 } from "@/Typography";
 import { CURRENCY } from "@/constants";
 import { formatCurrency } from "@/utils";
-import { Payload } from "../../../../Interfaces";
+import { Payload } from "../../../Interfaces/Interfaces";
 const BarsContainer = styled("div")`
   display: flex;
   flex-direction: column;

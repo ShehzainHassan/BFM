@@ -2,7 +2,7 @@ import { HKD_EQUIVALANT } from "@/constants";
 import { BFMPalette } from "@/Theme";
 import { H2, H3Secondary, H5 } from "@/Typography";
 import { formatCurrency } from "@/utils";
-import { AccountData } from "../../../../../Interfaces";
+import { AccountData } from "../../../../Interfaces/Interfaces";
 import {
   Amount,
   AmountContainer,

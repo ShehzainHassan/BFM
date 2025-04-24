@@ -1,10 +1,10 @@
-import { useData } from "@/DataContext";
+import { useInvoice } from "@/InvoiceContext";
 import { BFMPalette } from "@/Theme";
 import { BodyText, H5 } from "@/Typography";
 import { formatDate, parseInvoices, updateInvoiceStatus } from "@/utils";
 import { useState } from "react";
 import styled from "styled-components";
-import { InvoiceSummary } from "../../../../../Interfaces";
+import { InvoiceSummary } from "../../../../Interfaces/Interfaces";
 import DetailsModal from "../../Modal/Modal";
 import SavedModalContent from "../../SavedModalContent/SavedModalContent";
 import {
@@ -31,7 +31,7 @@ const StatusBadge = styled.div<{ $status: "PENDING" | "OVERDUE" | "PAID" }>`
 `;
 const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { setInvoicesSummary, transformClientName } = useData();
+  const { setInvoicesSummary, transformClientName } = useInvoice();
   const toggleInvoiceCategory = () => {
     const updatedInvoices = updateInvoiceStatus(row.invoiceNo);
     transformClientName(row.clientName);

@@ -1,4 +1,4 @@
-import { useData } from "@/DataContext";
+import { useInvoice } from "@/InvoiceContext";
 import { BFMPalette } from "@/Theme";
 import { H4 } from "@/Typography";
 import { CalendarOutlined } from "@ant-design/icons";
@@ -63,7 +63,7 @@ export default function InputDate({
   label = "Select Date",
   isRequired = true,
 }: InputDateProps) {
-  const { dueDate, setDueDate } = useData();
+  const { dueDate, setDueDate } = useInvoice();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isTouched, setIsTouched] = useState(false);
 

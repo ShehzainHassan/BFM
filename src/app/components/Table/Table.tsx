@@ -11,7 +11,7 @@ import {
 } from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import styled from "styled-components";
-import { RowData } from "../../../../Interfaces";
+import { RowData } from "../../../Interfaces/Interfaces";
 import { ExpandedColumns } from "./ExpandedTable/ExpandedColumn";
 
 export const TableContainer = styled.div`

@@ -2,7 +2,7 @@ import { BFMPalette } from "@/Theme";
 import { BodyText, H3Secondary, MediumBoldHeading } from "@/Typography";
 import { formatCurrency, formatKeys } from "@/utils";
 import { HKD_EQUIVALANT } from "@/constants";
-import { Outflows } from "../../../../../Interfaces";
+import { Outflows } from "../../../../Interfaces/Interfaces";
 
 const getTextColor = (value: number) => {
   if (value === 0) return BFMPalette.gray200;

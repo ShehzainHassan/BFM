@@ -7,7 +7,11 @@ import { H2 } from "@/Typography";
 import ButtonSecondary from "../Button/Secondary/ButtonSecondary";
 import DueDate from "../DueDate/DueDate";
 import useTranslation from "@/translations";
-import { DueDatePayload, Notification, Payload } from "../../../../Interfaces";
+import {
+  DueDatePayload,
+  Notification,
+  Payload,
+} from "../../../Interfaces/Interfaces";
 
 const Container = styled("div")`
   display: flex;

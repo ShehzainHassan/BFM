@@ -4,7 +4,7 @@ import { BodyText, H4 } from "@/Typography";
 import { formatCurrency, formatDate } from "@/utils";
 import Image from "next/image";
 import styled from "styled-components";
-import { RecurringTransaction } from "../../../../../Interfaces";
+import { RecurringTransaction } from "../../../../Interfaces/Interfaces";
 
 const DescriptionContainer = styled("div")`
   display: flex;

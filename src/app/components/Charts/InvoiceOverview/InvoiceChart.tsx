@@ -10,7 +10,7 @@ import {
   TooltipProps,
   YAxis,
 } from "recharts";
-import { Invoice } from "../../../../../Interfaces";
+import { Invoice } from "../../../../Interfaces/Interfaces";
 import {
   CustomTooltipContainer,
   CustomTooltipLabel,

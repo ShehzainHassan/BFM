@@ -1,7 +1,8 @@
-import { useData } from "@/DataContext";
+import { useInvoice } from "@/InvoiceContext";
 import { BFMPalette } from "@/Theme";
 import { TableTitle } from "@/Typography";
 import Image from "next/image";
+import { useState } from "react";
 import {
   Filter,
   Header,
@@ -11,10 +12,9 @@ import {
 import Search from "../Search/Search";
 import { useInvoiceSummaryColumns } from "../Table/InvoiceSummaryTable/InvoiceSummaryTableColumns";
 import DataTable from "../Table/Table";
-import { useState } from "react";
 
 export default function InvoiceSummary() {
-  const { invoicesSummary } = useData();
+  const { invoicesSummary } = useInvoice();
   const [searchQuery, setSearchQuery] = useState("");
 
   return (

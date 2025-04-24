@@ -8,6 +8,7 @@ import MobileNav from "./components/MobileNav/MobileNav";
 import Navbar from "./components/Navbar/Navbar";
 import Sidebar from "./components/Sidebar/Sidebar";
 import "./globals.css";
+import { InvoiceProvider } from "@/InvoiceContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,29 +45,31 @@ export default function RootLayout({
       <body>
         <Sidebar />
         <DataProvider>
-          <ContentWrapper>
-            <Navbar
-              navItems={[
-                { label: t("navbar.tabs.dashboard") },
-                { label: t("navbar.tabs.analytics") },
-                { label: t("navbar.tabs.invoices") },
-                { label: t("navbar.tabs.calendar") },
-                { label: t("navbar.tabs.esg") },
-              ]}
-            />
-            <MobileNav
-              navItems={[
-                { label: t("navbar.tabs.dashboard") },
-                { label: t("navbar.tabs.transactions") },
-                { label: t("navbar.tabs.analytics") },
-                { label: t("navbar.tabs.invoices") },
-                { label: t("navbar.tabs.calendar") },
-                { label: t("navbar.tabs.esg") },
-              ]}
-            />
+          <InvoiceProvider>
+            <ContentWrapper>
+              <Navbar
+                navItems={[
+                  { label: t("navbar.tabs.dashboard") },
+                  { label: t("navbar.tabs.analytics") },
+                  { label: t("navbar.tabs.invoices") },
+                  { label: t("navbar.tabs.calendar") },
+                  { label: t("navbar.tabs.esg") },
+                ]}
+              />
+              <MobileNav
+                navItems={[
+                  { label: t("navbar.tabs.dashboard") },
+                  { label: t("navbar.tabs.transactions") },
+                  { label: t("navbar.tabs.analytics") },
+                  { label: t("navbar.tabs.invoices") },
+                  { label: t("navbar.tabs.calendar") },
+                  { label: t("navbar.tabs.esg") },
+                ]}
+              />
 
-            <MainContent>{children}</MainContent>
-          </ContentWrapper>
+              <MainContent>{children}</MainContent>
+            </ContentWrapper>
+          </InvoiceProvider>
         </DataProvider>
       </body>
     </html>
