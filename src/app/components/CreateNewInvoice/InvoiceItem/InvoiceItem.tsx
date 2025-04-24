@@ -65,6 +65,7 @@ export default function InvoiceItem() {
             showAsterik={false}
             placeholder="Qty"
             type="number"
+            minimum={1}
             value={item.qty}
             onChange={(e) => updateItem(item.id, "qty", e.target.value)}
           />

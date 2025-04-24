@@ -1,13 +1,13 @@
 import { BFMPalette } from "@/Theme";
 import { MediumSpacedText, TextTitle } from "@/Typography";
-import {
-  getInvoiceFromLocalStorage,
-  getLastInvoice,
-  handleDownloadPDF,
-} from "@/utils";
+import { getInvoiceFromLocalStorage } from "@/utils";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import Image from "next/image";
+import { useRef } from "react";
 import styled from "styled-components";
 import NavButton from "../Button/Primary/NavButton";
+import InvoicePDF from "../Invoices/InvoicePDF/InvoicePDF";
 
 const Content = styled("div")`
   display: flex;
@@ -37,12 +37,41 @@ const BtnContainer = styled("div")`
     width: 100%;
   }
 `;
+const HiddenPDFContainer = styled.div`
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  width: 794px;
+`;
 interface SavedModalContentProps {
   invoiceNo?: string;
 }
 export default function SavedModalContent({
   invoiceNo,
 }: SavedModalContentProps) {
+  const storedInvoice = getInvoiceFromLocalStorage(invoiceNo ?? "");
+  const pdfRef = useRef<HTMLDivElement>(null);
+  const handleDownloadInvoice = async () => {
+    const element = pdfRef.current;
+    if (!element) return;
+
+    setTimeout(async () => {
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("invoice.pdf");
+    }, 100);
+  };
+
   return (
     <>
       <ContentContainer>
@@ -65,21 +94,14 @@ export default function SavedModalContent({
           imageSrc="/images/download.png"
           imagePosition="right"
           $textColor={BFMPalette.white}
-          onClick={() => {
-            if (!invoiceNo) {
-              const lastInvoice = getLastInvoice();
-              if (lastInvoice) {
-                handleDownloadPDF(lastInvoice);
-              } else {
-                console.error("No invoice found to download.");
-              }
-            } else {
-              handleDownloadPDF(getInvoiceFromLocalStorage(invoiceNo));
-            }
-          }}>
+          onClick={handleDownloadInvoice}>
           Download Invoice (PDF)
         </NavButton>
       </BtnContainer>
+
+      <HiddenPDFContainer ref={pdfRef}>
+        <InvoicePDF invoice={storedInvoice} />
+      </HiddenPDFContainer>
     </>
   );
 }

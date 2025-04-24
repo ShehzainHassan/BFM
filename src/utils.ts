@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
+import { HKD_EQUIVALANT } from "./constants";
 import {
   DetailedInvoiceSummary,
   ESGSummary,
@@ -9,14 +8,7 @@ import {
   MonthYearData,
   RecurringTransaction,
 } from "./Interfaces/Interfaces";
-import { fromAddress, HKD_EQUIVALANT, toAddress } from "./constants";
 import { BFMPalette } from "./Theme";
-
-declare module "jspdf" {
-  interface jsPDF {
-    lastAutoTable?: { finalY: number };
-  }
-}
 
 export const generateMonths = (
   reports?: ESGSummary | IncomeExpenseCategory
@@ -80,144 +72,6 @@ export const formatDate = (dateInput: string | number[]): string => {
     month: "short",
     year: "numeric",
   });
-};
-
-export const handleDownloadPDF = (invoice: DetailedInvoiceSummary) => {
-  const doc = new jsPDF();
-  let y = 15;
-  doc.setFontSize(14);
-  doc.setTextColor(BFMPalette.black800);
-  doc.text("Invoice", 105, y, { align: "center" });
-  y += 15;
-  const labelStyle = () => {
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(10);
-    doc.setTextColor(BFMPalette.gray700);
-  };
-
-  const valueStyle = () => {
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(10);
-    doc.setTextColor(BFMPalette.black800);
-  };
-
-  labelStyle();
-  doc.text("Invoice number:", 20, y);
-  y += 5;
-  valueStyle();
-  doc.text(invoice.invoiceNumber, 20, y);
-  y += 15;
-
-  labelStyle();
-  doc.text("From:", 20, y);
-  doc.text("To:", 130, y);
-  y += 5;
-
-  valueStyle();
-  doc.setTextColor(BFMPalette.purple900);
-  doc.text(fromAddress.name, 20, y);
-  doc.setTextColor(BFMPalette.black800);
-  doc.text(fromAddress.address, 20, y + 5);
-  doc.setTextColor(BFMPalette.purple900);
-  doc.text(invoice.address, 130, y);
-  doc.setTextColor(BFMPalette.black800);
-  doc.text(toAddress, 130, y + 5);
-  y += 15;
-
-  labelStyle();
-  doc.text("Invoice date:", 20, y);
-  doc.text("Invoice due date:", 130, y);
-  y += 5;
-
-  valueStyle();
-  doc.text(formatDate(getFirstDayOfMonth(invoice.dueDate)), 20, y);
-  doc.text(formatDate(invoice.dueDate), 130, y);
-  y += 15;
-
-  labelStyle();
-  doc.text("Invoice Detail", 20, y);
-  y += 5;
-  valueStyle();
-  doc.text(invoice.invoiceDetail, 20, y);
-  y += 10;
-
-  const tableData = invoice.items.map((item) => [
-    item.description,
-    item.qty,
-    formatCurrency(`${item.currency} ${item.price}`, 2),
-  ]);
-  autoTable(doc, {
-    startY: y,
-    head: [["DESCRIPTIONS", "QUANTITY", "AMOUNT"]],
-    body: tableData,
-    theme: "grid",
-    styles: { fontSize: 10, cellPadding: 3, textColor: BFMPalette.black800 },
-    headStyles: {
-      fillColor: BFMPalette.gray100,
-      textColor: BFMPalette.black800,
-      fontStyle: "bold",
-    },
-    columnStyles: { 2: { halign: "right" } },
-    margin: { left: 15, right: 15 },
-  });
-  let finalY = (doc as jsPDF).lastAutoTable?.finalY ?? 0;
-
-  autoTable(doc, {
-    startY: finalY,
-    body: [
-      ["Subtotal", invoice.subTotal],
-      ["Discount", invoice.discount],
-      ["Amount due", invoice.amountDue],
-    ],
-    theme: "plain",
-    styles: {
-      fontSize: 10,
-      textColor: BFMPalette.black800,
-      cellPadding: 3,
-    },
-    bodyStyles: {
-      lineWidth: 0.5,
-      lineColor: BFMPalette.gray200,
-      fillColor: BFMPalette.gray100,
-    },
-    columnStyles: {
-      0: { fontStyle: "bold", textColor: BFMPalette.black100 },
-      1: { halign: "right" },
-    },
-    margin: { left: 15, right: 15 },
-  });
-  finalY = ((doc as jsPDF).lastAutoTable?.finalY ?? 0) + 20;
-  autoTable(doc, {
-    startY: finalY,
-    body: [
-      ["Bank Name", invoice.bankDetails.bankName],
-      ["Name", invoice.bankDetails.name],
-      ["Account Number", invoice.bankDetails.accountNumber],
-      ["SWIFT Code", invoice.bankDetails.SWIFTCode],
-      ["Bank Address", invoice.bankDetails.bankAddress],
-    ],
-    theme: "plain",
-    styles: {
-      fontSize: 10,
-      textColor: BFMPalette.black800,
-      cellPadding: 3,
-    },
-    bodyStyles: {
-      lineWidth: 0.5,
-      lineColor: BFMPalette.gray200,
-    },
-    columnStyles: {
-      0: {
-        fontStyle: "bold",
-        fillColor: BFMPalette.gray100,
-        textColor: BFMPalette.black100,
-      },
-      1: { textColor: BFMPalette.black800 },
-    },
-    margin: { left: 15, right: 15 },
-  });
-
-  doc.save("invoice.pdf");
 };
 
 export const getLastInvoice = (): DetailedInvoiceSummary | null => {

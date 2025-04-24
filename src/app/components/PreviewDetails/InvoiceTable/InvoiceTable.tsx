@@ -4,7 +4,10 @@ import { H3, SmallText } from "@/Typography";
 import { formatCurrency } from "@/utils";
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { InvoiceItem } from "../../../../Interfaces/Interfaces";
+import {
+  DetailedInvoiceSummary,
+  InvoiceItem,
+} from "../../../../Interfaces/Interfaces";
 import { useInvoiceItem } from "@/InvoiceItemContext";
 
 const TableWrapper = styled.div`
@@ -40,8 +43,14 @@ const SummaryRow = styled(TableRow)`
 
 type InvoiceTableProps = {
   rows: InvoiceItem[];
+  invoice?: DetailedInvoiceSummary;
+  isDownloading?: boolean;
 };
-const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
+const InvoiceTable: React.FC<InvoiceTableProps> = ({
+  rows,
+  invoice,
+  isDownloading = false,
+}) => {
   const {
     hasDiscount,
     discount,
@@ -117,7 +126,11 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
         </TableCell>
         <TableCell />
         <TableCell $alignRight>
-          <H3 color={BFMPalette.black800}>{subTotal}</H3>
+          {!isDownloading ? (
+            <H3 color={BFMPalette.black800}>{subTotal}</H3>
+          ) : (
+            <H3 color={BFMPalette.black800}>{invoice?.subTotal}</H3>
+          )}
         </TableCell>
       </SummaryRow>
 
@@ -127,7 +140,11 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
         </TableCell>
         <TableCell />
         <TableCell $alignRight>
-          <H3 color={BFMPalette.black800}>{discount}%</H3>
+          {!isDownloading ? (
+            <H3 color={BFMPalette.black800}>{discount}%</H3>
+          ) : (
+            <H3 color={BFMPalette.black800}>{invoice?.discount}%</H3>
+          )}
         </TableCell>
       </SummaryRow>
 
@@ -137,7 +154,11 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
         </TableCell>
         <TableCell />
         <TableCell $alignRight>
-          <H3 color={BFMPalette.black800}>{finalTotal}</H3>
+          {!isDownloading ? (
+            <H3 color={BFMPalette.black800}>{finalTotal}</H3>
+          ) : (
+            <H3 color={BFMPalette.black800}>{invoice?.amountDue}</H3>
+          )}
         </TableCell>
       </SummaryRow>
     </TableWrapper>

@@ -3,7 +3,12 @@ import { useData } from "@/DataContext";
 import { BFMPalette } from "@/Theme";
 import useTranslation from "@/translations";
 import { H1 } from "@/Typography";
-import { formatDate, getFirstDayOfMonth, parseInvoices } from "@/utils";
+import {
+  formatDate,
+  getFirstDayOfMonth,
+  getLastInvoice,
+  parseInvoices,
+} from "@/utils";
 import Image from "next/image";
 import { useState } from "react";
 import styled from "styled-components";
@@ -82,7 +87,7 @@ const ImageContainer = styled("div")`
 
 export default function Navbar({ navItems }: NavbarProps) {
   const { t } = useTranslation();
-
+  const latestInvoice = getLastInvoice();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { selectedTab, setSelectedTab } = useData();
   const {
@@ -318,7 +323,7 @@ export default function Navbar({ navItems }: NavbarProps) {
         height="375px"
         modalIsOpen={isModalOpen}
         closeModal={handleCloseModal}>
-        <SavedModalContent />
+        <SavedModalContent invoiceNo={latestInvoice?.invoiceNumber} />
       </DetailsModal>
     </Container>
   );
