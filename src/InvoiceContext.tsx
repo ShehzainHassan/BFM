@@ -6,17 +6,45 @@ import {
   useEffect,
   useState,
 } from "react";
-import { BankDetails, InvoiceSummary, Item } from "./Interfaces/Interfaces";
+import { InvoiceSummary } from "./Interfaces/Interfaces";
 import useTranslation from "./translations";
 import { parseInvoices } from "./utils";
-import { InvoiceContextType } from "./Interfaces/InvoiceContext";
+
+type InvoiceContextType = {
+  isCreatingInvoice: boolean;
+  setIsCreatingInvoice: (value: boolean) => void;
+  invoiceNumber: string;
+  setInvoiceNumber: (value: string) => void;
+  invoiceSubject: string;
+  setInvoiceSubject: (value: string) => void;
+  invoiceDetails: string;
+  setInvoiceDetails: (value: string) => void;
+  dueDate: string;
+  setDueDate: (value: string) => void;
+  companyName: string;
+  setCompanyName: (value: string) => void;
+  companyAddress: string;
+  setCompanyAddress: (value: string) => void;
+  discount: number;
+  setDiscount: (value: number) => void;
+  hasDiscount: boolean;
+  setHasDiscount: (value: boolean) => void;
+  hasPaymentChecked: boolean;
+  setHasPaymentChecked: (value: boolean) => void;
+  subTotal: string;
+  setSubTotal: (value: string) => void;
+  finalTotal: string;
+  setFinalTotal: (value: string) => void;
+  invoicesSummary: InvoiceSummary[];
+  setInvoicesSummary: (value: InvoiceSummary[]) => void;
+  transformClientName: (clientName: string) => void;
+};
 
 const InvoiceContext = createContext<InvoiceContextType | null>(null);
 
 export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
   const { t } = useTranslation();
   const [isCreatingInvoice, setIsCreatingInvoice] = useState(false);
-  const [currency, setCurrency] = useState("USD");
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [invoiceSubject, setInvoiceSubject] = useState("");
   const [invoiceDetails, setInvoiceDetails] = useState("");
@@ -35,56 +63,6 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
 
   const [invoicesSummary, setInvoicesSummary] = useState<InvoiceSummary[]>([]);
 
-  const [bankDetails, setBankDetails] = useState<BankDetails>({
-    bankName: "",
-    name: "",
-    accountNumber: "",
-    SWIFTCode: "",
-    bankAddress: "",
-  });
-  const [items, setItems] = useState([
-    {
-      id: Date.now(),
-      description: "Enter item description",
-      qty: 1,
-      price: 0,
-      currency: currency,
-    },
-  ]);
-  const addItem = () => {
-    setItems([
-      ...items,
-      {
-        id: Date.now(),
-        description: "Enter item description",
-        qty: 1,
-        price: 0,
-        currency,
-      },
-    ]);
-  };
-
-  const removeItem = (id: number) => {
-    setItems(items.filter((item) => item.id !== id));
-  };
-
-  const updateItem = (id: number, key: string, value: Item[keyof Item]) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === id ? { ...item, [key]: value } : item
-      )
-    );
-  };
-  const handleCurrencyChange = (newCurrency: string) => {
-    setCurrency(newCurrency);
-
-    setItems((prevItems) =>
-      prevItems.map((item) => ({
-        ...item,
-        currency: newCurrency,
-      }))
-    );
-  };
   useEffect(() => {
     try {
       const storedInvoices = localStorage.getItem("invoices");
@@ -98,7 +76,7 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
         setInvoicesSummary(parsed);
       }
     } catch (err) {
-      console.error("Error loading data ", err);
+      console.error("Error loading invoices ", err);
     }
   }, []);
   return (
@@ -106,13 +84,6 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
       value={{
         isCreatingInvoice,
         setIsCreatingInvoice,
-        items,
-        addItem,
-        removeItem,
-        updateItem,
-        currency,
-        setCurrency,
-        handleCurrencyChange,
         invoiceNumber,
         setInvoiceNumber,
         invoiceSubject,
@@ -131,8 +102,6 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
         setHasDiscount,
         hasPaymentChecked,
         setHasPaymentChecked,
-        bankDetails,
-        setBankDetails,
         subTotal,
         setSubTotal,
         finalTotal,

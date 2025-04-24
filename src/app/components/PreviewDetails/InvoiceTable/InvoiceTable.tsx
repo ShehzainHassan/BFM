@@ -5,6 +5,7 @@ import { formatCurrency } from "@/utils";
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { InvoiceItem } from "../../../../Interfaces/Interfaces";
+import { useInvoiceItem } from "@/InvoiceItemContext";
 
 const TableWrapper = styled.div`
   width: 100%;
@@ -45,12 +46,13 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({ rows }) => {
     hasDiscount,
     discount,
     setDiscount,
-    items,
     subTotal,
     setSubTotal,
     finalTotal,
     setFinalTotal,
   } = useInvoice();
+
+  const { items } = useInvoiceItem();
   const totalPrice = items.reduce(
     (sum, item) => sum + item.qty * parseFloat(item.price.toString()),
     0

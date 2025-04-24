@@ -8,6 +8,8 @@ import InputCurrency from "../../InputCurrency/InputCurrency";
 import InputDate from "../../InputDate/InputDate";
 import InputWithLabel from "../../InputWithLabel/Input";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
+import { useInvoiceItem } from "@/InvoiceItemContext";
+import { useInvoiceBankDetails } from "@/InvoiceBankDetailsContext";
 
 const Container = styled("div")`
   display: flex;
@@ -36,14 +38,11 @@ export default function InvoiceDetails() {
     setHasDiscount,
     hasPaymentChecked,
     setHasPaymentChecked,
-    bankDetails,
-    setBankDetails,
-    items,
     subTotal,
     setSubTotal,
-    currency,
-    handleCurrencyChange,
   } = useInvoice();
+  const { items, currency, handleCurrencyChange } = useInvoiceItem();
+  const { bankDetails, setBankDetails } = useInvoiceBankDetails();
   useEffect(() => {
     if (items.length === 0) {
       setSubTotal(formatCurrency(`${currency} ${0.0}`, 2));

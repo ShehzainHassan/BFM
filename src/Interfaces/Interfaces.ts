@@ -372,7 +372,6 @@ export interface DetailedInvoiceSummary {
   subTotal: string;
   bankDetails: BankDetails;
   category: "PENDING" | "PAID" | "OVERDUE";
-  previousCategory?: "PENDING" | "PAID" | "OVERDUE";
 }
 export interface RecurringTransaction {
   description: {

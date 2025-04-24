@@ -12,6 +12,8 @@ import NavButton from "../Button/Primary/NavButton";
 import DetailsModal from "../Modal/Modal";
 import SavedModalContent from "../SavedModalContent/SavedModalContent";
 import { useInvoice } from "@/InvoiceContext";
+import { useInvoiceItem } from "@/InvoiceItemContext";
+import { useInvoiceBankDetails } from "@/InvoiceBankDetailsContext";
 const Container = styled("div")`
   display: flex;
   flex-direction: column;
@@ -86,12 +88,10 @@ export default function Navbar({ navItems }: NavbarProps) {
   const {
     isCreatingInvoice,
     setIsCreatingInvoice,
-    items,
     invoiceSubject,
     invoiceDetails,
     dueDate,
     hasPaymentChecked,
-    bankDetails,
     companyName,
     companyAddress,
     discount,
@@ -106,12 +106,12 @@ export default function Navbar({ navItems }: NavbarProps) {
     setSubTotal,
     setDiscount,
     setFinalTotal,
-    removeItem,
-    setBankDetails,
     setHasDiscount,
     setHasPaymentChecked,
     setInvoicesSummary,
   } = useInvoice();
+  const { items, removeItem } = useInvoiceItem();
+  const { bankDetails, setBankDetails } = useInvoiceBankDetails();
   const saveInvoice = () => {
     const storedInvoices = JSON.parse(localStorage.getItem("invoices") || "[]");
     const today = new Date();
@@ -138,7 +138,6 @@ export default function Navbar({ navItems }: NavbarProps) {
       subTotal: subTotal,
       discount: discount,
       amountDue: finalTotal,
-      previousCategory: category,
       category,
       bankDetails: {
         bankName: bankDetails.bankName,

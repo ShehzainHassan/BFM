@@ -450,21 +450,25 @@ export const updateInvoiceStatus = (
     localStorage.getItem("invoices") || "[]"
   );
 
-  const updatedInvoices = invoices.map((invoice) => {
+  const updatedInvoices: DetailedInvoiceSummary[] = invoices.map((invoice) => {
     if (invoice.invoiceNumber === InvoiceNumber) {
-      const isPaid = invoice.category === "PAID";
-
+      const today = new Date();
+      const dueDate = new Date(invoice.dueDate);
+      let newCategory: "PENDING" | "OVERDUE" | "PAID";
+      if (invoice.category === "PAID") {
+        newCategory = dueDate >= today ? "PENDING" : "OVERDUE";
+      } else {
+        newCategory = "PAID";
+      }
       return {
         ...invoice,
-        category: isPaid ? invoice.previousCategory || "PENDING" : "PAID",
-        previousCategory: isPaid ? undefined : invoice.category,
+        category: newCategory,
       };
     }
     return invoice;
   });
 
   localStorage.setItem("invoices", JSON.stringify(updatedInvoices));
-
   return updatedInvoices;
 };
 

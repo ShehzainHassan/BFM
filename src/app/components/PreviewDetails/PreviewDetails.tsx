@@ -9,6 +9,8 @@ import Address from "../Address/Address";
 import Notes from "../Notes/Notes";
 import InfoTable from "../PaymentsTable/PaymentsTable";
 import InvoiceTable from "./InvoiceTable/InvoiceTable";
+import { useInvoiceItem } from "@/InvoiceItemContext";
+import { useInvoiceBankDetails } from "@/InvoiceBankDetailsContext";
 
 const Container = styled("div")`
   background-color: ${BFMPalette.white25};
@@ -33,13 +35,13 @@ export default function PreviewDetails() {
   const { t } = useTranslation();
   const {
     companyAddress,
-    items,
     invoiceDetails,
     dueDate,
-    bankDetails,
     hasPaymentChecked,
     invoiceNumber,
   } = useInvoice();
+  const { items } = useInvoiceItem();
+  const { bankDetails } = useInvoiceBankDetails();
   return (
     <Container>
       <Notes title="Invoice number" value={invoiceNumber} />

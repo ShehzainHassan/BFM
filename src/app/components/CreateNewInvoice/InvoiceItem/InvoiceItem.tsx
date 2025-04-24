@@ -1,4 +1,4 @@
-import { useInvoice } from "@/InvoiceContext";
+import { useInvoiceItem } from "@/InvoiceItemContext";
 import { BFMPalette } from "@/Theme";
 import { H3Secondary } from "@/Typography";
 import Image from "next/image";
@@ -39,7 +39,7 @@ export default function InvoiceItem() {
     addItem,
     removeItem,
     updateItem,
-  } = useInvoice();
+  } = useInvoiceItem();
 
   return (
     <Container>
