@@ -107,10 +107,16 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({
       {rows.map((row, index) => (
         <TableRow key={index}>
           <TableCell>
-            <SmallText color={BFMPalette.black800}>{row.description}</SmallText>
+            <SmallText color={BFMPalette.black800}>
+              {row.description?.trim()
+                ? row.description
+                : "Enter item description"}
+            </SmallText>
           </TableCell>
           <TableCell>
-            <SmallText color={BFMPalette.black800}>{row.qty}</SmallText>
+            <SmallText color={BFMPalette.black800}>
+              {!Number.isNaN(row.qty) ? row.qty : 1}
+            </SmallText>
           </TableCell>
           <TableCell $alignRight>
             <H3 color={BFMPalette.purple375}>

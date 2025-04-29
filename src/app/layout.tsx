@@ -11,6 +11,7 @@ import "./globals.css";
 import { InvoiceProvider } from "@/InvoiceContext";
 import { InvoiceItemProvider } from "@/InvoiceItemContext";
 import { InvoiceBankProvider } from "@/InvoiceBankDetailsContext";
+import StyledComponentsRegistry from "@/lib/registry";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,38 +46,40 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        <Sidebar />
-        <DataProvider>
-          <InvoiceProvider>
-            <InvoiceItemProvider>
-              <InvoiceBankProvider>
-                <ContentWrapper>
-                  <Navbar
-                    navItems={[
-                      { label: t("navbar.tabs.dashboard") },
-                      { label: t("navbar.tabs.analytics") },
-                      { label: t("navbar.tabs.invoices") },
-                      { label: t("navbar.tabs.calendar") },
-                      { label: t("navbar.tabs.esg") },
-                    ]}
-                  />
-                  <MobileNav
-                    navItems={[
-                      { label: t("navbar.tabs.dashboard") },
-                      { label: t("navbar.tabs.transactions") },
-                      { label: t("navbar.tabs.analytics") },
-                      { label: t("navbar.tabs.invoices") },
-                      { label: t("navbar.tabs.calendar") },
-                      { label: t("navbar.tabs.esg") },
-                    ]}
-                  />
+        <StyledComponentsRegistry>
+          <Sidebar />
+          <DataProvider>
+            <InvoiceProvider>
+              <InvoiceItemProvider>
+                <InvoiceBankProvider>
+                  <ContentWrapper>
+                    <Navbar
+                      navItems={[
+                        { label: t("navbar.tabs.dashboard") },
+                        { label: t("navbar.tabs.analytics") },
+                        { label: t("navbar.tabs.invoices") },
+                        { label: t("navbar.tabs.calendar") },
+                        { label: t("navbar.tabs.esg") },
+                      ]}
+                    />
+                    <MobileNav
+                      navItems={[
+                        { label: t("navbar.tabs.dashboard") },
+                        { label: t("navbar.tabs.transactions") },
+                        { label: t("navbar.tabs.analytics") },
+                        { label: t("navbar.tabs.invoices") },
+                        { label: t("navbar.tabs.calendar") },
+                        { label: t("navbar.tabs.esg") },
+                      ]}
+                    />
 
-                  <MainContent>{children}</MainContent>
-                </ContentWrapper>
-              </InvoiceBankProvider>
-            </InvoiceItemProvider>
-          </InvoiceProvider>
-        </DataProvider>
+                    <MainContent>{children}</MainContent>
+                  </ContentWrapper>
+                </InvoiceBankProvider>
+              </InvoiceItemProvider>
+            </InvoiceProvider>
+          </DataProvider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

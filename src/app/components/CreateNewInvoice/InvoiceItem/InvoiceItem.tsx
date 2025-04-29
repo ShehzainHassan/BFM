@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { useInvoiceItem } from "@/InvoiceItemContext";
 import { BFMPalette } from "@/Theme";
 import { H3Secondary } from "@/Typography";
@@ -5,9 +8,11 @@ import Image from "next/image";
 import styled from "styled-components";
 import InputCurrency from "../../InputCurrency/InputCurrency";
 import InputWithLabel from "../../InputWithLabel/Input";
+import { Item } from "@/Interfaces/Interfaces";
 
 const AdditionalInfoContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.5fr 8fr 2fr 1fr 0.5fr;
   align-items: center;
   gap: 12px;
 `;
@@ -29,6 +34,7 @@ const AddButton = styled.button`
   background-color: ${BFMPalette.white25};
   width: fit-content;
   border: none;
+  cursor: pointer;
 `;
 
 export default function InvoiceItem() {
@@ -41,9 +47,36 @@ export default function InvoiceItem() {
     updateItem,
   } = useInvoiceItem();
 
+  const [localItems, setLocalItems] = useState(() =>
+    items.map((item) => ({ ...item }))
+  );
+
+  useEffect(() => {
+    setLocalItems(items.map((item) => ({ ...item })));
+  }, [items]);
+
+  const handleLocalChange = (
+    id: number,
+    field: string,
+    value: Item[keyof Item]
+  ) => {
+    setLocalItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, [field]: value } : item))
+    );
+  };
+
+  const commitChange = (id: number) => {
+    const editedItem = localItems.find((item) => item.id === id);
+    if (editedItem) {
+      updateItem(id, "description", editedItem.description);
+      updateItem(id, "qty", editedItem.qty.toString());
+      updateItem(id, "price", editedItem.price.toString());
+    }
+  };
+
   return (
     <Container>
-      {items.map((item) => (
+      {localItems.map((item) => (
         <AdditionalInfoContainer key={item.id}>
           <Image
             src="/images/dots-grid.png"
@@ -53,12 +86,14 @@ export default function InvoiceItem() {
           />
           <InputWithLabel
             label="Description"
-            showError={false}
             showLabel={false}
             showAsterik={false}
             placeholder="Enter item descriptions"
             value={item.description}
-            onChange={(e) => updateItem(item.id, "description", e.target.value)}
+            onChange={(e) =>
+              handleLocalChange(item.id, "description", e.target.value)
+            }
+            onBlur={() => commitChange(item.id)}
           />
           <InputWithLabel
             showLabel={false}
@@ -66,14 +101,19 @@ export default function InvoiceItem() {
             placeholder="Qty"
             type="number"
             minimum={1}
-            value={item.qty}
-            onChange={(e) => updateItem(item.id, "qty", e.target.value)}
+            value={isNaN(Number(item.qty)) ? 1 : item.qty}
+            onChange={(e) => handleLocalChange(item.id, "qty", e.target.value)}
+            onBlur={() => commitChange(item.id)}
           />
           <InputCurrency
+            $maxWidth="200px"
             showLabel={false}
             showAsterik={false}
             price={item.price}
-            onChangeAmount={(e) => updateItem(item.id, "price", e.target.value)}
+            onChangeAmount={(e) =>
+              handleLocalChange(item.id, "price", e.target.value)
+            }
+            onBlur={() => commitChange(item.id)}
             currency={currency}
             onChangeCurrency={(newCurrency) =>
               handleCurrencyChange(newCurrency)

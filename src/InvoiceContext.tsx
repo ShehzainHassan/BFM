@@ -53,8 +53,8 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
   const [companyAddress, setCompanyAddress] = useState("");
   const [discount, setDiscount] = useState(0);
   const [hasDiscount, setHasDiscount] = useState(false);
-  const [subTotal, setSubTotal] = useState("");
-  const [finalTotal, setFinalTotal] = useState("");
+  const [subTotal, setSubTotal] = useState("USD 0.00");
+  const [finalTotal, setFinalTotal] = useState("USD 0.00");
   const [hasPaymentChecked, setHasPaymentChecked] = useState(false);
 
   const transformClientName = (clientName: string): string => {

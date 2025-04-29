@@ -68,8 +68,10 @@ export default function PreviewDetails() {
           <Notes title="Invoice due date" value={formatDate(dueDate)} />
         )}
       </SubContainer>
-      {invoiceDetails && (
-        <Notes title="Invoice detail" value={invoiceDetails} />
+      {invoiceDetails ? (
+        <Notes title="Invoice Detail" value={invoiceDetails} />
+      ) : (
+        <Notes title="Invoice Detail" value="" />
       )}
       <InvoiceTable rows={items} />
       {hasPaymentChecked && (

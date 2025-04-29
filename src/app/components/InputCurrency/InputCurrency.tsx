@@ -12,8 +12,8 @@ const Container = styled.div`
   gap: 6px;
 `;
 
-const InputWrapper = styled.div<{ $isError: boolean }>`
-  display: inline-flex;
+const InputWrapper = styled.div<{ $isError: boolean; $maxWidth: string }>`
+  display: flex;
   align-items: center;
   border: 1px solid
     ${({ $isError }) => ($isError ? BFMPalette.red500 : BFMPalette.gray200)};
@@ -21,8 +21,7 @@ const InputWrapper = styled.div<{ $isError: boolean }>`
   background-color: ${BFMPalette.white};
   border-radius: 8px;
   gap: 8px;
-  max-width: 200px;
-
+  max-width: ${({ $maxWidth }) => $maxWidth || "100%"};
   &:focus-within {
     border-color: ${({ $isError }) => $isError && BFMPalette.red500};
   }
@@ -79,10 +78,12 @@ type InputCurrencyProps = {
   showAsterik?: boolean;
   price?: number;
   onChangeAmount?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   currency?: string;
   onChangeCurrency: (value: string) => void;
   readonly?: boolean;
   value?: number;
+  $maxWidth?: string | undefined;
 };
 
 export default function InputCurrency({
@@ -97,6 +98,8 @@ export default function InputCurrency({
   value,
   onChangeAmount,
   onChangeCurrency,
+  onBlur,
+  $maxWidth,
 }: InputCurrencyProps) {
   const [touched, setTouched] = useState(false);
 
@@ -113,7 +116,7 @@ export default function InputCurrency({
         {showLabel && <H4>{label}</H4>}
         {isRequired && showAsterik && <H4 color={BFMPalette.purple500}>*</H4>}
       </LabelWrapper>
-      <InputWrapper $isError={isError}>
+      <InputWrapper $maxWidth={$maxWidth || "100%"} $isError={isError}>
         <StyledSelect
           value={currency}
           onChange={(value) => onChangeCurrency(value as string)}
@@ -128,7 +131,10 @@ export default function InputCurrency({
           value={value !== undefined ? value : price}
           min={0}
           onChange={onChangeAmount}
-          onBlur={handleBlur}
+          onBlur={(e) => {
+            handleBlur();
+            onBlur?.(e);
+          }}
           readOnly={readonly}
         />
       </InputWrapper>

@@ -1,7 +1,7 @@
 import { useInvoice } from "@/InvoiceContext";
 import useTranslation from "@/translations";
 import { formatCurrency } from "@/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Checkbox from "../../Checkbox/Checkbox";
 import InputCurrency from "../../InputCurrency/InputCurrency";
@@ -10,6 +10,8 @@ import InputWithLabel from "../../InputWithLabel/Input";
 import InvoiceItem from "../InvoiceItem/InvoiceItem";
 import { useInvoiceItem } from "@/InvoiceItemContext";
 import { useInvoiceBankDetails } from "@/InvoiceBankDetailsContext";
+import { H3 } from "@/Typography";
+import { BFMPalette } from "@/Theme";
 
 const Container = styled("div")`
   display: flex;
@@ -17,9 +19,14 @@ const Container = styled("div")`
   gap: 24px;
 `;
 const CurrencyDateContainer = styled("div")`
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 6fr 6fr;
   gap: 20px;
+`;
+const LabelContainer = styled("div")`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 `;
 const PaymentsContainer = styled("div")`
   display: flex;
@@ -40,38 +47,83 @@ export default function InvoiceDetails() {
     setHasPaymentChecked,
     subTotal,
     setSubTotal,
+    dueDate,
+    setDueDate,
   } = useInvoice();
   const { items, currency, handleCurrencyChange } = useInvoiceItem();
   const { bankDetails, setBankDetails } = useInvoiceBankDetails();
+  const [localDetails, setLocalDetails] = useState(invoiceDetails);
+  const [localDate, setLocalDate] = useState(dueDate);
+  const [localBankDetails, setLocalBankDetails] = useState(bankDetails);
+  const [localDiscount, setLocalDiscount] = useState(discount);
+  const [invoiceSubjectInteracted, setInvoiceSubjectInteracted] =
+    useState(false);
+  const [invoiceDetailInteracted, setInvoiceDetailInteracted] = useState(false);
+  const [invoiceDateInteracted, setInvoiceDateInteracted] = useState(false);
+
   useEffect(() => {
     if (items.length === 0) {
       setSubTotal(formatCurrency(`${currency} ${0.0}`, 2));
     }
   }, [items, currency, setSubTotal]);
-
   return (
     <Container>
-      <InputWithLabel
-        value={invoiceSubject}
-        onChange={(e) => setInvoiceSubject(e.target.value)}
-        label={t("invoice_creation.subject.label")}
-        placeholder={t("invoice_creation.subject.placeholder")}
-      />
-      <InputWithLabel
-        value={invoiceDetails}
-        onChange={(e) => setInvoiceDetails(e.target.value)}
-        label={t("invoice_creation.invoice_detail.label")}
-        placeholder={t("invoice_creation.invoice_detail.placeholder")}
-      />
-      <CurrencyDateContainer>
-        <InputCurrency
-          currency={currency}
-          value={Number(subTotal.split(" ")[1]) || 0}
-          onChangeCurrency={(newCurrency) => handleCurrencyChange(newCurrency)}
-          label="Currency"
-          readonly={true}
+      <LabelContainer>
+        <InputWithLabel
+          value={invoiceSubject}
+          onChange={(e) => setInvoiceSubject(e.target.value)}
+          label={t("invoice_creation.subject.label")}
+          onBlur={() => setInvoiceSubjectInteracted(true)}
+          placeholder={t("invoice_creation.subject.placeholder")}
         />
-        <InputDate label="Invoice Due" />
+        {invoiceSubjectInteracted && !invoiceSubject.trim() && (
+          <H3 color={BFMPalette.red600}>
+            Please enter a subject for the invoice
+          </H3>
+        )}
+      </LabelContainer>
+      <LabelContainer>
+        <InputWithLabel
+          value={localDetails}
+          onChange={(e) => setLocalDetails(e.target.value)}
+          onBlur={() => {
+            setInvoiceDetailInteracted(true);
+            setInvoiceDetails(localDetails);
+          }}
+          label={t("invoice_creation.invoice_detail.label")}
+          placeholder={t("invoice_creation.invoice_detail.placeholder")}
+        />
+        {invoiceDetailInteracted && !localDetails.trim() && (
+          <H3 color={BFMPalette.red600}>Please enter invoice details</H3>
+        )}
+      </LabelContainer>
+      <CurrencyDateContainer>
+        <LabelContainer>
+          <InputCurrency
+            currency={currency}
+            value={Number(subTotal?.split(" ")[1]?.replace(/,/g, "")) ?? 0}
+            onChangeCurrency={(newCurrency) =>
+              handleCurrencyChange(newCurrency)
+            }
+            label="Currency"
+            readonly={true}
+          />
+        </LabelContainer>
+
+        <LabelContainer>
+          <InputDate
+            label="Invoice Due"
+            dueDate={localDate}
+            onChange={(e) => setLocalDate(e.target.value)}
+            onBlur={() => {
+              setInvoiceDateInteracted(true);
+              setDueDate(localDate);
+            }}
+          />
+          {invoiceDateInteracted && !localDate.trim() && (
+            <H3 color={BFMPalette.red600}>Please enter invoice due date</H3>
+          )}
+        </LabelContainer>
       </CurrencyDateContainer>
       <InvoiceItem />
 
@@ -83,75 +135,85 @@ export default function InvoiceDetails() {
       {hasPaymentChecked && (
         <PaymentsContainer>
           <InputWithLabel
-            value={bankDetails.bankName}
+            value={localBankDetails.bankName || ""}
             onChange={(e) =>
+              setLocalBankDetails({
+                ...localBankDetails,
+                bankName: e.target.value,
+              })
+            }
+            onBlur={() =>
               setBankDetails({
                 ...bankDetails,
-                bankName: e.target.value,
-                name: bankDetails.name || "",
-                accountNumber: bankDetails.accountNumber || "",
-                SWIFTCode: bankDetails.SWIFTCode || "",
-                bankAddress: bankDetails.bankAddress || "",
+                bankName: localBankDetails.bankName,
               })
             }
             label="Bank Name"
             placeholder="Enter bank name"
           />
           <InputWithLabel
-            value={bankDetails.name}
+            value={localBankDetails.name}
             onChange={(e) =>
+              setLocalBankDetails({
+                ...localBankDetails,
+                name: e.target.value,
+              })
+            }
+            onBlur={() =>
               setBankDetails({
                 ...bankDetails,
-                bankName: bankDetails.bankName || "",
-                name: e.target.value || "",
-                accountNumber: bankDetails.accountNumber || "",
-                SWIFTCode: bankDetails.SWIFTCode || "",
-                bankAddress: bankDetails.bankAddress || "",
+                name: localBankDetails.name,
               })
             }
             label="Name"
             placeholder="Enter name"
           />
           <InputWithLabel
-            value={bankDetails.accountNumber}
+            value={localBankDetails.accountNumber}
             onChange={(e) =>
+              setLocalBankDetails({
+                ...localBankDetails,
+                accountNumber: e.target.value,
+              })
+            }
+            onBlur={() =>
               setBankDetails({
                 ...bankDetails,
-                bankName: bankDetails.bankName || "",
-                name: bankDetails.name || "",
-                accountNumber: e.target.value,
-                SWIFTCode: bankDetails.SWIFTCode || "",
-                bankAddress: bankDetails.bankAddress || "",
+                accountNumber: localBankDetails.accountNumber,
               })
             }
             label="Account No."
             placeholder="XXX-XXX-XXX"
           />
           <InputWithLabel
-            value={bankDetails.SWIFTCode}
+            value={localBankDetails.SWIFTCode}
             onChange={(e) =>
+              setLocalBankDetails({
+                ...localBankDetails,
+                SWIFTCode: e.target.value,
+              })
+            }
+            onBlur={() =>
               setBankDetails({
                 ...bankDetails,
-                bankName: bankDetails.bankName || "",
-                name: bankDetails.name || "",
-                accountNumber: bankDetails.accountNumber || "",
-                SWIFTCode: e.target.value,
-                bankAddress: bankDetails.bankAddress || "",
+                SWIFTCode: localBankDetails.SWIFTCode,
               })
             }
             label="SWIFT Code"
             placeholder="Enter SWIFT Code"
           />
           <InputWithLabel
-            value={bankDetails.bankAddress}
+            value={localBankDetails.bankAddress}
             onChange={(e) =>
+              setLocalBankDetails({
+                ...localBankDetails,
+                bankAddress: e.target.value,
+              })
+            }
+            onBlur={() =>
               setBankDetails({
                 ...bankDetails,
-                bankName: bankDetails.bankName || "",
-                name: bankDetails.name || "",
-                accountNumber: bankDetails.accountNumber || "",
-                SWIFTCode: bankDetails.SWIFTCode || "",
-                bankAddress: e.target.value,
+                bankAddress: localBankDetails.bankAddress,
               })
             }
             label="Bank Address"
@@ -174,15 +236,13 @@ export default function InvoiceDetails() {
           isRequired={false}
           minimum={0}
           maximum={100}
-          value={discount}
+          value={localDiscount}
           onChange={(e) => {
             const inputValue = Number(e.target.value);
-            if (inputValue > 100) {
-              setDiscount(100);
-            } else {
-              setDiscount(inputValue);
-            }
+            const safeValue = Math.min(Math.max(inputValue, 0), 100);
+            setLocalDiscount(safeValue);
           }}
+          onBlur={() => setDiscount(localDiscount)}
           label="Discount"
           placeholder="Enter discount"
         />

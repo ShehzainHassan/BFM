@@ -1,5 +1,5 @@
 import { BFMPalette } from "@/Theme";
-import { H3, H4 } from "@/Typography";
+import { H4 } from "@/Typography";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -72,10 +72,10 @@ type InputWithLabelProps = {
   isRequired?: boolean;
   showLabel?: boolean;
   showAsterik?: boolean;
-  showError?: boolean;
   showPercentage?: boolean;
   value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   minimum?: number;
   maximum?: number;
 };
@@ -86,12 +86,12 @@ export default function InputWithLabel({
   isRequired = true,
   showLabel = true,
   showAsterik = true,
-  showError = true,
   showPercentage = false,
   value,
   minimum = 1,
   maximum,
   onChange,
+  onBlur,
 }: InputWithLabelProps) {
   const [isTouched, setIsTouched] = useState(false);
 
@@ -105,22 +105,29 @@ export default function InputWithLabel({
         {showLabel && <H4>{label}</H4>}
         {isRequired && showAsterik && <H4 color={BFMPalette.purple500}>*</H4>}
       </LabelWrapper>
-      <InputWrapper $isError={isRequired && isTouched && !value}>
+      <InputWrapper
+        $isError={
+          isRequired &&
+          isTouched &&
+          (typeof value === "string"
+            ? !value.trim()
+            : value === undefined || value === null)
+        }>
         {showPercentage && <PercentageIcon>%</PercentageIcon>}
         <StyledInput
           type={type}
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          onBlur={handleBlur}
+          onBlur={(e) => {
+            handleBlur();
+            onBlur?.(e);
+          }}
           min={minimum}
           max={maximum ?? undefined}
           $showPercentage={showPercentage}
         />
       </InputWrapper>
-      {isRequired && isTouched && !value && showError && (
-        <H3 color={BFMPalette.red600}>{label} is required</H3>
-      )}
     </Container>
   );
 }

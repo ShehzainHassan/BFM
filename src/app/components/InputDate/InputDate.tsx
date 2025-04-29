@@ -1,4 +1,3 @@
-import { useInvoice } from "@/InvoiceContext";
 import { BFMPalette } from "@/Theme";
 import { H4 } from "@/Typography";
 import { CalendarOutlined } from "@ant-design/icons";
@@ -14,7 +13,7 @@ const Container = styled.div`
 
 const InputWrapper = styled.div<{ $isError: boolean }>`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   border: 1px solid
     ${(props) => (props.$isError ? BFMPalette.red600 : BFMPalette.gray200)};
   padding: 8px 12px;
@@ -26,7 +25,6 @@ const InputWrapper = styled.div<{ $isError: boolean }>`
 `;
 
 const StyledInput = styled.input`
-  flex: 1;
   border: none;
   outline: none;
   font-size: 16px;
@@ -58,12 +56,17 @@ const LabelWrapper = styled.div`
 type InputDateProps = {
   label?: string;
   isRequired?: boolean;
+  dueDate: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 export default function InputDate({
   label = "Select Date",
+  dueDate,
   isRequired = true,
+  onChange,
+  onBlur,
 }: InputDateProps) {
-  const { dueDate, setDueDate } = useInvoice();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isTouched, setIsTouched] = useState(false);
 
@@ -75,11 +78,9 @@ export default function InputDate({
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDueDate(e.target.value);
+  const handleBlur = () => {
     setIsTouched(true);
   };
-
   return (
     <Container>
       <LabelWrapper>
@@ -91,7 +92,11 @@ export default function InputDate({
           ref={inputRef}
           type="date"
           value={dueDate}
-          onChange={handleChange}
+          onChange={onChange}
+          onBlur={(e) => {
+            handleBlur();
+            onBlur?.(e);
+          }}
         />
         <CalendarIcon />
       </InputWrapper>

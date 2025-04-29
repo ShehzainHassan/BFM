@@ -19,7 +19,7 @@ export const InvoiceItemProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState([
     {
       id: Date.now(),
-      description: "Enter item description",
+      description: "",
       qty: 1,
       price: 0,
       currency: currency,
@@ -30,7 +30,7 @@ export const InvoiceItemProvider = ({ children }: { children: ReactNode }) => {
       ...items,
       {
         id: Date.now(),
-        description: "Enter item description",
+        description: "",
         qty: 1,
         price: 0,
         currency,

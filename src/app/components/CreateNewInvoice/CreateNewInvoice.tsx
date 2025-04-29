@@ -17,7 +17,6 @@ const Inputs = styled("div")`
   flex-direction: column;
   gap: 32px;
   padding: 24px;
-  background-color: ${BFMPalette.white};
   max-width: 700px;
 `;
 const Preview = styled("div")`
@@ -26,6 +25,8 @@ const Preview = styled("div")`
   gap: 12px;
   padding: 24px;
   background-color: ${BFMPalette.gray200};
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
 `;
 export default function CreateNewInvoice() {
   return (

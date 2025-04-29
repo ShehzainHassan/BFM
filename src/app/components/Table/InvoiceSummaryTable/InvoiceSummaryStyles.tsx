@@ -36,6 +36,7 @@ const InvoiceActions = ({ row }: { row: InvoiceSummary }) => {
     const updatedInvoices = updateInvoiceStatus(row.invoiceNo);
     setInvoicesSummary(parseInvoices(updatedInvoices));
   };
+
   return (
     <ActionContainer>
       <AttachmentIcon
