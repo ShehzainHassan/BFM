@@ -70,7 +70,6 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
         const parsed = parseInvoices(JSON.parse(storedInvoices)).map(
           (invoice) => ({
             ...invoice,
-            clientName: transformClientName(invoice.clientName),
           })
         );
         setInvoicesSummary(parsed);

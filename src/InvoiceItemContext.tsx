@@ -20,7 +20,7 @@ export const InvoiceItemProvider = ({ children }: { children: ReactNode }) => {
     {
       id: Date.now(),
       description: "",
-      qty: 1,
+      qty: 0,
       price: 0,
       currency: currency,
     },
@@ -31,7 +31,7 @@ export const InvoiceItemProvider = ({ children }: { children: ReactNode }) => {
       {
         id: Date.now(),
         description: "",
-        qty: 1,
+        qty: 0,
         price: 0,
         currency,
       },

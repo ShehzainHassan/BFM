@@ -88,7 +88,7 @@ type InputCurrencyProps = {
 
 export default function InputCurrency({
   label = "Amount",
-  placeholder = "Enter amount",
+  placeholder = "00,000",
   isRequired = true,
   showLabel = true,
   showAsterik = true,

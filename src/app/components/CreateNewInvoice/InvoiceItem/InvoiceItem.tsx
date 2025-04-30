@@ -102,17 +102,26 @@ export default function InvoiceItem() {
             type="number"
             minimum={1}
             value={isNaN(Number(item.qty)) ? 1 : item.qty}
-            onChange={(e) => handleLocalChange(item.id, "qty", e.target.value)}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (value >= 1 || e.target.value === "") {
+                handleLocalChange(item.id, "qty", e.target.value);
+              }
+            }}
             onBlur={() => commitChange(item.id)}
           />
+
           <InputCurrency
-            $maxWidth="200px"
+            $maxWidth="150px"
             showLabel={false}
             showAsterik={false}
             price={item.price}
-            onChangeAmount={(e) =>
-              handleLocalChange(item.id, "price", e.target.value)
-            }
+            onChangeAmount={(e) => {
+              const value = Number(e.target.value);
+              if (value >= 0 || e.target.value === "") {
+                handleLocalChange(item.id, "price", e.target.value);
+              }
+            }}
             onBlur={() => commitChange(item.id)}
             currency={currency}
             onChangeCurrency={(newCurrency) =>

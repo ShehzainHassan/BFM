@@ -61,6 +61,10 @@ export default function SelectDropDown() {
   useEffect(() => {
     if (!companyAddress && options.length > 0) {
       setCompanyAddress(options[0].value);
+      const clientName = t(
+        `invoice_creation.dropdown.options.${companyAddress}`
+      );
+      setCompanyAddress(clientName);
     }
   }, [companyAddress, options, setCompanyAddress]);
 

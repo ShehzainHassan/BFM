@@ -60,7 +60,6 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({
     finalTotal,
     setFinalTotal,
   } = useInvoice();
-
   const { items } = useInvoiceItem();
   const totalPrice = items.reduce(
     (sum, item) => sum + item.qty * parseFloat(item.price.toString()),
@@ -104,27 +103,30 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({
         </TableHeader>
       )}
 
-      {rows.map((row, index) => (
-        <TableRow key={index}>
-          <TableCell>
-            <SmallText color={BFMPalette.black800}>
-              {row.description?.trim()
-                ? row.description
-                : "Enter item description"}
-            </SmallText>
-          </TableCell>
-          <TableCell>
-            <SmallText color={BFMPalette.black800}>
-              {!Number.isNaN(row.qty) ? row.qty : 1}
-            </SmallText>
-          </TableCell>
-          <TableCell $alignRight>
-            <H3 color={BFMPalette.purple375}>
-              {formatCurrency(`${row.currency} ${row.price}`, 2)}
-            </H3>
-          </TableCell>
-        </TableRow>
-      ))}
+      {rows
+        .filter(
+          (row) =>
+            row.description?.trim() &&
+            Number(row.qty) > 0 &&
+            Number(row.price) > 0
+        )
+        .map((row, index) => (
+          <TableRow key={index}>
+            <TableCell>
+              <SmallText color={BFMPalette.black800}>
+                {row.description}
+              </SmallText>
+            </TableCell>
+            <TableCell>
+              <SmallText color={BFMPalette.black800}>{row.qty}</SmallText>
+            </TableCell>
+            <TableCell $alignRight>
+              <H3 color={BFMPalette.purple375}>
+                {formatCurrency(`${row.currency} ${row.price}`, 2)}
+              </H3>
+            </TableCell>
+          </TableRow>
+        ))}
 
       <SummaryRow>
         <TableCell>
