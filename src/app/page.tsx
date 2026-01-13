@@ -4,7 +4,6 @@ import useTranslation from "@/translations";
 import { generateInvoiceNumber } from "@/utils";
 import { JSX, useEffect } from "react";
 import Analytics from "./components/Analytics/Analytics";
-import Calender from "./components/Calender/Calender";
 import CreateNewInvoice from "./components/CreateNewInvoice/CreateNewInvoice";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ESG from "./components/ESG/ESG";
@@ -30,7 +29,6 @@ export default function Page() {
     ) : (
       <Invoices />
     ),
-    [t("navbar.tabs.calendar")]: <Calender />,
     [t("navbar.tabs.esg")]: <ESG />,
     [t("navbar.tabs.transactions")]: <MobileTransactions />,
   };

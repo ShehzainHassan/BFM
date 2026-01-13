@@ -194,8 +194,6 @@ export default function Navbar({ navItems }: NavbarProps) {
       return t("navbar.titles.dashboard");
     if (selectedTab === t("navbar.tabs.invoices") && !isCreatingInvoice)
       return t("navbar.titles.invoices");
-    if (selectedTab === t("navbar.tabs.calendar"))
-      return t("navbar.titles.calendar");
     if (selectedTab === t("navbar.tabs.esg")) return t("navbar.titles.esg");
     if (isCreatingInvoice) {
       return t("navbar.titles.create_Invoice");

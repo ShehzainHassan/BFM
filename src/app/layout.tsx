@@ -58,7 +58,6 @@ export default function RootLayout({
                         { label: t("navbar.tabs.dashboard") },
                         { label: t("navbar.tabs.analytics") },
                         { label: t("navbar.tabs.invoices") },
-                        { label: t("navbar.tabs.calendar") },
                         { label: t("navbar.tabs.esg") },
                       ]}
                     />
@@ -68,7 +67,6 @@ export default function RootLayout({
                         { label: t("navbar.tabs.transactions") },
                         { label: t("navbar.tabs.analytics") },
                         { label: t("navbar.tabs.invoices") },
-                        { label: t("navbar.tabs.calendar") },
                         { label: t("navbar.tabs.esg") },
                       ]}
                     />
