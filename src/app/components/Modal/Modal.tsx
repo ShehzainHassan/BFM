@@ -103,7 +103,7 @@ export default function DetailsModal({
       document.body.style.position = "unset";
       document.body.style.width = "unset";
     };
-  }, [modalIsOpen]);
+  }, [modalIsOpen, internalOpen]);
 
   const modalPositionStyles = {
     right: {

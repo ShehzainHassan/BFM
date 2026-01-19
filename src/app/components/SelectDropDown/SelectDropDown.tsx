@@ -53,7 +53,7 @@ const Option = styled.option`
 export default function SelectDropDown() {
   const { t } = useTranslation();
   const options = Object.entries(t("invoice_creation.dropdown.options")).map(
-    ([value, label]) => ({ value, label })
+    ([value, label]) => ({ value, label }),
   );
 
   const { companyAddress, setCompanyAddress } = useInvoice();
@@ -62,11 +62,11 @@ export default function SelectDropDown() {
     if (!companyAddress && options.length > 0) {
       setCompanyAddress(options[0].value);
       const clientName = t(
-        `invoice_creation.dropdown.options.${companyAddress}`
+        `invoice_creation.dropdown.options.${companyAddress}`,
       );
       setCompanyAddress(clientName);
     }
-  }, [companyAddress, options, setCompanyAddress]);
+  }, [companyAddress, options, setCompanyAddress, t]);
 
   return (
     <Container>

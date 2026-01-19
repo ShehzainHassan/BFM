@@ -16,7 +16,7 @@ export default function MonthDropDown({
     if (selectedMonths.length === 0 && months.length > 0) {
       setSelectedMonths([months[0]]);
     }
-  }, []);
+  }, [months, selectedMonths, setSelectedMonths]);
   return (
     <Select
       mode="multiple"

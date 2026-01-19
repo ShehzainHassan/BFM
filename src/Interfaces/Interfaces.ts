@@ -298,7 +298,7 @@ export interface Notification {
   id: number;
   title: string;
   type: string;
-  payload: { [key: string]: string | number | boolean | null };
+  payload: object | CompareSpendPayload | InvoiceDueSoonPayload | LinkPayload;
   description?: string;
 }
 export interface Payload {
