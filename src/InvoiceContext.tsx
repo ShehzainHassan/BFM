@@ -50,7 +50,7 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
   const [invoiceDetails, setInvoiceDetails] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [companyAddress, setCompanyAddress] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("Blue Fund Pte Ltd");
   const [discount, setDiscount] = useState(0);
   const [hasDiscount, setHasDiscount] = useState(false);
   const [subTotal, setSubTotal] = useState("USD 0.00");
@@ -70,7 +70,7 @@ export const InvoiceProvider = ({ children }: { children: ReactNode }) => {
         const parsed = parseInvoices(JSON.parse(storedInvoices)).map(
           (invoice) => ({
             ...invoice,
-          })
+          }),
         );
         setInvoicesSummary(parsed);
       }

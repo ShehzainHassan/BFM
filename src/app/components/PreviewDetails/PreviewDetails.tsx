@@ -1,7 +1,8 @@
 import { fromAddress, toAddress } from "@/constants";
+import { useInvoiceBankDetails } from "@/InvoiceBankDetailsContext";
 import { useInvoice } from "@/InvoiceContext";
+import { useInvoiceItem } from "@/InvoiceItemContext";
 import { BFMPalette } from "@/Theme";
-import useTranslation from "@/translations";
 import { formatDate, getFirstDayOfMonth } from "@/utils";
 import Image from "next/image";
 import styled from "styled-components";
@@ -9,8 +10,6 @@ import Address from "../Address/Address";
 import Notes from "../Notes/Notes";
 import InfoTable from "../PaymentsTable/PaymentsTable";
 import InvoiceTable from "./InvoiceTable/InvoiceTable";
-import { useInvoiceItem } from "@/InvoiceItemContext";
-import { useInvoiceBankDetails } from "@/InvoiceBankDetailsContext";
 
 const Container = styled("div")`
   background-color: ${BFMPalette.white25};
@@ -32,7 +31,6 @@ const TableContainer = styled("div")`
 `;
 
 export default function PreviewDetails() {
-  const { t } = useTranslation();
   const {
     companyAddress,
     invoiceDetails,
@@ -53,7 +51,7 @@ export default function PreviewDetails() {
         />
         <Address
           title="To"
-          company={t(`invoice_creation.dropdown.options.${companyAddress}`)}
+          company={companyAddress || ""}
           address={toAddress}
         />
       </SubContainer>

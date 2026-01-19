@@ -3,17 +3,38 @@ import { BFMPalette } from "@/Theme";
 import styled from "styled-components";
 import TextComponent from "../../TextComponent/TextComponent";
 
+const ScrollWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 const Container = styled.div`
   display: grid;
-  justify-content: center;
-  grid-template-columns: 4fr 4fr 4fr;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
   gap: 16px;
   max-width: 1300px;
   width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 85%);
+  }
+`;
+
+const CardWrapper = styled.div`
+  scroll-snap-align: start;
 `;
 
 export default function InvoiceContainer() {
   const { invoicesSummary } = useInvoice();
+
   const parseAmount = (amount: string) => {
     const parts = amount.split(" ");
     return parseFloat(parts[1] || "0");
@@ -48,10 +69,14 @@ export default function InvoiceContainer() {
   ];
 
   return (
-    <Container>
-      {summaryData.map((invoice, index) => (
-        <TextComponent key={index} {...invoice} />
-      ))}
-    </Container>
+    <ScrollWrapper>
+      <Container>
+        {summaryData.map((invoice, index) => (
+          <CardWrapper key={index}>
+            <TextComponent {...invoice} />
+          </CardWrapper>
+        ))}
+      </Container>
+    </ScrollWrapper>
   );
 }

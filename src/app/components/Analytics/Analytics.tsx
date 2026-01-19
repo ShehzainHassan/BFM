@@ -27,13 +27,40 @@ const TabContainer1 = styled("div")`
   background-color: ${BFMPalette.white25};
   border: 1px solid ${BFMPalette.gray100};
 `;
-const TabContainer2 = styled("div")`
+const TabContainer2 = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
   background-color: ${BFMPalette.white25};
   border-bottom: 1px solid ${BFMPalette.gray100};
+  gap: 12px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`;
+
+const TabsWrapper = styled.div`
+  display: flex;
+  width: fit-content;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    overflow-x: auto;
+  }
+`;
+
+const BadgeWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  min-width: 180px;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    width: 100%;
+  }
 `;
 
 const Container = styled("div")`
@@ -97,14 +124,14 @@ export default function Analytics() {
         ? deposits
         : withdrawals
       : selectedTab === tabs[2]
-      ? selectedButton === tabButtons[0]
-        ? depositRecurring
-        : withdrawalRecurring
-      : selectedTab === tabs[3]
-      ? selectedButton === tabButtons[0]
-        ? depositHighlights
-        : withdrawalHighlights
-      : [];
+        ? selectedButton === tabButtons[0]
+          ? depositRecurring
+          : withdrawalRecurring
+        : selectedTab === tabs[3]
+          ? selectedButton === tabButtons[0]
+            ? depositHighlights
+            : withdrawalHighlights
+          : [];
 
   const offset = currentPage * ITEMS_PER_PAGE;
   const paginatedData = data.slice(offset, offset + ITEMS_PER_PAGE);
@@ -129,38 +156,46 @@ export default function Analytics() {
       </TabContainer1>
       {showTabContainer2 && (
         <TabContainer2>
-          <HorizontalTabs
-            tabs={tabButtons}
-            selectedTab={selectedButton}
-            onTabChange={(btn) => {
-              setSelectedButton(btn);
-              setCurrentPage(0);
-            }}
-          />
-          {selectedTab === tabs[2] && selectedButton === tabButtons[0] && (
-            <RenderBadgeGroup
-              title={t("tables.recurring_transactions.total_deposits_text")}
-              value={depositRecurringAVG}
+          <TabsWrapper>
+            <HorizontalTabs
+              tabs={tabButtons}
+              selectedTab={selectedButton}
+              onTabChange={(btn) => {
+                setSelectedButton(btn);
+                setCurrentPage(0);
+              }}
             />
-          )}
-          {selectedTab === tabs[2] && selectedButton === tabButtons[1] && (
-            <RenderBadgeGroup
-              title={t("tables.recurring_transactions.total_withdrawal_text")}
-              value={withdrawalRecurringAVG}
-            />
-          )}
-          {selectedTab === tabs[3] && selectedButton === tabButtons[0] && (
-            <RenderBadgeGroup
-              title={t("tables.transition_highlight.average_deposit_text")}
-              value={reports?.incomeIrregularReport?.averageAmount || 0}
-            />
-          )}
-          {selectedTab === tabs[3] && selectedButton === tabButtons[1] && (
-            <RenderBadgeGroup
-              title={t("tables.transition_highlight.average_withdrawal_text")}
-              value={reports?.expenseIrregularReport?.averageAmount || 0}
-            />
-          )}
+          </TabsWrapper>
+
+          <BadgeWrapper>
+            {selectedTab === tabs[2] && selectedButton === tabButtons[0] && (
+              <RenderBadgeGroup
+                title={t("tables.recurring_transactions.total_deposits_text")}
+                value={depositRecurringAVG}
+              />
+            )}
+
+            {selectedTab === tabs[2] && selectedButton === tabButtons[1] && (
+              <RenderBadgeGroup
+                title={t("tables.recurring_transactions.total_withdrawal_text")}
+                value={withdrawalRecurringAVG}
+              />
+            )}
+
+            {selectedTab === tabs[3] && selectedButton === tabButtons[0] && (
+              <RenderBadgeGroup
+                title={t("tables.transition_highlight.average_deposit_text")}
+                value={reports?.incomeIrregularReport?.averageAmount || 0}
+              />
+            )}
+
+            {selectedTab === tabs[3] && selectedButton === tabButtons[1] && (
+              <RenderBadgeGroup
+                title={t("tables.transition_highlight.average_withdrawal_text")}
+                value={reports?.expenseIrregularReport?.averageAmount || 0}
+              />
+            )}
+          </BadgeWrapper>
         </TabContainer2>
       )}
 

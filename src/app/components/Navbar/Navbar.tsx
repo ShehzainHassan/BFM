@@ -207,7 +207,7 @@ export default function Navbar({ navItems }: NavbarProps) {
     if (items.length > 0) {
       const allItemsValid = items.every(
         (item) =>
-          item.description && item.qty > 0 && item.price > 0 && item.currency
+          item.description && item.qty > 0 && item.price > 0 && item.currency,
       );
       if (!allItemsValid) {
         return false;
@@ -253,26 +253,6 @@ export default function Navbar({ navItems }: NavbarProps) {
         )}
 
         <ButtonsContainer>
-          {(selectedTab === t("navbar.tabs.calendar") ||
-            selectedTab === t("navbar.tabs.esg")) && (
-            <NavButton
-              $textColor={BFMPalette.purple600}
-              $bgColor={BFMPalette.white}
-              imagePosition="right"
-              imageSrc="/images/clock.png">
-              {t("nav_buttons.schedule")}
-            </NavButton>
-          )}
-          {(selectedTab === t("navbar.tabs.calendar") ||
-            selectedTab === t("navbar.tabs.esg")) && (
-            <NavButton
-              $textColor={BFMPalette.white}
-              $borderColor={BFMPalette.purple500}
-              $bgColor={BFMPalette.purple500}
-              imageSrc="/images/plus.png">
-              {t("nav_buttons.createEvent")}
-            </NavButton>
-          )}
           {selectedTab === t("navbar.tabs.invoices") && !isCreatingInvoice && (
             <NavButton
               $textColor={BFMPalette.white}
